@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khánh Nguyễn</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    flex-direction:column;
+}
+
+h1{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+p{
+    font-size:20px;
+    color:#cbd5e1;
+}
+
+.btn{
+    margin-top:30px;
+    padding:15px 35px;
+    background:#3b82f6;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#2563eb;
+}
+
+section{
+    padding:80px 10%;
+}
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    background:#020617;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Xin chào, tôi là Khánh Nguyễn</h1>
+    <p>Sinh viên đại học - Yêu thích công nghệ và an ninh mạng</p>
+    <a href="#about" class="btn">Khám phá</a>
+</header>
+
+<section id="about">
+    <h2>Giới thiệu</h2>
+    <br>
+    <p>
+        Tôi là Khánh Nguyễn. Tôi quan tâm đến công nghệ,
+        lập trình, an ninh mạng và nghiên cứu pháp luật.
+    </p>
+</section>
+
+<section>
+    <h2>Kỹ năng</h2>
+    <br>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>HTML/CSS</h3>
+            <p>Xây dựng giao diện website.</p>
+        </div>
+
+        <div class="card">
+            <h3>JavaScript</h3>
+            <p>Tạo hiệu ứng và chức năng.</p>
+        </div>
+
+        <div class="card">
+            <h3>An ninh mạng</h3>
+            <p>Nghiên cứu bảo mật hệ thống.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Liên hệ</h2>
+    <br>
+    <p>Email: yourmail@gmail.com</p>
+    <p>Facebook: facebook.com/youraccount</p>
+</section>
+
+<footer>
+    © 2026 Khánh Nguyễn. All Rights Reserved.
+</footer>
+
+</body>
+</html>
