@@ -64,6 +64,98 @@ z-index:1000;
 padding:10px;
 border:none;
 border-radius:8px;
+cursor:pointer;
+}
+
+/* ===== TÂM LÝ HỌC ===== */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+gap:15px;
+}
+
+.card{
+background:#111827;
+border:1px solid #334155;
+border-radius:16px;
+overflow:hidden;
+}
+
+.hd{
+display:flex;
+align-items:center;
+gap:10px;
+padding:15px;
+cursor:pointer;
+background:#1e293b;
+}
+
+.num{
+width:28px;
+height:28px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#3b82f6;
+color:white;
+font-weight:bold;
+}
+
+.ttl{
+flex:1;
+font-weight:700;
+}
+
+.tg{
+font-size:12px;
+padding:4px 8px;
+border-radius:8px;
+background:#3b82f6;
+}
+
+.arr{
+transition:.3s;
+}
+
+.card.on .arr{
+transform:rotate(180deg);
+}
+
+.bd{
+max-height:0;
+overflow:hidden;
+transition:max-height .4s ease;
+padding:0 15px;
+}
+
+.card.on .bd{
+max-height:3000px;
+padding:15px;
+}
+
+.hidden{
+display:none !important;
+}
+
+.tabs{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:20px;
+}
+
+.tab{
+padding:8px 14px;
+border-radius:20px;
+background:#1f2937;
+cursor:pointer;
+}
+
+.tab.on{
+background:#3b82f6;
+color:white;
 }
 
 @media(max-width:768px){
@@ -88,62 +180,9 @@ left:0;
 width:100%;
 padding-top:60px;
 }
-.mindmap-card{
 
-    background:#111827;
-    border:1px solid #334155;
-    border-radius:16px;
-
-    margin-bottom:15px;
-
-    overflow:hidden;
+.grid{
+grid-template-columns:1fr;
 }
 
-.mindmap-header{
-
-    padding:15px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    color:white;
-
-    background:#1e293b;
-}
-
-.mindmap-content{
-
-    max-height:0;
-
-    overflow:hidden;
-
-    transition:.4s;
-
-    padding:0 15px;
-}
-
-.mindmap-card.open .mindmap-content{
-
-    max-height:3000px;
-
-    padding:15px;
-}
-
-.mindmap-content h3{
-
-    color:#60a5fa;
-
-    margin:10px 0;
-}
-
-.mindmap-content ul{
-
-    padding-left:20px;
-}
-
-.mindmap-content li{
-
-    margin-bottom:8px;
-}
 }
