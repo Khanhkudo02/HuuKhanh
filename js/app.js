@@ -1,46 +1,123 @@
 function toggleSidebar(){
-    document.getElementById("sidebar")
-    .classList.toggle("show");
+
+    document
+    .getElementById("sidebar")
+    .classList
+    .toggle("show");
+
 }
 
 async function loadPage(page){
 
-    const content =
+    localStorage.setItem(
+        "lastPage",
+        page
+    );
+
+    document
+    .getElementById("backBtn")
+    .style.display="inline-block";
+
+    const content=
     document.getElementById("content");
 
     try{
 
-        const res = await fetch(page);
+        const res=
+        await fetch(page);
 
-        const html = await res.text();
+        const html=
+        await res.text();
 
-        content.innerHTML = html;
+        content.innerHTML=
+        `
+        <button id="backBtn" onclick="goHome()">
+        ⬅ Trang chủ
+        </button>
+        `+html;
 
-        // chạy lại script trong file html được load
-
-        const scripts =
+        const scripts=
         content.querySelectorAll("script");
 
         scripts.forEach(oldScript=>{
 
-            const newScript =
+            const newScript=
             document.createElement("script");
 
-            newScript.textContent =
-            oldScript.textContent;
+            if(oldScript.src){
 
-            document.body.appendChild(newScript);
+                newScript.src=
+                oldScript.src;
 
-            oldScript.remove();
+            }else{
+
+                newScript.textContent=
+                oldScript.textContent;
+
+            }
+
+            document.body.appendChild(
+                newScript
+            );
 
         });
 
-    }catch(err){
-
-        content.innerHTML=
-        "<h2>Lỗi tải dữ liệu</h2>";
-
-        console.error(err);
+        document
+        .getElementById("sidebar")
+        .classList
+        .remove("show");
 
     }
+
+    catch(error){
+
+        content.innerHTML=
+        `
+        <h2>Lỗi tải trang</h2>
+        <p>${error}</p>
+        `;
+
+        console.error(error);
+
+    }
+
 }
+
+function goHome(){
+
+    localStorage.removeItem(
+        "lastPage"
+    );
+
+    document
+    .getElementById("content")
+    .innerHTML=
+    `
+    <button id="backBtn"
+    onclick="goHome()"
+    style="display:none">
+    ⬅ Trang chủ
+    </button>
+
+    <div class="welcome">
+        <h1>Nguyễn Hữu Khánh</h1>
+        <p>Nơi lưu trữ tài liệu học tập</p>
+    </div>
+    `;
+
+}
+
+window.onload=()=>{
+
+    const lastPage=
+    localStorage.getItem(
+        "lastPage"
+    );
+
+    if(lastPage){
+
+        loadPage(lastPage);
+
+    }
+
+};
