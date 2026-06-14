@@ -1,123 +1,62 @@
-function toggleSidebar(){
+const content = document.getElementById("content");
 
-    document
-    .getElementById("sidebar")
-    .classList
-    .toggle("show");
-
+function savePage(page){
+localStorage.setItem("lastPage", page);
 }
 
-async function loadPage(page){
+function loadPage(page){
 
-    localStorage.setItem(
-        "lastPage",
-        page
-    );
+fetch(page)
+.then(r=>r.text())
+.then(html=>{
 
-    document
-    .getElementById("backBtn")
-    .style.display="inline-block";
+content.innerHTML = `
+<button class="back-home" onclick="goHome()">
+🏠 Trang chủ
+</button>
+${html}
+`;
 
-    const content=
-    document.getElementById("content");
+savePage(page);
 
-    try{
+if(window.innerWidth <= 768){
+document.getElementById("sidebar")
+.classList.remove("show");
+}
 
-        const res=
-        await fetch(page);
+window.scrollTo(0,0);
 
-        const html=
-        await res.text();
-
-        content.innerHTML=
-        `
-        <button id="backBtn" onclick="goHome()">
-        ⬅ Trang chủ
-        </button>
-        `+html;
-
-        const scripts=
-        content.querySelectorAll("script");
-
-        scripts.forEach(oldScript=>{
-
-            const newScript=
-            document.createElement("script");
-
-            if(oldScript.src){
-
-                newScript.src=
-                oldScript.src;
-
-            }else{
-
-                newScript.textContent=
-                oldScript.textContent;
-
-            }
-
-            document.body.appendChild(
-                newScript
-            );
-
-        });
-
-        document
-        .getElementById("sidebar")
-        .classList
-        .remove("show");
-
-    }
-
-    catch(error){
-
-        content.innerHTML=
-        `
-        <h2>Lỗi tải trang</h2>
-        <p>${error}</p>
-        `;
-
-        console.error(error);
-
-    }
-
+})
+.catch(()=>{
+content.innerHTML="<h2>Lỗi tải file</h2>";
+});
 }
 
 function goHome(){
 
-    localStorage.removeItem(
-        "lastPage"
-    );
+localStorage.removeItem("lastPage");
 
-    document
-    .getElementById("content")
-    .innerHTML=
-    `
-    <button id="backBtn"
-    onclick="goHome()"
-    style="display:none">
-    ⬅ Trang chủ
-    </button>
-
-    <div class="welcome">
-        <h1>Nguyễn Hữu Khánh</h1>
-        <p>Nơi lưu trữ tài liệu học tập</p>
-    </div>
-    `;
+content.innerHTML=`
+<div class="welcome">
+<h1>Nguyễn Hữu Khánh</h1>
+<p>Nơi lưu trữ tài liệu học tập</p>
+</div>
+`;
 
 }
 
-window.onload=()=>{
+function toggleSidebar(){
+document.getElementById("sidebar")
+.classList.toggle("show");
+}
 
-    const lastPage=
-    localStorage.getItem(
-        "lastPage"
-    );
+window.addEventListener("load",()=>{
 
-    if(lastPage){
+const lastPage =
+localStorage.getItem("lastPage");
 
-        loadPage(lastPage);
+if(lastPage){
+loadPage(lastPage);
+}
 
-    }
-
-};
+});
