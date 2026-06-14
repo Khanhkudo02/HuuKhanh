@@ -5,7 +5,7 @@ box-sizing:border-box;
 }
 
 body{
-font-family:system-ui;
+font-family:system-ui,sans-serif;
 background:#0f172a;
 color:white;
 }
@@ -38,6 +38,7 @@ border-radius:10px;
 cursor:pointer;
 margin-bottom:8px;
 background:#1f2937;
+transition:.2s;
 }
 
 .sidebar li:hover{
@@ -67,7 +68,23 @@ border-radius:8px;
 cursor:pointer;
 }
 
-/* ===== TÂM LÝ HỌC ===== */
+#backBtn{
+display:none;
+padding:10px 15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+cursor:pointer;
+margin-bottom:20px;
+font-weight:bold;
+}
+
+#backBtn:hover{
+background:#1d4ed8;
+}
+
+/* ===== HỖ TRỢ FILE TÂM LÝ HỌC ===== */
 
 .grid{
 display:grid;
@@ -99,7 +116,6 @@ display:flex;
 align-items:center;
 justify-content:center;
 background:#3b82f6;
-color:white;
 font-weight:bold;
 }
 
@@ -135,10 +151,6 @@ max-height:3000px;
 padding:15px;
 }
 
-.hidden{
-display:none !important;
-}
-
 .tabs{
 display:flex;
 flex-wrap:wrap;
@@ -147,7 +159,7 @@ margin-bottom:20px;
 }
 
 .tab{
-padding:8px 14px;
+padding:8px 12px;
 border-radius:20px;
 background:#1f2937;
 cursor:pointer;
@@ -156,6 +168,10 @@ cursor:pointer;
 .tab.on{
 background:#3b82f6;
 color:white;
+}
+
+.hidden{
+display:none !important;
 }
 
 @media(max-width:768px){
