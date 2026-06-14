@@ -1,1 +1,1026 @@
-data/psychology.html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindmap Tâm Lý Học - Chi tiết</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#080f1d;color:#e2e8f0;min-height:100vh}
+
+.hdr{text-align:center;padding:26px 16px 8px}
+.hdr h1{font-size:clamp(1.2rem,3vw,1.9rem);font-weight:800;color:#f1f5f9;letter-spacing:.04em}
+.hdr p{color:#475569;font-size:.8rem;margin-top:5px}
+
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:10px 20px 16px}
+.stat{background:#111827;border:1px solid #1f2d3d;border-radius:8px;padding:5px 12px;font-size:.72rem;color:#64748b}
+.stat b{color:#94a3b8;margin-right:4px}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:0 16px 18px}
+.tab{padding:5px 12px;border-radius:20px;border:1.5px solid #1f2d3d;cursor:pointer;font-size:.73rem;font-weight:600;background:#111827;color:#475569;transition:all .18s}
+.tab:hover{color:#cbd5e1;border-color:#334155}
+.tab.on{color:#fff !important;border-color:var(--c) !important;background:var(--c) !important}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px;padding:0 16px 50px;max-width:1500px;margin:0 auto}
+
+.card{background:#0e1624;border-radius:14px;border:1.5px solid #1a2535;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.card.on{border-color:var(--ac)}
+
+.hd{display:flex;align-items:center;gap:8px;padding:11px 13px;cursor:pointer;background:var(--ac-dim);user-select:none}
+.num{width:24px;height:24px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:#fff;flex-shrink:0}
+.ttl{font-size:.77rem;font-weight:700;color:#f1f5f9;flex:1;line-height:1.3}
+.tg{font-size:.6rem;padding:2px 6px;border-radius:6px;background:var(--ac);color:#fff;white-space:nowrap;flex-shrink:0;opacity:.85}
+.arr{font-size:.65rem;color:var(--ac);flex-shrink:0;transition:transform .22s}
+.card.on .arr{transform:rotate(180deg)}
+
+.bd{padding:0;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s}
+.card.on .bd{max-height:900px;overflow-y:auto;padding:12px 13px}
+.bd::-webkit-scrollbar{width:3px}
+.bd::-webkit-scrollbar-thumb{background:#1f2d3d;border-radius:2px}
+
+.br{margin-bottom:10px}
+.br:last-child{margin-bottom:0}
+.bt{font-size:.65rem;font-weight:800;color:var(--ac);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.bt::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--ac);flex-shrink:0}
+.br ul{list-style:none;padding-left:6px;border-left:2px solid var(--ac-dim2)}
+.br ul li{font-size:.71rem;color:#7d9ab5;padding:2.5px 0 2.5px 8px;line-height:1.45;position:relative}
+.br ul li::before{content:'›';position:absolute;left:-1px;color:var(--ac);font-size:.75rem;top:2px}
+.br ul li b{color:#c4d4e3;font-weight:600}
+.br ul li em{color:#60a5fa;font-style:normal}
+.br ul li s{color:#f87171;text-decoration:none;font-style:italic;font-size:.68rem}
+.br ul li u{text-decoration:none;color:#fbbf24}
+
+.sub{list-style:none !important;padding-left:12px !important;border-left:1px dashed var(--ac-dim2) !important;margin-top:2px}
+.sub li::before{content:'·' !important;left:0 !important;font-size:.8rem !important}
+
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:5px}
+.cc h4{font-size:.64rem;font-weight:800;color:var(--ac);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;padding-bottom:3px;border-bottom:1px solid var(--ac-dim2)}
+.cc ul{list-style:none;padding:0}
+.cc ul li{font-size:.69rem;color:#7d9ab5;padding:2px 0 2px 8px;line-height:1.4;position:relative}
+.cc ul li::before{content:'•';position:absolute;left:0;color:var(--ac);font-size:.55rem;top:4px}
+
+.steps{padding-left:0}
+.st{display:flex;gap:7px;margin-bottom:5px}
+.sn{min-width:17px;height:17px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:2px}
+.sv{font-size:.7rem;color:#7d9ab5;line-height:1.4}
+.sv b{color:#c4d4e3}
+
+.pill{display:inline-block;padding:1px 6px;border-radius:4px;font-size:.62rem;font-weight:700;margin:1px 2px;vertical-align:middle}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🧠 TÂM LÝ HỌC — MINDMAP ĐẦY ĐỦ</h1>
+  <p>26 câu · Chi tiết toàn bộ nội dung · Click thẻ để mở rộng</p>
+</div>
+<div class="stats">
+  <div class="stat"><b>📚</b>26 câu hỏi</div>
+  <div class="stat"><b>🏘️</b>Tâm lý XH: 5 câu</div>
+  <div class="stat"><b>🔬</b>Bản chất TL: 6 câu</div>
+  <div class="stat"><b>💡</b>Nhận thức: 7 câu</div>
+  <div class="stat"><b>❤️</b>Tình cảm & Ý chí: 6 câu</div>
+  <div class="stat"><b>🌟</b>Nhân cách: 2 câu</div>
+</div>
+<div class="tabs">
+  <div class="tab on" data-f="all" style="--c:#334155">Tất cả (26)</div>
+  <div class="tab" data-f="xa-hoi" style="--c:#6366f1">🏘️ Tâm lý XH</div>
+  <div class="tab" data-f="ban-chat" style="--c:#0ea5e9">🔬 Bản chất TL</div>
+  <div class="tab" data-f="nhan-thuc" style="--c:#10b981">💡 Nhận thức</div>
+  <div class="tab" data-f="tinh-cam" style="--c:#f59e0b">❤️ Tình cảm & Ý chí</div>
+  <div class="tab" data-f="nhan-cach" style="--c:#ec4899">🌟 Nhân cách</div>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const C=[
+/* ═══ TÂM LÝ XÃ HỘI ═══ */
+{n:1,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'XUNG ĐỘT NHÓM NHỎ',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Mâu thuẫn, bất đồng về <b>quan điểm, niềm tin</b> giữa các thành viên</li>
+<li>Động chạm đến <b>quyền lợi vật chất hoặc tinh thần</b> cá nhân</li>
+<li>Hình thành trong quá trình tương tác trong nhóm</li>
+</ul></div>
+<div class="br"><div class="bt">Nguyên nhân khách quan</div><ul>
+<li>Kinh tế, chính trị, văn hóa, tôn giáo tác động từ bên ngoài</li>
+<li>Quy chế, điều lệnh <b>chưa rõ ràng, đầy đủ</b></li>
+<li>Điều kiện vật chất, lương thưởng không thỏa đáng</li>
+</ul></div>
+<div class="br"><div class="bt">Nguyên nhân chủ quan</div><ul>
+<li><b>Lãnh đạo:</b> thiếu kinh nghiệm, phong cách không phù hợp, thiếu công bằng</li>
+<li><b>Thành viên:</b> cá tính cực đoan, lười biếng, xu nịnh, tư lợi</li>
+<li>Cơ cấu nhóm lỏng lẻo, phân công không rõ ràng</li>
+</ul></div>
+<div class="br"><div class="bt">4 giai đoạn hình thành xung đột</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Tranh luận</b> về vấn đề cụ thể, chưa đụng đến cá nhân</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Bất đồng gay gắt</b> — phê phán cá tính, lôi kéo quá khứ</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Xung đột công khai</b> — không lắng nghe ý kiến nhau</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Đối kháng TL</b> — bè cánh, tan rã hoặc thay lãnh đạo</div></div>
+</div></div>
+<div class="br"><div class="bt">Phòng ngừa xung đột</div><ul>
+<li>Tôn vinh hành vi mong muốn; hoan nghênh bất đồng chính kiến</li>
+<li>Xây dựng nhóm đa dạng; tạo <b>trách nhiệm giải trình</b> rõ ràng</li>
+<li>Khuyến khích <b>tự quản lý xung đột</b>; đào tạo kỹ năng giải quyết VĐ</li>
+<li>Phân công nhiệm vụ rõ ràng, tránh chồng chéo quyền lợi</li>
+</ul></div>
+<div class="br"><div class="bt">Giải quyết xung đột</div><ul>
+<li><b>Gác "cái tôi"</b> — lắng nghe trước khi phản biện</li>
+<li><b>Làm rõ vấn đề cốt lõi</b> bằng các câu hỏi truy nguyên</li>
+<li><b>Tìm giải pháp cùng nhau</b> — biểu quyết thống nhất</li>
+<li>Lãnh đạo: <b>không thiên vị, lắng nghe chủ động</b></li>
+<li>Cần thiết có thể mời bên thứ ba làm trung gian hòa giải</li>
+</ul></div>
+`},
+{n:2,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'BẦU KHÔNG KHÍ TÂM LÝ',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Hệ thống <b>trạng thái TL, tâm trạng ưu thế</b> giữ vai trò chủ đạo trong nhóm</li>
+<li>Phản ánh tính chất quan hệ và mức độ hòa hợp giữa các thành viên</li>
+<li>Hình thành trong quá trình <b>hoạt động cùng nhau</b></li>
+</ul></div>
+<div class="br"><div class="bt">Biểu hiện BKKTL tốt</div><ul>
+<li>Tiếp xúc thoải mái; <b>tự do tư tưởng</b>; kỷ luật tự nguyện</li>
+<li>Tôn trọng và giúp đỡ nhau; người mới <b>hòa nhập nhanh</b></li>
+<li>Phê bình mang tính <b>xây dựng</b>, không đả kích ngầm</li>
+<li>Lãnh đạo vừa là <b>thủ trưởng vừa là thủ lĩnh</b></li>
+<li>Trách nhiệm rõ ràng → <b>năng suất lao động cao</b></li>
+</ul></div>
+<div class="br"><div class="bt">Dấu hiệu đánh giá BKKTL</div><ul>
+<li>Tâm trạng nhóm; dư luận nội bộ; sự hài lòng của thành viên</li>
+<li>Uy tín lãnh đạo; ý thức kỷ luật; mức độ đoàn kết nội bộ</li>
+<li>Hiệu suất công tác và <b>năng suất lao động thực tế</b></li>
+</ul></div>
+<div class="br"><div class="bt">Yếu tố ảnh hưởng đến BKKTL</div><ul>
+<li><b>Phong cách lãnh đạo</b> — quan trọng nhất</li>
+<li>Hoàn cảnh sống và tính chất quan hệ giữa các thành viên</li>
+<li>Biến cố xã hội lớn gây tâm trạng chung lan truyền</li>
+<li>Tính chất lao động: mức lương, không gian, phương tiện</li>
+<li>Cơ chế <em>lây lan TL</em>: tâm trạng 1 người lan ra cả nhóm</li>
+</ul></div>
+<div class="br"><div class="bt">Ý nghĩa với CAND</div><ul>
+<li>Chủ động xây dựng đoàn kết; có tinh thần trách nhiệm cao</li>
+<li>Tôn trọng kỷ luật; giữ thái độ hòa nhã, chân thành</li>
+<li>Không nói xấu, gây chia rẽ; tích cực tham gia tập thể</li>
+<li>Lãnh đạo cần <b>tạo điều kiện để mọi người bày tỏ ý kiến</b></li>
+</ul></div>
+`},
+{n:3,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'NHÓM XÃ HỘI',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Từ <b>hai người trở lên</b>, cùng chung lợi ích và mục đích hoạt động</li>
+<li>Có <b>tương tác và ảnh hưởng lẫn nhau</b> trong hoạt động chung</li>
+</ul></div>
+<div class="br"><div class="bt">Phân loại theo số lượng thành viên</div><ul>
+<li><b>Nhóm nhỏ:</b> ít người, quan hệ trực tiếp thường xuyên, dễ phối hợp
+  <ul class="sub"><li>Ổn định hoặc tạm thời; chính thức hoặc không chính thức</li></ul>
+</li>
+<li><b>Nhóm lớn:</b> đông người, tạo giá trị và chuẩn mực chung, điều hòa TL-HV cá nhân</li>
+</ul></div>
+<div class="br"><div class="bt">Phân loại theo tính chất hoạt động</div><ul>
+<li><b>Nhóm chính thức:</b> có mục tiêu rõ ràng, xã hội thừa nhận, có tư cách pháp lý</li>
+<li><b>Nhóm không chính thức:</b> tự phát, dựa trên cảm tình, tương hợp TL
+  <ul class="sub"><li>VD: nhóm bạn bè, nhóm sở thích cùng nghề</li></ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">Phân loại theo nguồn gốc hình thành</div><ul>
+<li><b>Nhóm ước lệ:</b> do nhà nghiên cứu định ra theo tiêu chí
+  <ul class="sub"><li>VD: nhóm nam/nữ, nhóm phạm tội có tổ chức</li></ul>
+</li>
+<li><b>Nhóm thực:</b> tồn tại thực sự, tiếp xúc trực tiếp
+  <ul class="sub"><li>VD: lớp học, đoàn thể, tổ công tác</li></ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">Nhóm tham chiếu</div><ul>
+<li>Nhóm cá nhân <b>nhận mình là thành viên</b> hoặc <b>muốn trở thành thành viên</b></li>
+<li>Ảnh hưởng mạnh đến hành vi và thái độ của cá nhân dù không trực tiếp tiếp xúc</li>
+</ul></div>
+`},
+{n:4,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'ĐÁM ĐÔNG',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Tập hợp người <b>hỗn hợp, phi cấu trúc</b></li>
+<li>Có <b>đối tượng chú ý chung</b> và <b>trạng thái xúc cảm chung</b></li>
+<li>Tồn tại ở địa điểm và thời gian nhất định</li>
+</ul></div>
+<div class="br"><div class="bt">Đặc điểm nhận thức</div><ul>
+<li><b>Mù quáng, mất khả năng phê phán</b> bình thường</li>
+<li><b>Dễ bị ám thị:</b> nghe theo lời thủ lĩnh/kẻ kích động ngay tức thì</li>
+<li><b>Ngộ nhận:</b> coi đám đông là sức mạnh vạn năng, tính hợp pháp tuyệt đối</li>
+<li>Nhận thức bị <em>xúc cảm chủ đạo</em> chi phối, thiếu suy xét lý trí</li>
+<li>Cảm giác vô danh → giảm ý thức trách nhiệm cá nhân</li>
+</ul></div>
+<div class="br"><div class="bt">Đặc điểm xúc cảm</div><ul>
+<li><b>3 trạng thái chủ yếu:</b> sợ hãi / phẫn nộ / hân hoan</li>
+<li>Cường độ xúc cảm <b>tăng nhanh và lây lan</b> theo hướng tích lũy</li>
+<li>Dễ chuyển từ thái cực này sang thái cực khác đột ngột</li>
+<li><em>Hỗn loạn:</em> xuất hiện khi không có thủ lĩnh có uy tín hoặc nguy hiểm thật/giả tưởng</li>
+<li><em>Hân hoan:</em> khi chiêm ngưỡng thần tượng hoặc sau chiến thắng lớn</li>
+</ul></div>
+<div class="br"><div class="bt">Giải quyết đám đông — 4 tình huống (CAND)</div><ul>
+<li><b>Chưa hình thành:</b> hạn chế nguyên nhân kích thích, không để TL cá nhân gặp kích thích</li>
+<li><b>Mới hình thành:</b> tuyên truyền mềm dẻo, thông báo rõ bản chất sự việc</li>
+<li><b>Đã hình thành:</b> phân hóa đối tượng, cô lập kẻ cầm đầu kích động</li>
+<li><b>Kích động cao độ:</b> gây kích thích lạ/mạnh để phân tán; kết hợp biện pháp hành chính + vũ trang</li>
+</ul></div>
+<div class="br"><div class="bt">Nguyên tắc chung khi giải tán</div><ul>
+<li>Chuẩn bị chu đáo; biện pháp <b>dứt khoát, kiên quyết, nhanh chóng</b></li>
+<li>Dự kiến tình huống xấu nhất; ưu tiên <b>phòng ngừa làm trọng tâm</b></li>
+<li>Giảm căng thẳng trước khi trấn áp để <b>hạn chế tối đa tổn thất</b></li>
+</ul></div>
+`},
+{n:5,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'DƯ LUẬN XH vs TIN ĐỒN',html:`
+<div class="br"><div class="bt">Điểm giống nhau</div><ul>
+<li>Đều là kết cấu tinh thần-TL đặc trưng cho nhóm XH nhất định</li>
+<li>Đều có thành phần <b>trí tuệ, cảm xúc và ý chí</b> trong cấu trúc</li>
+<li>Đều chịu chi phối mạnh của <b>nhu cầu, lợi ích cá nhân/nhóm</b></li>
+<li>Đều <b>lan truyền nhanh</b> và dễ biến dạng qua nhiều người</li>
+<li>Đều xuất phát từ một sự kiện ban đầu có liên quan đến cảm xúc</li>
+</ul></div>
+<div class="cmp">
+<div class="cc"><h4>Dư luận xã hội</h4><ul>
+<li>Xuất phát từ <b>sự kiện có thật</b></li>
+<li>Hình thành qua <b>giao tiếp, tranh luận</b></li>
+<li>Quan điểm cá nhân chỉ là <b>một ý kiến trong tổng thể</b></li>
+<li>Lan truyền <b>chính thức + không chính thức</b></li>
+<li>Là <b>sự phán xét, đánh giá</b> — đồng tình/phản đối</li>
+<li>Độ tin cậy <b>cao hơn</b>; có thể kiểm chứng</li>
+</ul></div>
+<div class="cc"><h4>Tin đồn</h4><ul>
+<li>Sự kiện <b>bị méo mó hoặc bịa đặt hoàn toàn</b></li>
+<li>Bị nhào lặn bởi <b>chủ quan</b> của người truyền</li>
+<li>Thường <b>giật gân, hấp dẫn ly kỳ</b> → dễ thu hút</li>
+<li>Lan truyền <b>chủ yếu bằng miệng</b>, bí mật, ngầm ẩn</li>
+<li>Chỉ là <b>thông tin mô tả</b>, đầy thiên kiến</li>
+<li>Xuất hiện ở nơi <b>thông tin chính thức kém</b></li>
+</ul></div>
+</div>
+<div class="br"><div class="bt">Tội phạm lợi dụng tin đồn</div><ul>
+<li>Gây hoang mang quần chúng, dao động niềm tin vào nhà nước</li>
+<li>Đánh lạc hướng điều tra; làm vỏ bọc thủ đoạn phạm tội</li>
+<li>Thế lực thù địch dùng tin đồn nhảm để <b>chiến tranh TL</b></li>
+</ul></div>
+<div class="br"><div class="bt">5 biện pháp ngăn chặn tin đồn (CAND)</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv">Điều tra truy nguyên nguồn gốc, diễn biến tin đồn</div></div>
+<div class="st"><div class="sn">2</div><div class="sv">Xử lý thích đáng người tung tin (giáo dục → kỷ luật → pháp luật)</div></div>
+<div class="st"><div class="sn">3</div><div class="sv">Phát huy truyền thông — cung cấp thông tin chính xác, kịp thời</div></div>
+<div class="st"><div class="sn">4</div><div class="sv">Nâng cao nhận thức quần chúng để "miễn dịch" với tin đồn</div></div>
+<div class="st"><div class="sn">5</div><div class="sv">Liên hệ chặt chẽ với quần chúng, vận động cảnh giác cộng đồng</div></div>
+</div>
+<div class="br"><div class="bt">Ý nghĩa DLXH trong công tác CAND</div><ul>
+<li><b>Quản lý XH:</b> kênh phản hồi giúp hoạch định chính sách phù hợp</li>
+<li><b>Giáo dục:</b> phương tiện tác động nhận thức, lên án hành vi lệch chuẩn</li>
+<li><b>Phòng ngừa tội phạm:</b> điều chỉnh hành vi, đấu tranh hiện tượng tiêu cực</li>
+<li><b>Lãnh đạo, chỉ huy:</b> nắm trạng thái tinh thần quần chúng, điều chỉnh biện pháp quản lý</li>
+</ul></div>
+`},
+/* ═══ BẢN CHẤT TÂM LÝ ═══ */
+{n:6,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'CẤU TRÚC Ý THỨC & HÌNH THÀNH Ý THỨC',html:`
+<div class="br"><div class="bt">Khái niệm ý thức</div><ul>
+<li>Hình thức <b>phản ánh TL cao nhất</b>, chỉ có ở người</li>
+<li>Phản ánh bằng ngôn ngữ những gì con người tiếp thu qua quan hệ với HTKQ</li>
+</ul></div>
+<div class="br"><div class="bt">3 mặt cấu trúc ý thức</div><ul>
+<li><b>Mặt nhận thức:</b>
+  <ul class="sub">
+    <li>Cảm tính: cung cấp tài liệu đầu tiên cho ý thức</li>
+    <li>Lý tính: hình ảnh khái quát, bản chất — <b>hạt nhân ý thức</b>, năng lực nhận thức cao nhất</li>
+  </ul>
+</li>
+<li><b>Mặt thái độ:</b> thái độ cảm xúc, đánh giá của chủ thể; lựa chọn đối tượng và tính tích cực</li>
+<li><b>Mặt năng động:</b> dự kiến trước hành động, điều khiển-điều chỉnh hoạt động, cải tạo thế giới và bản thân</li>
+</ul></div>
+<div class="br"><div class="bt">Hình thành ý thức loài người</div><ul>
+<li><b>Lao động</b> là nguồn gốc:
+  <ul class="sub">
+    <li>Dùng công cụ do con người chế tạo</li>
+    <li>Hoạt động tập thể có phân công hợp tác</li>
+    <li>Ý thức hình thành và thể hiện trong suốt quá trình lao động</li>
+  </ul>
+</li>
+<li><b>Ngôn ngữ:</b> hình thức cụ thể của ý thức; phương tiện giao lưu và tư duy
+  <ul class="sub"><li>Ý thức không tồn tại bên ngoài ngôn ngữ</li></ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">4 con đường hình thành ý thức cá nhân</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv">Qua <b>hoạt động</b> và sản phẩm hoạt động của cá nhân</div></div>
+<div class="st"><div class="sn">2</div><div class="sv">Qua <b>giao tiếp</b> với người khác và với xã hội</div></div>
+<div class="st"><div class="sn">3</div><div class="sv">Qua <b>tiếp thu văn hóa XH - LS</b>, ý thức xã hội</div></div>
+<div class="st"><div class="sn">4</div><div class="sv">Qua <b>tự nhận thức, tự đánh giá, tự phân tích</b> hành vi bản thân</div></div>
+</div>
+<div class="br"><div class="bt">Nhân cách (định nghĩa)</div><ul>
+<li>Tổ hợp đặc điểm, thuộc tính TL <b>quy định giá trị XH và hành vi XH</b> của con người</li>
+<li>Biểu hiện ở 3 cấp độ: bên trong cá nhân / ra hoạt động và kết quả / trong đánh giá của người khác</li>
+</ul></div>
+`},
+{n:7,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'BẢN CHẤT TÂM LÝ NGƯỜI',html:`
+<div class="br"><div class="bt">TL là sự phản ánh của não</div><ul>
+<li>Không do thượng đế sinh ra; không do não "tiết ra" như gan tiết mật</li>
+<li>Phản ánh HTKQ vào não qua <em>"lăng kính chủ quan"</em></li>
+<li>TL là <b>chức năng của não</b> — não tổn thương → TL bất thường</li>
+<li>Cơ quan vật chất của TL là não; hoạt động não là cơ chế sinh lý TK của TL</li>
+</ul></div>
+<div class="br"><div class="bt">Tính chủ thể của tâm lý</div><ul>
+<li>Cùng kích thích → người khác nhau phản ánh <b>khác nhau về mức độ, sắc thái</b></li>
+<li>Cùng một người → hoàn cảnh, thời điểm khác → phản ánh khác nhau</li>
+<li>Mỗi chủ thể có thái độ và phản ứng <b>riêng</b> trước thực tế</li>
+<li>TL người ngoài cái chung luôn có <b>bản sắc riêng của mỗi cá nhân</b></li>
+</ul></div>
+<div class="br"><div class="bt">Bản chất xã hội - lịch sử</div><ul>
+<li>Nguồn gốc: HTKQ, trong đó <b>thế giới XH là nguồn gốc sâu xa quyết định</b></li>
+<li>TL là sản phẩm của <b>hoạt động + giao tiếp</b> trong xã hội</li>
+<li>Mỗi thời kỳ LS, giai cấp, nghề nghiệp khác nhau → nội dung TL khác nhau</li>
+<li>TL luôn vận động, phát triển cùng với sự vận động của XH</li>
+<li><s>Không thể hiểu TL người tách khỏi điều kiện XH-LS</s></li>
+</ul></div>
+<div class="br"><div class="bt">4 điều kiện hình thành & phát triển TL</div><ul>
+<li><b>Thể chất</b> (não, giác quan) — cơ sở vật chất, tiền đề</li>
+<li><b>Môi trường sống</b> — quy định bản chất và nội dung TL</li>
+<li><b>Hoạt động</b> — quyết định trực tiếp</li>
+<li><b>Tự tu dưỡng</b> — yếu tố bên trong, trực tiếp quyết định</li>
+</ul></div>
+`},
+{n:8,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'CÁC YẾU TỐ HÌNH THÀNH TÂM LÝ CÁ NHÂN',html:`
+<div class="br"><div class="bt">1. Yếu tố thể chất</div><ul>
+<li><b>Khái niệm:</b> toàn bộ đặc điểm sinh lý giải phẫu và hoạt động cơ thể, đặc biệt <b>não bộ và giác quan</b></li>
+<li><b>Vai trò: cơ sở vật chất và tiền đề</b> — điều kiện cần nhưng chưa đủ</li>
+<li>Não bình thường nhưng đặc điểm SL khác nhau (mẫn cảm, linh hoạt, cân bằng) → TL biểu hiện khác nhau</li>
+<li>Không trực tiếp quyết định TL, chỉ đặt ra <em>các khả năng khác nhau</em> cho cá nhân</li>
+<li>Có thể thay đổi theo quá trình sống và hoạt động</li>
+</ul></div>
+<div class="br"><div class="bt">2. Môi trường sống</div><ul>
+<li><b>Môi trường tự nhiên:</b> tác động gián tiếp, phải qua môi trường XH</li>
+<li><b>Môi trường XH:</b> <em>ý nghĩa chủ yếu</em> — quy định bản chất và nội dung TL
+  <ul class="sub">
+    <li>Quan hệ sản xuất là nguồn gốc sâu xa quyết định</li>
+    <li>Không có MT XH → tư chất loài người không phát triển được</li>
+  </ul>
+</li>
+<li><b>Tác động tự phát:</b> ngẫu nhiên, do sống trong môi trường</li>
+<li><b>Tác động tự giác:</b> có chủ đích, qua ý thức người khác (giáo dục)</li>
+</ul></div>
+<div class="br"><div class="bt">3. Yếu tố hoạt động</div><ul>
+<li><b>Là phương thức tồn tại</b> của con người; <b>quyết định trực tiếp</b></li>
+<li>Tác động vào hoàn cảnh → tạo sản phẩm + phản ánh thuộc tính HTKQ → tạo TL và nhân cách</li>
+<li>Thỏa mãn nhu cầu → <b>nảy sinh, hình thành, củng cố tình cảm</b></li>
+<li>Năng lực, tri thức, kỹ năng, kỹ xảo <b>chỉ phát triển trong HĐ</b></li>
+<li>Tính cách được hình thành, tôi luyện và phát triển qua HĐ</li>
+</ul></div>
+<div class="br"><div class="bt">4. Yếu tố tự tu dưỡng</div><ul>
+<li><b>Việc làm tự giác, có hệ thống</b> nhằm loại trừ khuyết điểm, bồi dưỡng ưu điểm</li>
+<li><b>Trực tiếp quyết định</b> sự phát triển TL cá nhân</li>
+<li>Giúp tiếp nhận tác động môi trường <em>có chọn lọc</em> theo mục đích đã định</li>
+<li>Khắc phục nhược điểm sinh lý, thể chất</li>
+<li>Nhờ có tự tu dưỡng → <b>giáo dục mới phát huy được vai trò chủ đạo</b></li>
+</ul></div>
+<div class="br"><div class="bt">Kết luận</div><ul>
+<li>Các yếu tố <b>tác động tổng hợp</b>, không thể tuyệt đối hóa bất kỳ yếu tố nào</li>
+<li>Mỗi yếu tố chỉ có ý nghĩa trong <b>mối liên hệ với các yếu tố khác</b></li>
+</ul></div>
+`},
+{n:9,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'YẾU TỐ HOẠT ĐỘNG ĐỐI VỚI TÂM LÝ',html:`
+<div class="br"><div class="bt">Lý thuyết hoạt động (Leontiev)</div><ul>
+<li>Thành tựu xuất sắc của TLHH thế kỷ XX — <b>A.N.Leontiev (Xô Viết)</b></li>
+<li>Khắc phục hai trào lưu sai: <em>tự nhiên chủ nghĩa</em> (TL người = TL động vật) và <em>duy tâm</em> (TL = hoạt động tinh thần thuần túy)</li>
+<li>Đưa TLH trở thành <b>khoa học khách quan thực sự</b></li>
+</ul></div>
+<div class="br"><div class="bt">Cấu trúc hoạt động</div>
+<div class="cmp">
+<div class="cc"><h4>Phía chủ thể (thao tác)</h4><ul>
+<li>Hoạt động (tổng thể)</li>
+<li>Hành động (bộ phận)</li>
+<li>Thao tác (cụ thể)</li>
+</ul></div>
+<div class="cc"><h4>Phía khách thể (nội dung TL)</h4><ul>
+<li>Động cơ (mục đích chung)</li>
+<li>Mục đích bộ phận</li>
+<li>Phương tiện</li>
+</ul></div>
+</div></div>
+<div class="br"><div class="bt">Mối quan hệ trong cấu trúc</div><ul>
+<li>Hoạt động gồm nhiều <b>hành động</b></li>
+<li>Hành động thực hiện qua các <b>thao tác</b></li>
+<li>Hoạt động hướng vào <b>động cơ</b> (mục đích chung cuối cùng)</li>
+<li>Kết quả: <em>"sản phẩm kép"</em> — về phía khách thể và chủ thể</li>
+</ul></div>
+<div class="br"><div class="bt">Vai trò của hoạt động</div><ul>
+<li>Phản ánh HTKQ → <b>tạo đời sống TL và nhân cách</b></li>
+<li>Thỏa mãn nhu cầu → <b>hình thành tình cảm</b></li>
+<li><b>Năng lực, tri thức, kỹ năng</b> chỉ phát triển trong HĐ</li>
+<li><b>Tính cách</b> được hình thành và tôi luyện qua HĐ</li>
+<li>HĐ càng phong phú → TL càng <em>đa dạng, sâu sắc</em></li>
+</ul></div>
+<div class="br"><div class="bt">Ví dụ: Ban chuyên án</div><ul>
+<li><b>HĐ:</b> điều tra vụ án — thúc đẩy bởi nhu cầu đấu tranh chống tội phạm</li>
+<li><b>Hành động:</b> khám nghiệm HT / điều tra trinh sát / lấy lời khai</li>
+<li><b>Thao tác:</b> chụp ảnh, ghi chép, lấy dấu vết, quan sát bằng mắt</li>
+</ul></div>
+`},
+{n:10,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'"GẦN MỰC ĐEN, GẦN ĐÈN RẠNG"',html:`
+<div class="br"><div class="bt">Cơ sở lý luận TLH</div><ul>
+<li>Nguồn gốc TL nằm trong <b>nền văn hóa XH - LS</b>, trong môi trường XH</li>
+<li>Quá trình hình thành TL = chuyển <em>kinh nghiệm XH-LS (cái bên ngoài)</em> thành <em>kinh nghiệm riêng (cái bên trong)</em> qua HĐ và giao tiếp</li>
+</ul></div>
+<div class="br"><div class="bt">Con người vs động vật</div><ul>
+<li><b>Động vật:</b> phát triển TL qua bản năng sinh vật + thích nghi cá thể</li>
+<li><b>Con người:</b> TL hình thành qua HĐ + giao tiếp + tự tu dưỡng trong hoàn cảnh XH</li>
+<li>Đứa trẻ mới sinh chưa có TL → TL hình thành dần trong quá trình sống và HĐ</li>
+</ul></div>
+<div class="br"><div class="bt">Phân tích câu tục ngữ</div><ul>
+<li><b>Gần mực → đen:</b> môi trường xấu tác động tiêu cực đến TL cá nhân</li>
+<li><b>Gần đèn → rạng:</b> môi trường tốt → TL tích cực, sáng suốt hơn</li>
+<li><b>Không tuyệt đối:</b> phụ thuộc vào bản lĩnh, tự tu dưỡng của cá nhân</li>
+<li>4 yếu tố tác động đồng thời: thể chất + môi trường + HĐ + tự tu dưỡng</li>
+</ul></div>
+<div class="br"><div class="bt">Ý nghĩa thực tiễn</div><ul>
+<li>Xây dựng môi trường lành mạnh cho sự phát triển TL cá nhân</li>
+<li>Tuyển chọn nhân sự cần xem xét môi trường xuất thân</li>
+<li>Giáo dục môi trường → hiệu quả giáo dục nhân cách</li>
+</ul></div>
+`},
+{n:11,cat:'ban-chat',ac:'#0ea5e9',tag:'Bản chất TL',title:'BÀI THƠ: NỬA ĐÊM — NHẬT KÝ TRONG TÙ',html:`
+<div class="br"><div class="bt">Vai trò của giáo dục</div><ul>
+<li>GD là <b>tác động tự giác của MT XH đến cá nhân</b> theo mục đích, kế hoạch, biện pháp định trước</li>
+<li>GD <b>vạch phương hướng</b> cho sự hình thành, phát triển TL và dẫn dắt theo chiều hướng đó</li>
+<li>Truyền lại <b>nền văn hóa XH - LS</b> cho thế hệ sau — người GD chọn lọc, cá nhân hóa kho tàng văn hóa</li>
+<li>Đưa con người vào <em>"vùng phát triển gần"</em> — đi trước thực tế, vươn tới tương lai</li>
+</ul></div>
+<div class="br"><div class="bt">6 khả năng của giáo dục</div><ul>
+<li>Vạch phương hướng và thúc đẩy TL phát triển theo hướng đó</li>
+<li>Kết hợp HĐ + giao tiếp → thay đổi mối quan hệ, cải tạo TL cũ, xây dựng TL mới</li>
+<li><b>Bù đắp thiếu hụt thể chất</b> — phục hồi, khắc phục một số thiếu hụt</li>
+<li><b>Uốn nắn lệch lạc</b> do tác động tự phát của môi trường (giáo dục lại)</li>
+<li>Thế hệ trước truyền lại cho thế hệ sau những tinh hoa văn hóa</li>
+<li>Đào tạo được <b>"mẫu người"</b> mà xã hội đòi hỏi</li>
+</ul></div>
+<div class="br"><div class="bt">Giới hạn của giáo dục</div><ul>
+<li>GD <s>không phải vạn năng</s> — không quyết định trực tiếp TL phát triển đến mức độ nào</li>
+<li>Cần tiến hành trong mối quan hệ hữu cơ với tổ chức HĐ, giao tiếp, môi trường XH</li>
+<li>GD phải gắn với <b>tự giáo dục, tự rèn luyện</b> của cá nhân</li>
+</ul></div>
+<div class="br"><div class="bt">Minh chứng từ bài thơ Bác Hồ</div><ul>
+<li>GD hình thành <b>ý chí, bản lĩnh chính trị</b> vững vàng trong hoàn cảnh khắc nghiệt</li>
+<li>Tự tu dưỡng + nền tảng GD đúng đắn → TL tích cực bền vững <em>bất chấp</em> môi trường bất lợi</li>
+</ul></div>
+`},
+/* ═══ NHẬN THỨC ═══ */
+{n:12,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'TƯ DUY',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Quá trình TL phản ánh <b>thuộc tính bản chất, mối liên hệ bên trong có tính quy luật</b> của SVHT</li>
+<li>Phản ánh <b>cái mà trước đó cá nhân chưa biết</b></li>
+</ul></div>
+<div class="br"><div class="bt">Bản chất xã hội của tư duy</div><ul>
+<li>Dựa vào <b>kinh nghiệm các thế hệ trước</b> đã tích lũy (tri thức nền)</li>
+<li>Sử dụng <b>ngôn ngữ</b> do thế hệ trước sáng tạo — phương tiện biểu đạt và bảo lưu kết quả NT</li>
+<li>Được thúc đẩy bởi <b>nhu cầu XH</b> trong từng giai đoạn LS</li>
+<li>Mang tính chất <b>chung của loài người</b> — sử dụng tri thức liên ngành</li>
+</ul></div>
+<div class="br"><div class="bt">4 đặc điểm của tư duy</div><ul>
+<li><b>Tính có vấn đề:</b> nảy sinh khi gặp tình huống có VĐ, không giải quyết được bằng cũ</li>
+<li><b>Tính gián tiếp:</b> qua ngôn ngữ, ký hiệu, công cụ → mở rộng không giới hạn khả năng NT</li>
+<li><b>Tính trừu tượng & khái quát:</b> phản ánh cái bản chất chung, gạt bỏ cái cụ thể cá biệt; giải quyết cả nhiệm vụ tương lai</li>
+<li><b>Gắn chặt với ngôn ngữ:</b> ngôn ngữ là "vỏ vật chất" — không có TL thì NN chỉ là âm thanh vô nghĩa</li>
+</ul></div>
+<div class="br"><div class="bt">Tư duy gắn với nhận thức cảm tính</div><ul>
+<li>TL phải dựa trên tài liệu cảm tính — <b>"trực quan sinh động" → tư duy trừu tượng</b></li>
+<li>NT cảm tính là cơ sở khái quát thành khái niệm, quy luật</li>
+<li>TL ngược lại cũng ảnh hưởng đến CG (quy luật thứ 3 CG, tính lựa chọn TG)</li>
+</ul></div>
+<div class="br"><div class="bt">5 giai đoạn của quá trình tư duy</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Xác định & biểu đạt vấn đề</b> — quan trọng nhất; đúng hướng hay lạc hướng phụ thuộc bước này</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Huy động</b> tri thức, kinh nghiệm liên quan — phụ thuộc vào nhiệm vụ đã xác định</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Sàng lọc liên tưởng</b> và <b>hình thành giả thuyết</b> — chọn lọc cái phù hợp với nhiệm vụ</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Kiểm tra giả thuyết</b> — trong đầu hoặc thực tiễn; có thể phát hiện ra nhiệm vụ mới</div></div>
+<div class="st"><div class="sn">5</div><div class="sv"><b>Giải quyết nhiệm vụ</b> — có thể gặp khó khăn: bỏ sót dữ kiện / thêm điều kiện thừa / tư duy khuôn sáo</div></div>
+</div>
+<div class="br"><div class="bt">3 kết luận thực tiễn</div><ul>
+<li>Tích cực tham gia <b>hoạt động thực tiễn</b> để rèn TL</li>
+<li>Phát triển TL không thể tách rời <b>trau dồi ngôn ngữ</b></li>
+<li>Rèn TL không thể thay thế rèn <b>CG, TG, trí nhớ, quan sát, tưởng tượng</b></li>
+</ul></div>
+`},
+{n:13,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'SO SÁNH TƯ DUY & TƯỞNG TƯỢNG',html:`
+<div class="br"><div class="bt">Giống nhau</div><ul>
+<li>Đều là quá trình <b>nhận thức lý tính</b> — phản ánh gián tiếp, khái quát</li>
+<li>Đều <b>xuất hiện khi gặp hoàn cảnh có vấn đề</b></li>
+<li>Đều liên quan chặt chẽ đến <b>ngôn ngữ và nhận thức cảm tính</b></li>
+</ul></div>
+<div class="cmp">
+<div class="cc"><h4>Tư duy</h4><ul>
+<li>Phản ánh thuộc tính <b>bản chất, quy luật</b> SVHT</li>
+<li>Khi thông tin <b>đủ để suy luận</b></li>
+<li>Ngôn ngữ là công cụ chính</li>
+<li>Thao tác logic: PT, TH, SS, TT, KQ</li>
+<li>KQ: <b>khái niệm, phán đoán</b></li>
+<li>Kiểm chứng được bằng logic</li>
+</ul></div>
+<div class="cc"><h4>Tưởng tượng</h4><ul>
+<li>Phản ánh <b>cái chưa có</b> trong kinh nghiệm cá nhân</li>
+<li>Khi thông tin <b>không xác định rõ</b> (bất định cao)</li>
+<li>Biểu tượng trí nhớ là công cụ chính</li>
+<li>Xây dựng hình ảnh mới từ biểu tượng cũ</li>
+<li>KQ: <b>biểu tượng mới, sáng tạo</b></li>
+<li>Mang tính hình ảnh cao hơn</li>
+</ul></div>
+</div>
+<div class="br"><div class="bt">3 đặc điểm tưởng tượng</div><ul>
+<li><b>Tính có vấn đề:</b> chỉ nảy sinh khi "tính bất định của hoàn cảnh quá lớn" — dù chưa đủ tri thức vẫn hình dung được kết quả</li>
+<li><b>Phản ánh cái mới:</b> cái chưa từng có trong kinh nghiệm cá nhân hoặc xã hội</li>
+<li><b>Thực hiện từ biểu tượng trí nhớ:</b> hình ảnh mới được xây dựng từ biểu tượng đã có — mang tính gián tiếp và khái quát cao hơn TN</li>
+</ul></div>
+<div class="br"><div class="bt">5 cách tưởng tượng tạo biểu tượng mới</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Thay đổi kích thước/số lượng:</b> Phật trăm tay, người khổng lồ, người tí hon...</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Nhấn mạnh:</b> làm nổi bật đặc điểm → tranh biếm họa, cường điệu nghệ thuật</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Chắp ghép:</b> ghép bộ phận nhiều SVHT — con rồng (cá+rắn+chim+sư tử). Bộ phận không bị chế biến</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Liên hợp:</b> bộ phận bị cải biến và sắp xếp trong tương quan mới — <em>tổng hợp sáng tạo</em></div></div>
+<div class="st"><div class="sn">5</div><div class="sv"><b>Điển hình hóa:</b> xây dựng nhân cách đại diện cho giai cấp/lớp người — dùng trong văn học, điêu khắc</div></div>
+</div>
+`},
+{n:14,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'CẢM GIÁC',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Phản ánh <b>từng thuộc tính riêng lẻ bề ngoài</b> của SVHT</li>
+<li>Khi SVHT <b>đang trực tiếp tác động</b> vào giác quan</li>
+<li>Mức độ nhận thức <b>thấp nhất</b> — "viên gạch đầu tiên" của tòa lâu đài NT</li>
+</ul></div>
+<div class="br"><div class="bt">Phân loại cảm giác</div><ul>
+<li><b>Ngoại cảm (5 giác quan):</b> thị giác, thính giác, khứu giác, vị giác, xúc giác</li>
+<li><b>Nội cảm:</b>
+  <ul class="sub">
+    <li>Vận động: cảm giác về chuyển động cơ bắp, khớp</li>
+    <li>Thăng bằng: trạng thái và vị trí cơ thể trong không gian</li>
+    <li>Nội tạng: cơn đói, khát, buồn nôn, đau nội tạng</li>
+  </ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">4 quy luật cảm giác</div><ul>
+<li><b>Ngưỡng cảm giác:</b>
+  <ul class="sub">
+    <li><em>Phía dưới:</em> cường độ tối thiểu đủ gây cảm giác (ngưỡng tuyệt đối)</li>
+    <li><em>Phía trên:</em> cường độ tối đa vẫn gây được cảm giác</li>
+    <li><em>Vùng phản ánh tốt:</em> khoảng giữa hai ngưỡng</li>
+    <li><em>Ngưỡng sai biệt:</em> chênh lệch tối thiểu phân biệt được 2 kích thích</li>
+    <li>Ngưỡng phía dưới ↓ → độ nhạy cảm ↑; ngưỡng sai biệt ↓ → nhạy cảm sai biệt ↑</li>
+    <li>Thay đổi theo: lứa tuổi, sức khỏe, TL, nghề nghiệp, rèn luyện</li>
+  </ul>
+</li>
+<li><b>Thích ứng:</b> giảm độ nhạy khi kích thích tăng quá mạnh; tăng độ nhạy khi kích thích quá yếu</li>
+<li><b>Tác động lẫn nhau:</b>
+  <ul class="sub">
+    <li>Kích thích yếu lên cơ quan phân tích này → tăng độ nhạy cơ quan phân tích khác</li>
+    <li>Kích thích mạnh → giảm độ nhạy cơ quan khác</li>
+    <li>Có thể đồng thời hoặc nối tiếp, cùng loại hoặc khác loại</li>
+  </ul>
+</li>
+<li><b>Tương phản:</b> sự thay đổi CG do ảnh hưởng kích thích cùng loại (đồng thời hoặc nối tiếp)</li>
+</ul></div>
+<div class="br"><div class="bt">4 vai trò của cảm giác</div><ul>
+<li><b>Định hướng đầu tiên</b> trong HTKQ — mỗi giây não nhận hàng ngàn thông tin</li>
+<li><b>Cung cấp nguyên vật liệu đầu tiên</b> cho các hình thức NT cao hơn (TL, TT)</li>
+<li>Đảm bảo <b>trạng thái hoạt động của vỏ não</b> — hoạt động tinh thần bình thường</li>
+<li>Đặc biệt quan trọng với <b>người khuyết tật</b> — nhận biết qua xúc giác</li>
+</ul></div>
+`},
+{n:15,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'TRI GIÁC',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Phản ánh SVHT <b>một cách trọn vẹn</b> khi chúng đang tác động trực tiếp vào giác quan</li>
+<li>Cao hơn cảm giác — tổng hợp nhiều thuộc tính thành hình ảnh đầy đủ, có ý nghĩa</li>
+<li>Thành phần chính của <b>nhận thức cảm tính</b> ở người trưởng thành</li>
+</ul></div>
+<div class="br"><div class="bt">5 quy luật tri giác</div><ul>
+<li><b>Tính đối tượng:</b> hình ảnh TG luôn thuộc về SVHT cụ thể của HTKQ
+  <ul class="sub"><li>→ Cơ sở định hướng, điều chỉnh hành vi và hoạt động</li></ul>
+</li>
+<li><b>Tính lựa chọn:</b> tách đối tượng ra khỏi bối cảnh, phản ánh chủ động
+  <ul class="sub"><li>Càng khác biệt với bối cảnh → càng dễ TG đầy đủ</li></ul>
+</li>
+<li><b>Tính có ý nghĩa:</b> gọi tên, xác định công dụng, xếp vào loại
+  <ul class="sub"><li>Gắn chặt với tư duy và hiểu biết về bản chất sự vật</li></ul>
+</li>
+<li><b>Tính ổn định:</b> phản ánh ổn định khi điều kiện TG thay đổi
+  <ul class="sub"><li>Phụ thuộc nhiều vào <em>kinh nghiệm cá nhân</em> — giúp định hướng trong thế giới biến đổi</li></ul>
+</li>
+<li><b>Tổng giác:</b> nhân cách (nhu cầu, hứng thú, TC, kinh nghiệm, năng lực) ảnh hưởng đến TG
+  <ul class="sub"><li>Con người TG bằng toàn bộ hoạt động, không chỉ giác quan cụ thể</li></ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">Ảo giác</div><ul>
+<li>TG <b>không đúng, bị sai lệch</b> — có tính quy luật, xảy ra ở mọi người bình thường</li>
+<li>Có ở: TG không gian, thời gian, vận động...</li>
+<li>VD: chiếc thìa "gãy" trong ly nước; chơi vui → thời gian trôi nhanh</li>
+</ul></div>
+<div class="br"><div class="bt">Quan sát — hình thức TG cao nhất</div><ul>
+<li>TG có <b>mục đích, kế hoạch</b>, do xã hội và lao động tạo thành</li>
+<li>Trở thành <b>phương pháp nghiên cứu</b> quan trọng của nhiều khoa học</li>
+</ul></div>
+<div class="br"><div class="bt">Vai trò với CAND</div><ul>
+<li>Trinh sát, khám nghiệm HT, xét hỏi bị can, lấy lời khai người làm chứng, đối chất</li>
+<li>Tình huống khẩn cấp: năng lực quan sát tốt → tránh tổn thất trong "tích tắc"</li>
+</ul></div>
+`},
+{n:16,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'NHẬN THỨC — TÌNH CẢM — Ý CHÍ',html:`
+<div class="br"><div class="bt">Nhận thức</div><ul>
+<li>Phản ánh HTKQ vào ý thức con người</li>
+<li><b>Cảm tính + Lý tính</b> — quan hệ biện chứng với nhau</li>
+<li>Cơ sở, mục đích và tiêu chuẩn của NT là <b>thực tiễn XH</b></li>
+</ul></div>
+<div class="br"><div class="bt">NT → Tình cảm (NT làm cơ sở cho TC)</div><ul>
+<li>NT là <b>cơ sở, điều kiện cần thiết</b> để TC hình thành, củng cố, phát triển</li>
+<li>Không có NT → không có TC; NT bất thường → xúc cảm bất thường</li>
+<li>NT đầy đủ, chính xác → <b>tri giác rõ hơn, nhớ lâu hơn, tư duy sáng suốt hơn, tưởng tượng phong phú hơn</b></li>
+<li>NT định hướng, điều khiển, điều chỉnh TC đi đúng hướng</li>
+</ul></div>
+<div class="br"><div class="bt">TC → Nhận thức (TC là động lực)</div><ul>
+<li>TC là <b>nguồn động lực mạnh mẽ</b> kích thích tìm tòi, nhận thức</li>
+<li>TC tốt (yêu thích môn học) → tri giác chính xác, tư duy sáng suốt hơn</li>
+<li>TC không lành mạnh (u buồn, chán nản) → tiếp thu kém, tư duy sai lệch</li>
+</ul></div>
+<div class="br"><div class="bt">6 phẩm chất của ý chí</div><ul>
+<li><b>Tính mục đích:</b> điều chỉnh HV hướng vào mục đích tự giác, có kế hoạch; gạt bỏ mục đích thứ yếu</li>
+<li><b>Tính độc lập - tự chủ:</b> làm chủ bản thân, tâm trạng; không có HĐ bộc phát vô ý thức</li>
+<li><b>Tính quyết đoán:</b> đưa ra quyết định kiên quyết, kịp thời, chính xác — không dao động không cần thiết</li>
+<li><b>Tính kiên trì:</b> thực hiện đến cùng mục đích dù lâu dài gian khổ; khó khăn càng tăng thêm quyết tâm</li>
+<li><b>Tính dũng cảm:</b> khắc phục sợ hãi, tiến tới mục đích bất chấp nguy hiểm khi hành động hợp đạo đức</li>
+<li><b>Tính tổ chức kỷ luật:</b> phục tùng tập thể; tự giác thực hiện nội quy; biết gắn quyền lợi với nghĩa vụ</li>
+</ul></div>
+`},
+{n:17,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'TÍNH CÓ VẤN ĐỀ CỦA TƯ DUY',html:`
+<div class="br"><div class="bt">Bản chất</div><ul>
+<li>TL chỉ nảy sinh khi gặp <b>tình huống có vấn đề</b></li>
+<li>Tình huống có VĐ: kinh nghiệm cũ <b>không đủ</b> giải quyết, buộc phải tìm tòi</li>
+<li><em>"Không có vấn đề thì không có tư duy thực sự"</em></li>
+<li>Vấn đề tạo ra <b>động lực nội tại</b> — trạng thái căng thẳng trí tuệ muốn tìm ra câu trả lời</li>
+</ul></div>
+<div class="br"><div class="bt">Nguồn gốc: 3 loại mâu thuẫn nhận thức</div><ul>
+<li>Giữa <b>cái đã biết và cái chưa biết</b></li>
+<li>Giữa <b>kinh nghiệm cũ và yêu cầu mới</b></li>
+<li>Giữa <b>mục tiêu và phương tiện chưa rõ</b></li>
+</ul></div>
+<div class="br"><div class="bt">3 mức độ tình huống có vấn đề</div><ul>
+<li><b>Thấp:</b> vấn đề quen, có thể giải bằng kinh nghiệm cũ</li>
+<li><b>Trung bình:</b> cần biến đổi, kết hợp tri thức, đòi hỏi suy luận</li>
+<li><b>Cao:</b> hoàn toàn mới, cần sáng tạo, phát hiện quy luật — yêu cầu cao nhất với TL</li>
+</ul></div>
+<div class="br"><div class="bt">Quá trình TL giải quyết VĐ (5 bước)</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Phân tích dữ kiện</b> — xác định bản chất và nguyên nhân (VD: khám nghiệm HT)</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>So sánh và liên hệ</b> với kinh nghiệm, vụ án cũ đã gặp</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Giả thuyết hóa</b> — đưa ra phương án điều tra có thể có</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Kiểm tra và điều chỉnh</b> — loại bỏ giả thuyết không phù hợp</div></div>
+<div class="st"><div class="sn">5</div><div class="sv"><b>Tìm ra giải pháp</b> — sáng tạo và khám phá điều mới</div></div>
+</div>
+<div class="br"><div class="bt">3 phương pháp dạy học dựa trên tính có VĐ</div><ul>
+<li><b>Dạy học nêu vấn đề:</b> GV đưa ra mâu thuẫn NT → HS tự tìm lời giải trước khi được cung cấp kiến thức</li>
+<li><b>Dạy học tình huống:</b> bối cảnh thực tế giả định → phân tích, đưa ra quyết định</li>
+<li><b>Dạy học khám phá:</b> tự quan sát, thử nghiệm, rút ra kết luận — GV chỉ định hướng</li>
+</ul></div>
+`},
+{n:18,cat:'nhan-thuc',ac:'#10b981',tag:'Nhận thức',title:'Ý NGHĨA NGHIÊN CỨU ĐẶC ĐIỂM TƯ DUY',html:`
+<div class="br"><div class="bt">1. Từ tính có vấn đề → Chủ động đặt & giải quyết VĐ</div><ul>
+<li>Rèn thói quen: <em>"vì sao?, như thế nào?, có cách khác không?"</em></li>
+<li>Tránh học thụ động, chỉ ghi nhớ không suy nghĩ</li>
+<li>Chủ động tìm kiếm, phân tích, kiểm chứng thông tin</li>
+<li><u>Ý nghĩa:</u> hình thành TL độc lập, phản biện, năng lực giải quyết VĐ</li>
+</ul></div>
+<div class="br"><div class="bt">2. Từ tính gián tiếp → Khai thác công cụ & tri thức trung gian</div><ul>
+<li>Sử dụng sơ đồ, bảng biểu, hình vẽ, tư duy hệ thống để tổ chức thông tin</li>
+<li>Tích lũy <b>tri thức nền</b> — "công cụ" của tư duy</li>
+<li>Thu thập, xử lý thông tin từ nhiều nguồn khác nhau</li>
+<li><u>Ý nghĩa:</u> nâng cao suy luận logic, phân tích dữ liệu, ra quyết định</li>
+</ul></div>
+<div class="br"><div class="bt">3. Từ tính trừu tượng → Hệ thống hóa kiến thức</div><ul>
+<li>Từ hiện tượng cụ thể → tìm bản chất bên trong, quy luật</li>
+<li>So sánh, phân loại, hệ thống hóa — nhìn vấn đề toàn diện</li>
+<li>Biết rút ra quy luật từ thực tiễn</li>
+<li><u>Ý nghĩa:</u> phát triển TL khoa học, tư duy lý luận, tránh phiến diện</li>
+</ul></div>
+<div class="br"><div class="bt">4. Từ gắn với ngôn ngữ → Phát triển năng lực diễn đạt</div><ul>
+<li>TL rõ ràng → diễn đạt rõ ràng; lập luận tốt → ngôn ngữ chính xác</li>
+<li>Rèn kỹ năng nói, viết; dùng thuật ngữ chính xác; trình bày có cấu trúc</li>
+<li><u>Ý nghĩa:</u> nâng cao giao tiếp, thuyết phục, trình bày khoa học trong nghề nghiệp</li>
+</ul></div>
+<div class="br"><div class="bt">5. Từ quan hệ với thực tiễn → Gắn học với hành</div><ul>
+<li>Vận dụng kiến thức vào tình huống cụ thể cuộc sống và công việc</li>
+<li>Tổng kết kinh nghiệm để điều chỉnh cách suy nghĩ cho phù hợp</li>
+<li><u>Ý nghĩa:</u> hình thành TL thực tiễn, linh hoạt, tránh lý thuyết suông</li>
+</ul></div>
+<div class="br"><div class="bt">Liên hệ bản thân</div><ul>
+<li>Xây dựng thói quen TL chủ động; luôn đặt câu hỏi, không thụ động</li>
+<li>Rèn TL logic, phản biện, sáng tạo qua đọc và nghiên cứu</li>
+<li>Chú trọng diễn đạt rõ ràng, có cấu trúc, dùng thuật ngữ chính xác</li>
+<li>Gắn lý thuyết với thực hành; tự đánh giá và điều chỉnh liên tục</li>
+</ul></div>
+`},
+/* ═══ TÌNH CẢM & Ý CHÍ ═══ */
+{n:19,cat:'tinh-cam',ac:'#f59e0b',tag:'Tình cảm',title:'SO SÁNH XÚC CẢM & TÌNH CẢM',html:`
+<div class="br"><div class="bt">Giống nhau</div><ul>
+<li>Đều là quá trình TL; đều là <b>các mức độ đời sống tình cảm cá nhân</b></li>
+<li>Đều gắn với nhu cầu; đều phản ánh thái độ của chủ thể đối với SVHT</li>
+</ul></div>
+<div class="cmp">
+<div class="cc"><h4>Xúc cảm</h4><ul>
+<li><b>Quá trình TL</b> gắn tình huống cụ thể</li>
+<li>Cường độ thấp/vừa; <b>thời gian ngắn</b></li>
+<li>Nảy sinh <b>tức thời</b> với kích thích</li>
+<li>Có ở <b>người và động vật</b></li>
+<li>Xúc cảm dương tính: thỏa mãn NC → tăng tích cực HĐ</li>
+<li>Xúc cảm âm tính: không thỏa mãn NC → thụ động, yếu sức HĐ</li>
+</ul></div>
+<div class="cc"><h4>Tình cảm</h4><ul>
+<li><b>Thuộc tính TL</b> — ổn định, bền vững</li>
+<li>Mang tính <b>khái quát, nhân cách</b></li>
+<li>Tồn tại <b>tiềm tàng</b>, bộc lộ qua xúc cảm</li>
+<li>Chỉ có ở <b>người</b></li>
+<li><em>Say mê:</em> TC cường độ mạnh, lâu dài, ý thức rõ (tích cực hoặc tiêu cực)</li>
+</ul></div>
+</div>
+<div class="br"><div class="bt">10 xúc cảm nền tảng</div><ul>
+<li>Hứng thú · Hồi hộp · Vui sướng · Ngạc nhiên · Đau khổ · Căm giận · Khinh bỉ · Khiếp sợ · Xấu hổ · Tội lỗi</li>
+</ul></div>
+<div class="br"><div class="bt">5 loại tình cảm cấp cao</div><ul>
+<li><b>Đạo đức:</b> tình mẹ con, bạn bè, đồng chí, lương tâm, hạnh phúc, nghĩa vụ, lẽ sống</li>
+<li><b>Trí tuệ:</b> gắn hoạt động học tập, sáng tạo, nhu cầu nhận thức</li>
+<li><b>Thẩm mỹ:</b> rung cảm trước cái đẹp — liên quan chặt đến TC đạo đức</li>
+<li><b>Hoạt động:</b> thái độ xúc cảm đối với lĩnh vực thực tiễn của bản thân</li>
+<li><b>Thế giới quan:</b> cao nhất — tinh thần dân tộc, chủ nghĩa yêu nước, nhân đạo; rất ổn định, bền vững</li>
+</ul></div>
+`},
+{n:20,cat:'tinh-cam',ac:'#f59e0b',tag:'Tình cảm',title:'6 QUY LUẬT ĐỜI SỐNG TÌNH CẢM',html:`
+<div class="br"><div class="bt">1. Quy luật Thích ứng ("Chai sạn")</div><ul>
+<li>Kích thích gây xúc cảm <b>lặp đi lặp lại đơn điệu</b> → suy yếu, không còn gây xúc cảm</li>
+<li>Tiếp tục tác động → có thể gây <b>cảm xúc đối lập</b> (thích thú → bực bội)</li>
+<li>VD: <em>"Gần thường, xa thương"</em></li>
+<li><u>Ứng dụng GD:</u> tránh lặp lại kích thích nhàm chán; thường xuyên đổi mới hình thức</li>
+</ul></div>
+<div class="br"><div class="bt">2. Quy luật Tương phản / Cảm ứng</div><ul>
+<li>Hai TC đối cực <b>tác động qua lại</b>: xuất hiện/suy yếu của TC này → tăng/giảm TC kia</li>
+<li>VD: <em>Càng yêu nước → càng căm thù quân xâm lược</em></li>
+<li>VD: <em>Càng yêu công bằng → càng ghét tham nhũng, chuyên quyền</em></li>
+<li><u>Biện pháp GD:</u> ôn nghèo nhớ khổ, ôn cổ tri tân</li>
+</ul></div>
+<div class="br"><div class="bt">3. Quy luật Di chuyển</div><ul>
+<li>TC di chuyển từ đối tượng này sang đối tượng khác <b>có liên quan</b></li>
+<li>Xảy ra khi cá nhân <b>không kịp làm chủ</b> tình cảm của mình</li>
+<li>VD: <em>"Giận cá chém thớt"; "Yêu nhau yêu cả đường đi, ghét nhau ghét cả tông ti họ hàng"</em></li>
+<li><u>Lưu ý:</u> TC không nên di chuyển tùy tiện — cần làm chủ bản thân</li>
+</ul></div>
+<div class="br"><div class="bt">4. Quy luật Pha trộn</div><ul>
+<li>Hai TC đối lập có thể <b>cùng tồn tại</b> trong một người, một lúc</li>
+<li>Chúng không loại trừ nhau mà <b>quy định lẫn nhau</b></li>
+<li>VD: <em>"Giận mà thương"; ghen tuông trong tình yêu (yêu + ghét)</em></li>
+<li>Phản ánh tính phức tạp, đa dạng và mâu thuẫn có thực trong hiện thực</li>
+</ul></div>
+<div class="br"><div class="bt">5. Quy luật Lây lan</div><ul>
+<li>TC người này lan truyền sang người khác — nền tảng là <b>tính XH trong TC con người</b></li>
+<li>VD: <em>"Vui lây", "buồn lây", "cảm thông", "đồng cảm"</em>; hoảng loạn tập thể</li>
+<li><u>Ý nghĩa:</u> cơ sở nguyên tắc <em>"giáo dục trong và thông qua tập thể"</em></li>
+</ul></div>
+<div class="br"><div class="bt">6. Quy luật Hình thành (tích lũy)</div><ul>
+<li>TC hình thành từ <b>xúc cảm đồng loại tích lũy</b> dần theo thời gian</li>
+<li>TC không xuất hiện đột ngột mà cần quá trình bồi đắp liên tục</li>
+<li><u>Ý nghĩa GD:</u> phải giáo dục TC đồng thời, không làm tuần tự từng loại</li>
+</ul></div>
+`},
+{n:21,cat:'tinh-cam',ac:'#f59e0b',tag:'Ý chí',title:'BẢN CHẤT Ý CHÍ',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Mặt năng động của ý thức — đề ra mục đích, phương hướng hành động</li>
+<li>Khắc phục khó khăn; điều khiển hành động đạt mục đích</li>
+</ul></div>
+<div class="br"><div class="bt">4 quan điểm về bản chất ý chí</div><ul>
+<li><b>Vô định luận (duy tâm):</b> M.Ernst, C.Manuel — ý chí là sức mạnh tinh thần độc lập; tự do tuyệt đối
+  <ul class="sub"><li>→ Hệ quả: chủ nghĩa duy ý chí, hành động tùy tiện bất chấp quy luật</li></ul>
+</li>
+<li><b>Quyết định luận máy móc:</b> ý chí hoàn toàn do HTKQ chi phối
+  <ul class="sub"><li>→ Hệ quả: phủ nhận tự do ý chí, thuyết định mệnh, con người thụ động</li></ul>
+</li>
+<li><b>Thuyết cảm xúc (C.Elzard):</b> ý chí là chiến thắng của cảm xúc mạnh nhất
+  <ul class="sub"><li>→ Hạn chế: duy tâm, khép kín, ý chí thuần túy từ xúc cảm</li></ul>
+</li>
+<li><b>CNDVBC (Mác-Lênin):</b> quan điểm đúng đắn nhất
+  <ul class="sub">
+    <li>Ý chí là hiện tượng TL, phản ánh HTKQ, cơ sở vật chất là não người</li>
+    <li>Vừa mang <b>tính tự do</b> (lựa chọn dựa trên nhận thức quy luật)</li>
+    <li>Vừa mang <b>tính tất yếu</b> (phải tuân theo quy luật tự nhiên và XH)</li>
+  </ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">Quan hệ Tự do - Tất yếu</div><ul>
+<li>Chưa hiểu quy luật → <em>"nô lệ"</em> của sự tất yếu</li>
+<li>Đã hiểu quy luật → <em>làm chủ</em>, tự do lựa chọn mục đích và kế hoạch</li>
+<li>Trình độ NT về quy luật càng cao → ý chí càng tự do</li>
+<li>Không thể hành động trái quy luật tự nhiên và XH</li>
+<li>Quy luật XH diễn ra <b>thông qua hoạt động tự giác của con người</b></li>
+</ul></div>
+`},
+/* ═══ NHÂN CÁCH ═══ */
+{n:22,cat:'nhan-cach',ac:'#ec4899',tag:'Nhân cách',title:'NĂNG LỰC CÁ NHÂN',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Tổ hợp những thuộc tính TL của cá nhân <b>phù hợp với yêu cầu đặc trưng</b> của loại HĐ nhất định</li>
+<li>Nhằm <b>hoàn thành có kết quả cao</b> trong lĩnh vực HĐ ấy</li>
+</ul></div>
+<div class="br"><div class="bt">Các mức độ năng lực</div><ul>
+<li><b>Năng lực chung:</b> cần cho nhiều lĩnh vực HĐ (chú ý, quan sát, TL, trí nhớ...)</li>
+<li><b>Năng lực chuyên biệt:</b> đặc thù cho một lĩnh vực cụ thể</li>
+<li><b>Tài năng:</b> mức độ NL cao → sản phẩm hoàn hảo, độc đáo</li>
+<li><b>Thiên tài:</b> mức độ cao nhất — để lại dấu ấn lịch sử loài người</li>
+</ul></div>
+<div class="br"><div class="bt">4 yếu tố hình thành và phát triển năng lực</div><ul>
+<li><b>Tư chất:</b> đặc điểm riêng về giải phẫu SL, cấu tạo não bộ, giác quan, kiểu TK cấp cao
+  <ul class="sub">
+    <li>Là cơ sở, tiền đề — điều kiện cần nhưng chưa đủ</li>
+    <li>Ảnh hưởng chiều hướng và tốc độ phát triển NL</li>
+    <li>Tư chất phù hợp → dễ phát triển NL tương ứng</li>
+  </ul>
+</li>
+<li><b>Điều kiện XH - LS:</b> phân công lao động, trình độ KH-KT, chế độ chính trị, điều kiện GD
+  <ul class="sub"><li>Quy định nội dung, phẩm chất của NL cá nhân</li></ul>
+</li>
+<li><b>Hoạt động cá nhân:</b> ý nghĩa <b>trực tiếp quyết định</b>
+  <ul class="sub">
+    <li>HĐ nhiều mặt, nội dung phong phú → NL phát triển rõ rệt và đầy đủ hơn</li>
+    <li>NL chỉ được nảy sinh và phát triển trong HĐ</li>
+  </ul>
+</li>
+<li><b>Tri thức, kỹ năng, kỹ xảo:</b> điều kiện cần thiết
+  <ul class="sub">
+    <li>Không tiếp thu TT-KN → không thể hình thành NL</li>
+    <li>Mức độ nắm vững TT-KN ↑ → NL ↑</li>
+    <li>Ngược lại: NL ↑ → nắm vững TT-KN nhanh và dễ hơn</li>
+  </ul>
+</li>
+</ul></div>
+`},
+{n:23,cat:'tinh-cam',ac:'#f59e0b',tag:'Ý chí',title:'NHẬN THỨC ĐÚNG — HÀNH ĐỘNG SAI',html:`
+<div class="br"><div class="bt">Bản chất hiện tượng</div><ul>
+<li>Sự <b>không thống nhất giữa nhận thức và hành vi</b> — khá phổ biến</li>
+<li>Phản ánh sự phức tạp của mối quan hệ NT → TC → Ý chí → Hành động</li>
+</ul></div>
+<div class="br"><div class="bt">5 nguyên nhân chính</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Ý chí & tự kiểm soát yếu:</b> thiếu bản lĩnh, kiên trì; dễ sai khi áp lực hoặc cám dỗ</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Cảm xúc lấn át lý trí:</b> nóng giận, lo sợ, bốc đồng → quyết định thiếu chính xác</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Môi trường XH:</b> áp lực tập thể, dư luận, tình huống bất ngờ → chọn hành vi sai để thích nghi</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Thiếu kỹ năng thực hành:</b> "biết" nhưng chưa "làm được" do thiếu KN, kinh nghiệm</div></div>
+<div class="st"><div class="sn">5</div><div class="sv"><b>Lợi ích cá nhân:</b> lợi ích trước mắt mâu thuẫn với chuẩn mực đã nhận thức</div></div>
+</div>
+<div class="br"><div class="bt">5 giải pháp khắc phục</div><ul>
+<li>Rèn luyện <b>ý chí và tự kiểm soát</b> — hình thành thói quen hành động theo chuẩn mực</li>
+<li>Nâng cao <b>điều chỉnh cảm xúc</b> — bình tĩnh, suy nghĩ trước khi hành động</li>
+<li><b>Gắn NT với thực hành</b> — tăng cường rèn luyện KN, trải nghiệm thực tiễn</li>
+<li>Xây dựng <b>môi trường tích cực</b>; củng cố hệ giá trị cá nhân đúng đắn</li>
+<li>Đặt <b>lợi ích lâu dài và chung</b> lên trên lợi ích trước mắt</li>
+</ul></div>
+<div class="br"><div class="bt">NT thay đổi → TC có thay đổi không?</div><ul>
+<li><b>Có, nhưng không đồng thời hoàn toàn</b> — TC có "độ trễ"</li>
+<li>NT là cơ sở của TC → NT thay đổi → cách đánh giá thay đổi → kéo theo TC thay đổi</li>
+<li><b>3 trường hợp TC không đổi ngay:</b>
+  <ul class="sub">
+    <li>TC đã hình thành lâu/bền vững — định kiến, ấn tượng ban đầu mạnh</li>
+    <li>Cảm xúc cá nhân, trải nghiệm trước đó lấn át</li>
+    <li>Thói quen TL hoặc ảnh hưởng môi trường XH</li>
+  </ul>
+</li>
+<li><b>Kết luận:</b> muốn thay đổi thái độ người khác → tác động đồng thời vào <em>NT + cảm xúc + môi trường XH</em></li>
+</ul></div>
+`},
+{n:24,cat:'tinh-cam',ac:'#f59e0b',tag:'Ý chí',title:'HÀNH ĐỘNG Ý CHÍ PHỨC TẠP',html:`
+<div class="br"><div class="bt">Định nghĩa hành động ý chí</div><ul>
+<li>HĐ có <b>xác định trước mục đích</b>, lựa chọn phương tiện/biện pháp</li>
+<li>Có <b>nỗ lực cố gắng vượt qua khó khăn</b> để đạt mục đích đã đề ra</li>
+</ul></div>
+<div class="br"><div class="bt">3 đặc điểm của hành động ý chí</div><ul>
+<li><b>Ý thức đầy đủ về mục đích:</b> hình dung kết quả trực tiếp lẫn gián tiếp; cân nhắc phương tiện tối ưu
+  <ul class="sub"><li>→ Còn gọi là <em>hành động tự giác / có chủ tâm</em></li></ul>
+</li>
+<li><b>Kích thích là động cơ TL:</b> không phải kích thích trực tiếp, mà là <em>sự nhận thức về ý nghĩa của kích thích</em>
+  <ul class="sub"><li>Ph.Ănghen: "Tất cả cái thúc đẩy con người hành động đều phải đi qua đầu óc họ"</li></ul>
+</li>
+<li><b>Nỗ lực khắc phục khó khăn:</b> khơi dậy hoặc kìm hãm, tăng hoặc giảm cường độ HĐ
+  <ul class="sub"><li>Ý chí cao: quyết tâm, nỗ lực vượt khó; ý chí thấp: dễ bỏ cuộc</li></ul>
+</li>
+</ul></div>
+<div class="br"><div class="bt">3 loại hành động ý chí</div><ul>
+<li><b>Đơn giản:</b> mục đích rõ, không cần cân nhắc biện pháp, ít nỗ lực, dễ vượt qua</li>
+<li><b>Phức tạp (điển hình):</b> lựa chọn mục đích, cân nhắc biện pháp, nỗ lực cao, quyết tâm cao — <em>phổ biến nhất trong cuộc sống</em></li>
+<li><b>Cấp bách:</b> tình huống khẩn cấp, thời gian ngắn, quyết định nhanh, áp lực cao</li>
+</ul></div>
+<div class="br"><div class="bt">5 giai đoạn HĐYC phức tạp</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Xác định & ý thức mục đích</b> — hình dung kết quả trực tiếp và gián tiếp</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Đấu tranh động cơ</b> — cân nhắc các mục đích và biện pháp có thể</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Lập kế hoạch</b> và lựa chọn biện pháp thực hiện phù hợp nhất</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Thực hiện</b> — theo dõi, đối chiếu với mô hình trong đầu, điều chỉnh liên tục</div></div>
+<div class="st"><div class="sn">5</div><div class="sv"><b>Đánh giá kết quả</b> — rút kinh nghiệm cho lần sau</div></div>
+</div>
+`},
+/* ═══ TẬP THỂ & NHU CẦU ═══ */
+{n:25,cat:'xa-hoi',ac:'#6366f1',tag:'Tâm lý XH',title:'TẬP THỂ',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Cộng đồng được tổ chức trên cơ sở <b>phân công và hợp tác</b></li>
+<li>Có <b>địa vị pháp lý</b> trong XH; mục đích chung phù hợp với lợi ích XH</li>
+<li>Đem lại lợi ích cho cộng đồng, từng thành viên và toàn xã hội</li>
+</ul></div>
+<div class="br"><div class="bt">5 dấu hiệu cơ bản của tập thể</div><ul>
+<li>Là nhóm chính thức, <b>được XH thừa nhận</b> có tính pháp lý</li>
+<li>Mục đích chung <b>phù hợp với lợi ích XH</b> — phân biệt với băng cướp, ổ cờ bạc...
+  <ul class="sub"><li>Lợi ích tập thể phải thống nhất với lợi ích XH</li></ul>
+</li>
+<li>Tồn tại <b>tự giác</b> của các thành viên</li>
+<li><b>Tính tổng thể:</b> cơ cấu tổ chức, phân công chức năng, lãnh đạo rõ ràng</li>
+<li>Phát triển <b>nhân cách cùng với sự phát triển của tập thể</b></li>
+</ul></div>
+<div class="br"><div class="bt">4 giai đoạn phát triển tập thể</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Tổng hợp sơ cấp:</b> mới hình thành, quan hệ bên ngoài, chưa phối hợp đồng bộ. Lãnh đạo: xây dựng tổ chức, kỷ luật chặt, đặt yêu cầu và kiểm tra thường xuyên</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Phân hóa:</b> 3 nhóm: <em>cốt cán</em> (tích cực) / <em>trung lập</em> (thụ động, đông nhất) / <em>tiêu cực</em> (phá rối). Lãnh đạo: dựa vào cốt cán, lôi kéo trung lập, đấu tranh với tiêu cực</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Hợp nhất:</b> đoàn kết, tự quản, bầu không khí thân ái. Lãnh đạo: để thành viên tham gia xây dựng kế hoạch, nghị quyết</div></div>
+<div class="st"><div class="sn">4</div><div class="sv"><b>Yêu cầu tối đa:</b> nhân cách phát triển cao; lợi ích XH phù hợp lợi ích cá nhân. Lãnh đạo: phải có tài năng cao, đạo đức, sáng kiến — chỉ chấp nhận người lãnh đạo xứng đáng</div></div>
+</div>
+<div class="br"><div class="bt">6 vấn đề xây dựng tập thể vững mạnh</div><ul>
+<li>Xây dựng <b>mục tiêu, nhiệm vụ</b> cân bằng lợi ích XH và cá nhân</li>
+<li>Hoàn thiện <b>cơ cấu tổ chức</b>, bộ máy lãnh đạo và quy chế HĐ</li>
+<li>Xây dựng <b>truyền thống tốt đẹp</b> — phát huy sức mạnh tập thể</li>
+<li>Tạo <b>BKKTL thuận lợi</b> — đổi mới nội dung, phương thức HĐ</li>
+<li>Đảm bảo <b>cơ sở vật chất kỹ thuật</b> cần thiết cho HĐ</li>
+<li>Tạo môi trường kinh tế, chính trị, XH bên ngoài <b>thuận lợi</b></li>
+</ul></div>
+<div class="br"><div class="bt">Lưu ý quan trọng</div><ul>
+<li>Phát triển của lãnh đạo và của tập thể là <b>quá trình thống nhất</b></li>
+<li>Người lãnh đạo không phải "sức mạnh bên ngoài" mà là <b>bộ phận của tập thể</b></li>
+</ul></div>
+`},
+{n:26,cat:'nhan-cach',ac:'#ec4899',tag:'Nhân cách',title:'VAI TRÒ CỦA NHU CẦU',html:`
+<div class="br"><div class="bt">Khái niệm</div><ul>
+<li>Sự <b>đòi hỏi tất yếu</b> về những cái cần thiết để tồn tại và phát triển</li>
+<li>Phụ thuộc vào điều kiện và phương thức XH - LS nhất định</li>
+<li>Là những đòi hỏi <b>khách quan</b> đảm bảo sự sống, phát triển của con người</li>
+</ul></div>
+<div class="br"><div class="bt">3 đặc điểm cơ bản của nhu cầu</div><ul>
+<li><b>Luôn có đối tượng cụ thể:</b> "một cái gì đó" vật chất hoặc tinh thần; khi gặp đối tượng → NC trở thành <em>động cơ</em></li>
+<li><b>Nội dung do điều kiện XH quy định:</b> mang bản chất XH, phát triển cùng XH; khác xa về chất so với NC động vật (bản năng)</li>
+<li><b>Tính chu kỳ:</b> được thỏa mãn → tái diễn; NC nảy sinh sau có thể lặp lại hoặc cao hơn trước</li>
+</ul></div>
+<div class="br"><div class="bt">3 giai đoạn thỏa mãn nhu cầu</div>
+<div class="steps">
+<div class="st"><div class="sn">1</div><div class="sv"><b>Khởi đầu:</b> NC hình thành, thúc đẩy cá nhân tìm kiếm đối tượng để thỏa mãn</div></div>
+<div class="st"><div class="sn">2</div><div class="sv"><b>Chiếm lĩnh & hưởng thụ:</b> xuất hiện xúc cảm dương tính (thỏa mãn) hoặc âm tính (thất vọng)</div></div>
+<div class="st"><div class="sn">3</div><div class="sv"><b>Nảy sinh NC mới:</b> thường cao hơn → lại thúc đẩy HĐ mới chiếm lĩnh đối tượng mới</div></div>
+</div>
+<div class="br"><div class="bt">Phân loại nhu cầu</div><ul>
+<li><b>Theo tính chất:</b>
+  <ul class="sub">
+    <li><em>Tự nhiên:</em> ăn, uống, sinh đẻ... (bẩm sinh, di truyền)</li>
+    <li><em>Xã hội:</em> học tập, nghiên cứu KH, chính trị...</li>
+  </ul>
+</li>
+<li><b>Theo đối tượng thỏa mãn:</b>
+  <ul class="sub">
+    <li><em>Vật chất:</em> ăn, mặc, ở... gắn với sự tồn tại cơ thể</li>
+    <li><em>Tinh thần:</em> nhận thức, nghệ thuật, lao động, giao lưu, HĐ XH</li>
+  </ul>
+</li>
+<li>Sự phân chia chỉ có <b>tính tương đối</b> — đều mang bản chất người, do ĐK XH-LS quy định</li>
+</ul></div>
+<div class="br"><div class="bt">Vai trò của nhu cầu</div><ul>
+<li><b>Nguồn gốc bên trong</b> tạo nên tính tích cực của cá nhân</li>
+<li><b>Động cơ thúc đẩy HĐ</b> — khi NC gặp đối tượng phù hợp</li>
+<li>Cơ sở đầu tiên hình thành <b>xu hướng cá nhân</b></li>
+<li>NC tích cực → xu hướng tích cực và ngược lại</li>
+<li><b>Tháp NC Maslow (5 bậc từ thấp → cao):</b>
+  <ul class="sub">
+    <li>1. Sinh lý: ăn, uống, ngủ, sinh dục</li>
+    <li>2. An toàn: an ninh, ổn định, được bảo vệ</li>
+    <li>3. Xã hội: yêu thương, thuộc về, được chấp nhận</li>
+    <li>4. Được tôn trọng: địa vị, thành tích, được công nhận</li>
+    <li>5. Tự hoàn thiện: phát huy hết tiềm năng bản thân</li>
+  </ul>
+</li>
+</ul></div>
+`}
+];
+
+function mk(d){
+  const el=document.createElement('div');
+  el.className='card';el.dataset.cat=d.cat;
+  el.style.cssText=`--ac:${d.ac};--ac-dim:${d.ac}15;--ac-dim2:${d.ac}40`;
+  el.innerHTML=`<div class="hd"><div class="num">${d.n}</div><div class="ttl">${d.title}</div><div class="tg">${d.tag}</div><div class="arr">▼</div></div><div class="bd">${d.html}</div>`;
+  el.querySelector('.hd').onclick=()=>el.classList.toggle('on');
+  return el;
+}
+const grid=document.getElementById('grid');
+C.forEach(d=>grid.appendChild(mk(d)));
+
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=function(){
+    document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('on');x.style.cssText=''});
+    this.classList.add('on');
+    const f=this.dataset.f;
+    document.querySelectorAll('.card').forEach(c=>{
+      c.classList[f==='all'||c.dataset.cat===f?'remove':'add']('hidden');
+    });
+  };
+});
+</script>
+</body>
+</html>
