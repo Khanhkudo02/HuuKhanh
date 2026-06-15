@@ -1,78 +1,99 @@
 const content = document.getElementById("content");
 
-// ===== PAGES =====
-const pages = {
-    home: `
-        <div class="welcome fade">
+function savePage(page){
+    localStorage.setItem("lastPage", page);
+}
+
+function executeScripts(container){
+
+    const scripts = container.querySelectorAll("script");
+
+    scripts.forEach(oldScript => {
+
+        const newScript = document.createElement("script");
+
+        if(oldScript.src){
+            newScript.src = oldScript.src;
+        }else{
+            newScript.textContent = oldScript.textContent;
+        }
+
+        document.body.appendChild(newScript);
+        oldScript.remove();
+    });
+}
+
+function loadPage(page){
+
+    fetch(page)
+    .then(response => response.text())
+    .then(html => {
+
+        content.innerHTML = `
+            <button class="back-home" onclick="goHome()">
+                🏠 Trang chủ
+            </button>
+
+            ${html}
+        `;
+
+        executeScripts(content);
+
+        savePage(page);
+
+        if(window.innerWidth <= 768){
+            document
+            .getElementById("sidebar")
+            .classList.remove("show");
+        }
+
+        window.scrollTo(0,0);
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        content.innerHTML = `
+            <div class="welcome">
+                <h2>⚠️ Lỗi tải nội dung</h2>
+            </div>
+        `;
+    });
+}
+
+function goHome(){
+
+    localStorage.removeItem("lastPage");
+
+    content.innerHTML = `
+        <div class="welcome">
             <h1>Nguyễn Hữu Khánh</h1>
             <p>Nơi lưu trữ tài liệu học tập</p>
-            <p>D5S-VB2A</p>
         </div>
-    `,
-
-    psychology: `
-        <div class="fade">
-            <h1>🧠 Tâm lý học</h1>
-            <p>Đây là nội dung môn Tâm lý học</p>
-        </div>
-    `,
-
-    english: `
-        <div class="fade">
-            <h1>🇬🇧 Tiếng Anh</h1>
-            <p>Đây là nội dung môn Tiếng Anh</p>
-        </div>
-    `
-};
-
-// ===== NAVIGATE =====
-function navigate(page){
-
-    window.location.hash = page; // đổi URL
-
-    render(page);
+    `;
 
     if(window.innerWidth <= 768){
-        document.getElementById("sidebar").classList.remove("show");
+        document
+        .getElementById("sidebar")
+        .classList.remove("show");
     }
+
+    window.scrollTo(0,0);
 }
 
-// ===== RENDER =====
-function render(page){
-
-    if(!pages[page]) page = "home";
-
-    content.innerHTML = pages[page];
-
-    setActive(page);
-}
-
-// ===== ACTIVE MENU =====
-function setActive(page){
-
-    document.querySelectorAll(".sidebar li").forEach(li => {
-        li.classList.remove("active");
-    });
-
-    const active = document.getElementById("nav-" + page);
-    if(active){
-        active.classList.add("active");
-    }
-}
-
-// ===== SIDEBAR =====
 function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("show");
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("show");
 }
 
-// ===== HANDLE BACK/FORWARD =====
-window.addEventListener("hashchange", () => {
-    const page = window.location.hash.replace("#", "") || "home";
-    render(page);
-});
-
-// ===== INIT =====
 window.addEventListener("load", () => {
-    const page = window.location.hash.replace("#", "") || "home";
-    render(page);
+
+    const lastPage =
+    localStorage.getItem("lastPage");
+
+    if(lastPage){
+        loadPage(lastPage);
+    }
 });
