@@ -1,9 +1,11 @@
 const content = document.getElementById("content");
 
+// lưu trang cuối
 function savePage(page){
     localStorage.setItem("lastPage", page);
 }
 
+// chạy script trong file HTML load vào
 function executeScripts(container){
 
     const scripts = container.querySelectorAll("script");
@@ -14,7 +16,7 @@ function executeScripts(container){
 
         if(oldScript.src){
             newScript.src = oldScript.src;
-        }else{
+        } else {
             newScript.textContent = oldScript.textContent;
         }
 
@@ -23,9 +25,13 @@ function executeScripts(container){
     });
 }
 
+// LOAD TRANG CON
 function loadPage(page){
 
-    fetch(page)
+    // reset trước khi load (QUAN TRỌNG)
+    content.innerHTML = "";
+
+    fetch(page + "?v=" + new Date().getTime()) // chống cache
     .then(response => response.text())
     .then(html => {
 
@@ -34,17 +40,16 @@ function loadPage(page){
                 🏠 Trang chủ
             </button>
 
-            ${html}
+            <div id="page-wrapper">
+                ${html}
+            </div>
         `;
 
         executeScripts(content);
-
         savePage(page);
 
         if(window.innerWidth <= 768){
-            document
-            .getElementById("sidebar")
-            .classList.remove("show");
+            document.getElementById("sidebar").classList.remove("show");
         }
 
         window.scrollTo(0,0);
@@ -61,6 +66,7 @@ function loadPage(page){
     });
 }
 
+// QUAY VỀ TRANG CHỦ
 function goHome(){
 
     localStorage.removeItem("lastPage");
@@ -69,29 +75,26 @@ function goHome(){
         <div class="welcome">
             <h1>Nguyễn Hữu Khánh</h1>
             <p>Nơi lưu trữ tài liệu học tập</p>
+            <p>D5S-VB2A</p>
         </div>
     `;
 
     if(window.innerWidth <= 768){
-        document
-        .getElementById("sidebar")
-        .classList.remove("show");
+        document.getElementById("sidebar").classList.remove("show");
     }
 
     window.scrollTo(0,0);
 }
 
+// mở/đóng sidebar
 function toggleSidebar(){
-
-    document
-    .getElementById("sidebar")
-    .classList.toggle("show");
+    document.getElementById("sidebar").classList.toggle("show");
 }
 
+// tự load lại trang cuối khi mở web
 window.addEventListener("load", () => {
 
-    const lastPage =
-    localStorage.getItem("lastPage");
+    const lastPage = localStorage.getItem("lastPage");
 
     if(lastPage){
         loadPage(lastPage);
