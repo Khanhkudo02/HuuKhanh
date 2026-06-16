@@ -1,10 +1,25 @@
 const content = document.getElementById("content");
 
+// Theo dõi các script đã inject để xóa sau
+let injectedScripts = [];
+
+function cleanupScripts() {
+    injectedScripts.forEach(s => {
+        if (s && s.parentNode) {
+            s.parentNode.removeChild(s);
+        }
+    });
+    injectedScripts = [];
+}
+
 function savePage(page) {
     localStorage.setItem("lastPage", page);
 }
 
 function loadPage(page) {
+
+    // Dọn script cũ trước khi load trang mới
+    cleanupScripts();
 
     fetch(page + "?t=" + Date.now())
         .then(response => response.text())
@@ -19,9 +34,9 @@ function loadPage(page) {
             `;
 
             const container = document.getElementById("page-container");
-
             container.innerHTML = html;
 
+            // Chạy lại các script trong nội dung vừa load
             const scripts = container.querySelectorAll("script");
 
             scripts.forEach(oldScript => {
@@ -35,6 +50,9 @@ function loadPage(page) {
                 }
 
                 document.body.appendChild(newScript);
+
+                // Lưu lại để xóa sau
+                injectedScripts.push(newScript);
 
                 oldScript.remove();
             });
@@ -64,6 +82,9 @@ function loadPage(page) {
 }
 
 function goHome() {
+
+    // Dọn script khi về trang chủ
+    cleanupScripts();
 
     localStorage.removeItem("lastPage");
 
