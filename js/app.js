@@ -19,39 +19,40 @@ function loadPage(page) {
 
             const container = document.getElementById("page-container");
 
-            // Tách script ra khỏi html trước khi gán innerHTML
+            // Parse HTML, tách script ra
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");
 
-            // Lấy tất cả script và xóa khỏi doc
             const scriptContents = [];
             doc.querySelectorAll("script").forEach(s => {
                 scriptContents.push({
-                    src: s.src || null,
+                    src: s.getAttribute("src") || null,
                     text: s.textContent
                 });
                 s.remove();
             });
 
-            // Gán HTML không có script
+            // Gán HTML (không có script) vào DOM trước
             container.innerHTML = doc.body.innerHTML;
 
-            // Chạy từng script bằng Function() để tránh xung đột scope toàn cục
-            scriptContents.forEach(s => {
-                try {
+            // Đợi DOM render xong rồi mới chạy script
+            setTimeout(() => {
+                scriptContents.forEach(s => {
                     if (s.src) {
                         const el = document.createElement("script");
                         el.src = s.src + "?t=" + Date.now();
                         document.body.appendChild(el);
                     } else {
-                        // Wrap trong IIFE để tránh redeclare const/let toàn cục
-                        const fn = new Function(s.text);
-                        fn();
+                        try {
+                            // eval chạy trong global scope, có access DOM
+                            // Wrap IIFE để tránh redeclare const/let
+                            eval(`(function(){ ${s.text} })()`);
+                        } catch(e) {
+                            console.error("Script error:", e);
+                        }
                     }
-                } catch(e) {
-                    console.error("Script error:", e);
-                }
-            });
+                });
+            }, 0);
 
             savePage(page);
 
