@@ -15,17 +15,32 @@ display:flex;
 min-height:100vh;
 }
 
+/* ===== SIDEBAR ===== */
+
 .sidebar{
 width:260px;
 background:#111827;
 padding:20px;
 transition:.3s;
+overflow-y:auto;
 }
 
 .logo{
 font-size:22px;
 font-weight:bold;
-margin-bottom:20px;
+margin-bottom:25px;
+text-align:center;
+}
+
+.sidebar-title{
+margin-top:20px;
+margin-bottom:10px;
+padding:10px;
+border-radius:10px;
+background:#0f172a;
+font-weight:bold;
+text-align:center;
+color:#60a5fa;
 }
 
 .sidebar ul{
@@ -39,11 +54,15 @@ cursor:pointer;
 margin-bottom:8px;
 background:#1f2937;
 transition:.2s;
+font-weight:500;
 }
 
 .sidebar li:hover{
 background:#374151;
+transform:translateX(4px);
 }
+
+/* ===== CONTENT ===== */
 
 #content{
 flex:1;
@@ -56,35 +75,53 @@ text-align:center;
 margin-top:100px;
 }
 
+.welcome h1{
+font-size:38px;
+margin-bottom:15px;
+}
+
+.welcome p{
+margin-top:10px;
+font-size:18px;
+color:#cbd5e1;
+}
+
+/* ===== MENU MOBILE ===== */
+
 .menu-btn{
 display:none;
 position:fixed;
 top:10px;
 left:10px;
 z-index:1000;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-#backBtn{
-display:none;
-padding:10px 15px;
+padding:10px 14px;
 border:none;
 border-radius:10px;
+cursor:pointer;
 background:#2563eb;
 color:white;
-cursor:pointer;
-margin-bottom:20px;
-font-weight:bold;
+font-size:18px;
 }
 
-#backBtn:hover{
+/* ===== BACK BUTTON ===== */
+
+.back-home{
+display:inline-block;
+padding:10px 16px;
+margin-bottom:20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+}
+
+.back-home:hover{
 background:#1d4ed8;
 }
 
-/* ===== HỖ TRỢ FILE TÂM LÝ HỌC ===== */
+/* ===== MINDMAP ===== */
 
 .grid{
 display:grid;
@@ -151,6 +188,8 @@ max-height:3000px;
 padding:15px;
 }
 
+/* ===== TAB ===== */
+
 .tabs{
 display:flex;
 flex-wrap:wrap;
@@ -173,6 +212,31 @@ color:white;
 .hidden{
 display:none !important;
 }
+
+/* ===== AUDIO ===== */
+
+.audio-card{
+background:#111827;
+border:1px solid #334155;
+border-radius:16px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.audio-card h2{
+margin-bottom:10px;
+}
+
+.audio-card p{
+margin-bottom:15px;
+color:#cbd5e1;
+}
+
+audio{
+width:100%;
+}
+
+/* ===== MOBILE ===== */
 
 @media(max-width:768px){
 
@@ -200,23 +264,13 @@ padding-top:60px;
 .grid{
 grid-template-columns:1fr;
 }
-.back-home{
-display:inline-block;
-padding:10px 16px;
-margin-bottom:20px;
 
-background:#2563eb;
-color:white;
-
-border:none;
-border-radius:10px;
-
-cursor:pointer;
-font-weight:700;
+.welcome h1{
+font-size:28px;
 }
 
-.back-home:hover{
-background:#1d4ed8;
+.welcome p{
+font-size:16px;
 }
 
 }
