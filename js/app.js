@@ -1,10 +1,23 @@
 const content = document.getElementById("content");
 
+let loadedScripts = [];
+
 function savePage(page){
     localStorage.setItem("lastPage", page);
 }
 
+function clearScripts(){
+
+    loadedScripts.forEach(script => {
+        script.remove();
+    });
+
+    loadedScripts = [];
+}
+
 function executeScripts(container){
+
+    clearScripts();
 
     const scripts = container.querySelectorAll("script");
 
@@ -19,22 +32,25 @@ function executeScripts(container){
         }
 
         document.body.appendChild(newScript);
-        oldScript.remove();
+
+        loadedScripts.push(newScript);
     });
 }
 
 function loadPage(page){
 
-    fetch(page)
+    fetch(page + "?t=" + Date.now())
+
     .then(response => response.text())
+
     .then(html => {
 
         content.innerHTML = `
-            <button class="back-home" onclick="goHome()">
-                🏠 Trang chủ
-            </button>
+        <button class="back-home" onclick="goHome()">
+            🏠 Trang chủ
+        </button>
 
-            ${html}
+        ${html}
         `;
 
         executeScripts(content);
@@ -42,6 +58,7 @@ function loadPage(page){
         savePage(page);
 
         if(window.innerWidth <= 768){
+
             document
             .getElementById("sidebar")
             .classList.remove("show");
@@ -49,30 +66,34 @@ function loadPage(page){
 
         window.scrollTo(0,0);
     })
+
     .catch(error => {
 
         console.error(error);
 
         content.innerHTML = `
-            <div class="welcome">
-                <h2>⚠️ Lỗi tải nội dung</h2>
-            </div>
+        <div class="welcome">
+            <h2>⚠️ Lỗi tải nội dung</h2>
+        </div>
         `;
     });
 }
 
 function goHome(){
 
+    clearScripts();
+
     localStorage.removeItem("lastPage");
 
     content.innerHTML = `
-        <div class="welcome">
-            <h1>Nguyễn Hữu Khánh</h1>
-            <p>Nơi lưu trữ tài liệu học tập</p>
-        </div>
+    <div class="welcome">
+        <h1>Nguyễn Hữu Khánh D5S-VB2A</h1>
+        <p>Nơi lưu trữ tài liệu học tập</p>
+    </div>
     `;
 
     if(window.innerWidth <= 768){
+
         document
         .getElementById("sidebar")
         .classList.remove("show");
