@@ -1,5 +1,15 @@
 const content = document.getElementById("content");
 
+// Lưu lại các <style> đã inject để xóa khi chuyển trang
+let injectedStyles = [];
+
+function cleanupStyles() {
+    injectedStyles.forEach(s => {
+        if (s && s.parentNode) s.parentNode.removeChild(s);
+    });
+    injectedStyles = [];
+}
+
 function savePage(page) {
     localStorage.setItem("lastPage", page);
 }
@@ -10,6 +20,9 @@ function loadPage(page) {
         .then(response => response.text())
         .then(html => {
 
+            // Dọn style cũ của trang trước
+            cleanupStyles();
+
             content.innerHTML = `
                 <button class="back-home" onclick="goHome()">
                     🏠 Trang chủ
@@ -19,12 +32,21 @@ function loadPage(page) {
 
             const container = document.getElementById("page-container");
 
-            // Parse HTML, tách script ra
+            // Parse toàn bộ HTML
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");
 
+            // 1. Inject <style> từ <head> vào <head> trang chính
+            doc.querySelectorAll("head style").forEach(s => {
+                const styleEl = document.createElement("style");
+                styleEl.textContent = s.textContent;
+                document.head.appendChild(styleEl);
+                injectedStyles.push(styleEl);
+            });
+
+            // 2. Tách script ra khỏi body
             const scriptContents = [];
-            doc.querySelectorAll("script").forEach(s => {
+            doc.querySelectorAll("body script, script").forEach(s => {
                 scriptContents.push({
                     src: s.getAttribute("src") || null,
                     text: s.textContent
@@ -32,10 +54,10 @@ function loadPage(page) {
                 s.remove();
             });
 
-            // Gán HTML (không có script) vào DOM trước
+            // 3. Gán HTML (không script) vào container
             container.innerHTML = doc.body.innerHTML;
 
-            // Đợi DOM render xong rồi mới chạy script
+            // 4. Chạy script sau khi DOM đã sẵn sàng
             setTimeout(() => {
                 scriptContents.forEach(s => {
                     if (s.src) {
@@ -44,8 +66,6 @@ function loadPage(page) {
                         document.body.appendChild(el);
                     } else {
                         try {
-                            // eval chạy trong global scope, có access DOM
-                            // Wrap IIFE để tránh redeclare const/let
                             eval(`(function(){ ${s.text} })()`);
                         } catch(e) {
                             console.error("Script error:", e);
@@ -75,6 +95,9 @@ function loadPage(page) {
 }
 
 function goHome() {
+
+    // Dọn style của trang con khi về trang chủ
+    cleanupStyles();
 
     localStorage.removeItem("lastPage");
 
