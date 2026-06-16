@@ -1,108 +1,91 @@
+cat > /mnt/user-data/outputs/mindmap-dlcm-antt.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mindmap — Đường Lối CM về ANTT</title>
+<title>Mindmap Chi Tiết — ĐLCM về ANTT</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#07090f;color:#e2e8f0;min-height:100vh}
-
-.hdr{text-align:center;padding:32px 16px 10px}
-.hdr-badge{display:inline-block;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:#ef4444;border:1px solid #ef444466;padding:3px 10px;border-radius:3px;margin-bottom:12px}
-.hdr h1{font-size:clamp(1.1rem,3vw,1.8rem);font-weight:800;color:#f1f5f9;letter-spacing:-.01em;line-height:1.25}
-.hdr p{color:#475569;font-size:.78rem;margin-top:6px}
-
-.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;padding:10px 20px 16px}
-.st{font-size:.68rem;color:#64748b;background:#0e1422;border:1px solid #1a2436;border-radius:6px;padding:4px 10px}
-.st b{color:#94a3b8}
-
-.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:0 16px 18px}
-.tab{font-size:.68rem;font-weight:700;padding:5px 11px;border-radius:20px;border:1.5px solid #1a2436;background:#0e1422;color:#475569;cursor:pointer;transition:all .16s;letter-spacing:.02em}
-.tab:hover{color:#cbd5e1;border-color:#334155}
-.tab.on{color:#fff !important;background:var(--c) !important;border-color:var(--c) !important}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(305px,1fr));gap:11px;padding:0 14px 50px;max-width:1500px;margin:0 auto}
-
-.card{background:#0c1220;border-radius:12px;border:1.5px solid #131e30;overflow:hidden;transition:transform .15s,box-shadow .15s}
-.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.6)}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#060910;color:#e2e8f0;min-height:100vh}
+.hdr{text-align:center;padding:30px 16px 10px}
+.hdr-badge{display:inline-block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#ef4444;border:1px solid #ef444455;padding:3px 10px;border-radius:3px;margin-bottom:12px}
+.hdr h1{font-size:clamp(1rem,2.8vw,1.7rem);font-weight:800;color:#f1f5f9;line-height:1.25}
+.hdr p{color:#374151;font-size:.76rem;margin-top:5px}
+.stats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px 16px}
+.st{font-size:.65rem;color:#4b5563;background:#0b1120;border:1px solid #111827;border-radius:6px;padding:3px 9px}
+.st b{color:#6b7280}
+.tabs{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:0 14px 16px}
+.tab{font-size:.66rem;font-weight:700;padding:5px 10px;border-radius:20px;border:1.5px solid #111827;background:#0b1120;color:#374151;cursor:pointer;transition:all .15s}
+.tab:hover{color:#9ca3af;border-color:#1f2937}
+.tab.on{color:#fff!important;background:var(--c)!important;border-color:var(--c)!important}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;padding:0 13px 50px;max-width:1600px;margin:0 auto}
+.card{background:#0a1120;border-radius:11px;border:1.5px solid #0f1a2e;overflow:hidden;transition:transform .14s,box-shadow .14s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.6)}
 .card.on{border-color:var(--ac)}
-
-.chd{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;background:color-mix(in srgb,var(--ac) 8%,#0c1220);user-select:none}
-.cico{width:30px;height:30px;border-radius:7px;background:color-mix(in srgb,var(--ac) 18%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.chd{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;background:color-mix(in srgb,var(--ac) 9%,#0a1120);user-select:none}
+.cico{width:28px;height:28px;border-radius:6px;background:color-mix(in srgb,var(--ac) 18%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0}
 .cmeta{flex:1;min-width:0}
-.cttl{font-size:.74rem;font-weight:800;color:#f1f5f9;line-height:1.25}
-.csub{font-size:.59rem;color:#475569;margin-top:1px}
-.cbg{font-size:.58rem;padding:1px 6px;border-radius:6px;background:color-mix(in srgb,var(--ac) 15%,transparent);color:var(--ac);flex-shrink:0}
-.carr{font-size:.6rem;color:var(--ac);flex-shrink:0;transition:transform .2s}
+.cttl{font-size:.71rem;font-weight:800;color:#f1f5f9;line-height:1.22}
+.csub{font-size:.57rem;color:#374151;margin-top:1px}
+.cbg{font-size:.56rem;padding:1px 6px;border-radius:5px;background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);flex-shrink:0;white-space:nowrap}
+.carr{font-size:.58rem;color:var(--ac);flex-shrink:0;transition:transform .2s}
 .card.on .carr{transform:rotate(180deg)}
-
-.cbd{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.card.on .cbd{max-height:1400px;overflow-y:auto}
+.cbd{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.card.on .cbd{max-height:2000px;overflow-y:auto}
 .cbd::-webkit-scrollbar{width:3px}
-.cbd::-webkit-scrollbar-thumb{background:#1a2436}
-.cbi{padding:11px 13px}
-
-.sec{margin-bottom:10px}
+.cbd::-webkit-scrollbar-thumb{background:#111827}
+.cbi{padding:10px 12px}
+.sec{margin-bottom:9px}
 .sec:last-child{margin-bottom:0}
-.stt{font-size:.59rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid color-mix(in srgb,var(--ac) 18%,transparent);display:flex;align-items:center;gap:4px}
-.stt::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--ac);flex-shrink:0}
-
-.ul{list-style:none;padding-left:5px;border-left:2px solid color-mix(in srgb,var(--ac) 30%,transparent)}
-.ul li{font-size:.69rem;color:#6b8099;padding:2.5px 0 2.5px 8px;line-height:1.45;position:relative}
-.ul li::before{content:'›';position:absolute;left:-1px;color:var(--ac);font-size:.72rem;top:2px}
-.ul li b{color:#b8cce0;font-weight:600}
-.ul li em{color:#60a5fa;font-style:normal}
-.ul li u{text-decoration:none;color:#fbbf24}
-
-/* sub-bullets */
-.sub{list-style:none !important;padding-left:10px !important;border-left:1px dashed color-mix(in srgb,var(--ac) 20%,transparent) !important;margin-top:2px}
-.sub li::before{content:'·' !important;left:0 !important;top:2px !important;font-size:.9rem !important}
-.sub li{font-size:.66rem !important;color:#4d6680 !important}
-
-/* timeline steps */
+.stt{font-size:.57rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);margin-bottom:3px;padding-bottom:3px;border-bottom:1px solid color-mix(in srgb,var(--ac) 16%,transparent);display:flex;align-items:center;gap:3px}
+.stt::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--ac);flex-shrink:0}
+.ul{list-style:none;padding-left:5px;border-left:2px solid color-mix(in srgb,var(--ac) 28%,transparent)}
+.ul li{font-size:.67rem;color:#4b6080;padding:2px 0 2px 7px;line-height:1.44;position:relative}
+.ul li::before{content:'›';position:absolute;left:-1px;color:var(--ac);font-size:.7rem;top:2px}
+.ul li b{color:#93b0cc;font-weight:600}
+.ul li em{color:#3b82f6;font-style:normal}
+.ul li u{text-decoration:none;color:#f59e0b}
+.ul li s{color:#ef4444;text-decoration:none;font-size:.63rem;font-style:italic}
+.sub{list-style:none!important;padding-left:9px!important;border-left:1px dashed color-mix(in srgb,var(--ac) 18%,transparent)!important;margin-top:1px}
+.sub li{font-size:.63rem!important;color:#2d4a66!important;padding:1px 0 1px 6px!important}
+.sub li::before{content:'·'!important;left:0!important;top:1px!important;font-size:.85rem!important}
 .steps{}
-.step{display:flex;gap:7px;margin-bottom:6px;align-items:flex-start}
-.snum{min-width:18px;height:18px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
-.stxt{font-size:.68rem;color:#6b8099;line-height:1.4}
-.stxt b{color:#b8cce0}
-
-/* compare 2 cols */
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
-.col h4{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ac);margin-bottom:3px;padding-bottom:2px;border-bottom:1px solid color-mix(in srgb,var(--ac) 20%,transparent)}
+.step{display:flex;gap:6px;margin-bottom:5px;align-items:flex-start}
+.snum{min-width:16px;height:16px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
+.stxt{font-size:.66rem;color:#4b6080;line-height:1.38}
+.stxt b{color:#93b0cc}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:3px}
+.col h4{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ac);margin-bottom:2px;padding-bottom:2px;border-bottom:1px solid color-mix(in srgb,var(--ac) 18%,transparent)}
 .col ul{list-style:none;padding:0}
-.col ul li{font-size:.66rem;color:#6b8099;padding:2px 0 2px 7px;position:relative;line-height:1.35}
-.col ul li::before{content:'•';position:absolute;left:0;color:var(--ac);font-size:.55rem;top:4px}
-
-/* pills */
-.pills{display:flex;flex-direction:column;gap:4px;margin-top:4px}
-.pill{display:flex;align-items:flex-start;gap:7px;padding:5px 8px;border-radius:5px;border:1px solid color-mix(in srgb,var(--ac) 20%,transparent);background:color-mix(in srgb,var(--ac) 6%,transparent)}
-.pill-lbl{font-size:.62rem;font-weight:700;color:var(--ac);white-space:nowrap;min-width:80px;padding-top:1px}
-.pill-txt{font-size:.66rem;color:#6b8099;line-height:1.35}
-
-hr.div{border:none;border-top:1px solid #131e30;margin:8px 0}
+.col ul li{font-size:.63rem;color:#4b6080;padding:1.5px 0 1.5px 6px;position:relative;line-height:1.32}
+.col ul li::before{content:'•';position:absolute;left:0;color:var(--ac);font-size:.5rem;top:4px}
+.pills{display:flex;flex-direction:column;gap:3px;margin-top:3px}
+.pill{display:flex;align-items:flex-start;gap:6px;padding:4px 7px;border-radius:4px;border:1px solid color-mix(in srgb,var(--ac) 18%,transparent);background:color-mix(in srgb,var(--ac) 5%,transparent)}
+.pill-lbl{font-size:.58rem;font-weight:700;color:var(--ac);white-space:nowrap;min-width:70px;padding-top:1px;flex-shrink:0}
+.pill-txt{font-size:.63rem;color:#4b6080;line-height:1.33}
+hr.div{border:none;border-top:1px solid #0f1a2e;margin:6px 0}
+.tag{display:inline-block;font-size:.57rem;padding:1px 5px;border-radius:3px;font-weight:700;margin:1px 2px;vertical-align:middle}
 .hidden{display:none!important}
 </style>
 </head>
 <body>
 <div class="hdr">
-  <div class="hdr-badge">🛡️ Tập bài giảng · ĐHCSNД · 2026</div>
-  <h1>ĐƯỜNG LỐI CÁCH MẠNG CỦA ĐẢNG CỘNG SẢN<br>VIỆT NAM VỀ AN NINH TRẬT TỰ</h1>
-  <p>7 chương · 160 trang · Click vào thẻ để mở nội dung</p>
+  <div class="hdr-badge">🛡️ Tập bài giảng · ĐHCSNД · 2026 · 160 trang</div>
+  <h1>ĐƯỜNG LỐI CÁCH MẠNG CỦA ĐCSVN VỀ AN NINH TRẬT TỰ</h1>
+  <p>7 chương · Chi tiết đầy đủ · Click thẻ để mở</p>
 </div>
-
 <div class="stats">
-  <div class="st"><b>Chương I:</b> Giới thiệu môn học</div>
-  <div class="st"><b>Chương II:</b> ANTT 1945–1975</div>
-  <div class="st"><b>Chương III:</b> AN chính trị hiện nay</div>
-  <div class="st"><b>Chương IV:</b> AN trong KT–XH</div>
-  <div class="st"><b>Chương V:</b> AN với đối ngoại</div>
-  <div class="st"><b>Chương VI:</b> Sức mạnh quần chúng</div>
-  <div class="st"><b>Chương VII:</b> Xây dựng CAND</div>
+  <div class="st"><b>C.I</b> Giới thiệu môn học</div>
+  <div class="st"><b>C.II</b> ANTT 1945–1975</div>
+  <div class="st"><b>C.III</b> AN chính trị ĐM</div>
+  <div class="st"><b>C.IV</b> AN trong KT–XH</div>
+  <div class="st"><b>C.V</b> AN với đối ngoại</div>
+  <div class="st"><b>C.VI</b> Sức mạnh QC</div>
+  <div class="st"><b>C.VII</b> Xây dựng CAND</div>
 </div>
-
 <div class="tabs">
-  <div class="tab on" data-f="all" style="--c:#334155">Tất cả (7)</div>
+  <div class="tab on" data-f="all" style="--c:#1e3a5f">Tất cả (7)</div>
   <div class="tab" data-f="c1" style="--c:#8b5cf6">🟣 Chương I</div>
   <div class="tab" data-f="c2" style="--c:#3b82f6">🔵 Chương II</div>
   <div class="tab" data-f="c3" style="--c:#ef4444">🔴 Chương III</div>
@@ -111,278 +94,341 @@ hr.div{border:none;border-top:1px solid #131e30;margin:8px 0}
   <div class="tab" data-f="c6" style="--c:#06b6d4">🔷 Chương VI</div>
   <div class="tab" data-f="c7" style="--c:#f97316">🟠 Chương VII</div>
 </div>
-
 <div class="grid" id="grid"></div>
-
 <script>
 const DATA=[
-/* ═══ CHƯƠNG I ═══ */
-{id:'c1',ac:'#8b5cf6',ico:'📚',bg:'7 chương',
-title:'CHƯƠNG I — VỊ TRÍ, ĐỐI TƯỢNG, NHIỆM VỤ, PHƯƠNG PHÁP NGHIÊN CỨU MÔN HỌC',
-sub:'Trang 1–3',
+{id:'c1',ac:'#8b5cf6',ico:'📚',bg:'Trang 1–3',
+title:'CHƯƠNG I — VỊ TRÍ, ĐỐI TƯỢNG, NHIỆM VỤ, PHƯƠNG PHÁP NGHIÊN CỨU',sub:'Giới thiệu môn học',
 html:`
-<div class="sec"><div class="stt">I. Vị trí môn học</div>
-<ul class="ul">
-  <li>Thuộc <b>các môn lý luận chính trị</b> trong chương trình đào tạo CAND</li>
-  <li>Nghiên cứu vận dụng <b>chủ nghĩa Mác–Lênin</b> vào thực tiễn bảo vệ chính quyền cách mạng và Tổ quốc XHCN</li>
-  <li>Trang bị kiến thức về <b>quá trình Đảng lãnh đạo ANTT</b> từ 1945 đến nay</li>
-  <li>Góp phần củng cố <b>niềm tin vào vai trò lãnh đạo của Đảng</b> đối với cán bộ, chiến sỹ CAND</li>
-  <li>Trang bị phương pháp luận <b>nắm bắt tình hình, dự báo xu hướng</b> vận động của thực tiễn</li>
+<div class="sec"><div class="stt">I. Vị trí môn học</div><ul class="ul">
+<li>Thuộc nhóm <b>môn lý luận chính trị</b> trong chương trình đào tạo Văn bằng 2 CAND</li>
+<li>Nghiên cứu sự vận dụng <b>chủ nghĩa Mác–Lênin</b> vào thực tiễn bảo vệ chính quyền CM và Tổ quốc XHCN</li>
+<li>Nâng cao nhận thức về <b>vai trò lãnh đạo của Đảng</b> đối với BVANCQ, TTATXH</li>
+<li>Trang bị kiến thức về quá trình Đảng lãnh đạo ANTT qua <b>4 giai đoạn lớn</b>:
+  <ul class="sub">
+    <li>Kháng chiến bảo vệ chính quyền CM (1945–1975)</li>
+    <li>Bảo vệ ANCT trong thời kỳ đổi mới</li>
+    <li>BĐANTT trong phát triển KT–XH, đối ngoại</li>
+    <li>Phát huy QC và xây dựng CAND</li>
+  </ul>
+</li>
+<li>Giúp CBCS <b>nắm bắt tình hình, dự báo xu hướng</b> về chính trị, kinh tế, văn hóa, xã hội, đối ngoại</li>
+<li>Củng cố niềm tin vào Đảng; nâng cao <b>đạo đức CM, kỷ luật, tác phong</b> công tác</li>
+<li>Tạo nền tảng để tham mưu Đảng lãnh đạo <b>quản lý nhà nước về ANTT</b></li>
 </ul></div>
-<div class="sec"><div class="stt">II. Đối tượng & Nhiệm vụ nghiên cứu</div>
-<ul class="ul">
-  <li><b>Đối tượng:</b> Đường lối, chủ trương, chính sách của Đảng CSVN về bảo vệ ANTT trong các thời kỳ lịch sử</li>
-  <li><b>Nhiệm vụ 1:</b> Làm rõ <em>cơ sở lý luận, thực tiễn</em> hình thành đường lối ANTT của Đảng</li>
-  <li><b>Nhiệm vụ 2:</b> Phân tích <em>nội dung đường lối</em> qua từng giai đoạn lịch sử</li>
-  <li><b>Nhiệm vụ 3:</b> Rút ra <em>bài học kinh nghiệm</em> phục vụ công tác CAND hiện nay</li>
+<div class="sec"><div class="stt">II. Đối tượng nghiên cứu</div><ul class="ul">
+<li><b>Đối tượng chủ yếu:</b> Hệ thống quan điểm, chủ trương, chính sách của Đảng về BVANCQ và TTATXH <em>từ 1945 đến nay</em></li>
+<li>Đường lối ANTT = <b>"hệ thống quan điểm về mục tiêu, phương hướng, nhiệm vụ và giải pháp"</b></li>
+<li>Thể hiện qua <b>nghị quyết, cương lĩnh</b> của Đảng qua các kỳ Đại hội</li>
+<li>Đảng CSVN ra đời 3/2/1930 → lãnh đạo giành chính quyền 19/8/1945 → lãnh đạo BVAN đến nay</li>
 </ul></div>
-<div class="sec"><div class="stt">III. Phương pháp nghiên cứu</div>
-<ul class="ul">
-  <li><b>Cơ sở phương pháp luận:</b> Chủ nghĩa duy vật biện chứng và duy vật lịch sử</li>
-  <li><b>Phương pháp lịch sử – logic:</b> Phân tích sự kiện gắn với bối cảnh cụ thể</li>
-  <li><b>Phương pháp phân tích tổng hợp:</b> Từ thực tiễn rút ra quy luật, bài học</li>
-  <li><b>Phương pháp so sánh:</b> Đối chiếu giữa các giai đoạn, các thời kỳ</li>
-  <li>Gắn lý luận với <em>thực tiễn công tác bảo vệ ANTT</em></li>
+<div class="sec"><div class="stt">II. Nhiệm vụ nghiên cứu</div><ul class="ul">
+<li><b>NV1:</b> Làm rõ quá trình hình thành, bổ sung, phát triển đường lối ANTT từ 1945 đến nay</li>
+<li><b>NV2:</b> Làm rõ kết quả thực hiện đường lối CM của Đảng về ANTT trong tiến trình CM VN</li>
+<li><b>NV3:</b> Làm rõ đặc biệt đường lối <em>BĐANTT để phát triển KT–XH, vận động QC, xây dựng CAND thời đổi mới</em></li>
+<li><b>Với giảng viên:</b> Nghiên cứu đầy đủ nghị quyết, chỉ thị; cập nhật hệ thống đường lối; gắn lý luận với thực tiễn</li>
+<li><b>Với người học:</b> Nắm nội dung cơ bản để lý giải vấn đề thực tiễn; đóng góp ý kiến cho Đảng về ANTT</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Phương pháp nghiên cứu</div><ul class="ul">
+<li><b>Cơ sở phương pháp luận:</b> Thế giới quan, phương pháp luận khoa học của <em>chủ nghĩa Mác–Lênin</em></li>
+<li>Kết hợp quan điểm có ý nghĩa phương pháp luận của <b>Chủ tịch Hồ Chí Minh</b> và Đảng</li>
+<li><b>Phương pháp chủ yếu:</b> Lịch sử và Logic — đặc trưng của khoa học Lịch sử Đảng</li>
+<li><b>Phương pháp bổ trợ:</b> Phân tích, tổng hợp, so sánh — áp dụng linh hoạt theo từng nội dung</li>
+<li>Nguyên tắc: <u>Gắn lý luận với thực tiễn</u> xuyên suốt quá trình giảng dạy và nghiên cứu</li>
 </ul></div>
 `},
 
-/* ═══ CHƯƠNG II ═══ */
 {id:'c2',ac:'#3b82f6',ico:'🏛️',bg:'Trang 4–25',
-title:'CHƯƠNG II — ĐƯỜNG LỐI XÂY DỰNG CHÍNH QUYỀN CM VÀ BẢO VỆ ANTT 1945–1975',
-sub:'Thời kỳ kháng chiến',
+title:'CHƯƠNG II — ĐƯỜNG LỐI XD CHÍNH QUYỀN CM VÀ BẢO VỆ ANTT 1945–1975',sub:'Thời kỳ kháng chiến',
 html:`
-<div class="sec"><div class="stt">I. Giai đoạn 1945–1954</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Chủ trương 1945–1946 (Chỉ thị Kháng chiến kiến quốc 25/11/1945)</div>
-<ul class="ul">
-  <li><b>Bối cảnh:</b> Chính quyền non trẻ đối phó "thù trong giặc ngoài" — Pháp tái xâm lược, Tưởng Giới Thạch chiếm miền Bắc</li>
-  <li><b>4 nhiệm vụ cấp bách:</b> <em>Củng cố chính quyền – Chống thực dân Pháp – Bài trừ nội phản – Cải thiện đời sống nhân dân</em></li>
-  <li><b>Về AN:</b> Trừng trị bọn phản quốc, bọn chia rẽ, bọn đầu cơ tích trữ, bọn lạm quyền nhiễu dân</li>
-  <li><b>Đề phòng:</b> Bọn Tưởng và tay sai, phản động Nhật, Việt gian thân Pháp chui vào Đảng phá hoại</li>
-  <li><b>Kết quả:</b> Xây dựng nền móng chế độ dân chủ nhân dân; Quốc hội, Hiến pháp, CAND được thiết lập</li>
+<div class="sec"><div class="stt">I.1. Hoàn cảnh 1945–1946 — Thù trong giặc ngoài</div><ul class="ul">
+<li><b>Ngoài nước:</b> ~20 vạn quân Tưởng Giới Thạch kéo vào từ vĩ tuyến 16 (giải giáp Nhật); tay sai "Việt quốc", "Việt cách" theo sau</li>
+<li><b>Trong nước:</b> ~6 vạn quân Nhật chờ giải giáp; quân Pháp mưu toan tái chiếm; chưa nước nào công nhận ngoại giao</li>
+<li><b>Kinh tế:</b> Nạn đói chưa khắc phục; ruộng hoang; công nghiệp đình đốn; tài chính cạn kiệt</li>
+<li><b>Xã hội:</b> 95% dân số mù chữ; tệ nạn xã hội nặng nề từ chế độ cũ</li>
+<li><b>Quân sự:</b> LLVT chưa chính quy, trang bị thô sơ</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Chủ trương kháng chiến chống Pháp 1946–1954</div>
-<ul class="ul">
-  <li><b>Ngày 19/12/1946:</b> Lời kêu gọi Toàn quốc kháng chiến — Bác Hồ phát trên Đài TNVN</li>
-  <li><b>Đường lối:</b> Kháng chiến toàn dân, toàn diện, trường kỳ, tự lực cánh sinh</li>
-  <li><b>Bảo vệ ANTT:</b> Xây dựng lực lượng vũ trang nhân dân, bảo vệ vùng hậu phương kháng chiến</li>
-  <li><b>Chiến thắng Điện Biên Phủ (5/1954)</b> → Hiệp định Genève → miền Bắc hoàn toàn giải phóng</li>
-</ul></div></div>
-<div class="sec"><div class="stt">II. Giai đoạn 1954–1975</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Giai đoạn 1954–1964</div>
-<ul class="ul">
-  <li><b>Nhiệm vụ kép:</b> Miền Bắc xây dựng XHCN + Miền Nam tiếp tục cách mạng dân tộc dân chủ</li>
-  <li>Đấu tranh chống âm mưu <b>chia cắt lâu dài</b> đất nước của đế quốc Mỹ–Diệm</li>
-  <li>Xây dựng <b>lực lượng CAND chính quy</b> bảo vệ hậu phương miền Bắc</li>
+<div class="sec"><div class="stt">I.1. Chủ trương của Đảng 1945–1946 (Chỉ thị KCKQ 25/11/1945)</div><ul class="ul">
+<li><b>Chiến lược:</b> Kẻ thù chính = <em>"thực dân Pháp xâm lược, phải tập trung ngọn lửa đấu tranh vào chúng"</em></li>
+<li><b>4 nhiệm vụ cấp bách:</b> <u>Củng cố chính quyền – Chống Pháp xâm lược – Bài trừ nội phản – Cải thiện đời sống nhân dân</u></li>
+<li><b>Biện pháp chính trị:</b> Bầu cử Quốc hội (6/1/1946), thành lập Chính phủ chính thức, ban hành Hiến pháp dân chủ nhân dân</li>
+<li><b>Biện pháp quân sự:</b> Động viên toàn dân kháng chiến lâu dài; tổ chức tự vệ tại khu phố, thôn xã</li>
+<li><b>Biện pháp kinh tế:</b> Khôi phục nông nghiệp, công nghiệp; phát hành giấy bạc "Cụ Hồ" (11/1946)</li>
+<li><b>Biện pháp AN:</b> Trừng trị bọn phản quốc, chia rẽ, đầu cơ tích trữ, lạm quyền nhiễu dân</li>
+<li><b>Đề phòng:</b> Bọn tay sai Pháp chui vào Đảng phá hoại; bọc lộ thủ đoạn hại nước của Tưởng, Nhật, Việt gian</li>
+<li><b>Kết quả:</b> Xây dựng nền móng chế độ dân chủ nhân dân; Quốc hội, HĐND, Hiến pháp, CAND, Vệ quốc đoàn được thiết lập</li>
+<li><b>Văn hóa:</b> Diệt dốt, bình dân học vụ → cuối 1946 thêm 2,5 triệu người biết đọc biết viết</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Giai đoạn 1965–1975</div>
-<ul class="ul">
-  <li>Mỹ leo thang chiến tranh → <b>chiến đấu chống chiến tranh phá hoại miền Bắc</b></li>
-  <li>Đường lối: Phát huy sức mạnh toàn dân + phát triển lực lượng vũ trang ba thứ quân</li>
-  <li>CAND bảo vệ trật tự hậu phương, đấu tranh chống gián điệp, biệt kích</li>
-  <li><b>30/4/1975:</b> Đại thắng Mùa Xuân — Thống nhất Tổ quốc</li>
+<div class="sec"><div class="stt">I.2. Kháng chiến chống Pháp 1946–1954</div><ul class="ul">
+<li><b>19/12/1946:</b> Pháp gửi tối hậu thư đòi tước vũ khí tự vệ HN → Hội nghị Vạn Phúc → phát động Toàn quốc kháng chiến</li>
+<li><b>Lời kêu gọi của Bác:</b> <em>"Bất kỳ đàn ông, đàn bà... hễ là người Việt Nam thì phải đứng lên đánh thực dân Pháp"</em></li>
+<li><b>Đường lối 4 toàn:</b> <u>Toàn dân – Toàn diện – Trường kỳ – Tự lực cánh sinh</u> (Trường Chinh — "Kháng chiến nhất định thắng lợi" 1947)</li>
+<li><b>Mục đích:</b> Đánh đuổi Pháp, giành thống nhất và độc lập</li>
+<li><b>Về chính trị:</b> Đoàn kết toàn dân; lập Liên Việt (MTTQ); kết hợp đánh giặc – trừ gian; lương giáo đoàn kết</li>
+<li><b>Về quân sự:</b> Vũ trang toàn dân; du kích chiến → vận động chiến; vừa đánh vừa tuyển quân, đào tạo cán bộ</li>
+<li><b>Về kinh tế:</b> Tiêu thổ kháng chiến; kinh tế tự cung tự túc; phát triển nông nghiệp và công nghiệp QP</li>
+<li><b>Về văn hóa:</b> Xóa bỏ văn hóa thực dân; xây dựng văn hóa <em>dân tộc – khoa học – đại chúng</em></li>
+<li><b>Về ngoại giao:</b> Thêm bạn bớt thù; liên hiệp dân tộc Pháp tiến bộ, chống phản động thực dân Pháp</li>
+<li><b>Đại hội II (2/1951):</b> Đảng ra hoạt động công khai; đường lối CM dân tộc dân chủ nhân dân; 3 giai đoạn tiến lên CNXH</li>
+<li><b>Cải cách ruộng đất (1953):</b> HN TW 4 và 5 → thực hiện người cày có ruộng → tăng sức kháng chiến</li>
+<li><b>Chiến thắng Điện Biên Phủ 7/5/1954:</b> <em>"Lần đầu tiên trong lịch sử, một nước thuộc địa nhỏ yếu đã đánh thắng một nước thực dân hùng mạnh" — HCM</em></li>
+<li><b>Hiệp định Genève 20/7/1954:</b> Chấm dứt chiến tranh ĐD; miền Bắc hoàn toàn giải phóng</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">3. Kết quả & Bài học kinh nghiệm</div>
-<ul class="ul">
-  <li>Bảo vệ vững chắc <b>chính quyền cách mạng</b> qua 30 năm kháng chiến</li>
-  <li>Bài học: <em>Phát huy sức mạnh toàn dân, kết hợp đấu tranh chính trị – quân sự – AN</em></li>
-  <li>Xây dựng được lực lượng <b>CAND trung thành, tinh nhuệ</b> phục vụ kháng chiến</li>
+<div class="sec"><div class="stt">I.2. Bài học kinh nghiệm kháng chiến chống Pháp</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">BL 1</span><span class="pill-txt">Đề ra đường lối đúng đắn và quán triệt sâu sắc cho toàn Đảng, toàn quân, toàn dân</span></div>
+  <div class="pill"><span class="pill-lbl">BL 2</span><span class="pill-txt">Kết hợp chống đế quốc với chống phong kiến và xây dựng chế độ dân chủ nhân dân</span></div>
+  <div class="pill"><span class="pill-lbl">BL 3</span><span class="pill-txt">Vừa kháng chiến vừa xây dựng chế độ mới — xây dựng hậu phương ngày càng vững mạnh</span></div>
+  <div class="pill"><span class="pill-lbl">BL 4</span><span class="pill-txt">Kết hợp đấu tranh quân sự với đấu tranh ngoại giao, tìm phương pháp chiến đấu sáng tạo</span></div>
+  <div class="pill"><span class="pill-lbl">BL 5</span><span class="pill-txt">Tăng cường xây dựng Đảng, nâng cao sức chiến đấu và năng lực lãnh đạo trong chiến tranh</span></div>
+</div></div>
+<div class="sec"><div class="stt">II.1. Đường lối 1954–1964 — Hai nhiệm vụ chiến lược</div><ul class="ul">
+<li><b>HN TW 7 và 8 (1955):</b> Củng cố miền Bắc + giữ vững đấu tranh miền Nam</li>
+<li><b>HN TW 13 (12/1957):</b> <em>"Củng cố miền Bắc tiến dần lên CNXH; tiếp tục đấu tranh thống nhất bằng phương pháp hòa bình"</em></li>
+<li><b>NQ 15 (1959):</b> Cách mạng miền Nam = <u>giải phóng khỏi ách đế quốc–phong kiến, thực hiện độc lập dân tộc, người cày có ruộng</u></li>
+<li><b>Đại hội III (9/1960):</b> Hoàn chỉnh đường lối chiến lược chung: MB là hậu phương lớn – MN là tiền tuyến lớn</li>
+<li><b>MB quyết định nhất</b> đối với toàn bộ CM VN; <b>MN quyết định trực tiếp</b> giải phóng miền Nam</li>
+<li>Kiên trì con đường hòa bình thống nhất theo tinh thần Hiệp định Genève</li>
+</ul></div>
+<div class="sec"><div class="stt">II.2. Đường lối 1965–1975 — Chống Mỹ cứu nước</div><ul class="ul">
+<li><b>Bối cảnh:</b> Mỹ chuyển sang "Chiến tranh cục bộ" (1965) — ồ ạt đưa quân Mỹ và chư hầu vào MN</li>
+<li><b>HN TW 11 và 12 (3–12/1965):</b> Phát động kháng chiến chống Mỹ trên cả nước</li>
+<li><b>Quyết tâm chiến lược:</b> <em>"Quyết tâm đánh thắng giặc Mỹ xâm lược... kiên quyết đánh bại trong bất kỳ tình huống nào"</em></li>
+<li><b>Phương châm MN:</b> Giữ vững và phát triển thế tiến công; ba mũi giáp công (quân sự–chính trị–binh vận)</li>
+<li><b>Phương châm MB:</b> Chuyển hướng KT–QP; chống chiến tranh phá hoại; chi viện tối đa cho MN</li>
+<li><b>"Điện Biên Phủ trên không" (12/1972):</b> Đánh thắng chiến lược không kích B-52 của Mỹ tại Hà Nội</li>
+<li><b>Đại thắng Mùa Xuân 30/4/1975:</b> Chiến dịch HCM lịch sử → Thống nhất đất nước</li>
+</ul></div>
+<div class="sec"><div class="stt">II.3. Ý nghĩa lịch sử và bài học</div><ul class="ul">
+<li>Kết thúc <b>30 năm chiến tranh CM (1945–1975)</b>; 115 năm chống đế quốc thực dân phương Tây</li>
+<li>Mở kỷ nguyên mới: <em>cả nước hòa bình, thống nhất, cùng một nhiệm vụ chiến lược đi lên CNXH</em></li>
+<li>ĐH IV (12/1976): <em>"trang chói lọi nhất... biểu tượng sáng ngời của CNAH cách mạng... chiến công vĩ đại của thế kỷ XX"</em></li>
+<li><b>BL 1:</b> Giương cao ngọn cờ độc lập dân tộc và CNXH, huy động sức mạnh toàn dân</li>
+<li><b>BL 2:</b> Tin tưởng sức mạnh dân tộc, tư tưởng tiến công, quyết thắng Mỹ</li>
+<li><b>BL 3:</b> Chiến tranh nhân dân — tìm phương pháp chiến đấu đúng đắn, sáng tạo, linh hoạt</li>
+<li><b>BL 4:</b> Tổ chức thực hiện giỏi, năng động, sáng tạo ở các cấp bộ Đảng</li>
+<li><b>BL 5:</b> Xây dựng Đảng vững mạnh; liên minh Đông Dương; tranh thủ đồng tình quốc tế</li>
 </ul></div>
 `},
 
-/* ═══ CHƯƠNG III ═══ */
 {id:'c3',ac:'#ef4444',ico:'🛡️',bg:'Trang 26–53',
-title:'CHƯƠNG III — ĐƯỜNG LỐI CỦA ĐẢNG VỀ BẢO VỆ AN NINH CHÍNH TRỊ HIỆN NAY',
-sub:'Thời kỳ đổi mới',
+title:'CHƯƠNG III — ĐƯỜNG LỐI CỦA ĐẢNG VỀ BẢO VỆ AN NINH CHÍNH TRỊ HIỆN NAY',sub:'Thời kỳ đổi mới',
 html:`
-<div class="sec"><div class="stt">I. Chủ trương của Đảng về AN chính trị</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Các yếu tố tác động</div>
-<ul class="ul">
-  <li><b>Bên ngoài:</b> CNXH thế giới sụp đổ (Liên Xô, Đông Âu 1989–1991); chủ nghĩa đế quốc đẩy mạnh <em>"diễn biến hòa bình"</em></li>
-  <li><b>Bên trong:</b> Khó khăn kinh tế–xã hội thời kỳ bao cấp; các thế lực thù địch lợi dụng kích động</li>
-  <li><b>Việt Nam</b> trở thành <u>trọng điểm đánh phá</u> trong chiến lược diễn biến hòa bình của đế quốc Mỹ</li>
+<div class="sec"><div class="stt">I.1. Tác động của tình hình quốc tế</div><ul class="ul">
+<li><b>CNXH Đông Âu sụp đổ (1989–1991):</b> So sánh lực lượng bất lợi cho CM; gây tâm lý hoang mang trong một bộ phận cán bộ đảng viên</li>
+<li><b>Nguyên nhân thất bại của ĐCS Đông Âu:</b> <em>Tự đánh mất bản lĩnh giai cấp, tự tha hóa chính trị, chủ quan mơ hồ, thỏa hiệp vô nguyên tắc với lực lượng chống CNXH</em></li>
+<li><b>Chủ nghĩa đế quốc đẩy mạnh:</b> "Diễn biến hòa bình" bằng bài dân chủ, nhân quyền, tôn giáo; bạo loạn lật đổ</li>
+<li><b>Mỹ:</b> "kẻ thù cơ bản, lâu dài, nguy hiểm trước mắt" (NQ 03-NQ/HNTW 1992); Việt Nam = <u>trọng điểm đánh phá</u></li>
+<li>Việt kiều phản động được đế quốc tài trợ để chống phá Việt Nam quyết liệt</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Quan điểm cơ bản của Đảng (từ Đại hội VI–XIV)</div>
-<ul class="ul">
-  <li><b>NQ 03-NQ/HNTW (1992):</b> Lần đầu tiên đánh giá toàn diện về chống diễn biến hòa bình
-    <ul class="sub">
-      <li>Mỹ là "kẻ thù cơ bản, lâu dài, nguy hiểm trước mắt"</li>
-      <li>Chống diễn biến hòa bình, bạo loạn lật đổ là "nhiệm vụ cấp bách hàng đầu"</li>
-    </ul>
-  </li>
-  <li><b>Kết hợp chiến lược thống nhất:</b> Phát triển KT–XH với bảo vệ ANTT; quốc phòng toàn dân với thế trận AN nhân dân</li>
-  <li><b>Phát huy sức mạnh tổng hợp</b> của cả hệ thống chính trị dưới sự lãnh đạo của Đảng</li>
-  <li><b>Tư tưởng chủ đạo:</b> Lấy "phong trào quần chúng" làm nền tảng sức mạnh</li>
-  <li>Sử dụng đồng bộ các biện pháp — <em>lấy phòng ngừa là cơ bản</em></li>
-  <li>CAND là <b>lực lượng xung kích, nòng cốt</b> trong đấu tranh bảo vệ ANTT</li>
-</ul></div></div>
-<div class="sec"><div class="stt">II. Đảng lãnh đạo bảo vệ AN chính trị</div>
-<ul class="ul">
-  <li><b>Sự chỉ đạo với ban ngành:</b> Hệ thống chính trị từ Trung ương đến cơ sở đều có trách nhiệm BVAN</li>
-  <li><b>Bảo vệ trận địa tư tưởng XHCN:</b> Chống xâm lăng văn hóa, bảo vệ nền tảng tư tưởng của Đảng</li>
-  <li><b>Bảo vệ AN nội bộ chính trị:</b> Phòng ngừa nội gián, phản động chui vào Đảng, chính quyền</li>
-  <li><b>Bảo vệ AN tôn giáo, dân tộc:</b> Ngăn chặn lợi dụng tôn giáo phá hoại đoàn kết dân tộc</li>
-  <li><b>Bảo vệ AN kinh tế:</b> Ngăn chặn hoạt động phá hoại kinh tế, gây bất ổn xã hội</li>
+<div class="sec"><div class="stt">I.1. Tác động của tình hình trong nước</div><ul class="ul">
+<li><b>Tích cực:</b> ĐH VI (1986) khởi xướng đổi mới → kinh tế hàng hóa nhiều TP; mở cửa hội nhập; dân chủ hóa</li>
+<li><b>Thách thức:</b> Cơ chế quản lý chưa đồng bộ → sơ hở; buông lỏng ở một số mặt; bị thế lực thù địch lợi dụng</li>
+<li><b>Nông thôn:</b> Mâu thuẫn nội bộ, cán bộ tham nhũng → khiếu kiện tập thể, gây rối TTAN (1989: 811 vụ toàn quốc)</li>
+<li><b>Nguy cơ lớn:</b> Quan liêu, tham nhũng, tiêu cực trong bộ máy Đảng, Nhà nước, DNQD → <s>"quốc nạn"</s></li>
+<li>Phản động trong nước tích cực chuyển hướng phối hợp với kế hoạch DBHB, gây bạo loạn lật đổ từ bên ngoài</li>
 </ul></div>
-<div class="sec"><div class="stt">III. Thành công & Kinh nghiệm của Đảng</div>
+<div class="sec"><div class="stt">I.2. Quan điểm cơ bản qua các Đại hội Đảng</div><ul class="ul">
+<li><b>ĐH VI (1986):</b> Trên mặt trận ANCT đang diễn ra cuộc đấu tranh gay gắt giữa CM và phản CM; <em>BVANCT là bộ phận quan trọng trong chiến lược</em></li>
+<li><b>ĐH VII (6/1991):</b> <em>"Giữ vững ổn định chính trị là nhân tố hàng đầu để thực hiện đổi mới có kết quả"</em></li>
+<li><b>NQ 03-NQ/HNTW (29/6/1992):</b> Lần đầu TBT chính thức đánh giá toàn diện về chống DBHB; xác định mục tiêu, phương thức, nội dung đấu tranh BVANCT trong điều kiện mới</li>
+<li><b>Nội dung NQ 03:</b>
+  <ul class="sub">
+    <li>Bảo vệ độc lập, chủ quyền, toàn vẹn lãnh thổ, chế độ XHCN, nhân dân, Đảng</li>
+    <li>"Đánh bại âm mưu DBHB, chủ động loại trừ bạo loạn lật đổ, sẵn sàng đánh bại các âm mưu khác"</li>
+    <li>Đề cao cảnh giác CM; giữ vững ổn định chính trị; xây dựng nền ANNД kết hợp thế trận ANNД</li>
+    <li>Lấy sử dụng biện pháp chính trị là chủ yếu; CAND là nòng cốt phối hợp bộ đội địa phương và DQDV</li>
+  </ul>
+</li>
+<li><b>Nguyên tắc xử lý:</b> Phân biệt mâu thuẫn nội bộ nhân dân; tách kẻ chống đối khỏi quần chúng bị kích động; cô lập bọn đầu sỏ ngoan cố</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Đảng lãnh đạo bảo vệ AN chính trị — Các lĩnh vực</div><ul class="ul">
+<li><b>Kết hợp chiến lược thống nhất:</b> Phát triển KT–XH + BVAN; quốc phòng toàn dân + thế trận ANNД; sức mạnh tổng hợp cả hệ thống chính trị</li>
+<li><b>Tư tưởng cơ bản:</b> <em>"Phát động sâu rộng phong trào quần chúng BVANTQ, xây dựng các tuyến và địa bàn an toàn"</em></li>
+<li><b>Biện pháp:</b> Đồng bộ các BP đấu tranh CA; kết hợp phòng ngừa với tấn công; <u>lấy phòng ngừa là cơ bản</u></li>
+<li><b>Kết hợp:</b> Nghiêm trị với khoan hồng; trấn áp với giáo dục cải tạo; nêu cao cảnh giác</li>
+<li><b>CAND:</b> Là <em>"lực lượng xung kích, nòng cốt"</em>; được củng cố về chính trị–tư tưởng–tổ chức; phục vụ nhân dân và KT–XH</li>
+<li><b>AN nội bộ chính trị:</b> Phòng ngừa nội gián, phản động chui vào Đảng, chính quyền; bảo vệ bí mật nhà nước</li>
+<li><b>AN tư tưởng:</b> Bảo vệ trận địa tư tưởng XHCN; chống xâm lăng văn hóa; chống suy thoái, "tự diễn biến", "tự chuyển hóa"</li>
+<li><b>AN tôn giáo, dân tộc:</b> <em>"Nghiêm cấm và ngăn chặn mọi hành vi lợi dụng tôn giáo phá hoại độc lập và đoàn kết dân tộc"</em></li>
+<li><b>Chỉ đạo từ Trung ương đến địa phương:</b> Ban ngành, cấp ủy, chính quyền đều có trách nhiệm BVAN</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Thành công và kinh nghiệm của Đảng</div>
 <div class="pills">
-  <div class="pill"><span class="pill-lbl">Thành công 1</span><span class="pill-txt">Giữ vững ổn định chính trị, tạo môi trường thuận lợi cho công cuộc đổi mới</span></div>
-  <div class="pill"><span class="pill-lbl">Thành công 2</span><span class="pill-txt">Đập tan nhiều âm mưu diễn biến hòa bình, bạo loạn lật đổ của thế lực thù địch</span></div>
-  <div class="pill"><span class="pill-lbl">Thành công 3</span><span class="pill-txt">Xây dựng được hệ thống tư duy mới về ANCT trong điều kiện đổi mới và hội nhập</span></div>
-  <div class="pill"><span class="pill-lbl">Kinh nghiệm 1</span><span class="pill-txt">Đặt nhiệm vụ BVTQ trong tổng thể nhiệm vụ xây dựng và bảo vệ đất nước</span></div>
-  <div class="pill"><span class="pill-lbl">Kinh nghiệm 2</span><span class="pill-txt">Kết hợp chặt chẽ quốc phòng–an ninh; phát huy sức mạnh toàn dân</span></div>
-  <div class="pill"><span class="pill-lbl">Kinh nghiệm 3</span><span class="pill-txt">Xây dựng CAND trong sạch vững mạnh, làm nòng cốt bảo vệ ANCT</span></div>
+  <div class="pill"><span class="pill-lbl">TC 1</span><span class="pill-txt">Giữ vững ổn định chính trị qua 30+ năm đổi mới — tạo môi trường cho phát triển KT–XH</span></div>
+  <div class="pill"><span class="pill-lbl">TC 2</span><span class="pill-txt">Kịp thời nhận thức nguyên nhân thất bại của CNXH Đông Âu, không để VN rơi vào vết xe đổ</span></div>
+  <div class="pill"><span class="pill-lbl">TC 3</span><span class="pill-txt">Xây dựng hệ thống tư duy mới về ANCT phù hợp với điều kiện đổi mới và hội nhập</span></div>
+  <div class="pill"><span class="pill-lbl">TC 4</span><span class="pill-txt">Triệt phá nhiều tổ chức phản động, làm thất bại nhiều âm mưu DBHB, bạo loạn lật đổ</span></div>
+  <div class="pill"><span class="pill-lbl">KN 1</span><span class="pill-txt">Đặt nhiệm vụ BVTQ trong tổng thể hai nhiệm vụ chiến lược xây dựng và bảo vệ đất nước</span></div>
+  <div class="pill"><span class="pill-lbl">KN 2</span><span class="pill-txt">Kết hợp chặt chẽ QP–AN; phát huy sức mạnh toàn dân dưới sự lãnh đạo của Đảng</span></div>
+  <div class="pill"><span class="pill-lbl">KN 3</span><span class="pill-txt">Xây dựng CAND trong sạch vững mạnh, lấy phòng ngừa là cơ bản, CAND là nòng cốt</span></div>
+  <div class="pill"><span class="pill-lbl">KN 4</span><span class="pill-txt">Phân biệt đúng đắn đối tượng, đối tác; sử dụng biện pháp tổng hợp phù hợp với từng tình huống</span></div>
 </div></div>
 `},
 
-/* ═══ CHƯƠNG IV ═══ */
 {id:'c4',ac:'#10b981',ico:'💰',bg:'Trang 54–80',
-title:'CHƯƠNG IV — ĐƯỜNG LỐI CỦA ĐẢNG VỀ BẢO ĐẢM ANTT TRONG PHÁT TRIỂN KT–XH',
-sub:'AN với kinh tế',
+title:'CHƯƠNG IV — ĐƯỜNG LỐI VỀ BĐANTT TRONG PHÁT TRIỂN KT–XH HIỆN NAY',sub:'AN với kinh tế',
 html:`
-<div class="sec"><div class="stt">I. Mối quan hệ biện chứng ANTT – Phát triển KT–XH</div>
-<ul class="ul">
-  <li><b>Mối quan hệ 1:</b> Kết hợp BĐANTT với phát triển KT–XH phản ánh <em>quan hệ biện chứng giữa 2 nhiệm vụ chiến lược</em> — xây dựng XHCN và bảo vệ Tổ quốc XHCN</li>
-  <li><b>Mối quan hệ 2:</b> BĐANTT vừa là <u>điều kiện</u> vừa là <u>nội dung</u> của phát triển KT–XH — và ngược lại</li>
-  <li><b>Mối quan hệ 3:</b> Trong điều kiện hiện nay, BĐANTT là <em>nhiệm vụ trọng yếu thường xuyên</em> của toàn dân và Nhà nước</li>
-  <li>KT–XH phát triển → <b>tạo nền tảng vật chất</b> cho ANTT; ANTT ổn định → <b>tạo môi trường</b> cho KT–XH phát triển</li>
+<div class="sec"><div class="stt">I.1. Quan hệ biện chứng — ANTT phản ánh 2 nhiệm vụ chiến lược</div><ul class="ul">
+<li>Hai nhiệm vụ chiến lược của CM VN: <b>Xây dựng CNXH</b> và <b>Bảo vệ Tổ quốc XHCN</b></li>
+<li>Kết hợp BĐANTT với phát triển KT–XH phản ánh <em>mối quan hệ biện chứng giữa xây dựng và bảo vệ</em></li>
+<li><b>NQ 28-NQ/TW (2013) — "Chiến lược BVTQ trong tình hình mới":</b> Kết hợp chặt chẽ phát triển KT với BĐQP–AN trong các dự án lớn, quy hoạch vùng, ngành; ưu tiên "công nghiệp cơ bản" tạo nền tảng cho CNQP–AN</li>
+<li><b>ĐH XI:</b> <em>"Bảo vệ Tổ quốc XHCN là bảo vệ vững chắc độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ, bảo vệ ANCQ, TTATXH và nền văn hóa; bảo vệ Đảng, Nhà nước, nhân dân và chế độ XHCN"</em></li>
 </ul></div>
-<div class="sec"><div class="stt">II. Chủ trương của Đảng về BĐANTT trong phát triển KT–XH</div>
-<ul class="ul">
-  <li><b>Chủ trương xuyên suốt:</b> Kết hợp BĐANTT và phát triển KT–XH trong <em>mọi kế hoạch KT–XH</em></li>
-  <li><b>AN kinh tế:</b> Ngăn chặn hoạt động buôn lậu, gian lận thương mại, tội phạm kinh tế, tham nhũng</li>
-  <li><b>AN nông thôn:</b> Giải quyết ổn thỏa tranh chấp đất đai, không để tích tụ thành điểm nóng</li>
-  <li><b>AN đô thị:</b> Kiểm soát nhập cư, phòng chống tội phạm, trật tự đô thị</li>
-  <li><b>AN lao động:</b> Ngăn chặn đình công bất hợp pháp, bảo vệ quyền lợi hợp pháp người lao động</li>
-  <li><b>AN môi trường:</b> Phòng chống tội phạm môi trường, ô nhiễm gây bất ổn xã hội</li>
+<div class="sec"><div class="stt">I.2. ANTT vừa là điều kiện vừa là nội dung của phát triển KT–XH</div><ul class="ul">
+<li><b>AN → KT:</b> ANCQ và TTATXH tạo <em>môi trường hòa bình ổn định</em>, điều kiện quốc tế và trong nước thuận lợi để đẩy mạnh CNH–HĐH</li>
+<li><b>KT → AN:</b> CNH–HĐH tạo <em>cơ sở vật chất–kỹ thuật</em> cho xây dựng nền ANCQ, TTATXH hiện đại, CAND chính quy tinh nhuệ hiện đại</li>
+<li><b>TTATXH:</b> Là hệ thống các quan hệ XH được điều chỉnh bởi pháp luật và chuẩn mực đạo đức, thuần phong mỹ tục</li>
+<li><b>Công thức:</b> <u>Xây dựng là gốc của bảo vệ; bảo vệ là điều kiện của xây dựng</u></li>
+<li>Coi nhẹ hoặc tách rời một trong hai nhiệm vụ → <s>cả hai đều không thể thực hiện được mục tiêu đã định</s></li>
 </ul></div>
-<div class="sec"><div class="stt">III. Nhiệm vụ trọng tâm BĐANTT trong thời gian tới</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Tình hình tác động</div>
-<ul class="ul">
-  <li>Thế giới: <b>Cạnh tranh chiến lược các nước lớn</b> gay gắt; xung đột cục bộ; khủng hoảng kinh tế toàn cầu</li>
-  <li>Trong nước: Kinh tế phát triển nhưng <b>các vấn đề xã hội, tội phạm</b> ngày càng phức tạp</li>
-  <li>Thế lực thù địch tiếp tục <em>lợi dụng vấn đề dân chủ, nhân quyền, dân tộc, tôn giáo</em> chống phá</li>
+<div class="sec"><div class="stt">I.3. BĐANTT là nhiệm vụ trọng yếu thường xuyên của toàn dân</div><ul class="ul">
+<li>Bác Hồ dặn: <em>"Còn chủ nghĩa đế quốc, còn giai cấp bóc lột là còn phá hoại. Công việc của công an phải thường xuyên, không phải có từng đợt, từng lúc"</em></li>
+<li><b>ĐH IX:</b> <em>"Tăng cường quốc phòng, an ninh là nhiệm vụ trọng yếu, thường xuyên của Đảng, Nhà nước và toàn dân, trong đó QĐND và CAND là lực lượng nòng cốt"</em></li>
+<li><b>Điều 64 Hiến pháp 2013:</b> <em>"Bảo vệ Tổ quốc Việt Nam XHCN là sự nghiệp của toàn dân"</em>; cơ quan, tổ chức, công dân phải thực hiện đầy đủ nhiệm vụ QP và AN</li>
+<li><b>ĐH XIII:</b> Quán triệt sâu sắc QP–AN là nhiệm vụ trọng yếu thường xuyên; <em>"bảo vệ Tổ quốc từ sớm, từ xa, từ khi nước chưa nguy"</em></li>
+<li>ANTT hiện nay bao gồm cả <b>AN phi truyền thống:</b> AN mạng, AN kinh tế, AN môi trường, AN năng lượng, AN nguồn nước...</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Mục tiêu & Nhiệm vụ</div>
+<div class="sec"><div class="stt">II. Chủ trương xuyên suốt — Kết hợp BĐANTT và phát triển KT–XH</div><ul class="ul">
+<li><b>Trước đổi mới:</b> "Kết hợp kinh tế với QP và QP với kinh tế" — kinh tế khép kín, QP–AN chuyên môn hóa cao, chống vũ trang</li>
+<li><b>Thời kỳ đổi mới:</b> Kinh tế "mở", hội nhập → kết hợp KT–QP–AN theo nghĩa rộng; QP–AN chống cả thù trong giặc ngoài bằng biện pháp <em>tổng hợp</em> (vận động QC, pháp luật, ngoại giao, kinh tế, KHKT, nghiệp vụ, vũ trang)</li>
+<li><b>NQ HN TW 8 (Khóa IX):</b> Kết hợp phát triển KT–XH gắn với BĐQP–AN trong các dự án lớn và địa bàn chiến lược</li>
+<li><b>NQ ĐH IX:</b> Kết hợp sức mạnh <em>dân tộc với sức mạnh thời đại</em>; LLQP với thế trận ANNД; KT với QP–AN; QP–AN với hoạt động đối ngoại</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Chủ trương trên các lĩnh vực cụ thể</div><ul class="ul">
+<li><b>AN kinh tế:</b> Phòng chống tội phạm kinh tế, tham nhũng, buôn lậu, gian lận thương mại, rửa tiền</li>
+<li><b>AN nông thôn:</b> Giải quyết ổn thỏa tranh chấp đất đai; không để tích tụ thành điểm nóng</li>
+<li><b>AN đô thị:</b> Kiểm soát nhập cư, phòng chống tội phạm, trật tự đô thị</li>
+<li><b>AN lao động:</b> Ngăn chặn đình công bất hợp pháp; bảo vệ quyền lợi hợp pháp người lao động</li>
+<li><b>AN môi trường:</b> Phòng chống tội phạm môi trường gây bất ổn xã hội</li>
+<li><b>AN kinh tế đối ngoại:</b> Kiểm soát đầu tư nước ngoài ở địa bàn nhạy cảm; phòng chống gián điệp kinh tế</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Nhiệm vụ trọng tâm BĐANTT thời gian tới</div>
 <div class="pills">
   <div class="pill"><span class="pill-lbl">Mục tiêu</span><span class="pill-txt">Xây dựng xã hội trật tự, kỷ cương, an toàn, lành mạnh; bảo vệ cuộc sống bình yên của nhân dân</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 1</span><span class="pill-txt">Phòng ngừa, đấu tranh với tội phạm và các vi phạm pháp luật về ANTT</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 2</span><span class="pill-txt">Kiềm chế, làm giảm tội phạm và tệ nạn xã hội; giữ gìn TTATXH</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 3</span><span class="pill-txt">Xây dựng phong trào toàn dân bảo vệ ANTQ gắn với các phong trào xã hội</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 4</span><span class="pill-txt">Tăng cường pháp chế XHCN; hoàn thiện hệ thống pháp luật về ANTT</span></div>
-</div></div></div>
-`},
-
-/* ═══ CHƯƠNG V ═══ */
-{id:'c5',ac:'#f59e0b',ico:'🌐',bg:'Trang 81–116',
-title:'CHƯƠNG V — ĐƯỜNG LỐI CỦA ĐẢNG VỀ BĐANTT VỚI MỞ RỘNG QUAN HỆ ĐỐI NGOẠI, HỢP TÁC QUỐC TẾ',
-sub:'AN với đối ngoại',
-html:`
-<div class="sec"><div class="stt">I. Quá trình hình thành đường lối</div>
-<div class="steps">
-  <div class="step"><div class="snum">1</div><div class="stxt"><b>1975–1986:</b> Củng cố quan hệ với phe XHCN; Bảo vệ AN sau giải phóng; Đối phó bọn gián điệp Mỹ và các thế lực phản động nước ngoài. NQ 31-NQ/TW (1980) xác định nhiệm vụ BVANCТ trong tình hình mới</div></div>
-  <div class="step"><div class="snum">2</div><div class="stxt"><b>1986–1996:</b> Đổi mới tư duy — "Việt Nam muốn làm bạn với tất cả các nước". NQ 13 Bộ Chính trị (1988): chuyển từ đối đầu sang <em>đấu tranh và hợp tác trong cùng tồn tại hòa bình</em>; Đa dạng hóa, đa phương hóa quan hệ quốc tế</div></div>
-  <div class="step"><div class="snum">3</div><div class="stxt"><b>Từ 1996 đến nay:</b> Phương châm: <em>"Chủ động, tích cực hội nhập quốc tế"</em>; là bạn, là đối tác tin cậy, là thành viên có trách nhiệm trong cộng đồng quốc tế; gắn hội nhập với BVANCQ</div></div>
+  <div class="pill"><span class="pill-lbl">Nhiệm vụ 1</span><span class="pill-txt">Phòng ngừa, đấu tranh tội phạm và vi phạm pháp luật về ANTT — lấy phòng ngừa là cơ bản</span></div>
+  <div class="pill"><span class="pill-lbl">Nhiệm vụ 2</span><span class="pill-txt">Kiềm chế, làm giảm tội phạm và tệ nạn xã hội; giữ gìn TTATXH trên tất cả địa bàn</span></div>
+  <div class="pill"><span class="pill-lbl">Nhiệm vụ 3</span><span class="pill-txt">Xây dựng phong trào TDVBANTQ gắn với các phong trào xã hội tại cơ sở</span></div>
+  <div class="pill"><span class="pill-lbl">Nhiệm vụ 4</span><span class="pill-txt">Tăng cường pháp chế XHCN; hoàn thiện hệ thống pháp luật về ANTT phù hợp hội nhập</span></div>
+  <div class="pill"><span class="pill-lbl">Nhiệm vụ 5</span><span class="pill-txt">Đẩy mạnh cải cách hành chính, nâng cao hiệu lực quản lý nhà nước về ANTT</span></div>
 </div></div>
-<div class="sec"><div class="stt">II. Nội dung chủ trương của Đảng</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Tác động tình hình thế giới và trong nước</div>
-<ul class="ul">
-  <li><b>Toàn cầu hóa:</b> Tạo cơ hội phát triển nhưng cũng đặt ra thách thức về <em>chủ quyền an ninh</em></li>
-  <li><b>Cạnh tranh chiến lược:</b> Các nước lớn cạnh tranh ảnh hưởng khu vực, tác động đến Việt Nam</li>
-  <li><b>Tình hình Biển Đông:</b> Tranh chấp chủ quyền phức tạp, đe dọa AN biển đảo</li>
-  <li><b>Khủng bố, tội phạm xuyên quốc gia:</b> Ma túy, buôn người, tội phạm mạng ngày càng nghiêm trọng</li>
-</ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Mục tiêu và tư tưởng chỉ đạo</div>
-<ul class="ul">
-  <li>Bảo vệ <b>độc lập, chủ quyền, toàn vẹn lãnh thổ</b> trong quá trình hội nhập</li>
-  <li>Kết hợp chặt chẽ <em>nhiệm vụ đối ngoại với bảo đảm ANTT</em></li>
-  <li>Giải quyết tranh chấp bằng <b>biện pháp hòa bình</b>, tuân thủ luật pháp quốc tế</li>
-  <li>Kiên quyết, kiên trì đấu tranh bảo vệ lợi ích quốc gia – dân tộc</li>
-</ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">3. Chủ trương, chính sách cụ thể</div>
-<ul class="ul">
-  <li><b>Hợp tác AN–CAND:</b> Tăng cường quan hệ với cơ quan AN các nước ASEAN, theo sáng kiến của BCA Việt Nam</li>
-  <li><b>Phòng chống tội phạm xuyên quốc gia:</b> Ký hiệp định tương trợ tư pháp, dẫn độ tội phạm</li>
-  <li><b>Bảo vệ pháp lý:</b> Bổ sung hoàn thiện hệ thống pháp luật về ANQG trong bối cảnh hội nhập</li>
-  <li><b>Kiểm soát viện trợ nước ngoài:</b> Giám sát hoạt động tài trợ trong lĩnh vực pháp luật hình sự, cải cách tư pháp</li>
-  <li>Tham mưu xử lý tốt <b>quan hệ với các nước lớn</b>; tránh bị cuốn vào đối đầu, xung đột vũ trang</li>
-</ul></div></div>
 `},
 
-/* ═══ CHƯƠNG VI ═══ */
+{id:'c5',ac:'#f59e0b',ico:'🌐',bg:'Trang 81–116',
+title:'CHƯƠNG V — ĐƯỜNG LỐI BĐANTT VỚI MỞ RỘNG QUAN HỆ ĐỐI NGOẠI, HỢP TÁC QUỐC TẾ',sub:'AN với đối ngoại',
+html:`
+<div class="sec"><div class="stt">I.1. Giai đoạn 1975–1986 — Củng cố AN sau giải phóng</div><ul class="ul">
+<li><b>Bối cảnh:</b> Vừa thoát khỏi chiến tranh vừa phải đối phó chiến tranh biên giới Tây Nam và phía Bắc; tình trạng <em>"vừa có hòa bình vừa đương đầu kiểu chiến tranh phá hoại nhiều mặt"</em> (ĐH V 1982)</li>
+<li><b>ĐH IV (12/1976):</b> Đối ngoại = <em>"ra sức tranh thủ điều kiện quốc tế thuận lợi để hàn gắn vết thương chiến tranh, xây dựng CSVCKT của CNXH"</em></li>
+<li><b>Chủ trương:</b> Củng cố quan hệ với XHCN; bảo vệ và phát triển quan hệ đặc biệt VN–Lào–Campuchia; sẵn sàng thiết lập quan hệ bình thường với tất cả nước trên cơ sở tôn trọng độc lập, bình đẳng, cùng có lợi</li>
+<li><b>NQ 31-NQ/TW (2/2/1980):</b> Nhiệm vụ trung tâm = bóc gỡ hệ thống AN–tình báo–gián điệp–nội gián còn lẩn trốn; tiếp tục truy quét tàn quân; bảo vệ cơ quan đầu não và địa bàn trọng điểm</li>
+<li><b>NQ 03-NQ/TW (1982):</b> Quyết tâm đập tan kiểu chiến tranh phá hoại nhiều mặt của phản động quốc tế câu kết với phản động trong nước</li>
+<li><b>Thành tích:</b> Phát hiện bóc gỡ nhiều đầu mối nội gián; tan rã FULRO vũ trang Tây Nguyên; ngăn chặn FULRO câu kết Khơme đỏ và phỉ Vàng Pao</li>
+</ul></div>
+<div class="sec"><div class="stt">I.2. Giai đoạn 1986–1996 — Đổi mới đối ngoại, độc lập tự chủ</div><ul class="ul">
+<li><b>ĐH VI (1986):</b> Nhận thức cách mạng KH–KT → đa phương hóa quan hệ; mở rộng hợp tác KT với nước ngoài hệ XHCN; khắc phục độc quyền ngoại thương từ 1989</li>
+<li><b>NQ 13 Bộ Chính trị (5/1988):</b> <em>"Mục tiêu chiến lược = củng cố và giữ vững hòa bình để xây dựng và phát triển kinh tế"</em></li>
+<li>Chuyển từ <em>đối đầu</em> sang <em>đấu tranh và hợp tác trong cùng tồn tại hòa bình</em>; đa dạng hóa, đa phương hóa quan hệ quốc tế</li>
+<li><b>Luật Đầu tư nước ngoài (12/1987):</b> Lần đầu tạo cơ sở pháp lý cho FDI vào Việt Nam</li>
+<li><b>ĐH VII (1991):</b> <em>"VN muốn làm bạn với tất cả các nước trong cộng đồng thế giới, phấn đấu vì hòa bình, độc lập và phát triển"</em></li>
+<li><b>AN trong giai đoạn này:</b> Tăng cường phòng chống gián điệp; kiểm soát hoạt động nước ngoài; giải quyết vấn đề người Hoa, Hoa kiều</li>
+</ul></div>
+<div class="sec"><div class="stt">I.3. Từ 1996 đến nay — Chủ động, tích cực hội nhập</div><ul class="ul">
+<li><b>Phương châm:</b> <em>"Chủ động, tích cực hội nhập quốc tế"</em>; là bạn, là đối tác tin cậy, là thành viên có trách nhiệm</li>
+<li><b>Nguyên tắc:</b> Độc lập, tự chủ; đa phương hóa, đa dạng hóa; bình đẳng, cùng có lợi</li>
+<li>Hội nhập sâu rộng: <b>ASEAN (1995), APEC (1998), WTO (2007), CPTPP (2018)</b>...</li>
+<li>Mối đe dọa AN mới: Khủng bố, tội phạm xuyên quốc gia, gián điệp công nghệ, an ninh mạng</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Tác động & Mục tiêu, tư tưởng chỉ đạo</div><ul class="ul">
+<li><b>Toàn cầu hóa:</b> Cơ hội phát triển nhưng đe dọa chủ quyền AN; các thế lực thù địch xâm nhập qua kênh hội nhập</li>
+<li><b>Biển Đông:</b> Tranh chấp chủ quyền phức tạp với Trung Quốc → thách thức AN biển đảo</li>
+<li><b>Cạnh tranh chiến lược:</b> Mỹ–Trung cạnh tranh ảnh hưởng ở Đông Nam Á tác động trực tiếp đến Việt Nam</li>
+<li><b>Tội phạm xuyên QG:</b> Ma túy, buôn người, rửa tiền, tội phạm công nghệ cao, khủng bố</li>
+<li><b>Mục tiêu:</b> Bảo vệ độc lập, chủ quyền, toàn vẹn lãnh thổ trong quá trình hội nhập; giải quyết tranh chấp bằng biện pháp hòa bình, luật pháp quốc tế</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Chủ trương, chính sách cụ thể</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">CAND đối ngoại</span><span class="pill-txt">Mở rộng quan hệ với cơ quan CA các nước ASEAN theo sáng kiến của BCA VN; hợp tác bình đẳng, cùng có lợi</span></div>
+  <div class="pill"><span class="pill-lbl">PC tội phạm XQG</span><span class="pill-txt">Ký hiệp định tương trợ tư pháp, dẫn độ tội phạm; phối hợp điều tra tội phạm ma túy, buôn người</span></div>
+  <div class="pill"><span class="pill-lbl">Pháp luật</span><span class="pill-txt">Bổ sung hoàn thiện hệ thống pháp luật về ANCQ trong hội nhập; giám sát tài trợ nước ngoài trong lĩnh vực pháp luật hình sự</span></div>
+  <div class="pill"><span class="pill-lbl">Hậu cần–kỹ thuật</span><span class="pill-txt">Huy động tiềm lực, nâng cao năng lực hậu cần kỹ thuật; đầu tư KHCN, trang bị phương tiện hiện đại</span></div>
+  <div class="pill"><span class="pill-lbl">Nước lớn</span><span class="pill-txt">Tham mưu Đảng, NN xử lý tốt quan hệ với các nước lớn; tránh đối đầu, xung đột; bảo vệ lợi ích QG–dân tộc</span></div>
+  <div class="pill"><span class="pill-lbl">Kết hợp</span><span class="pill-txt">Kết hợp chặt chẽ nhiệm vụ đối ngoại với BĐANTT; gắn phát triển KT–VH–XH với BĐQP–AN</span></div>
+</div></div>
+`},
+
 {id:'c6',ac:'#06b6d4',ico:'👥',bg:'Trang 117–144',
-title:'CHƯƠNG VI — ĐƯỜNG LỐI CỦA ĐẢNG VỀ PHÁT HUY SỨC MẠNH QUẦN CHÚNG NHÂN DÂN TRONG BẢO VỆ ANTT',
-sub:'Vai trò quần chúng',
+title:'CHƯƠNG VI — ĐƯỜNG LỐI VỀ PHÁT HUY SỨC MẠNH QUẦN CHÚNG NHÂN DÂN TRONG BẢO VỆ ANTT',sub:'Vai trò quần chúng',
 html:`
-<div class="sec"><div class="stt">I. Quan điểm Mác–Lênin & Tư tưởng Hồ Chí Minh</div>
-<ul class="ul">
-  <li><b>Quần chúng nhân dân:</b> Là người tạo ra lịch sử; là động lực của mọi cuộc cách mạng xã hội
-    <ul class="sub">
-      <li>Bao gồm: giai cấp công nhân, nông dân, trí thức, tầng lớp tiểu tư sản tiến bộ và các giai tầng khác</li>
-    </ul>
-  </li>
-  <li><b>An ninh, trật tự:</b> Là trạng thái xã hội <em>bình yên, an toàn, ổn định</em>, được pháp luật bảo đảm</li>
-  <li><b>Tư tưởng HCM:</b> "Dân là gốc" — <em>"Lấy dân làm gốc"</em> là nguyên tắc xuyên suốt; CAND là "đầy tớ của nhân dân"</li>
-  <li>Sức mạnh bảo vệ ANTT <b>bắt nguồn từ nhân dân</b>; không dựa vào dân thì không thể giữ được AN</li>
-  <li>Phương châm: <b>Phòng ngừa tội phạm từ cơ sở</b>, từ cộng đồng dân cư</li>
+<div class="sec"><div class="stt">I. Quan điểm chủ nghĩa Mác–Lênin về quần chúng nhân dân</div><ul class="ul">
+<li><b>QCND là người tạo ra lịch sử;</b> là động lực của mọi cuộc CM xã hội</li>
+<li>Bao gồm: <b>giai cấp công nhân, nông dân, trí thức</b>, tiểu tư sản tiến bộ và các giai tầng khác</li>
+<li>CNXH chỉ có thể được xây dựng và bảo vệ khi dựa vào <em>sức mạnh đông đảo của QCND</em></li>
+<li><b>AN, trật tự:</b> Là trạng thái XH <em>bình yên, an toàn, ổn định</em>, được pháp luật và quy phạm xã hội bảo đảm</li>
 </ul></div>
-<div class="sec"><div class="stt">II. Phát huy sức mạnh quần chúng — Thực tiễn</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Quan điểm của Đảng hiện nay</div>
-<ul class="ul">
-  <li>Phong trào <b>"Toàn dân bảo vệ An ninh Tổ quốc"</b> là nền tảng chiến lược</li>
-  <li>Gắn phong trào TDVBANTQ với <em>xây dựng nông thôn mới, đô thị văn minh</em></li>
-  <li>Phát huy vai trò <b>Mặt trận Tổ quốc và các đoàn thể</b> trong tham gia bảo vệ ANTT</li>
-  <li>Xây dựng <b>địa bàn dân cư an toàn</b>: tổ dân phố, thôn, bản an toàn về ANTT</li>
+<div class="sec"><div class="stt">I. Tư tưởng Hồ Chí Minh về QCND và ANTT</div><ul class="ul">
+<li><em>"Dân là gốc"</em> — <em>"Lấy dân làm gốc"</em> là nguyên tắc bất biến</li>
+<li>CAND là <b>"đầy tớ của nhân dân"</b> — phục vụ nhân dân trên hết, trước hết</li>
+<li><em>"Công an của ta là công an nhân dân, vì dân mà phục vụ và dựa vào nhân dân mà làm việc"</em></li>
+<li>Sức mạnh BVAN <b>bắt nguồn từ nhân dân</b>; không dựa vào dân thì không giữ được AN</li>
+<li>CAND phải <em>"Đối với tự mình phải cần, kiệm, liêm, chính; Đối với đồng sự phải thân ái giúp đỡ; Đối với chính phủ phải tuyệt đối trung thành; Đối với nhân dân phải kính trọng lễ phép; Đối với công việc phải tận tụy; Đối với địch phải cương quyết khôn khéo"</em></li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Một số nhiệm vụ trọng tâm</div>
+<div class="sec"><div class="stt">II.1. Quan điểm của Đảng về phát huy sức mạnh QCND hiện nay</div><ul class="ul">
+<li>Phong trào <b>"Toàn dân bảo vệ An ninh Tổ quốc"</b> là <em>nền tảng chiến lược</em> lâu dài</li>
+<li>Gắn phong trào TDVBANTQ với <b>xây dựng nông thôn mới, đô thị văn minh</b></li>
+<li>Phát huy vai trò <b>Mặt trận Tổ quốc và các đoàn thể</b> trong tham gia BĐANTT</li>
+<li>Xây dựng <b>"địa bàn dân cư an toàn"</b> — tổ dân phố, thôn, bản, xã phường không có tệ nạn, tội phạm</li>
+<li><b>Phòng ngừa tội phạm từ cơ sở, từ cộng đồng dân cư</b> — tư tưởng chiến lược trọng yếu</li>
+<li>Các cơ quan, tổ chức, doanh nghiệp đều có trách nhiệm tham gia BĐANTT theo chức năng</li>
+</ul></div>
+<div class="sec"><div class="stt">II.2. Nhiệm vụ trọng tâm phát huy sức mạnh QCND</div>
 <div class="pills">
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 1</span><span class="pill-txt">Tuyên truyền, giáo dục nâng cao ý thức trách nhiệm của nhân dân với ANTT</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 2</span><span class="pill-txt">Xây dựng, củng cố lực lượng nòng cốt quần chúng tại cơ sở (tổ trưởng dân phố, trưởng thôn, bản...)</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 3</span><span class="pill-txt">Phát huy vai trò của các cơ quan, tổ chức, doanh nghiệp trong tham gia bảo đảm ANTT</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 4</span><span class="pill-txt">Tăng cường quan hệ gắn bó CAND với nhân dân; CAND phục vụ nhân dân là trên hết</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 5</span><span class="pill-txt">Đẩy mạnh phong trào tố giác tội phạm; bảo vệ người dám tố giác tội phạm</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 6</span><span class="pill-txt">Xây dựng cơ chế phối hợp CAND–chính quyền–đoàn thể ở địa phương</span></div>
-</div></div></div>
+  <div class="pill"><span class="pill-lbl">NV 1</span><span class="pill-txt">Tuyên truyền, giáo dục nâng cao ý thức trách nhiệm của nhân dân với ANTT — đặc biệt với thanh thiếu niên</span></div>
+  <div class="pill"><span class="pill-lbl">NV 2</span><span class="pill-txt">Xây dựng, củng cố lực lượng nòng cốt quần chúng tại cơ sở: tổ trưởng dân phố, trưởng thôn bản, bảo vệ dân phố</span></div>
+  <div class="pill"><span class="pill-lbl">NV 3</span><span class="pill-txt">Phát huy vai trò cơ quan, tổ chức, doanh nghiệp; xây dựng quy chế phối hợp liên ngành về BĐANTT</span></div>
+  <div class="pill"><span class="pill-lbl">NV 4</span><span class="pill-txt">Tăng cường quan hệ gắn bó CAND với nhân dân; thực hiện "Công an nhân dân học tập và làm theo lời Bác Hồ dạy"</span></div>
+  <div class="pill"><span class="pill-lbl">NV 5</span><span class="pill-txt">Đẩy mạnh phong trào tố giác tội phạm; có cơ chế bảo vệ và khen thưởng người tố giác tội phạm</span></div>
+  <div class="pill"><span class="pill-lbl">NV 6</span><span class="pill-txt">Xây dựng cơ chế phối hợp CAND–chính quyền–đoàn thể ở địa phương; phân công trách nhiệm rõ ràng</span></div>
+  <div class="pill"><span class="pill-lbl">NV 7</span><span class="pill-txt">Đổi mới nội dung, hình thức, phương pháp vận động quần chúng phù hợp với điều kiện KT–XH mới</span></div>
+</div></div>
 `},
 
-/* ═══ CHƯƠNG VII ═══ */
 {id:'c7',ac:'#f97316',ico:'⭐',bg:'Trang 145–152',
-title:'CHƯƠNG VII — ĐƯỜNG LỐI CỦA ĐẢNG VỀ XÂY DỰNG LỰC LƯỢNG CÔNG AN NHÂN DÂN HIỆN NAY',
-sub:'Xây dựng CAND',
+title:'CHƯƠNG VII — ĐƯỜNG LỐI CỦA ĐẢNG VỀ XÂY DỰNG LỰC LƯỢNG CAND HIỆN NAY',sub:'Xây dựng CAND',
 html:`
-<div class="sec"><div class="stt">I. Chủ trương của Đảng về xây dựng CAND</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Tình hình thế giới và trong nước</div>
-<ul class="ul">
-  <li><b>Thế giới:</b> Cách mạng CN 4.0 tạo ra thách thức mới về tội phạm công nghệ cao, an ninh mạng</li>
-  <li><b>Trong nước:</b> Tội phạm ngày càng <em>chuyên nghiệp, có tổ chức xuyên quốc gia</em>; tình hình ANTT phức tạp</li>
-  <li><b>Yêu cầu:</b> Cần lực lượng CAND <em>chính quy, tinh nhuệ, hiện đại</em> để đáp ứng yêu cầu bảo vệ ANTT</li>
-  <li><b>Đặt ra yêu cầu mới:</b> Cán bộ CAND phải có trình độ cao về pháp luật, chính trị, nghiệp vụ, ngoại ngữ, CNTT</li>
+<div class="sec"><div class="stt">I.1. Tình hình thế giới và trong nước</div><ul class="ul">
+<li><b>CMCN 4.0:</b> Tội phạm công nghệ cao, AN mạng, tội phạm sử dụng AI ngày càng phổ biến và nguy hiểm</li>
+<li><b>Tội phạm có tổ chức XQG:</b> Chuyên nghiệp hóa, quy mô lớn, xuyên biên giới — thách thức lớn với CAND</li>
+<li><b>Trong nước:</b> ANTT phức tạp; các thế lực thù địch tiếp tục lợi dụng dân chủ, nhân quyền, dân tộc, tôn giáo chống phá</li>
+<li><b>Yêu cầu mới:</b> Cán bộ CAND cần trình độ cao về pháp luật, chính trị, nghiệp vụ, ngoại ngữ, CNTT</li>
+<li><b>Cơ hội:</b> Ứng dụng KHCN hiện đại (AI, dữ liệu lớn, camera nhận diện...) nâng cao hiệu quả PCTP</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Đường lối của Đảng</div>
-<ul class="ul">
-  <li>Xây dựng CAND <b>tuyệt đối trung thành</b> với Đảng, Nhà nước, nhân dân và chế độ XHCN</li>
-  <li>Đặt dưới <b>sự lãnh đạo tuyệt đối, trực tiếp về mọi mặt</b> của Đảng CSVN</li>
-  <li>CAND vừa có tính <b>giai cấp</b> (bảo vệ giai cấp công nhân và nhân dân lao động) vừa có tính <b>nhân dân</b> (phục vụ nhân dân)</li>
-  <li>Xây dựng CAND theo hướng <em>"cách mạng, chính quy, tinh nhuệ, từng bước hiện đại"</em></li>
-  <li>Kết hợp <b>lực lượng chuyên trách, nửa chuyên trách</b> với phong trào quần chúng</li>
-</ul></div></div>
-<div class="sec"><div class="stt">II. Phương hướng, nhiệm vụ xây dựng CAND</div>
-<div class="sec"><div class="stt" style="font-size:.56rem">1. Phương hướng & Mục tiêu</div>
-<ul class="ul">
-  <li><b>Chính trị:</b> Xây dựng CAND <em>trong sạch, vững mạnh về chính trị</em> — kiên định lập trường Mác–Lênin, tư tưởng HCM</li>
-  <li><b>Tổ chức:</b> Tinh gọn bộ máy, nâng cao hiệu quả quản lý; phân cấp rõ ràng trách nhiệm</li>
-  <li><b>Nghiệp vụ:</b> Đổi mới phương pháp, chiến thuật nghiệp vụ đáp ứng yêu cầu mới</li>
-  <li><b>Hiện đại:</b> Đầu tư trang thiết bị công nghệ cao; ứng dụng AI, CNTT trong điều tra, quản lý ANTT</li>
-  <li><b>Pháp luật:</b> Hoàn thiện hành lang pháp lý cho hoạt động của CAND</li>
+<div class="sec"><div class="stt">I.2. Đường lối của Đảng về xây dựng CAND</div><ul class="ul">
+<li><b>Bản chất:</b> <em>Tuyệt đối trung thành với Đảng, Nhà nước, nhân dân và chế độ XHCN</em></li>
+<li><b>Nguyên tắc lãnh đạo:</b> Đặt dưới <em>sự lãnh đạo tuyệt đối, trực tiếp về mọi mặt của Đảng CSVN</em></li>
+<li><b>Tính chất kép:</b> Vừa có <u>tính giai cấp</u> (bảo vệ GC CN và nhân dân LĐ) vừa có <u>tính nhân dân</u> (phục vụ toàn dân)</li>
+<li><b>Phương hướng:</b> <em>"Cách mạng, chính quy, tinh nhuệ, từng bước hiện đại"</em></li>
+<li><b>Kết hợp:</b> Lực lượng chuyên trách + nửa chuyên trách + phong trào quần chúng</li>
+<li><b>6 điều Bác Hồ dạy CAND:</b> Đối với bản thân–đồng sự–Chính phủ–nhân dân–công việc–địch</li>
 </ul></div>
-<div class="sec"><div class="stt" style="font-size:.56rem">2. Nhiệm vụ cụ thể</div>
+<div class="sec"><div class="stt">II.1. Phương hướng, mục tiêu xây dựng CAND</div><ul class="ul">
+<li><b>Chính trị–tư tưởng:</b> Kiên định Mác–Lênin, tư tưởng HCM; chống suy thoái, "tự diễn biến", "tự chuyển hóa"; bảo vệ nền tảng tư tưởng của Đảng</li>
+<li><b>Tổ chức:</b> Tinh gọn bộ máy theo nguyên tắc <em>"bộ tinh, tỉnh mạnh, huyện toàn diện, xã bám cơ sở"</em>; phân cấp rõ ràng</li>
+<li><b>Nghiệp vụ:</b> Đổi mới phương pháp, chiến thuật nghiệp vụ; tăng cường trinh sát, điều tra hình sự, kỹ thuật hình sự</li>
+<li><b>Hiện đại hóa:</b> Ứng dụng AI, dữ liệu lớn, camera AI, hệ thống thông tin chỉ huy tích hợp</li>
+<li><b>Pháp luật:</b> Hoàn thiện Luật CAND, Luật BVANCQ, Luật PCTP, Luật TTATXH... tạo hành lang pháp lý vững chắc</li>
+<li><b>Quốc tế:</b> Mở rộng quan hệ đối ngoại CAND; nâng cao hiệu quả hợp tác quốc tế về PCTP</li>
+</ul></div>
+<div class="sec"><div class="stt">II.2. Nhiệm vụ xây dựng CAND</div>
 <div class="pills">
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 1</span><span class="pill-txt">Xây dựng CAND vững mạnh về chính trị, tư tưởng — chống suy thoái, "tự diễn biến", "tự chuyển hóa"</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 2</span><span class="pill-txt">Đổi mới, kiện toàn tổ chức bộ máy CAND tinh gọn, hoạt động hiệu lực, hiệu quả</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 3</span><span class="pill-txt">Xây dựng đội ngũ cán bộ có bản lĩnh chính trị vững vàng, đạo đức trong sáng, năng lực chuyên môn giỏi</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 4</span><span class="pill-txt">Đầu tư nâng cao tiềm lực hậu cần, kỹ thuật, KHCN phục vụ công tác chiến đấu và xây dựng lực lượng</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 5</span><span class="pill-txt">Hoàn thiện hệ thống pháp luật tạo hành lang pháp lý vững chắc cho BVANCQ, BĐTTATXH</span></div>
-  <div class="pill"><span class="pill-lbl">Nhiệm vụ 6</span><span class="pill-txt">Đẩy mạnh hợp tác quốc tế CAND — mở rộng quan hệ với cơ quan AN các nước ASEAN và thế giới</span></div>
-</div></div></div>
+  <div class="pill"><span class="pill-lbl">NV 1</span><span class="pill-txt">Xây dựng CAND vững mạnh về CT–TT–TC — chống 3 biểu hiện nguy hiểm: suy thoái, "tự diễn biến", "tự chuyển hóa"</span></div>
+  <div class="pill"><span class="pill-lbl">NV 2</span><span class="pill-txt">Đổi mới, kiện toàn tổ chức bộ máy CAND tinh gọn, hoạt động hiệu lực, hiệu quả, sát cơ sở</span></div>
+  <div class="pill"><span class="pill-lbl">NV 3</span><span class="pill-txt">Xây dựng đội ngũ cán bộ có bản lĩnh CT vững vàng, đạo đức trong sáng, năng lực chuyên môn giỏi, kỷ luật tốt</span></div>
+  <div class="pill"><span class="pill-lbl">NV 4</span><span class="pill-txt">Đầu tư nâng cao tiềm lực hậu cần–kỹ thuật; ứng dụng KHCN hiện đại vào PCTP và quản lý ANTT</span></div>
+  <div class="pill"><span class="pill-lbl">NV 5</span><span class="pill-txt">Hoàn thiện hệ thống pháp luật tạo hành lang pháp lý vững chắc; kiểm soát tài trợ nước ngoài trong lĩnh vực pháp luật hình sự</span></div>
+  <div class="pill"><span class="pill-lbl">NV 6</span><span class="pill-txt">Đẩy mạnh hợp tác quốc tế CAND; phát triển quan hệ với cơ quan AN các nước ASEAN và quốc tế</span></div>
+  <div class="pill"><span class="pill-lbl">NV 7</span><span class="pill-txt">Tăng cường quan hệ CAND–nhân dân; thực hiện phương châm "Công an nhân dân vì nước quên thân, vì dân phục vụ"</span></div>
+</div></div>
 `}
 ];
 
@@ -390,27 +436,15 @@ function mk(d){
   const el=document.createElement('div');
   el.className='card';el.dataset.id=d.id;
   el.style.cssText=`--ac:${d.ac}`;
-  el.innerHTML=`
-    <div class="chd">
-      <div class="cico">${d.ico}</div>
-      <div class="cmeta">
-        <div class="cttl">${d.title}</div>
-        <div class="csub">${d.sub}</div>
-      </div>
-      <div class="cbg">${d.bg}</div>
-      <div class="carr">▼</div>
-    </div>
-    <div class="cbd"><div class="cbi">${d.html}</div></div>`;
+  el.innerHTML=`<div class="chd"><div class="cico">${d.ico}</div><div class="cmeta"><div class="cttl">${d.title}</div><div class="csub">${d.sub}</div></div><div class="cbg">${d.bg}</div><div class="carr">▼</div></div><div class="cbd"><div class="cbi">${d.html}</div></div>`;
   el.querySelector('.chd').onclick=()=>el.classList.toggle('on');
   return el;
 }
-
 const grid=document.getElementById('grid');
 DATA.forEach(d=>grid.appendChild(mk(d)));
-
 document.querySelectorAll('.tab').forEach(t=>{
   t.onclick=function(){
-    document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('on');});
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
     this.classList.add('on');
     const f=this.dataset.f;
     document.querySelectorAll('.card').forEach(c=>{
@@ -421,3 +455,5 @@ document.querySelectorAll('.tab').forEach(t=>{
 </script>
 </body>
 </html>
+HTMLEOF
+echo "Done — $(wc -c < /mnt/user-data/outputs/mindmap-dlcm-antt.html) bytes"
