@@ -3,74 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mindmap Chi Tiết – Luật Hình Sự Việt Nam</title>
+  <title>Sổ Tay Luật Hình Sự Việt Nam</title>
+  <!-- Nhúng file CSS của bạn vào đây -->
+  <link rel="stylesheet" href="style.css">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Segoe UI',system-ui,sans-serif;background:#08090f;color:#a8b4d0;padding-bottom:40px}
-    .hdr{text-align:center;padding:30px 16px 10px;background:linear-gradient(180deg,#12162a 0%,#08090f 100%);border-bottom:1px solid #1c2040}
-    .hdr-badge{display:inline-block;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:#6b7db3;margin-bottom:5px}
-    .hdr h1{font-size:clamp(1.2rem,2.8vw,1.7rem);font-weight:800;color:#e8edf8;line-height:1.3}
-    .hdr h1 span{color:#7c9ff5}
-    .hdr p{color:#4b5c8a;font-size:.76rem;margin-top:6px}
-    .section-title{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:#3d4f73;margin-bottom:8px}
-    .filter-sec{padding:12px 12px 4px;border-bottom:1px solid #111827}
-    .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
-    .tab{flex-shrink:0;padding:5px 12px;border-radius:20px;border:1.5px solid #1e2540;background:#0e1020;color:#5a6899;font-size:.66rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px}
-    .tab.on{border-color:#7c9ff5!important;background:#1e3080!important;color:#7c9ff5!important;font-weight:700}
-    .stats{padding:8px 16px 4px;font-size:.7rem;color:#374151}
-    .grid{display:flex;flex-direction:column;gap:10px;padding:2px 12px}
-    .card{border-radius:14px;overflow:hidden;background:#0b0e1c;border:1px solid #1e2540}
-    .chd{display:flex;align-items:flex-start;gap:14px;padding:16px;cursor:pointer;user-select:none;width:100%;border:none;text-align:left}
-    .cico{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
-    .cmeta{flex:1;min-width:0}
-    .cttl{font-size:.75rem;font-weight:800;color:#e8edf8;line-height:1.4;margin-bottom:4px}
-    .csub{font-size:.65rem;line-height:1.2}
-    .cside{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
-    .cbg{border-radius:8px;padding:2px 8px;font-size:.6rem;font-weight:700;white-space:nowrap}
-    .carr{font-size:.65rem;transition:transform .2s;display:inline-block}
-    .ctag{padding:0 16px 12px 74px;font-size:.62rem;font-style:italic}
-    .cbd{max-height:0;overflow:hidden;transition:max-height .3s ease-out;background:#0b0e1c;padding:0 16px}
-    .cbd.open{padding:14px 16px 18px;max-height:3000px}
-    .sec-item{margin-bottom:16px}
-    .sec-item:last-child{margin-bottom:0}
-    .sec-ttl{font-size:.7rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-    .sec-bullet{width:3px;height:14px;border-radius:2px;display:inline-block;flex-shrink:0}
-    .sec-list{display:flex;flex-direction:column;gap:6px;padding-left:10px}
-    .sec-line{display:flex;gap:8px;align-items:flex-start;font-size:.68rem;line-height:1.6;color:#a8b4d0}
-    .empty-state{text-align:center;padding:40px 20px;color:#374151;font-size:.75rem}
-    .footer{text-align:center;margin-top:28px;color:#1e2540;font-size:.65rem}
+    /* Bổ sung một số style nhỏ cho nội dung bên trong .bd để hiển thị danh sách đẹp mắt */
+    .sec-item { margin-bottom: 14px; }
+    .sec-item:last-child { margin-bottom: 0; }
+    .sec-ttl { font-weight: 700; color: #60a5fa; margin-bottom: 6px; font-size: 14px; }
+    .sec-list { list-style-type: disc; padding-left: 20px; color: #cbd5e1; font-size: 13.5px; }
+    .sec-list li { margin-bottom: 4px; line-height: 1.5; }
   </style>
 </head>
 <body>
 
-  <div class="hdr">
-    <span class="hdr-badge">Tài liệu học tập</span>
-    <h1>Luật Hình sự<br><span>Việt Nam</span></h1>
-    <p>9 Chương · BLHS 2015 (sửa đổi, bổ sung 2017)</p>
-  </div>
+  <!-- BUTTON MOBILE -->
+  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
 
-  <div class="filter-sec">
-    <div class="section-title">Lọc theo chủ đề</div>
-    <div class="tabs" id="theme-tabs"></div>
-  </div>
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="logo">Tài Liệu Học Tập</div>
+      <div class="sidebar-title">Luật Hình Sự</div>
+      <ul id="sidebar-list">
+        <!-- Danh sách chương sẽ tự động render tại đây -->
+      </ul>
+    </div>
 
-  <div class="filter-sec" style="border-bottom:none">
-    <div class="section-title">Lọc theo chương</div>
-    <div class="tabs" id="chapter-tabs"></div>
-  </div>
+    <!-- MAIN CONTENT -->
+    <div id="content">
+      <div style="margin-bottom: 25px;">
+        <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 6px;">Luật Hình sự Việt Nam</h1>
+        <p style="color: #cbd5e1; font-size: 14px;">9 Chương · BLHS 2015 (sửa đổi, bổ sung 2017)</p>
+      </div>
 
-  <div class="stats" id="stats-count"></div>
-  <div class="grid" id="cards-container"></div>
-  <div class="footer">BLHS 2015 · Sửa đổi, bổ sung 2017</div>
+      <!-- TABS LỌC CHỦ ĐỀ -->
+      <div class="tabs" id="theme-tabs">
+        <!-- Các tab sẽ tự động render tại đây -->
+      </div>
+
+      <!-- MINDMAP / GRID CARDS -->
+      <div class="grid" id="grid-container">
+        <!-- Các card chương sẽ tự động render tại đây -->
+      </div>
+    </div>
+  </div>
 
   <script>
+    // DỮ LIỆU GIỮ NGUYÊN 100% NỘI DUNG TỪ CODE GỐC
     const CHAPTERS = [
       {
-        id: "c1", label: "Chương I", icon: "⚖️", color: "#7C3AED",
-        bg: "linear-gradient(135deg, #2D1B69 0%, #1E1040 100%)",
+        id: "c1", num: "I", label: "Chương I",
         title: "CHƯƠNG I — NHỮNG VẤN ĐỀ CHUNG VỀ LUẬT HÌNH SỰ VN",
-        sub: "Khái niệm, vị trí, nguyên tắc & hiệu lực",
-        pages: "Mục I–VII", tag: "Tổng quan", themes: ["tong-quan", "nguyen-tac"],
+        pages: "Mục I–VII", themes: ["tong-quan", "nguyen-tac"],
         sections: [
           { title: "I. Khái niệm Luật Hình sự", items: ["Là ngành luật độc lập trong hệ thống pháp luật Việt Nam", "Bao gồm tổng hợp các quy phạm do Quốc hội ban hành", "Quy định hành vi bị coi là tội phạm và hình phạt tương ứng", "Áp dụng đối với người hoặc pháp nhân thương mại thực hiện hành vi đó"] },
           { title: "II. Vị trí trong hệ thống pháp luật", items: ["Công cụ pháp lý quan trọng nhất bảo vệ chế độ xã hội", "Bảo vệ trật tự pháp luật, quyền con người, quyền công dân", "Liên hệ mật thiết với LTTHS, Luật Dân sự, Luật Hành chính"] },
@@ -84,10 +69,9 @@
         ]
       },
       {
-        id: "c2", label: "Chương II", icon: "🔍", color: "#DC2626",
-        bg: "linear-gradient(135deg, #4C1D1D 0%, #2D1010 100%)",
-        title: "CHƯƠNG II — TỘI PHẠM", sub: "Khái niệm, dấu hiệu, phân loại",
-        pages: "Điều 8–9 BLHS", tag: "Tội phạm", themes: ["toi-pham"],
+        id: "c2", num: "II", label: "Chương II",
+        title: "CHƯƠNG II — TỘI PHẠM",
+        pages: "Điều 8–9", themes: ["toi-pham"],
         sections: [
           { title: "I. Khái niệm tội phạm (Điều 8 BLHS)", items: ["Là hành vi nguy hiểm cho xã hội được quy định trong BLHS", "Do người có năng lực TNHS hoặc pháp nhân thương mại thực hiện", "Thực hiện một cách cố ý hoặc vô ý", "Hành vi tuy nguy hiểm nhưng chưa đến mức đáng kể thì không phải tội phạm — xử lý bằng biện pháp khác"] },
           { title: "II. Bốn dấu hiệu pháp lý của tội phạm", items: ["① Tính nguy hiểm cho xã hội (dấu hiệu cơ bản nhất): gây thiệt hại hoặc đe dọa gây thiệt hại đáng kể cho các quan hệ XH được LHS bảo vệ", "② Tính có lỗi: người thực hiện nhận thức được & làm chủ được hành vi (cố ý trực tiếp, cố ý gián tiếp, vô ý vì quá tự tin, vô ý vì cẩu thả)", "③ Tính trái pháp luật hình sự: hành vi chỉ là tội phạm nếu được mô tả cụ thể trong BLHS", "④ Tính phải chịu hình phạt: hành vi đương nhiên đối mặt với chế tài nghiêm khắc nhất là hình phạt"] },
@@ -96,10 +80,9 @@
         ]
       },
       {
-        id: "c3", label: "Chương III", icon: "🧩", color: "#2563EB",
-        bg: "linear-gradient(135deg, #1E3A6E 0%, #0F1F3D 100%)",
-        title: "CHƯƠNG III — CẤU THÀNH TỘI PHẠM", sub: "Bốn yếu tố xác định hành vi là tội phạm",
-        pages: "Phần chung BLHS", tag: "CTTP", themes: ["toi-pham", "tong-quan"],
+        id: "c3", num: "III", label: "Chương III",
+        title: "CHƯƠNG III — CẤU THÀNH TỘI PHẠM",
+        pages: "Phần chung", themes: ["toi-pham", "tong-quan"],
         sections: [
           { title: "I. Khái niệm & Đặc điểm CTTP", items: ["Là tổng hợp những dấu hiệu pháp lý đặc trưng (do luật quy định) xác định hành vi cụ thể là tội phạm", "Do luật định: không thể tự suy diễn thêm yếu tố ngoài quy định", "Mang tính bắt buộc: phải thỏa mãn đầy đủ mới có TNHS", "Phản ánh bản chất nguy hiểm của tội phạm", "Ý nghĩa: là cơ sở pháp lý DUY NHẤT để xác định tội phạm và truy cứu TNHS"] },
           { title: "II. Phân loại CTTP", items: ["Theo mức độ nguy hiểm: CTTP cơ bản / CTTP tăng nặng / CTTP giảm nhẹ", "Theo cấu trúc — Hình thức: chỉ cần thực hiện hành vi, không yêu cầu hậu quả (VD: tội cướp tài sản)", "Theo cấu trúc — Vật chất: yêu cầu phải có hậu quả thực tế xảy ra (VD: tội giết người, tội trộm cắp TS)"] },
@@ -110,10 +93,9 @@
         ]
       },
       {
-        id: "c4", label: "Chương IV", icon: "📈", color: "#059669",
-        bg: "linear-gradient(135deg, #064E3B 0%, #022C22 100%)",
-        title: "CHƯƠNG IV — CÁC GIAI ĐOẠN CỐ Ý THỰC HIỆN TỘI PHẠM", sub: "Chuẩn bị → Chưa đạt → Hoàn thành",
-        pages: "Điều 14–16 BLHS", tag: "Giai đoạn TP", themes: ["toi-pham"],
+        id: "c4", num: "IV", label: "Chương IV",
+        title: "CHƯƠNG IV — CÁC GIAI ĐOẠN CỐ Ý THỰC HIỆN TỘI PHẠM",
+        pages: "Điều 14–16", themes: ["toi-pham"],
         sections: [
           { title: "I. Nhận thức chung", items: ["Là mức độ thực hiện tội phạm cố ý qua các thời điểm khác nhau về mặt khách quan và chủ quan", "Chỉ áp dụng với tội phạm CỐ Ý — không có giai đoạn phạm tội với tội vô ý", "Căn cứ phân chia: hành vi thực tế đã thực hiện + mức độ đạt được mục đích phạm tội"] },
           { title: "II. Giai đoạn 1 — Chuẩn bị phạm tội", items: ["Tìm kiếm, chuẩn bị công cụ, phương tiện hoặc tạo điều kiện khác để thực hiện tội phạm", "Hành vi: mua vũ khí, thăm dò địa điểm, rủ rê đồng phạm, lên kế hoạch...", "Chưa thực hiện hành vi khách quan được mô tả trong CTTP", "TNHS: chỉ chịu TNHS nếu là tội RẤT NGHIÊM TRỌNG hoặc ĐẶC BIỆT NGHIÊM TRỌNG (Điều 14 BLHS)", "Hình phạt: được giảm nhẹ so với tội phạm hoàn thành"] },
@@ -123,10 +105,9 @@
         ]
       },
       {
-        id: "c5", label: "Chương V", icon: "👥", color: "#D97706",
-        bg: "linear-gradient(135deg, #4D2D00 0%, #2D1A00 100%)",
-        title: "CHƯƠNG V — ĐỒNG PHẠM", sub: "Nhiều người cùng cố ý thực hiện một tội phạm",
-        pages: "Điều 17 BLHS", tag: "Đồng phạm", themes: ["dong-pham"],
+        id: "c5", num: "V", label: "Chương V",
+        title: "CHƯƠNG V — ĐỒNG PHẠM",
+        pages: "Điều 17", themes: ["dong-pham"],
         sections: [
           { title: "I. Khái niệm & Dấu hiệu pháp lý (Điều 17)", items: ["Là trường hợp có từ 2 người trở lên cố ý cùng thực hiện một tội phạm", "Dấu hiệu khách quan: cùng tham gia thực hiện TP; hành vi mỗi người là điều kiện hỗ trợ cho cả nhóm", "Dấu hiệu chủ quan: cùng cố ý; biết rõ hành vi của mình và người khác cùng hướng tới mục đích chung", "Lưu ý: tội phạm do vô ý KHÔNG có đồng phạm"] },
           { title: "II. Bốn loại người trong đồng phạm", items: ["Người THỰC HÀNH: trực tiếp thực hiện hành vi được mô tả trong CTTP; chịu TNHS nặng nhất trong nhóm", "Người TỔ CHỨC: chủ mưu, cầm đầu, chỉ huy toàn bộ hoạt động phạm tội; nguy hiểm nhất trong đồng phạm", "Người XÚI GIỤC: kích động, dụ dỗ, thúc đẩy người khác nảy sinh ý định & thực hiện TP", "Người GIÚP SỨC: tạo điều kiện tinh thần (hứa hẹn che giấu) hoặc vật chất (cung cấp công cụ, thông tin)"] },
@@ -136,10 +117,9 @@
         ]
       },
       {
-        id: "c6", label: "Chương VI", icon: "🛡️", color: "#0891B2",
-        bg: "linear-gradient(135deg, #0C3547 0%, #051E2B 100%)",
-        title: "CHƯƠNG VI — LOẠI TRỪ TRÁCH NHIỆM HÌNH SỰ", sub: "Bảy trường hợp không bị coi là tội phạm",
-        pages: "Điều 20–26 BLHS", tag: "Loại trừ TNHS", themes: ["hinh-phat", "tong-quan"],
+        id: "c6", num: "VI", label: "Chương VI",
+        title: "CHƯƠNG VI — LOẠI TRỪ TRÁCH NHIỆM HÌNH SỰ",
+        pages: "Điều 20–26", themes: ["hinh-phat", "tong-quan"],
         sections: [
           { title: "I. Nhận thức chung", items: ["Là những trường hợp hành vi có biểu hiện bên ngoài giống tội phạm nhưng không bị coi là tội phạm", "Do hoàn cảnh đặc biệt nên không phải chịu TNHS", "Ý nghĩa: bảo vệ quyền tự vệ, khuyến khích công dân tham gia chống tội phạm & lao động sáng tạo"] },
           { title: "II. Sự kiện bất ngờ (Điều 20)", items: ["Gây ra hậu quả nguy hại nhưng không thể thấy trước hoặc không buộc phải thấy trước", "Không có lỗi → không phải chịu TNHS", "VD: lái xe đúng luật, người đi bộ đột ngột băng qua gây tai nạn"] },
@@ -152,10 +132,9 @@
         ]
       },
       {
-        id: "c7", label: "Chương VII", icon: "⚡", color: "#65A30D",
-        bg: "linear-gradient(135deg, #1A3300 0%, #0D1F00 100%)",
-        title: "CHƯƠNG VII — TNHS, HÌNH PHẠT & BIỆN PHÁP TƯ PHÁP", sub: "Hậu quả pháp lý của tội phạm",
-        pages: "Điều 27–82 BLHS", tag: "Hình phạt", themes: ["hinh-phat"],
+        id: "c7", num: "VII", label: "Chương VII",
+        title: "CHƯƠNG VII — TNHS, HÌNH PHẠT & BIỆN PHÁP TƯ PHÁP",
+        pages: "Điều 27–82", themes: ["hinh-phat"],
         sections: [
           { title: "I. Trách nhiệm hình sự", items: ["Hậu quả pháp lý bất lợi mà người phạm tội phải gánh chịu trước Nhà nước", "Cơ sở DUY NHẤT: hành vi thỏa mãn đầy đủ CTTP được quy định trong BLHS", "Đặc điểm: mang tính cưỡng chế nhà nước cao nhất; gắn với án tích", "Thời hiệu truy cứu TNHS: Ít NT — 5 năm | NT — 10 năm | Rất NT — 15 năm | Đặc biệt NT — 20 năm", "Miễn TNHS: khi có chuyển biến tình hình; tự thú, thành khẩn khai báo, lập công; người chưa thành niên phạm tội ít NT lần đầu..."] },
           { title: "II. Hình phạt — Khái niệm & Mục đích", items: ["Là biện pháp cưỡng chế nghiêm khắc nhất của Nhà nước do Tòa án quyết định", "Áp dụng đối với người/pháp nhân thương mại phạm tội theo bản án có hiệu lực pháp luật", "Mục đích răn đe: ngăn người phạm tội tái phạm & ngăn người khác phạm tội (phòng ngừa chung)", "Mục đích giáo dục & cải tạo: giúp người phạm tội trở thành công dân có ích cho xã hội"] },
@@ -166,10 +145,9 @@
         ]
       },
       {
-        id: "c8", label: "Chương VIII", icon: "📋", color: "#9333EA",
-        bg: "linear-gradient(135deg, #3B0764 0%, #1E0336 100%)",
-        title: "CHƯƠNG VIII — QUY ĐỊNH KHÁC VỀ HÌNH PHẠT & CHẤP HÀNH", sub: "Thời hiệu, miễn giảm, án treo, xóa án tích",
-        pages: "Điều 83–110 BLHS", tag: "Chấp hành HP", themes: ["hinh-phat"],
+        id: "c8", num: "VIII", label: "Chương VIII",
+        title: "CHƯƠNG VIII — QUY ĐỊNH KHÁC VỀ HÌNH PHẠT & CHẤP HÀNH",
+        pages: "Điều 83–110", themes: ["hinh-phat"],
         sections: [
           { title: "I. Thời hiệu thi hành bản án", items: ["Là thời hạn do luật định mà khi hết, người bị kết án không phải chấp hành bản án đã tuyên", "Tù ≤ 3 năm: thời hiệu 5 năm", "Tù từ 3 → 7 năm: thời hiệu 10 năm", "Tù từ 7 → 15 năm: thời hiệu 15 năm", "Tù từ 15 năm trở lên, chung thân, tử hình: thời hiệu 20 năm", "Thời hiệu bị gián đoạn nếu người bị kết án cố tình trốn tránh"] },
           { title: "II. Miễn hình phạt", items: ["Được Tòa án miễn toàn bộ hình phạt đã tuyên khi có nhiều tình tiết giảm nhẹ đặc biệt", "Nhân thân tốt, vai trò thứ yếu, đã bồi thường toàn bộ thiệt hại, lập công lớn...", "Vẫn bị coi là có tội (có án tích); khác với miễn TNHS"] },
@@ -180,10 +158,9 @@
         ]
       },
       {
-        id: "c9", label: "Chương IX", icon: "🧒", color: "#0D9488",
-        bg: "linear-gradient(135deg, #0C3B38 0%, #052220 100%)",
-        title: "CHƯƠNG IX — NGƯỜI DƯỚI 18 TUỔI PHẠM TỘI", sub: "Chính sách nhân đạo — giáo dục là chủ yếu",
-        pages: "Điều 90–108 BLHS", tag: "Người dưới 18t", themes: ["nguoi-duoi-18"],
+        id: "c9", num: "IX", label: "Chương IX",
+        title: "CHƯƠNG IX — NGƯỜI DƯỚI 18 TUỔI PHẠM TỘI",
+        pages: "Điều 90–108", themes: ["nguoi-duoi-18"],
         sections: [
           { title: "I. Khái niệm & Nguyên tắc xử lý", items: ["Đối tượng đặc thù: chưa phát triển hoàn thiện về thể chất và tâm sinh lý", "Nguyên tắc 1: bảo đảm LỢI ÍCH TỐT NHẤT cho người dưới 18 tuổi", "Nguyên tắc 2: chủ yếu nhằm GIÁO DỤC, giúp đỡ sửa chữa sai lầm, phát triển lành mạnh", "Nguyên tắc 3: HẠN CHẾ áp dụng hình phạt tù; ưu tiên biện pháp giám sát, giáo dục", "Nguyên tắc 4: bảo đảm quyền tham gia tố tụng phù hợp với lứa tuổi"] },
           { title: "II. Biện pháp giám sát / giáo dục (khi được miễn TNHS)", items: ["KHIỂN TRÁCH: áp dụng với tội ít NT hoặc NT do vô ý; chỉ phê bình trực tiếp", "HÒA GIẢI TẠI CỘNG ĐỒNG: tổ chức xin lỗi và bồi thường thiệt hại trực tiếp với nạn nhân trước cộng đồng", "GIÁO DỤC TẠI XÃ/PHƯỜNG/THỊ TRẤN: giao cho chính quyền địa phương + gia đình giám sát từ 1 đến 2 năm", "Trong thời gian giáo dục: phải tuân thủ cam kết không vi phạm, tham gia chương trình học tập/dạy nghề"] },
@@ -196,129 +173,99 @@
     ];
 
     const THEMES = [
-      { id: "tat-ca", label: "Tất cả", icon: "📚" },
-      { id: "tong-quan", label: "Tổng quan", icon: "⚖️" },
-      { id: "toi-pham", label: "Tội phạm", icon: "🔍" },
-      { id: "dong-pham", label: "Đồng phạm", icon: "👥" },
-      { id: "hinh-phat", label: "Hình phạt", icon: "⚡" },
-      { id: "nguoi-duoi-18", label: "Người < 18t", icon: "🧒" }
+      { id: "tat-ca", label: "📚 Tất cả" },
+      { id: "tong-quan", label: "⚖️ Tổng quan" },
+      { id: "toi-pham", label: "🔍 Tội phạm" },
+      { id: "dong-pham", label: "👥 Đồng phạm" },
+      { id: "hinh-phat", label: "⚡ Hình phạt" },
+      { id: "nguoi-duoi-18", label: "🧒 Người < 18t" }
     ];
 
-    let activeTheme = "tat-ca";
-    let activeChapter = "tat-ca";
-    const expandedState = {};
-
-    function renderThemeTabs() {
-      const container = document.getElementById("theme-tabs");
-      container.innerHTML = THEMES.map(t => `
-        <button class="tab ${activeTheme === t.id ? 'on' : ''}" onclick="selectTheme('${t.id}')">
-          <span>${t.icon}</span> ${t.label}
-        </button>
-      `).join("");
+    // RENDER SIDEBAR
+    function renderSidebar() {
+      const list = document.getElementById("sidebar-list");
+      list.innerHTML = CHAPTERS.map(ch => `
+        <li onclick="scrollToChapter('${ch.id}')">${ch.label}</li>
+      `).join('');
     }
 
-    function renderChapterTabs() {
-      const container = document.getElementById("chapter-tabs");
-      let html = `
-        <button class="tab ${activeChapter === 'tat-ca' ? 'on' : ''}" onclick="selectChapter('tat-ca')">
-          Tất cả (${CHAPTERS.length})
-        </button>
-      `;
-      html += CHAPTERS.map(ch => {
-        const isOn = activeChapter === ch.id;
-        const style = isOn ? `border-color:${ch.color}!important;background:${ch.color}22!important;color:${ch.color}!important;font-weight:700` : '';
-        return `
-          <button class="tab ${isOn ? 'on' : ''}" style="${style}" onclick="selectChapter('${ch.id}')">
-            <span style="font-size:11px">${ch.icon}</span> ${ch.label}
-          </button>
-        `;
-      }).join("");
-      container.innerHTML = html;
+    // RENDER TABS
+    function renderTabs() {
+      const tabsContainer = document.getElementById("theme-tabs");
+      tabsContainer.innerHTML = THEMES.map((t, index) => `
+        <div class="tab ${index === 0 ? 'on' : ''}" onclick="filterTheme('${t.id}', this)">
+          ${t.label}
+        </div>
+      `).join('');
     }
 
-    function selectTheme(id) {
-      activeTheme = id;
-      activeChapter = "tat-ca";
-      renderThemeTabs();
-      renderChapterTabs();
-      renderCards();
-    }
-
-    function selectChapter(id) {
-      activeChapter = (activeChapter === id && id !== "tat-ca") ? "tat-ca" : id;
-      renderChapterTabs();
-      renderCards();
-    }
-
-    function toggleCard(id) {
-      expandedState[id] = !expandedState[id];
-      renderCards();
-    }
-
+    // RENDER CARDS (THEO CHUẨN HTML CỦA FILE CSS)
     function renderCards() {
-      const visible = CHAPTERS.filter(ch => {
-        const themeMatch = activeTheme === "tat-ca" || ch.themes.includes(activeTheme);
-        const chapterMatch = activeChapter === "tat-ca" || ch.id === activeChapter;
-        return themeMatch && chapterMatch;
-      });
-
-      document.getElementById("stats-count").innerText = `Hiển thị ${visible.length} chương`;
-
-      const container = document.getElementById("cards-container");
-      if (visible.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <div style="font-size:32px;margin-bottom:12px">🔍</div>
-            <div>Không có chương nào phù hợp với bộ lọc đã chọn.</div>
+      const grid = document.getElementById("grid-container");
+      grid.innerHTML = CHAPTERS.map(ch => `
+        <div class="card" id="${ch.id}" data-themes="${ch.themes.join(' ')}">
+          <div class="hd" onclick="toggleCard(this)">
+            <div class="num">${ch.num}</div>
+            <div class="ttl">${ch.title}</div>
+            <div class="tg">${ch.pages}</div>
+            <div class="arr">▼</div>
           </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = visible.map(ch => {
-        const isOpen = !!expandedState[ch.id];
-        return `
-          <div class="card" style="border-color:${ch.color}40;box-shadow:0 2px 16px ${ch.color}18">
-            <button class="chd" style="background:${ch.bg}" onclick="toggleCard('${ch.id}')">
-              <div class="cico" style="background:${ch.color}25;border:1px solid ${ch.color}50">${ch.icon}</div>
-              <div class="cmeta">
-                <div class="cttl">${ch.title}</div>
-                <div class="csub" style="color:${ch.color}BB">${ch.sub}</div>
+          <div class="bd">
+            ${ch.sections.map(sec => `
+              <div class="sec-item">
+                <div class="sec-ttl">${sec.title}</div>
+                <ul class="sec-list">
+                  ${sec.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
               </div>
-              <div class="cside">
-                <span class="cbg" style="background:${ch.color}30;color:${ch.color};border:1px solid ${ch.color}50">${ch.pages}</span>
-                <span class="carr" style="color:${ch.color};transform:${isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}">▼</span>
-              </div>
-            </button>
-            <div class="ctag" style="background:${ch.bg}">
-              <span style="color:${ch.color}90">${ch.tag}</span>
-            </div>
-            <div class="cbd ${isOpen ? 'open' : ''}">
-              ${ch.sections.map(sec => `
-                <div class="sec-item">
-                  <div class="sec-ttl" style="color:${ch.color}">
-                    <span class="sec-bullet" style="background:${ch.color}"></span>
-                    ${sec.title}
-                  </div>
-                  <div class="sec-list">
-                    ${sec.items.map(item => `
-                      <div class="sec-line">
-                        <span style="color:${ch.color}80;flex-shrink:0">•</span>
-                        <span>${item}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
+            `).join('')}
           </div>
-        `;
-      }).join("");
+        </div>
+      `).join('');
     }
 
-    // Khởi tạo giao diện
-    renderThemeTabs();
-    renderChapterTabs();
+    // TOGGLE EXPAND CARD (DÙNG CLASS .on)
+    function toggleCard(hdElement) {
+      const card = hdElement.parentElement;
+      card.classList.toggle("on");
+    }
+
+    // LỌC THEO TAB (DÙNG CLASS .hidden CỦA CSS)
+    function filterTheme(themeId, tabElement) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("on"));
+      tabElement.classList.add("on");
+
+      document.querySelectorAll(".card").forEach(card => {
+        const themes = card.getAttribute("data-themes") || "";
+        if (themeId === "tat-ca" || themes.includes(themeId)) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+
+    // SỰ KIỆN SIDEBAR MOBILE
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
+
+    // CUỘN ĐẾN CHƯƠNG VÀ MỞ NÓ
+    function scrollToChapter(id) {
+      const card = document.getElementById(id);
+      if (card) {
+        card.classList.remove("hidden");
+        card.classList.add("on"); // Tự động mở card khi bấm sidebar
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Đóng sidebar nếu đang ở giao diện mobile
+        document.getElementById("sidebar").classList.remove("show");
+      }
+    }
+
+    // KHỞI TẠO TẤT CẢ GIAO DIỆN
+    renderSidebar();
+    renderTabs();
     renderCards();
   </script>
 </body>
