@@ -608,7 +608,7 @@ ul.pts li::before{content:"•";color:var(--ac);opacity:.6;flex-shrink:0;margin-
       <ul class="pts">
         <li>Căn cứ: quy định của luật + tính chất nguy hiểm + nhân thân + tình tiết giảm nhẹ/tăng nặng</li>
         <li>Tình tiết TĂNG NẶNG (Điều 52): phạm tội có tổ chức, tái phạm nguy hiểm, phạm tội vì động cơ đê hèn...</li>
-        <li>Tình tiết GIẢM NHẸ (Điều 51): tự thú, thành khẩn, lập công chuộc tội, bồi thường thiệt hại...</li>
+        <li>Tình tiết GIẢM NHỆ (Điều 51): tự thú, thành khẩn, lập công chuộc tội, bồi thường thiệt hại...</li>
         <li>Dưới mức thấp nhất của khung: khi có ≥ 2 tình tiết giảm nhẹ đặc biệt (Điều 54)</li>
         <li>Phạm nhiều tội: tổng hợp HP (tù tối đa 30 năm; tiền/cải tạo KGG: cộng toàn bộ)</li>
         <li>Tổng hợp nhiều bản án: cộng HP chưa chấp hành của bản án trước với HP bản án mới</li>
@@ -772,42 +772,42 @@ ul.pts li::before{content:"•";color:var(--ac);opacity:.6;flex-shrink:0;margin-
 <div class="ftr">BLHS 2015 · Sửa đổi, bổ sung 2017</div>
 
 <script>
-var activeTheme='tat-ca', activeChap='tat-ca';
+var activeTheme = 'tat-ca', activeChap = 'tat-ca';
 
-function toggle(id){
-  var c=document.getElementById(id);
-  c.classList.toggle('on');
-}
+window.toggle = function(id) {
+  var c = document.getElementById(id);
+  if (c) c.classList.toggle('on');
+};
 
-function setTheme(btn){
-  document.querySelectorAll('#theme-tabs .tab').forEach(function(t){t.classList.remove('on')});
+window.setTheme = function(btn) {
+  document.querySelectorAll('#theme-tabs .tab').forEach(function(t){ t.classList.remove('on'); });
   btn.classList.add('on');
-  activeTheme=btn.dataset.theme;
-  activeChap='tat-ca';
-  document.querySelectorAll('#chap-tabs .tab').forEach(function(t){t.classList.remove('on','c-on')});
+  activeTheme = btn.dataset.theme;
+  activeChap = 'tat-ca';
+  document.querySelectorAll('#chap-tabs .tab').forEach(function(t){ t.classList.remove('on','c-on'); });
   document.querySelector('#chap-tabs .tab[data-chap="tat-ca"]').classList.add('on');
   applyFilter();
-}
+};
 
-function setChap(btn){
-  document.querySelectorAll('#chap-tabs .tab').forEach(function(t){t.classList.remove('on','c-on')});
-  activeChap=btn.dataset.chap;
-  if(activeChap==='tat-ca'){btn.classList.add('on');}
-  else{btn.classList.add('c-on');}
+window.setChap = function(btn) {
+  document.querySelectorAll('#chap-tabs .tab').forEach(function(t){ t.classList.remove('on','c-on'); });
+  activeChap = btn.dataset.chap;
+  if (activeChap === 'tat-ca') { btn.classList.add('on'); }
+  else { btn.classList.add('c-on'); }
   applyFilter();
-}
+};
 
-function applyFilter(){
-  var cards=document.querySelectorAll('.card');
-  var shown=0;
+function applyFilter() {
+  var cards = document.querySelectorAll('.card');
+  var shown = 0;
   cards.forEach(function(c){
-    var themes=(c.dataset.themes||'').split(' ');
-    var themeOk=activeTheme==='tat-ca'||themes.indexOf(activeTheme)>-1;
-    var chapOk=activeChap==='tat-ca'||c.id===activeChap;
-    if(themeOk&&chapOk){c.style.display='';shown++;}
-    else{c.style.display='none';}
+    var themes = (c.dataset.themes || '').split(' ');
+    var themeOk = activeTheme === 'tat-ca' || themes.indexOf(activeTheme) > -1;
+    var chapOk = activeChap === 'tat-ca' || c.id === activeChap;
+    if (themeOk && chapOk) { c.style.display = ''; shown++; }
+    else { c.style.display = 'none'; }
   });
-  document.getElementById('count').textContent='Hiển thị '+shown+' chương';
+  document.getElementById('count').textContent = 'Hiển thị ' + shown + ' chương';
 }
 </script>
 </body>
