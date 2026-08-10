@@ -1,0 +1,777 @@
+import { useState } from "react";
+
+const CHAPTERS = [
+  {
+    id: "c1", label: "Chương I", icon: "⚖️", color: "#7C3AED",
+    bg: "linear-gradient(135deg, #2D1B69 0%, #1E1040 100%)",
+    title: "CHƯƠNG I — NHỮNG VẤN ĐỀ CHUNG VỀ LUẬT HÌNH SỰ VN",
+    sub: "Khái niệm, vị trí, nguyên tắc & hiệu lực",
+    pages: "Mục I–VII", tag: "Tổng quan",
+    themes: ["tong-quan", "nguyen-tac"],
+    sections: [
+      {
+        title: "I. Khái niệm Luật Hình sự",
+        items: [
+          "Là ngành luật độc lập trong hệ thống pháp luật Việt Nam",
+          "Bao gồm tổng hợp các quy phạm do Quốc hội ban hành",
+          "Quy định hành vi bị coi là tội phạm và hình phạt tương ứng",
+          "Áp dụng đối với người hoặc pháp nhân thương mại thực hiện hành vi đó",
+        ]
+      },
+      {
+        title: "II. Vị trí trong hệ thống pháp luật",
+        items: [
+          "Công cụ pháp lý quan trọng nhất bảo vệ chế độ xã hội",
+          "Bảo vệ trật tự pháp luật, quyền con người, quyền công dân",
+          "Liên hệ mật thiết với LTTHS, Luật Dân sự, Luật Hành chính",
+        ]
+      },
+      {
+        title: "III. Cấu trúc của Luật Hình sự",
+        items: [
+          "Phần Chung (General): điều kiện TNHS, hình phạt, các quy định chung",
+          "Phần Riêng (Specific): các tội danh cụ thể & khung hình phạt tương ứng",
+        ]
+      },
+      {
+        title: "IV. Nhiệm vụ của Luật Hình sự",
+        items: [
+          "Bảo vệ: độc lập, chủ quyền, an ninh quốc gia, quyền con người",
+          "Bảo vệ chế độ, tài sản của Nhà nước và tổ chức",
+          "Giáo dục: nâng cao ý thức chấp hành pháp luật",
+          "Phòng ngừa & đấu tranh: răn đe, ngăn chặn, trừng trị tội phạm",
+        ]
+      },
+      {
+        title: "V. Quá trình phát triển",
+        items: [
+          "Trước 1945: Quốc triều hình luật, Hoàng Việt luật lệ, quy định thời Pháp thuộc",
+          "1945–1985: Sắc lệnh, văn bản đơn lẻ của Nhà nước DCCH & CHXHCN VN",
+          "1985: BLHS đầu tiên ra đời — thống nhất hệ thống LHS",
+          "1999: BLHS thứ hai (sửa đổi, bổ sung 2009)",
+          "2015: BLHS hiện hành (sửa đổi, bổ sung 2017) — lần đầu quy định TNHS pháp nhân TM",
+        ]
+      },
+      {
+        title: "VI. Bản chất của Luật Hình sự",
+        items: [
+          "Tính giai cấp: công cụ sắc bén của giai cấp công nhân & nhân dân lao động",
+          "Dưới sự lãnh đạo của Đảng duy trì trật tự xã hội, bảo vệ Nhà nước",
+          "Tính nhân văn/xã hội: bảo vệ quyền & lợi ích chính đáng của mọi chủ thể",
+          "Phục vụ sự phát triển bền vững của xã hội",
+        ]
+      },
+      {
+        title: "VII. Mối quan hệ với ngành luật khác",
+        items: [
+          "Tố tụng hình sự: LHS quy định nội dung (tội gì, phạt ra sao); LTTHS quy định thủ tục áp dụng",
+          "Hành chính: phân định vi phạm HC và tội phạm HS theo tính chất & mức độ nguy hiểm",
+          "Dân sự: vi phạm HS thường đi kèm nghĩa vụ bồi thường thiệt hại dân sự",
+        ]
+      },
+      {
+        title: "VIII. Sáu nguyên tắc cơ bản",
+        items: [
+          "Pháp chế XHCN: tội phạm & hình phạt phải được quy định rõ trong luật (Nullum crimen, nulla poena sine lege)",
+          "Dân chủ, bình đẳng: mọi người phạm tội đều bình đẳng trước pháp luật",
+          "Nhân đạo: hướng tới cải tạo, giáo dục; hạn chế áp dụng án tử hình",
+          "Trách nhiệm do lỗi: chỉ truy cứu TNHS đối với người có lỗi khi thực hiện hành vi",
+          "Phân hóa TNHS: áp dụng hình phạt tương ứng mức độ nguy hiểm & nhân thân",
+          "Yêu nước & đoàn kết quốc tế: bảo vệ chủ quyền kết hợp hợp tác quốc tế chống TP xuyên quốc gia",
+        ]
+      },
+      {
+        title: "IX. Nguồn & Hiệu lực của Luật Hình sự",
+        items: [
+          "Nguồn: BLHS + Nghị quyết Hội đồng Thẩm phán + Thông tư liên tịch hướng dẫn áp dụng",
+          "Hiệu lực không gian: lãnh thổ, tàu thuyền/hàng không VN, cơ quan ngoại giao",
+          "Hiệu lực thời gian: thời điểm phát sinh, hiệu lực trở về trước (hồi tỵ — chỉ áp dụng khi có lợi cho người phạm tội)",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c2", label: "Chương II", icon: "🔍", color: "#DC2626",
+    bg: "linear-gradient(135deg, #4C1D1D 0%, #2D1010 100%)",
+    title: "CHƯƠNG II — TỘI PHẠM",
+    sub: "Khái niệm, dấu hiệu, phân loại",
+    pages: "Điều 8–9 BLHS", tag: "Tội phạm",
+    themes: ["toi-pham"],
+    sections: [
+      {
+        title: "I. Khái niệm tội phạm (Điều 8 BLHS)",
+        items: [
+          "Là hành vi nguy hiểm cho xã hội được quy định trong BLHS",
+          "Do người có năng lực TNHS hoặc pháp nhân thương mại thực hiện",
+          "Thực hiện một cách cố ý hoặc vô ý",
+          "Hành vi tuy nguy hiểm nhưng chưa đến mức đáng kể thì không phải tội phạm — xử lý bằng biện pháp khác",
+        ]
+      },
+      {
+        title: "II. Bốn dấu hiệu pháp lý của tội phạm",
+        items: [
+          "① Tính nguy hiểm cho xã hội (dấu hiệu cơ bản nhất): gây thiệt hại hoặc đe dọa gây thiệt hại đáng kể cho các quan hệ XH được LHS bảo vệ",
+          "② Tính có lỗi: người thực hiện nhận thức được & làm chủ được hành vi (cố ý trực tiếp, cố ý gián tiếp, vô ý vì quá tự tin, vô ý vì cẩu thả)",
+          "③ Tính trái pháp luật hình sự: hành vi chỉ là tội phạm nếu được mô tả cụ thể trong BLHS",
+          "④ Tính phải chịu hình phạt: hành vi đương nhiên đối mặt với chế tài nghiêm khắc nhất là hình phạt",
+        ]
+      },
+      {
+        title: "III. Phân loại tội phạm theo Điều 9 BLHS",
+        items: [
+          "Tội phạm ÍT NGHIÊM TRỌNG: mức cao nhất của khung HP ≤ 3 năm tù / phạt tiền / cải tạo KGG",
+          "Tội phạm NGHIÊM TRỌNG: mức cao nhất của khung HP ≤ 7 năm tù",
+          "Tội phạm RẤT NGHIÊM TRỌNG: mức cao nhất của khung HP ≤ 15 năm tù",
+          "Tội phạm ĐẶC BIỆT NGHIÊM TRỌNG: mức cao nhất > 15 năm tù, tù chung thân hoặc tử hình",
+          "Ý nghĩa phân loại: xác định thời hiệu, thẩm quyền xét xử, áp dụng biện pháp ngăn chặn...",
+        ]
+      },
+      {
+        title: "IV. Tội phạm và vi phạm pháp luật khác",
+        items: [
+          "Điểm giống: đều là hành vi trái PL, có lỗi, xâm phạm trật tự pháp luật",
+          "Khác về mức độ nguy hiểm: tội phạm có tính nguy hiểm cao hơn hẳn",
+          "Khác về văn bản quy định: tội phạm chỉ do BLHS quy định; vi phạm khác do luật chuyên ngành",
+          "Khác về hậu quả pháp lý: tội phạm → hình phạt + án tích; vi phạm khác → phạt HC, bồi thường DS, kỷ luật",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c3", label: "Chương III", icon: "🧩", color: "#2563EB",
+    bg: "linear-gradient(135deg, #1E3A6E 0%, #0F1F3D 100%)",
+    title: "CHƯƠNG III — CẤU THÀNH TỘI PHẠM",
+    sub: "Bốn yếu tố xác định hành vi là tội phạm",
+    pages: "Phần chung BLHS", tag: "CTTP",
+    themes: ["toi-pham", "tong-quan"],
+    sections: [
+      {
+        title: "I. Khái niệm & Đặc điểm CTTP",
+        items: [
+          "Là tổng hợp những dấu hiệu pháp lý đặc trưng (do luật quy định) xác định hành vi cụ thể là tội phạm",
+          "Do luật định: không thể tự suy diễn thêm yếu tố ngoài quy định",
+          "Mang tính bắt buộc: phải thỏa mãn đầy đủ mới có TNHS",
+          "Phản ánh bản chất nguy hiểm của tội phạm",
+          "Ý nghĩa: là cơ sở pháp lý DUY NHẤT để xác định tội phạm và truy cứu TNHS",
+        ]
+      },
+      {
+        title: "II. Phân loại CTTP",
+        items: [
+          "Theo mức độ nguy hiểm: CTTP cơ bản / CTTP tăng nặng / CTTP giảm nhẹ",
+          "Theo cấu trúc — Hình thức: chỉ cần thực hiện hành vi, không yêu cầu hậu quả (VD: tội cướp tài sản)",
+          "Theo cấu trúc — Vật chất: yêu cầu phải có hậu quả thực tế xảy ra (VD: tội giết người, tội trộm cắp TS)",
+        ]
+      },
+      {
+        title: "III. Khách thể của tội phạm",
+        items: [
+          "Là quan hệ xã hội được LHS bảo vệ nhưng bị tội phạm xâm hại",
+          "Khách thể chung: toàn bộ quan hệ XH mà LHS bảo vệ (độc lập, chủ quyền, quyền công dân...)",
+          "Khách thể loại: nhóm quan hệ XH cùng tính chất (VD: tội xâm phạm tính mạng, sức khỏe)",
+          "Khách thể trực tiếp: quan hệ XH cụ thể bị từng tội phạm xâm hại (VD: tính mạng của người bị hại)",
+          "Đối tượng tác động: con người, tài sản, hoạt động bình thường của tổ chức...",
+        ]
+      },
+      {
+        title: "IV. Mặt khách quan của tội phạm",
+        items: [
+          "Hành vi nguy hiểm cho XH: biểu hiện bên ngoài thế giới khách quan (hành động hoặc không hành động)",
+          "Hậu quả của tội phạm: thiệt hại thực tế gây ra cho khách thể được bảo vệ",
+          "Quan hệ nhân quả: hành vi phải là nguyên nhân trực tiếp, tất yếu dẫn đến hậu quả",
+          "Các dấu hiệu khác: phương tiện, công cụ, thời gian, địa điểm, hoàn cảnh phạm tội",
+        ]
+      },
+      {
+        title: "V. Mặt chủ quan của tội phạm",
+        items: [
+          "Lỗi cố ý trực tiếp: nhận thức rõ hành vi nguy hiểm + thấy trước hậu quả + mong muốn hậu quả xảy ra",
+          "Lỗi cố ý gián tiếp: nhận thức rõ + thấy trước hậu quả + không mong muốn nhưng để mặc hậu quả",
+          "Vô ý vì quá tự tin: thấy trước hậu quả nhưng tin tưởng (không có cơ sở) hậu quả không xảy ra",
+          "Vô ý vì cẩu thả: không thấy trước hậu quả dù phải & có thể thấy trước",
+          "Động cơ phạm tội: nguyên nhân tâm lý thúc đẩy người phạm tội thực hiện hành vi",
+          "Mục đích phạm tội: kết quả cuối cùng mà người phạm tội nhắm tới",
+        ]
+      },
+      {
+        title: "VI. Chủ thể của tội phạm",
+        items: [
+          "Chủ thể thường: con người cụ thể, đủ tuổi chịu TNHS, có năng lực TNHS",
+          "Đủ tuổi TNHS: từ đủ 14 tuổi trở lên (14–16t: chỉ chịu TNHS với tội rất NT & đặc biệt NT); từ đủ 16t: chịu TNHS về mọi tội",
+          "Có năng lực TNHS: không mắc bệnh tâm thần, không ở trong tình trạng mất khả năng nhận thức/điều khiển hành vi",
+          "Chủ thể đặc biệt: yêu cầu thêm dấu hiệu đặc thù (VD: tội tham nhũng — phải là người có chức vụ, quyền hạn)",
+          "Pháp nhân thương mại: TNHS khi thực hiện hành vi phạm tội nhân danh / vì lợi ích của pháp nhân đó",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c4", label: "Chương IV", icon: "📈", color: "#059669",
+    bg: "linear-gradient(135deg, #064E3B 0%, #022C22 100%)",
+    title: "CHƯƠNG IV — CÁC GIAI ĐOẠN CỐ Ý THỰC HIỆN TỘI PHẠM",
+    sub: "Chuẩn bị → Chưa đạt → Hoàn thành",
+    pages: "Điều 14–16 BLHS", tag: "Giai đoạn TP",
+    themes: ["toi-pham"],
+    sections: [
+      {
+        title: "I. Nhận thức chung",
+        items: [
+          "Là mức độ thực hiện tội phạm cố ý qua các thời điểm khác nhau về mặt khách quan và chủ quan",
+          "Chỉ áp dụng với tội phạm CỐ Ý — không có giai đoạn phạm tội với tội vô ý",
+          "Căn cứ phân chia: hành vi thực tế đã thực hiện + mức độ đạt được mục đích phạm tội",
+        ]
+      },
+      {
+        title: "II. Giai đoạn 1 — Chuẩn bị phạm tội",
+        items: [
+          "Tìm kiếm, chuẩn bị công cụ, phương tiện hoặc tạo điều kiện khác để thực hiện tội phạm",
+          "Hành vi: mua vũ khí, thăm dò địa điểm, rủ rê đồng phạm, lên kế hoạch...",
+          "Chưa thực hiện hành vi khách quan được mô tả trong CTTP",
+          "TNHS: chỉ chịu TNHS nếu là tội RẤT NGHIÊM TRỌNG hoặc ĐẶC BIỆT NGHIÊM TRỌNG (Điều 14 BLHS)",
+          "Hình phạt: được giảm nhẹ so với tội phạm hoàn thành",
+        ]
+      },
+      {
+        title: "III. Giai đoạn 2 — Phạm tội chưa đạt",
+        items: [
+          "Đã bắt đầu thực hiện hành vi khách quan trong CTTP nhưng không thực hiện được đến cùng",
+          "Nguyên nhân: do nguyên nhân NGOÀI Ý MUỐN của người phạm tội (bị bắt, nạn nhân chống cự, súng hỏng...)",
+          "Chưa đạt chưa hoàn thành: hành vi chưa thực hiện hết (còn có thể tiếp tục nhưng bị ngăn)",
+          "Chưa đạt đã hoàn thành: thực hiện hết hành vi nhưng hậu quả không xảy ra (bắn trượt, nạn nhân không chết)",
+          "TNHS: vẫn phải chịu TNHS, được giảm nhẹ so với tội phạm hoàn thành",
+        ]
+      },
+      {
+        title: "IV. Giai đoạn 3 — Tội phạm hoàn thành",
+        items: [
+          "Hành vi đã thỏa mãn đầy đủ tất cả dấu hiệu được quy định trong CTTP",
+          "CTTP hình thức: hoàn thành khi thực hiện xong hành vi (không cần hậu quả)",
+          "CTTP vật chất: hoàn thành khi hậu quả đã xảy ra trên thực tế",
+          "Áp dụng mức hình phạt đầy đủ theo khung hình phạt",
+        ]
+      },
+      {
+        title: "V. Tự ý nửa chừng chấm dứt việc phạm tội",
+        items: [
+          "Khái niệm: tự mình không thực hiện tiếp tội phạm đến cùng, dù không có gì ngăn cản",
+          "Điều kiện 1 — Tự nguyện: xuất phát từ ý chí của bản thân, không phải vì bị ngăn cản",
+          "Điều kiện 2 — Triệt để: từ bỏ hoàn toàn, không tiếp tục thực hiện",
+          "Điều kiện 3 — Thời điểm: phải ở giai đoạn chuẩn bị hoặc chưa đạt chưa hoàn thành",
+          "Hậu quả pháp lý: được MIỄN TNHS về tội định thực hiện",
+          "Lưu ý: nếu hành vi thực tế đã cấu thành tội khác → vẫn chịu TNHS về tội đó",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c5", label: "Chương V", icon: "👥", color: "#D97706",
+    bg: "linear-gradient(135deg, #4D2D00 0%, #2D1A00 100%)",
+    title: "CHƯƠNG V — ĐỒNG PHẠM",
+    sub: "Nhiều người cùng cố ý thực hiện một tội phạm",
+    pages: "Điều 17 BLHS", tag: "Đồng phạm",
+    themes: ["dong-pham"],
+    sections: [
+      {
+        title: "I. Khái niệm & Dấu hiệu pháp lý (Điều 17)",
+        items: [
+          "Là trường hợp có từ 2 người trở lên cố ý cùng thực hiện một tội phạm",
+          "Dấu hiệu khách quan: cùng tham gia thực hiện TP; hành vi mỗi người là điều kiện hỗ trợ cho cả nhóm",
+          "Dấu hiệu chủ quan: cùng cố ý; biết rõ hành vi của mình và người khác cùng hướng tới mục đích chung",
+          "Lưu ý: tội phạm do vô ý KHÔNG có đồng phạm",
+        ]
+      },
+      {
+        title: "II. Bốn loại người trong đồng phạm",
+        items: [
+          "Người THỰC HÀNH: trực tiếp thực hiện hành vi được mô tả trong CTTP; chịu TNHS nặng nhất trong nhóm",
+          "Người TỔ CHỨC: chủ mưu, cầm đầu, chỉ huy toàn bộ hoạt động phạm tội; nguy hiểm nhất trong đồng phạm",
+          "Người XÚI GIỤC: kích động, dụ dỗ, thúc đẩy người khác nảy sinh ý định & thực hiện TP",
+          "Người GIÚP SỨC: tạo điều kiện tinh thần (hứa hẹn che giấu) hoặc vật chất (cung cấp công cụ, thông tin)",
+        ]
+      },
+      {
+        title: "III. Phân loại các hình thức đồng phạm",
+        items: [
+          "Đồng phạm ĐƠN GIẢN: chỉ có người thực hành, không phân công vai trò",
+          "Đồng phạm PHỨC TẠP: có phân công vai trò rõ ràng (tổ chức, thực hành, giúp sức, xúi giục)",
+          "Đồng phạm KHÔNG BÀN BẠC TRƯỚC: hành động tự phát, không có kế hoạch chung từ trước",
+          "Đồng phạm CÓ BÀN BẠC TRƯỚC: đã thống nhất kế hoạch trước khi thực hiện",
+          "Phạm tội CÓ TỔ CHỨC: hình thức nguy hiểm nhất — câu kết chặt chẽ, phân công chi tiết, có tính chuyên nghiệp",
+        ]
+      },
+      {
+        title: "IV. Trách nhiệm hình sự trong đồng phạm",
+        items: [
+          "Nguyên tắc chung: tất cả người đồng phạm chịu TNHS chung về toàn bộ tội phạm đã thực hiện",
+          "Phân hóa cá nhân: TNHS được xác định theo vai trò, tính chất và mức độ tham gia của từng người",
+          "Người tổ chức & người thực hành: thường chịu TNHS nặng hơn người giúp sức",
+          "Hành vi VƯỢT QUÁ của người thực hành: người khác trong nhóm KHÔNG phải chịu TNHS về phần vượt quá",
+          "Tình tiết giảm nhẹ/tăng nặng cá nhân: chỉ áp dụng cho người có tình tiết đó",
+        ]
+      },
+      {
+        title: "V. Phân biệt với hành vi cấu thành tội phạm độc lập",
+        items: [
+          "Chứa chấp/tiêu thụ tài sản do phạm tội: thực hiện SAU khi TP kết thúc, không có hứa hẹn trước → không phải đồng phạm",
+          "Che giấu tội phạm: cản trở phát hiện/xử lý TP sau khi đã xảy ra, không có bàn bạc từ trước → tội độc lập",
+          "Không tố giác tội phạm: biết TP đang chuẩn bị/đang/đã thực hiện nhưng không báo cơ quan thẩm quyền → tội độc lập",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c6", label: "Chương VI", icon: "🛡️", color: "#0891B2",
+    bg: "linear-gradient(135deg, #0C3547 0%, #051E2B 100%)",
+    title: "CHƯƠNG VI — LOẠI TRỪ TRÁCH NHIỆM HÌNH SỰ",
+    sub: "Bảy trường hợp không bị coi là tội phạm",
+    pages: "Điều 20–26 BLHS", tag: "Loại trừ TNHS",
+    themes: ["hinh-phat", "tong-quan"],
+    sections: [
+      {
+        title: "I. Nhận thức chung",
+        items: [
+          "Là những trường hợp hành vi có biểu hiện bên ngoài giống tội phạm nhưng không bị coi là tội phạm",
+          "Do hoàn cảnh đặc biệt nên không phải chịu TNHS",
+          "Ý nghĩa: bảo vệ quyền tự vệ, khuyến khích công dân tham gia chống tội phạm & lao động sáng tạo",
+        ]
+      },
+      {
+        title: "II. Sự kiện bất ngờ (Điều 20)",
+        items: [
+          "Gây ra hậu quả nguy hại nhưng không thể thấy trước hoặc không buộc phải thấy trước",
+          "Không có lỗi → không phải chịu TNHS",
+          "VD: lái xe đúng luật, người đi bộ đột ngột băng qua gây tai nạn",
+        ]
+      },
+      {
+        title: "III. Không có năng lực TNHS (Điều 21)",
+        items: [
+          "Do mắc bệnh tâm thần hoặc bệnh khác làm MẤT khả năng nhận thức/điều khiển hành vi",
+          "Phải có kết luận giám định pháp y tâm thần",
+          "Có thể bị áp dụng biện pháp bắt buộc chữa bệnh",
+        ]
+      },
+      {
+        title: "IV. Phòng vệ chính đáng (Điều 22)",
+        items: [
+          "Chống trả lại một cách CẦN THIẾT người đang có hành vi xâm phạm quyền/lợi ích hợp pháp",
+          "Điều kiện: hành vi xâm phạm phải đang xảy ra (không phải đã qua hoặc tưởng tượng)",
+          "Mức chống trả phải tương xứng với mức độ nguy hiểm của hành vi xâm phạm",
+          "Vượt quá phòng vệ chính đáng: chống trả rõ ràng quá mức cần thiết → vẫn phải chịu TNHS nhưng được giảm nhẹ",
+        ]
+      },
+      {
+        title: "V. Tình thế cấp thiết (Điều 23)",
+        items: [
+          "Gây một thiệt hại nhỏ hơn để ngăn chặn một nguy cơ thiệt hại lớn hơn đang thực tế đe dọa",
+          "Điều kiện: nguy hiểm phải đang thực sự đe dọa, không có cách nào khác để ngăn chặn",
+          "Thiệt hại gây ra phải NHỎ HƠN thiệt hại cần ngăn chặn",
+          "Vượt quá tình thế cấp thiết: thiệt hại gây ra ≥ thiệt hại cần ngăn chặn → vẫn phải chịu TNHS",
+        ]
+      },
+      {
+        title: "VI. Gây thiệt hại khi bắt giữ người phạm tội (Điều 24)",
+        items: [
+          "Sử dụng vũ lực cần thiết để khống chế, bắt giữ người đang bỏ trốn sau khi phạm tội",
+          "Điều kiện: không còn biện pháp nào khác, vũ lực sử dụng không vượt quá mức cần thiết",
+          "Không được gây thiệt hại quá mức cần thiết cho việc bắt giữ",
+        ]
+      },
+      {
+        title: "VII. Rủi ro trong nghiên cứu, thử nghiệm KH-KT (Điều 25)",
+        items: [
+          "Thực hiện đúng quy trình, tiêu chuẩn được phép nhưng vẫn xảy ra rủi ro, thiệt hại",
+          "Điều kiện: mục tiêu có lợi ích xã hội rõ ràng; đã áp dụng đúng quy trình cho phép",
+          "Thiệt hại xảy ra không phải do vi phạm quy trình",
+        ]
+      },
+      {
+        title: "VIII. Thi hành mệnh lệnh của người chỉ huy/cấp trên (Điều 26)",
+        items: [
+          "Thi hành mệnh lệnh hợp pháp trong lực lượng vũ trang hoặc trong công vụ",
+          "Điều kiện: mệnh lệnh phải HỢP PHÁP; người thi hành không biết là trái pháp luật",
+          "Nếu cố ý thực hiện tội phạm nghiêm trọng theo mệnh lệnh → vẫn phải chịu TNHS",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c7", label: "Chương VII", icon: "⚡", color: "#65A30D",
+    bg: "linear-gradient(135deg, #1A3300 0%, #0D1F00 100%)",
+    title: "CHƯƠNG VII — TNHS, HÌNH PHẠT & BIỆN PHÁP TƯ PHÁP",
+    sub: "Hậu quả pháp lý của tội phạm",
+    pages: "Điều 27–82 BLHS", tag: "Hình phạt",
+    themes: ["hinh-phat"],
+    sections: [
+      {
+        title: "I. Trách nhiệm hình sự",
+        items: [
+          "Hậu quả pháp lý bất lợi mà người phạm tội phải gánh chịu trước Nhà nước",
+          "Cơ sở DUY NHẤT: hành vi thỏa mãn đầy đủ CTTP được quy định trong BLHS",
+          "Đặc điểm: mang tính cưỡng chế nhà nước cao nhất; gắn với án tích",
+          "Thời hiệu truy cứu TNHS: Ít NT — 5 năm | NT — 10 năm | Rất NT — 15 năm | Đặc biệt NT — 20 năm",
+          "Miễn TNHS: khi có chuyển biến tình hình; tự thú, thành khẩn khai báo, lập công; người chưa thành niên phạm tội ít NT lần đầu...",
+        ]
+      },
+      {
+        title: "II. Hình phạt — Khái niệm & Mục đích",
+        items: [
+          "Là biện pháp cưỡng chế nghiêm khắc nhất của Nhà nước do Tòa án quyết định",
+          "Áp dụng đối với người/pháp nhân thương mại phạm tội theo bản án có hiệu lực pháp luật",
+          "Mục đích răn đe: ngăn người phạm tội tái phạm & ngăn người khác phạm tội (phòng ngừa chung)",
+          "Mục đích giáo dục & cải tạo: giúp người phạm tội trở thành công dân có ích cho xã hội",
+        ]
+      },
+      {
+        title: "III. Hệ thống hình phạt đối với cá nhân",
+        items: [
+          "HP chính ① Cảnh cáo: nhẹ nhất, chỉ áp dụng với tội ít NT & nhiều tình tiết giảm nhẹ",
+          "HP chính ② Phạt tiền: áp dụng là HP chính với một số tội hoặc là HP bổ sung",
+          "HP chính ③ Cải tạo không giam giữ: 6 tháng → 3 năm; tại nơi làm việc hoặc cư trú",
+          "HP chính ④ Trục xuất: buộc người nước ngoài rời khỏi lãnh thổ VN",
+          "HP chính ⑤ Tù có thời hạn: 3 tháng → 20 năm; tội ghép tối đa 30 năm",
+          "HP chính ⑥ Tù chung thân: không xác định thời hạn; không áp dụng với người dưới 18 tuổi",
+          "HP chính ⑦ Tử hình: nghiêm khắc nhất; không áp dụng với phụ nữ có thai/đang nuôi con <36 tháng, người dưới 18t, người ≥ 75 tuổi",
+          "HP bổ sung: Tước quyền công dân, cấm đảm nhiệm chức vụ, quản chế, tịch thu tài sản, phạt tiền (khi không là HP chính), cấm cư trú...",
+        ]
+      },
+      {
+        title: "IV. Hình phạt đối với pháp nhân thương mại phạm tội",
+        items: [
+          "HP chính ① Phạt tiền: 50 triệu → 3 tỷ đồng (hoặc cao hơn tùy loại tội)",
+          "HP chính ② Đình chỉ hoạt động có thời hạn: 6 tháng → 3 năm trong lĩnh vực vi phạm",
+          "HP chính ③ Đình chỉ hoạt động vĩnh viễn: chấm dứt hoàn toàn sự tồn tại của pháp nhân",
+          "HP bổ sung: Cấm kinh doanh; cấm hoạt động một số lĩnh vực; cấm huy động vốn; phạt tiền (khi không là HP chính)",
+        ]
+      },
+      {
+        title: "V. Các biện pháp tư pháp",
+        items: [
+          "Khái niệm: biện pháp hỗ trợ hoặc thay thế hình phạt, do Tòa án áp dụng",
+          "Đối với người phạm tội: Tịch thu vật/tiền trực tiếp liên quan đến TP",
+          "Đối với người phạm tội: Trả lại tài sản cho chủ sở hữu / sửa chữa / bồi thường thiệt hại",
+          "Đối với người phạm tội: Bắt buộc chữa bệnh (khi phạm tội trong tình trạng tâm thần hoặc sau khi phạm tội bị mắc bệnh)",
+          "Đối với pháp nhân TM: Tịch thu vật/tiền; Khôi phục lại trạng thái ban đầu; Bồi thường thiệt hại",
+        ]
+      },
+      {
+        title: "VI. Quyết định hình phạt",
+        items: [
+          "Căn cứ quyết định: quy định của luật + tính chất nguy hiểm + nhân thân + tình tiết giảm nhẹ/tăng nặng",
+          "Các tình tiết TĂNG NẶNG TNHS (Điều 52): phạm tội có tổ chức, tái phạm nguy hiểm, phạm tội vì động cơ đê hèn...",
+          "Các tình tiết GIẢM NHẸ TNHS (Điều 51): tự thú, thành khẩn, lập công chuộc tội, bồi thường thiệt hại...",
+          "Dưới mức thấp nhất của khung: khi có ≥ 2 tình tiết giảm nhẹ đặc biệt (Điều 54)",
+          "Phạm nhiều tội: tổng hợp hình phạt theo quy định (tù tối đa 30 năm; tiền/cải tạo KGG: cộng toàn bộ)",
+          "Tổng hợp nhiều bản án: cộng hình phạt chưa chấp hành của bản án trước với hình phạt bản án mới",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c8", label: "Chương VIII", icon: "📋", color: "#9333EA",
+    bg: "linear-gradient(135deg, #3B0764 0%, #1E0336 100%)",
+    title: "CHƯƠNG VIII — QUY ĐỊNH KHÁC VỀ HÌNH PHẠT & CHẤP HÀNH",
+    sub: "Thời hiệu, miễn giảm, án treo, xóa án tích",
+    pages: "Điều 83–110 BLHS", tag: "Chấp hành HP",
+    themes: ["hinh-phat"],
+    sections: [
+      {
+        title: "I. Thời hiệu thi hành bản án",
+        items: [
+          "Là thời hạn do luật định mà khi hết, người bị kết án không phải chấp hành bản án đã tuyên",
+          "Tù ≤ 3 năm: thời hiệu 5 năm",
+          "Tù từ 3 → 7 năm: thời hiệu 10 năm",
+          "Tù từ 7 → 15 năm: thời hiệu 15 năm",
+          "Tù từ 15 năm trở lên, chung thân, tử hình: thời hiệu 20 năm",
+          "Thời hiệu bị gián đoạn nếu người bị kết án cố tình trốn tránh",
+        ]
+      },
+      {
+        title: "II. Miễn hình phạt",
+        items: [
+          "Được Tòa án miễn toàn bộ hình phạt đã tuyên khi có nhiều tình tiết giảm nhẹ đặc biệt",
+          "Nhân thân tốt, vai trò thứ yếu, đã bồi thường toàn bộ thiệt hại, lập công lớn...",
+          "Vẫn bị coi là có tội (có án tích); khác với miễn TNHS",
+        ]
+      },
+      {
+        title: "III. Án treo",
+        items: [
+          "Biện pháp miễn chấp hành hình phạt tù có điều kiện",
+          "Điều kiện: bị xử phạt tù ≤ 3 năm; nhân thân tốt; có nơi cư trú rõ ràng; có khả năng cải tạo nếu không giam giữ",
+          "Thời gian thử thách: từ 1 → 5 năm (tính từ ngày tuyên án)",
+          "Vi phạm trong thời gian thử thách → buộc phải chấp hành toàn bộ hình phạt tù đã tuyên",
+          "Không áp dụng án treo với người tái phạm nguy hiểm, phạm tội có tổ chức...",
+        ]
+      },
+      {
+        title: "IV. Tha tù trước thời hạn có điều kiện",
+        items: [
+          "Điều kiện: đã chấp hành được ít nhất 1/2 mức tù hoặc 15 năm (với tù chung thân đã giảm còn tù có thời hạn)",
+          "Chấp hành tốt nội quy, không vi phạm; có nơi cư trú rõ ràng sau khi ra tù",
+          "Thời gian thử thách = thời gian tù còn lại chưa chấp hành",
+          "Vi phạm trong thời thử thách → phải chấp hành phần tù còn lại",
+        ]
+      },
+      {
+        title: "V. Hoãn / Tạm đình chỉ chấp hành hình phạt tù",
+        items: [
+          "Hoãn chấp hành: trước khi vào thi hành; lý do: bệnh nặng cần điều trị; phụ nữ có thai/nuôi con <36 tháng; là lao động duy nhất...",
+          "Tạm đình chỉ: đang thi hành; lý do tương tự như hoãn",
+          "Thời gian hoãn/tạm đình chỉ KHÔNG được tính vào thời hạn chấp hành hình phạt",
+        ]
+      },
+      {
+        title: "VI. Xóa án tích",
+        items: [
+          "Công nhận người đã bị kết án coi như CHƯA BỊ KẾT ÁN sau khi đáp ứng đủ điều kiện",
+          "Đương nhiên xóa án tích: sau khi chấp hành xong HP + thời hạn luật định (cảnh cáo/phạt tiền/cải tạo KGG: 1 năm | tù ≤ 5 năm: 3 năm | tù 5–15 năm: 5 năm | tù > 15 năm/chung thân: 7 năm)",
+          "Xóa án tích theo quyết định Tòa án: khi chưa đủ thời hạn đương nhiên xóa nhưng lập công lớn",
+          "Trường hợp đặc biệt: Chủ tịch nước quyết định (đặc xá)",
+          "Thời hạn tính từ ngày chấp hành xong HP chính + HP bổ sung + các quyết định khác của bản án",
+        ]
+      },
+    ]
+  },
+  {
+    id: "c9", label: "Chương IX", icon: "🧒", color: "#0D9488",
+    bg: "linear-gradient(135deg, #0C3B38 0%, #052220 100%)",
+    title: "CHƯƠNG IX — NGƯỜI DƯỚI 18 TUỔI PHẠM TỘI",
+    sub: "Chính sách nhân đạo — giáo dục là chủ yếu",
+    pages: "Điều 90–108 BLHS", tag: "Người dưới 18t",
+    themes: ["nguoi-duoi-18"],
+    sections: [
+      {
+        title: "I. Khái niệm & Nguyên tắc xử lý",
+        items: [
+          "Đối tượng đặc thù: chưa phát triển hoàn thiện về thể chất và tâm sinh lý",
+          "Nguyên tắc 1: bảo đảm LỢI ÍCH TỐT NHẤT cho người dưới 18 tuổi",
+          "Nguyên tắc 2: chủ yếu nhằm GIÁO DỤC, giúp đỡ sửa chữa sai lầm, phát triển lành mạnh",
+          "Nguyên tắc 3: HẠN CHẾ áp dụng hình phạt tù; ưu tiên biện pháp giám sát, giáo dục",
+          "Nguyên tắc 4: bảo đảm quyền tham gia tố tụng phù hợp với lứa tuổi",
+        ]
+      },
+      {
+        title: "II. Biện pháp giám sát / giáo dục (khi được miễn TNHS)",
+        items: [
+          "KHIỂN TRÁCH: áp dụng với tội ít NT hoặc NT do vô ý; chỉ phê bình trực tiếp",
+          "HÒA GIẢI TẠI CỘNG ĐỒNG: tổ chức xin lỗi và bồi thường thiệt hại trực tiếp với nạn nhân trước cộng đồng",
+          "GIÁO DỤC TẠI XÃ/PHƯỜNG/THỊ TRẤN: giao cho chính quyền địa phương + gia đình giám sát từ 1 đến 2 năm",
+          "Trong thời gian giáo dục: phải tuân thủ cam kết không vi phạm, tham gia chương trình học tập/dạy nghề",
+        ]
+      },
+      {
+        title: "III. Biện pháp tư pháp — Trường giáo dưỡng",
+        items: [
+          "Áp dụng với người từ đủ 14 tuổi đến dưới 18 tuổi phạm tội nghiêm trọng hoặc rất nghiêm trọng",
+          "Đưa vào môi trường giáo dục chuyên biệt, học văn hóa & học nghề",
+          "Thời hạn: 1 → 2 năm",
+          "Chấm dứt trước thời hạn: khi tiến bộ rõ rệt + đã chấp hành được ít nhất 1/2 thời hạn",
+          "Không áp dụng nếu người đó đã đủ 18 tuổi tại thời điểm xét xử",
+        ]
+      },
+      {
+        title: "IV. Hình phạt áp dụng với người dưới 18 tuổi",
+        items: [
+          "PHẠT TIỀN: chỉ áp dụng với người đủ 16 tuổi trở lên và có tài sản riêng hoặc thu nhập riêng",
+          "CẢI TẠO KHÔNG GIAM GIỮ: thời hạn tối đa ≤ 1/2 so với người lớn (tối đa 1,5 năm)",
+          "TÙ CÓ THỜI HẠN với người 16 → dưới 18 tuổi: tối đa 18 năm tù (thay vì 20 năm với người lớn)",
+          "TÙ CÓ THỜI HẠN với người 14 → dưới 16 tuổi: tối đa 12 năm tù",
+          "TUYỆT ĐỐI KHÔNG áp dụng: tù chung thân và tử hình với người dưới 18 tuổi",
+          "Không áp dụng hình phạt bổ sung: tước một số quyền công dân, cấm cư trú, quản chế",
+        ]
+      },
+      {
+        title: "V. Quyết định hình phạt đặc thù",
+        items: [
+          "Chuẩn bị phạm tội/chưa đạt: mức tối đa ≤ 1/2 khung HP áp dụng cho người dưới 18 tuổi",
+          "Tổng hợp hình phạt nhiều tội: không vượt mức tối đa theo lứa tuổi (18 năm hoặc 12 năm)",
+          "Tổng hợp nhiều bản án: tương tự giới hạn theo lứa tuổi tại thời điểm xét xử",
+        ]
+      },
+      {
+        title: "VI. Giảm mức HP & Tha tù trước thời hạn",
+        items: [
+          "Giảm mức hình phạt: điều kiện & thời gian xét duyệt ưu đãi hơn so với người trưởng thành",
+          "Tha tù trước thời hạn có điều kiện: chấp hành ít nhất 1/3 mức tù (người lớn cần 1/2)",
+          "Xóa án tích: thời hạn ngắn hơn đáng kể so với người trưởng thành",
+          "Người dưới 16 tuổi bị kết án: khi chấp hành xong bản án → CỬ NHƯ KHÔNG CÓ ÁN TÍCH",
+        ]
+      },
+    ]
+  },
+];
+
+const THEMES = [
+  { id: "tat-ca", label: "Tất cả", icon: "📚" },
+  { id: "tong-quan", label: "Tổng quan", icon: "⚖️" },
+  { id: "toi-pham", label: "Tội phạm", icon: "🔍" },
+  { id: "dong-pham", label: "Đồng phạm", icon: "👥" },
+  { id: "hinh-phat", label: "Hình phạt", icon: "⚡" },
+  { id: "nguoi-duoi-18", label: "Người < 18t", icon: "🧒" },
+];
+
+export default function App() {
+  const [activeTheme, setActiveTheme] = useState("tat-ca");
+  const [activeChapter, setActiveChapter] = useState("tat-ca");
+  const [expanded, setExpanded] = useState({});
+
+  const toggle = (id) => setExpanded(p => ({ ...p, [id]: !p[id] }));
+
+  const visible = CHAPTERS.filter(ch => {
+    const themeMatch = activeTheme === "tat-ca" || ch.themes.includes(activeTheme);
+    const chapterMatch = activeChapter === "tat-ca" || ch.id === activeChapter;
+    return themeMatch && chapterMatch;
+  });
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#08090F", fontFamily: "'Segoe UI','Inter',sans-serif", paddingBottom: 40 }}>
+
+      {/* Header */}
+      <div style={{ background: "linear-gradient(180deg,#12162A 0%,#08090F 100%)", padding: "20px 16px 14px", borderBottom: "1px solid #1C2040" }}>
+        <div style={{ fontSize: 10, color: "#6B7DB3", letterSpacing: 2, textTransform: "uppercase", marginBottom: 5 }}>Tài liệu học tập</div>
+        <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "#E8EDF8", lineHeight: 1.3 }}>
+          Luật Hình sự<br /><span style={{ color: "#7C9FF5" }}>Việt Nam</span>
+        </h1>
+        <div style={{ marginTop: 6, fontSize: 11.5, color: "#4B5C8A" }}>
+          9 Chương · BLHS 2015 (sửa đổi, bổ sung 2017)
+        </div>
+      </div>
+
+      {/* Theme filter */}
+      <div style={{ padding: "12px 12px 4px", borderBottom: "1px solid #111827" }}>
+        <div style={{ fontSize: 9.5, color: "#3D4F73", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 8 }}>Lọc theo chủ đề</div>
+        <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 4, scrollbarWidth: "none" }}>
+          {THEMES.map(t => {
+            const active = activeTheme === t.id;
+            return (
+              <button key={t.id} onClick={() => { setActiveTheme(t.id); setActiveChapter("tat-ca"); }}
+                style={{
+                  flexShrink: 0, padding: "6px 12px", borderRadius: 20,
+                  border: active ? "1.5px solid #7C9FF5" : "1.5px solid #1E2540",
+                  background: active ? "#1E3080" : "#0E1020",
+                  color: active ? "#7C9FF5" : "#5A6899",
+                  fontSize: 12, fontWeight: active ? 700 : 500, cursor: "pointer",
+                  display: "flex", alignItems: "center", gap: 5,
+                }}>
+                <span>{t.icon}</span> {t.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Chapter filter */}
+      <div style={{ padding: "10px 12px 6px" }}>
+        <div style={{ fontSize: 9.5, color: "#3D4F73", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 8 }}>Lọc theo chương</div>
+        <div style={{ display: "flex", gap: 7, overflowX: "auto", paddingBottom: 4, scrollbarWidth: "none" }}>
+          <button onClick={() => setActiveChapter("tat-ca")}
+            style={{
+              flexShrink: 0, padding: "5px 12px", borderRadius: 20,
+              border: activeChapter === "tat-ca" ? "1.5px solid #9CA3AF" : "1.5px solid #1E2540",
+              background: activeChapter === "tat-ca" ? "#1F2937" : "#0E1020",
+              color: activeChapter === "tat-ca" ? "#E5E7EB" : "#5A6899",
+              fontSize: 11.5, fontWeight: activeChapter === "tat-ca" ? 700 : 500, cursor: "pointer"
+            }}>
+            Tất cả ({CHAPTERS.length})
+          </button>
+          {CHAPTERS.map(ch => {
+            const active = activeChapter === ch.id;
+            return (
+              <button key={ch.id} onClick={() => setActiveChapter(active ? "tat-ca" : ch.id)}
+                style={{
+                  flexShrink: 0, padding: "5px 12px", borderRadius: 20,
+                  border: active ? `1.5px solid ${ch.color}` : "1.5px solid #1E2540",
+                  background: active ? ch.color + "22" : "#0E1020",
+                  color: active ? ch.color : "#5A6899",
+                  fontSize: 11.5, fontWeight: active ? 700 : 500, cursor: "pointer",
+                  display: "flex", alignItems: "center", gap: 5,
+                }}>
+                <span style={{ fontSize: 11 }}>{ch.icon}</span> {ch.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Results count */}
+      <div style={{ padding: "4px 16px 8px", fontSize: 11, color: "#374151" }}>
+        Hiển thị {visible.length} chương
+      </div>
+
+      {/* Cards */}
+      <div style={{ padding: "2px 12px", display: "flex", flexDirection: "column", gap: 10 }}>
+        {visible.map(ch => {
+          const open = !!expanded[ch.id];
+          return (
+            <div key={ch.id} style={{ borderRadius: 14, overflow: "hidden", border: `1px solid ${ch.border || ch.color}40`, boxShadow: `0 2px 16px ${ch.color}18` }}>
+
+              {/* Header */}
+              <button onClick={() => toggle(ch.id)} style={{
+                width: "100%", textAlign: "left", background: ch.bg,
+                padding: "16px 16px 0", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "flex-start", gap: 14
+              }}>
+                <div style={{
+                  width: 44, height: 44, borderRadius: 12, flexShrink: 0,
+                  background: ch.color + "25", border: `1px solid ${ch.color}50`,
+                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20
+                }}>{ch.icon}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: "#E8EDF8", lineHeight: 1.4, marginBottom: 4 }}>{ch.title}</div>
+                  <div style={{ fontSize: 11.5, color: ch.color + "BB" }}>{ch.sub}</div>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6, flexShrink: 0 }}>
+                  <span style={{
+                    background: ch.color + "30", color: ch.color,
+                    border: `1px solid ${ch.color}50`, borderRadius: 8,
+                    padding: "2px 8px", fontSize: 10.5, fontWeight: 700, whiteSpace: "nowrap"
+                  }}>{ch.pages}</span>
+                  <span style={{ color: ch.color, fontSize: 12, transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s", display: "inline-block" }}>▼</span>
+                </div>
+              </button>
+
+              {/* Tag row */}
+              <div style={{ background: ch.bg, padding: "8px 16px 14px 74px" }}>
+                <span style={{ fontSize: 10.5, color: ch.color + "90", fontStyle: "italic" }}>{ch.tag}</span>
+              </div>
+
+              {/* Content */}
+              {open && (
+                <div style={{ background: "#0B0E1C", padding: "14px 16px 18px" }}>
+                  {ch.sections.map((sec, si) => (
+                    <div key={si} style={{ marginBottom: si < ch.sections.length - 1 ? 18 : 0 }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: ch.color, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+                        <span style={{ width: 3, height: 14, background: ch.color, borderRadius: 2, display: "inline-block", flexShrink: 0 }} />
+                        {sec.title}
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 6, paddingLeft: 10 }}>
+                        {sec.items.map((item, ii) => (
+                          <div key={ii} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                            <span style={{ color: ch.color + "80", fontSize: 12, flexShrink: 0, marginTop: 2 }}>•</span>
+                            <span style={{ fontSize: 12, color: "#A8B4D0", lineHeight: 1.6 }}>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {visible.length === 0 && (
+          <div style={{ textAlign: "center", padding: "40px 20px", color: "#374151" }}>
+            <div style={{ fontSize: 32, marginBottom: 12 }}>🔍</div>
+            <div style={{ fontSize: 13 }}>Không có chương nào phù hợp với bộ lọc đã chọn.</div>
+          </div>
+        )}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 28, color: "#1E2540", fontSize: 11 }}>
+        BLHS 2015 · Sửa đổi, bổ sung 2017
+      </div>
+    </div>
+  );
+}
