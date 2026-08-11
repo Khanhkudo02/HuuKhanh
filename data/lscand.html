@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindmap — Lịch sử Xây dựng CAND</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a1120;color:#e2e8f0;min-height:100vh}
+/* ── HEADER ── */
+.hdr{text-align:center;padding:28px 16px 8px}
+.hdr-badge{display:inline-block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#f59e0b;border:1px solid #f59e0b55;padding:3px 10px;border-radius:3px;margin-bottom:11px}
+.hdr h1{font-size:clamp(1rem,2.6vw,1.65rem);font-weight:800;color:#f1f5f9;line-height:1.22}
+.hdr p{color:#374151;font-size:.74rem;margin-top:5px}
+/* ── STATS ── */
+.stats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:10px 16px 14px}
+.st{font-size:.64rem;color:#4b5563;background:#0e1624;border:1px solid #111e30;border-radius:6px;padding:3px 8px}
+.st b{color:#6b7280}
+/* ── TABS ── */
+.tabs{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:0 14px 14px;overflow-x:auto}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font-size:.64rem;font-weight:700;padding:4px 9px;border-radius:16px;border:1.5px solid #111e30;background:#0e1624;color:#374151;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab:hover{color:#9ca3af;border-color:#1f2937}
+.tab.on{color:#fff!important;background:var(--c)!important;border-color:var(--c)!important}
+/* ── GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(305px,1fr));gap:10px;padding:0 13px 50px;max-width:1600px;margin:0 auto}
+/* ── CARD ── */
+.card{background:#0a1120;border-radius:11px;border:1.5px solid #111e30;overflow:hidden;transition:transform .14s,box-shadow .14s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.6)}
+.card.on{border-color:var(--ac)}
+/* card header */
+.chd{display:flex;align-items:flex-start;gap:8px;padding:11px 13px;cursor:pointer;background:color-mix(in srgb,var(--ac) 9%,#0a1120);user-select:none}
+.cico{min-width:30px;height:30px;border-radius:7px;background:color-mix(in srgb,var(--ac) 18%,transparent);border:1px solid color-mix(in srgb,var(--ac) 32%,transparent);display:flex;align-items:center;justify-content:center;font-size:.88rem;flex-shrink:0;margin-top:1px}
+.cmeta{flex:1;min-width:0}
+.cttl{font-size:.71rem;font-weight:800;color:#f1f5f9;line-height:1.22}
+.csub{font-size:.57rem;color:#374151;margin-top:1px}
+.cright{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.cbg{font-size:.56rem;padding:1px 6px;border-radius:5px;background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);white-space:nowrap}
+.carr{font-size:.6rem;color:var(--ac);transition:transform .2s}
+.card.on .carr{transform:rotate(180deg)}
+/* card body */
+.cbd{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.card.on .cbd{max-height:2000px;overflow-y:auto}
+.cbd::-webkit-scrollbar{width:3px}
+.cbd::-webkit-scrollbar-thumb{background:#111e30}
+.cbi{padding:10px 13px}
+/* sections */
+.sec{margin-bottom:9px}
+.sec:last-child{margin-bottom:0}
+.stt{font-size:.57rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ac);margin-bottom:3px;padding-bottom:3px;border-bottom:1px solid color-mix(in srgb,var(--ac) 14%,transparent);display:flex;align-items:center;gap:3px}
+.stt::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--ac);flex-shrink:0}
+/* list */
+.ul{list-style:none;padding-left:5px;border-left:2px solid color-mix(in srgb,var(--ac) 25%,transparent)}
+.ul li{font-size:.68rem;color:#4a607c;padding:2.5px 0 2.5px 7px;line-height:1.44;position:relative}
+.ul li::before{content:'›';position:absolute;left:-1px;color:var(--ac);font-size:.7rem;top:2px}
+.ul li b{color:#8faec8;font-weight:600}
+.ul li em{color:#3b82f6;font-style:normal}
+.ul li u{text-decoration:none;color:#f59e0b}
+.ul li s{color:#ef4444;text-decoration:none;font-size:.63rem;font-style:italic}
+/* sub-bullets */
+.sub{list-style:none!important;padding-left:9px!important;border-left:1px dashed color-mix(in srgb,var(--ac) 16%,transparent)!important;margin-top:2px}
+.sub li{font-size:.63rem!important;color:#2e4560!important;padding:1px 0 1px 6px!important}
+.sub li::before{content:'·'!important;left:0!important;top:1px!important;font-size:.85rem!important}
+/* steps */
+.step{display:flex;gap:7px;margin-bottom:5px;align-items:flex-start}
+.snum{min-width:16px;height:16px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px}
+.stxt{font-size:.66rem;color:#4a607c;line-height:1.38}
+.stxt b{color:#8faec8}
+/* pills */
+.pills{display:flex;flex-direction:column;gap:3px;margin-top:3px}
+.pill{display:flex;align-items:flex-start;gap:6px;padding:4px 7px;border-radius:4px;border:1px solid color-mix(in srgb,var(--ac) 16%,transparent);background:color-mix(in srgb,var(--ac) 5%,transparent)}
+.pill-lbl{font-size:.57rem;font-weight:700;color:var(--ac);white-space:nowrap;min-width:72px;padding-top:1px;flex-shrink:0}
+.pill-txt{font-size:.63rem;color:#4a607c;line-height:1.32}
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:3px}
+.col h4{font-size:.57rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--ac);margin-bottom:2px;padding-bottom:2px;border-bottom:1px solid color-mix(in srgb,var(--ac) 16%,transparent)}
+.col ul{list-style:none;padding:0}
+.col ul li{font-size:.63rem;color:#4a607c;padding:1.5px 0 1.5px 6px;position:relative;line-height:1.32}
+.col ul li::before{content:'•';position:absolute;left:0;color:var(--ac);font-size:.5rem;top:4px}
+hr.div{border:none;border-top:1px solid #0f1a2e;margin:6px 0}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-badge">🌟 Môn học · ĐHCSNД · Văn bằng 2</div>
+  <h1>LỊCH SỬ XÂY DỰNG LỰC LƯỢNG<br>CÔNG AN NHÂN DÂN VIỆT NAM</h1>
+  <p>9 câu ôn tập · Nội dung chi tiết · Click thẻ để mở</p>
+</div>
+<div class="stats">
+  <div class="st"><b>Câu 1</b> Tổ chức tiền thân CAND</div>
+  <div class="st"><b>Câu 2</b> CAND 1945–1946 & chống Pháp</div>
+  <div class="st"><b>Câu 3</b> Chi viện MN & vai trò QC</div>
+  <div class="st"><b>Câu 4</b> Dân tộc, tôn giáo & biệt kích</div>
+  <div class="st"><b>Câu 5</b> 8 Truyền thống CAND</div>
+  <div class="st"><b>Câu 6</b> Bản chất, vị trí, chức năng</div>
+  <div class="st"><b>Câu 7</b> Xây dựng lực lượng CAND</div>
+  <div class="st"><b>Câu 8</b> Nguyên tắc hoạt động</div>
+  <div class="st"><b>Câu 9</b> Các ý kiến bổ sung</div>
+</div>
+<div class="tabs">
+  <div class="tab on" data-f="all" style="--c:#1e3a5f">Tất cả (9)</div>
+  <div class="tab" data-f="c1" style="--c:#8b5cf6">🟣 Câu 1</div>
+  <div class="tab" data-f="c2" style="--c:#3b82f6">🔵 Câu 2</div>
+  <div class="tab" data-f="c3" style="--c:#10b981">🟢 Câu 3</div>
+  <div class="tab" data-f="c4" style="--c:#ef4444">🔴 Câu 4</div>
+  <div class="tab" data-f="c5" style="--c:#f59e0b">🟡 Câu 5</div>
+  <div class="tab" data-f="c6" style="--c:#06b6d4">🔷 Câu 6</div>
+  <div class="tab" data-f="c7" style="--c:#f97316">🟠 Câu 7</div>
+  <div class="tab" data-f="c8" style="--c:#ec4899">🔶 Câu 8</div>
+  <div class="tab" data-f="c9" style="--c:#a3e635">🟩 Câu 9</div>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const D=[
+/* ═══ CÂU 1 ═══ */
+{id:'c1',ac:'#8b5cf6',ico:'📜',bg:'Tiền thân & Tất yếu',
+title:'CÂU 1 — CÁC TỔ CHỨC TIỀN THÂN CỦA CAND & TÍNH TẤT YẾU',
+sub:'Sự ra đời phù hợp với quá trình phát triển',
+html:`
+<div class="sec"><div class="stt">I. Giai đoạn 1930–1931</div><ul class="ul">
+<li><b>03/02/1930:</b> Đảng CSVN thành lập → đặt ra yêu cầu xây dựng lực lượng vũ trang nhân dân</li>
+<li>Quan điểm của Đảng: <em>phải dùng bạo lực cách mạng</em></li>
+<li><b>Công hội đỏ, Nông hội đỏ, Đoàn TNCS:</b> tập hợp thanh niên ưu tú, trang bị gậy thô sơ</li>
+<li><b>Phong trào Xô Viết Nghệ Tĩnh:</b> ra đời với nhiệm vụ:
+  <ul class="sub">
+    <li>Bảo vệ cách mạng</li>
+    <li>Đấu tranh với bọn phản cách mạng</li>
+    <li>Giữ gìn trật tự trị an</li>
+  </ul>
+</li>
+<li><b>→ Đội Tự vệ đỏ ra đời:</b> hạt nhân đầu tiên của lực lượng vũ trang CM do Đảng lãnh đạo</li>
+<li><b>Nhiệm vụ Đội Tự vệ đỏ:</b> bảo vệ bí mật, hoá trang bảo vệ hội họp, chống mật thám, bảo vệ Đảng–nhân dân–TTAN</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Giai đoạn 1936–1939</div><ul class="ul">
+<li>Chiến tranh ác liệt nhưng Đảng luôn chú trọng <b>xây dựng và phát triển</b> các LLVT nhân dân</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Giai đoạn 1939–1945 — Hoạt động bí mật</div><ul class="ul">
+<li><b>"Ban Công tác Đội"</b> ở Khu an toàn 1: bảo vệ an toàn khu, lãnh đạo, lãnh tụ, hội nghị quan trọng</li>
+<li><b>"Đội Tự vệ cứu quốc"</b> ở Tỉnh ủy Cao Bằng: tiến bộ về huấn luyện cán bộ, chiến sĩ ở bản, xã</li>
+<li><b>Khu giải phóng:</b> thành lập tổ chức chuyên môn hơn:
+  <ul class="sub">
+    <li>"Khu danh dự trừ gian"</li>
+    <li>"Đội Trinh sát"</li>
+    <li>"Đội Hộ lương diệt ác"</li>
+  </ul>
+</li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Sự ra đời là TẤT YẾU KHÁCH QUAN — 4 luận điểm</div>
+<div class="step"><div class="snum">1</div><div class="stxt"><b>Sự lựa chọn đúng đắn của Đảng:</b> Đảng chọn bạo lực CM là con đường duy nhất → phải xây dựng LLVT → các tổ chức tiền thân CAND ra đời là tất yếu</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt"><b>Sự lớn mạnh của các tổ chức tiền thân:</b> Đội Tự vệ đỏ (tự phát) → Ban Công tác đội, Đội TV cứu quốc (Đảng trực tiếp lãnh đạo) → Hộ lương diệt ác, Danh dự trừ gian (lập nhiều chiến công, có nơi chính quyền địch tan rã)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt"><b>Đáp ứng yêu cầu CM:</b> Cách mạng tháng Tám thay đổi chế độ → chế độ mới cần lực lượng bạo lực duy trì → CAND ra đời khi giành chính quyền là phù hợp quy luật XH</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt"><b>Thực tiễn chứng minh:</b> Tiền thân CAND đã chiếm lĩnh cơ quan mật thám–cảnh sát–tình báo địch; giữ TTATXH; trấn áp lưu manh; điều tra âm mưu lật đổ; làm giao thông viên</div></div>
+<div class="sec"><div class="stt">V. Ý nghĩa</div><ul class="ul">
+<li>Sự ra đời của LL CAND VN là phù hợp với quá trình lịch sử và là <u>tất yếu khách quan</u></li>
+</ul></div>
+`},
+
+/* ═══ CÂU 2 ═══ */
+{id:'c2',ac:'#3b82f6',ico:'🏛️',bg:'1945–1954',
+title:'CÂU 2 — CAND BẢO VỆ CHÍNH QUYỀN 1945–1946 & KHÁNG CHIẾN CHỐNG PHÁP',
+sub:'Mặt công tác, thuận lợi, khó khăn, nguyên nhân thắng lợi',
+html:`
+<div class="sec"><div class="stt">I. 4 Mặt công tác chính (1945–1946)</div>
+<div class="step"><div class="snum">1</div><div class="stxt"><b>Đấu tranh làm thất bại âm mưu Tưởng Giới Thạch:</b> Cô lập bọn đầu sỏ; trừng trị nơi không có quân Tưởng; bao vây cắt liên hệ nơi có quân Tưởng; huy động QC biểu tình gây áp lực → Tưởng buộc giảm khiêu khích, xin lỗi chính quyền</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt"><b>Đấu tranh làm thất bại thực dân Pháp:</b> Chủ động dự báo tình huống → bắt sống/tiêu diệt gọn các toán gián điệp Pháp; thực hiện "Diệt trừ Việt gian tay sai Pháp–Nhật"</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt"><b>Đấu tranh trấn áp đảng phái phản động:</b> Phá vụ án phản CM số <u>7 phố Ôn Như Hầu (12/7/1946)</u>; bắt 100+ tên, đập 40 trụ sở QDĐ; mở rộng trấn áp toàn quốc → <em>12/7/1946 là Ngày truyền thống ANND</em></div></div>
+<div class="step"><div class="snum">4</div><div class="stxt"><b>Bảo vệ cơ quan Đảng–Nhà nước–lãnh tụ:</b> Phát hiện âm mưu ám sát Bác; bảo vệ Tổng tuyển cử đầu tiên; bài trừ tệ nạn XH; thành lập "Cảnh sát danh dự không lương", "Việt dũng TN đoàn", "Đoàn Cảnh sát xung phong"</div></div>
+</div>
+<div class="sec"><div class="stt">II. Thuận lợi</div><ul class="ul">
+<li>CM tháng Tám 1945 thành công → Nhà nước DCCHND đầu tiên ở Đông Nam Á</li>
+<li>Có ĐCSVN lãnh đạo tuyệt đối, trực tiếp về mọi mặt</li>
+<li>CAND được tổ chức hệ thống: Sở Liêm phóng (BB), Ty Trinh sát (TB), Quốc gia tự vệ cuộc (NB)</li>
+<li>Chỉ thị "Kháng chiến kiến quốc" 25/11/1945 vạch rõ nhiệm vụ bảo vệ chính quyền CM</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Khó khăn ("ngàn cân treo sợi tóc")</div><ul class="ul">
+<li><b>Miền Bắc:</b> 20 vạn quân Tưởng với âm mưu "diệt cộng, cầm Hồ"</li>
+<li><b>Miền Nam:</b> Pháp được Anh hỗ trợ; phản động Cao Đài, Hòa Hảo chống phá</li>
+<li>Kinh tế: ngân khố trống, mất mùa, đói kém; 95% mù chữ; tệ nạn XH tràn lan</li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Nguyên nhân thắng lợi</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">NN 1</span><span class="pill-txt">Sự lãnh đạo sáng suốt, tài tình của Đảng và Chủ tịch Hồ Chí Minh</span></div>
+  <div class="pill"><span class="pill-lbl">NN 2</span><span class="pill-txt">Kiên quyết, khôn khéo "bài trừ nội phản" — phá vụ án Ôn Như Hầu 12/7/1946</span></div>
+  <div class="pill"><span class="pill-lbl">NN 3</span><span class="pill-txt">Cùng Vệ quốc đoàn nắm tình hình địch, ngăn chặn khiêu khích, bảo vệ di chuyển cơ quan</span></div>
+  <div class="pill"><span class="pill-lbl">NN 4</span><span class="pill-txt">Thành lập các lực lượng bổ trợ: Cảnh sát danh dự, Đoàn Cảnh sát xung phong... bảo vệ Quốc hội, Tổng Tuyển cử, Quỹ Độc lập, Tuần lễ Vàng</span></div>
+</div></div>
+<div class="sec"><div class="stt">V. CAND trong vùng địch tạm chiếm (NQ TW lần II 10/1951)</div><ul class="ul">
+<li>Lấy <b>xây dựng cơ sở, đấu tranh chính trị và kinh tế</b> làm nội dung chính</li>
+<li>Triệt phá chính quyền bù nhìn, phá hội tề, tiêu diệt sinh lực địch; đẩy mạnh điệp báo vào cơ quan đầu não địch</li>
+<li>Lợi dụng mọi tổ chức hợp pháp của địch để giác ngộ–tập hợp–lãnh đạo quần chúng</li>
+</ul></div>
+<div class="sec"><div class="stt">VI. Kết quả xây dựng LL CAND giai đoạn chống Pháp</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">11/3/1948</span><span class="pill-txt">Bác Hồ gửi thư Giám đốc CA Khu XII → <b>6 điều Bác Hồ dạy CAND</b> trở thành phương hướng phấn đấu</span></div>
+  <div class="pill"><span class="pill-lbl">6/1949</span><span class="pill-txt">Hội nghị điều tra toàn quốc lần I → cơ sở lý luận nghiệp vụ điều tra</span></div>
+  <div class="pill"><span class="pill-lbl">1/1950</span><span class="pill-txt">HN CA toàn quốc lần V → "Đề án CAND VN" — văn kiện đầu tiên đặt nền móng lý luận XD LL CAND</span></div>
+  <div class="pill"><span class="pill-lbl">10/10/1950</span><span class="pill-txt">NĐ 438: thành lập Ban Công an xã</span></div>
+  <div class="pill"><span class="pill-lbl">16/02/1953</span><span class="pill-txt">SL 141: đổi Nha CA VN thành Thứ Bộ Công an</span></div>
+  <div class="pill"><span class="pill-lbl">8/1953</span><span class="pill-txt">Đổi Thứ Bộ CA thành <b>Bộ Công an</b>; đồng chí Trần Quốc Hoàn làm Bộ trưởng đầu tiên</span></div>
+</div></div>
+`},
+
+/* ═══ CÂU 3 ═══ */
+{id:'c3',ac:'#10b981',ico:'🤝',bg:'Chống Mỹ',
+title:'CÂU 3 — CHI VIỆN CAND MB CHO AN NINH MN & VAI TRÒ QUẦN CHÚNG',
+sub:'Thời kỳ kháng chiến chống Mỹ',
+html:`
+<div class="sec"><div class="stt">I. Chi viện lực lượng CAND MB → AN MN (1959–1975)</div><ul class="ul">
+<li>Tuyển chọn cán bộ, chiến sĩ <em>"đi B"</em> từ: AN, cảnh sát, CAVT, KHKT, cơ yếu, thông tin, cảnh vệ</li>
+<li>Bộ triệu tập nhiều đợt → bồi dưỡng kiến thức → chi viện theo nhiều đợt</li>
+<li><b>1959 – 29/4/1975:</b> chi viện <u>11.576 cán bộ</u> cho AN miền Nam</li>
+<li>Cử các tổ cán bộ có năng lực vào tham mưu giúp Ban AN TW Cục</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Chi viện phương tiện và tài liệu</div><ul class="ul">
+<li>Gần <b>100 bộ điện đài thu phát 2 chiều</b>, hàng trăm báo vụ, cơ yếu và luốc mật mã</li>
+<li>Thực hoá học, vũ khí, chất nổ → đảm bảo liên lạc thông suốt 2 chiều</li>
+<li>Tổng tấn công Tết Mậu Thân + Mùa xuân 1975: <b>hơn 400 tấn vũ khí, hàng hoá</b></li>
+<li>Chỉ thị "Đẩy mạnh công tác nắm tình hình địch", "Bản gợi ý tăng cường AN đô thị", NQ 39 và NQ 40</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Chi viện tin tức tình báo</div><ul class="ul">
+<li>Dựa vào trinh sát kỹ thuật → thông báo <b>ngày giờ, địa điểm địch ném bom B52</b> vào cơ quan đầu não ta</li>
+<li>Tin về hoạt động Biệt đội sưu tầm, Cảnh sát đặc biệt nguỵ, bọn nội gián</li>
+<li>Cung cấp <b>hàng ngày, độ chính xác cao</b> → AN MN giành thế chủ động trên chiến trường</li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Công tác vận động quần chúng chống Mỹ</div><ul class="ul">
+<li>Vận động QC phối hợp MTTQ tiếp quản thành phố vùng mới giải phóng; chống dụ dỗ đồng bào di cư</li>
+<li>Phát động phong trào <b>"Bảo vệ trị an", "Bảo mật phòng gian"</b></li>
+<li>Phá hàng chục tổ chức gián điệp Mỹ–Pháp; thu hàng chục tấn vũ khí, điện đài</li>
+<li>Biên giới phía Bắc: phối hợp bộ đội tấn công chính trị + vũ trang → bắt/diệt/tan rã hàng ngàn tên phỉ, đặc vụ Tưởng</li>
+</ul></div>
+<div class="sec"><div class="stt">V. Vai trò quần chúng trong chống Mỹ</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">Vai trò 1</span><span class="pill-txt"><b>Nền tảng, chỗ dựa vững chắc</b> — sức mạnh của số đông, hàng chục triệu người; ANTT là nguyện vọng của mọi dân</span></div>
+  <div class="pill"><span class="pill-lbl">Vai trò 2</span><span class="pill-txt"><b>Lực lượng trực tiếp đấu tranh</b> — gián điệp trà trộn trong QC → QC cảnh giác = "thiên la địa võng" không lọt đối tượng</span></div>
+  <div class="pill"><span class="pill-lbl">Vai trò 3</span><span class="pill-txt"><b>Tự giác tham gia phong trào BVANTQ</b> — kẻ địch nhằm vào xói mòn lòng tin QC; mất QC = mất lực lượng CM</span></div>
+  <div class="pill"><span class="pill-lbl">Vai trò 4</span><span class="pill-txt"><b>Xây dựng CAND trong sạch vững mạnh</b> — QC giác ngộ là nguồn bổ sung vô tận; thông qua vận động QC, CA được rèn luyện lập trường chính trị, quan điểm QC</span></div>
+</div>
+<div class="stxt" style="margin-top:6px;font-size:.65rem;color:#4a607c"><em>"Khi nhân dân giúp đỡ ta nhiều thì thành công nhiều, giúp đỡ ta hoàn toàn thì thắng lợi hoàn toàn" — Bác Hồ</em></div></div>
+`},
+
+/* ═══ CÂU 4 ═══ */
+{id:'c4',ac:'#ef4444',ico:'⚔️',bg:'Dân tộc & Tôn giáo',
+title:'CÂU 4 — CHỐNG PHẢN ĐỘNG LỢI DỤNG DÂN TỘC, TÔN GIÁO & BIỆT KÍCH GIÁN ĐIỆP',
+sub:'So sánh thời kỳ chống Pháp và giai đoạn 1975–1986',
+html:`
+<div class="sec"><div class="stt">I. Chống phản động lợi dụng dân tộc (sau 1954)</div><ul class="ul">
+<li><b>CT 14/CT-TW (16/4/1955) và CT 186/CT-TW (17/2/1960):</b> Đoàn kết rộng rãi các tầng lớp dân tộc; hoạt động chính trị + cải thiện dân sinh là chính; lực lượng quân sự là chủ yếu</li>
+<li>CA phối hợp cán bộ xuống bản làng: tuyên truyền chính sách dân tộc; vận động đồng bào lầm đường trở về</li>
+<li>Đóng góp làm thất bại âm mưu <b>"xưng vua, đón vua"</b> của địch</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Chống phản động lợi dụng tôn giáo</div><ul class="ul">
+<li>Kiên trì giáo dục giáo dân thực hiện chính sách tự do tín ngưỡng</li>
+<li>Vạch trần âm mưu địch, tranh thủ quần chúng</li>
+<li>Điều tra nắm chứng cứ → bắt cầm đầu đưa xét xử công khai → kéo QC ra khỏi ảnh hưởng</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Công tác bảo vệ cơ quan đầu não kháng chiến (chống Mỹ)</div><ul class="ul">
+<li>Hệ thống ban BVAN các cấp từ khu → tỉnh → huyện → xã (theo chỉ thị 525/BT-TW)</li>
+<li>Ban AN T4 (Sài Gòn – Gia Định), An ninh Phú Yên, Tây Ninh, Khánh Hòa chủ động nắm tình hình</li>
+<li>Xây dựng giao thông liên lạc, căn cứ dự bị đề phòng khẩn cấp</li>
+<li>HN bảo vệ cơ quan toàn miền Nam → ban AN khẩn trương triển khai phương án, quy ước bảo vệ</li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Chống biệt kích gián điệp Mỹ–Ngụy</div><ul class="ul">
+<li>Chỉ thị <b>69VP/P4 "Kế hoạch 69" (14/12/1960):</b> xác định mục tiêu, đối tượng, địa bàn, biện pháp đấu tranh</li>
+<li>Triển khai: nắm tình hình; bảo vệ lãnh tụ–cơ quan; bảo vệ CT nội bộ; tập trung cải tạo phần tử nguy hiểm</li>
+<li>Bố trí lại lực lượng trinh sát; xây dựng mạng lưới đặc tình; đảm bảo thông tin bí mật–an toàn–chính xác</li>
+<li><b>2 nguyên nhân thắng lợi:</b>
+  <ul class="sub">
+    <li>Nhận thức đúng tính chất cuộc đấu tranh → bố trí lực lượng nòng cốt hợp lý</li>
+    <li>Nắm vững quan điểm chỉ đạo Đảng: chủ động phòng ngừa + tiến công + toàn diện, sâu sắc</li>
+  </ul>
+</li>
+</ul></div>
+<div class="sec"><div class="stt">V. So sánh chống phản động DT–TG: Chống Pháp vs 1975–1986</div>
+<div class="cmp">
+<div class="col"><h4>Giống nhau</h4><ul>
+<li>Đảng kiên quyết đấu tranh chống phản động lợi dụng DT–TG</li>
+<li>LL nòng cốt: CAND; đối tượng: bọn phản động lợi dụng DT–TG</li>
+</ul></div>
+<div class="col"><h4>Khác — Hoàn cảnh LS</h4><ul>
+<li>Chống P: chưa có chính quyền chính thức → khó khăn hơn</li>
+<li>1975–1986: có chính quyền, đất nước độc lập thống nhất</li>
+</ul></div>
+</div>
+<div class="cmp" style="margin-top:5px">
+<div class="col"><h4>Chống Pháp — Đối tượng</h4><ul>
+<li>Được P hậu thuẫn, kích động</li>
+<li>TG: dùng thần quyền rào làng, trang bị vũ khí cho giáo dân</li>
+<li>DT ít người: lôi kéo thành lập LLVT theo Pháp</li>
+</ul></div>
+<div class="col"><h4>1975–1986 — Đối tượng</h4><ul>
+<li>Được Mỹ và phương Tây hậu thuẫn</li>
+<li>TG: kêu gọi giáo dân lập LLVT, tích trữ vũ khí cướp CQ</li>
+<li>DT: lôi kéo nổi dậy, đòi thành lập khu tự trị</li>
+</ul></div>
+</div></div>
+<div class="sec"><div class="stt">VI. Ý nghĩa</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">Ý nghĩa 1</span><span class="pill-txt">Cấp ủy, chính quyền nâng cao nhận thức về chính sách DT–TG; giải quyết tốt → ổn định CT–XH</span></div>
+  <div class="pill"><span class="pill-lbl">Ý nghĩa 2</span><span class="pill-txt">Chú trọng xây dựng lực lượng chính trị cốt cán trong TG; kiện toàn tuyên truyền ở vùng đông đồng bào theo đạo</span></div>
+  <div class="pill"><span class="pill-lbl">Ý nghĩa 3</span><span class="pill-txt">Đẩy mạnh phong trào QC BVANTQ; thực hiện đoàn kết lương giáo; nâng cao ý thức cảnh giác tín đồ, dân tộc thiểu số</span></div>
+  <div class="pill"><span class="pill-lbl">Ý nghĩa 4</span><span class="pill-txt">Các tỉnh, TP đào tạo đội ngũ cán bộ làm công tác TG–DT đáp ứng quản lý NN trong tình hình mới</span></div>
+</div></div>
+`},
+
+/* ═══ CÂU 5 ═══ */
+{id:'c5',ac:'#f59e0b',ico:'⭐',bg:'8 Truyền thống',
+title:'CÂU 5 — 8 TRUYỀN THỐNG CỦA CAND & MỐI QUAN HỆ GIỮA CÁC TRUYỀN THỐNG',
+sub:'Nội dung giáo dục bản lĩnh chính trị, đạo đức, lối sống',
+html:`
+<div class="sec"><div class="stt">8 Truyền thống của CAND</div>
+<div class="pills">
+<div class="pill"><span class="pill-lbl">TT 1</span><span class="pill-txt"><b>Tuyệt đối trung thành</b> với Tổ quốc, Đảng CSVN, Nhà nước CHXHCNVN và nhân dân; chiến đấu anh dũng, không ngại hy sinh vì độc lập, tự do, chủ quyền, thống nhất và toàn vẹn lãnh thổ, vì ANTQ</span></div>
+<div class="pill"><span class="pill-lbl">TT 2</span><span class="pill-txt"><b>Hết lòng hết sức phục vụ nhân dân,</b> dựa vào nhân dân để chiến đấu và xây dựng lực lượng — "CAND vì nước quên thân, vì dân phục vụ"</span></div>
+<div class="pill"><span class="pill-lbl">TT 3</span><span class="pill-txt"><b>Tận tụy trong công tác, mưu trí, dũng cảm</b> trong đấu tranh, phát huy cao độ tinh thần độc lập, tự chủ, tự lực, tự cường vượt qua mọi khó khăn, hoàn thành xuất sắc nhiệm vụ</span></div>
+<div class="pill"><span class="pill-lbl">TT 4</span><span class="pill-txt"><b>Đoàn kết giúp đỡ nhau</b> hoàn thành nhiệm vụ, phối hợp, hiệp đồng chặt chẽ giữa các lực lượng để lập chiến công tập thể — "Đoàn kết, đại đoàn kết, thành công đại thành công"</span></div>
+<div class="pill"><span class="pill-lbl">TT 5</span><span class="pill-txt"><b>Không ngừng tu dưỡng, rèn luyện phẩm chất đạo đức</b> cần, kiệm, liêm, chính, chí công, vô tư — "danh dự là điều thiêng liêng, cao quý nhất"</span></div>
+<div class="pill"><span class="pill-lbl">TT 6</span><span class="pill-txt"><b>Luôn nêu cao tinh thần cảnh giác, bí mật, mưu trí, dũng cảm, cương quyết, khôn khéo,</b> tích cực phòng ngừa, chủ động tiến công kẻ địch và bọn tội phạm</span></div>
+<div class="pill"><span class="pill-lbl">TT 7</span><span class="pill-txt"><b>Không ngừng học tập</b> nâng cao trình độ chính trị, nghiệp vụ và năng lực công tác; tiếp thu, vận dụng sáng tạo KHCN phục vụ công tác, chiến đấu</span></div>
+<div class="pill"><span class="pill-lbl">TT 8</span><span class="pill-txt"><b>Nêu cao tinh thần đoàn kết quốc tế</b> trong sáng, thủy chung, nghĩa tình — thực hiện nghĩa vụ quốc tế với Lào, Campuchia; hợp tác PCTP xuyên quốc gia</span></div>
+</div></div>
+<div class="sec"><div class="stt">Mối quan hệ giữa các truyền thống</div><ul class="ul">
+<li>Các truyền thống có <b>mối quan hệ tác động qua lại</b> → tạo thành thể thống nhất phản ánh bản chất CAND</li>
+<li>Để <b>trung thành với Đảng</b> → phải phục vụ nhân dân, dựa vào dân; tận tụy công tác, mưu trí; đoàn kết lập công tập thể</li>
+<li>Để <b>hết lòng phục vụ dân</b> → phải dựa trên trung thành với Đảng; bảo đảm cuộc sống bình yên dân; tận tụy, đoàn kết</li>
+<li>Để <b>tận tụy, dũng cảm</b> → phải có động lực từ lòng trung thành; lý tưởng phục vụ nhân dân; tinh thần đoàn kết</li>
+</ul></div>
+<div class="sec"><div class="stt">Nội dung giáo dục bản lĩnh CT & đạo đức — 11 hướng đổi mới</div>
+<div class="step"><div class="snum">1</div><div class="stxt">Đổi mới hình thức hoạt động → nâng cao lòng tin vào Mác–Lênin, HCM, đường lối đổi mới của Đảng</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">Kết hợp tuyên truyền–giáo dục–vận động phù hợp điều kiện công tác thực tế, trình độ cán bộ chiến sĩ</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">GD CT–TT bám sát thực tiễn, hướng về cơ sở, vùng sâu vùng xa, phục vụ kịp thời lực lượng trực tiếp chiến đấu</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt">Nội dung GD tập trung: Mác–Lênin, HCM, NQ–đường lối Đảng, 6 điều Bác dạy, tiêu chí CM–CQ–TN–HĐ</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt">Cải tiến phương pháp GD CTTT → thực sự hiệu quả, nâng cao tính tiên phong gương mẫu, tính chiến đấu</div></div>
+<div class="step"><div class="snum">6</div><div class="stxt">Xây dựng đội ngũ báo cáo viên, tuyên truyền viên, cộng tác viên chất lượng cao trong CAND</div></div>
+<div class="step"><div class="snum">7</div><div class="stxt">Dự báo và thực hiện quy chế nắm–phản ánh–giải quyết tình hình tư tưởng cán bộ, chiến sĩ</div></div>
+<div class="step"><div class="snum">8</div><div class="stxt">Nâng cao chất lượng thi đua khen thưởng → động lực thúc đẩy hoàn thành xuất sắc nhiệm vụ</div></div>
+<div class="step"><div class="snum">9</div><div class="stxt">Phân cấp khen thưởng hợp lý, đảm bảo kịp thời và trực tiếp hiệu quả; tránh tiêu cực trong xét thưởng</div></div>
+<div class="step"><div class="snum">10</div><div class="stxt">Tăng cường quản lý, nâng cao chất lượng báo chí–xuất bản CAND: tính định hướng CT, GD, chiến đấu</div></div>
+<div class="step"><div class="snum">11</div><div class="stxt">Sử dụng hiệu quả sinh hoạt CT, đoàn thể: truyền thống DT–Đảng–CA; đạo lý uống nước nhớ nguồn</div></div>
+</div>
+`},
+
+/* ═══ CÂU 6 ═══ */
+{id:'c6',ac:'#06b6d4',ico:'📋',bg:'Bản chất, vị trí',
+title:'CÂU 6 — BẢN CHẤT GIAI CẤP, VỊ TRÍ, CHỨC NĂNG, NHIỆM VỤ CAND',
+sub:'Cơ sở pháp lý — Luật CAND 2018',
+html:`
+<div class="sec"><div class="stt">I. CAND mang bản chất giai cấp của Nhà nước</div><ul class="ul">
+<li>Nhà nước là bộ máy một giai cấp thực thi quyền lực chính trị → CA là công cụ chuyên chính của NN → mang bản chất GC của NN</li>
+<li><em>"Công an của Nhà nước nào thì mang bản chất giai cấp của Nhà nước ấy"</em></li>
+<li>CAND VN là công cụ của giai cấp công nhân và nhân dân lao động → mang bản chất GC công nhân VN</li>
+<li><b>4 biểu hiện bản chất GC công nhân của CAND:</b>
+  <ul class="sub">
+    <li>Đặt dưới lãnh đạo tuyệt đối, trực tiếp về mọi mặt của Đảng CSVN</li>
+    <li>Tuyệt đối trung thành với Đảng, Tổ quốc, nhân dân LĐ VN; gắn bó mật thiết với nhân dân</li>
+    <li>Cán bộ chiến sĩ tu dưỡng rèn luyện phẩm chất đạo đức trong sáng; lối sống lành mạnh</li>
+    <li>Tổ chức và hoạt động dưới sự thống lĩnh của Chủ tịch nước; quản lý của Chính phủ; chỉ huy trực tiếp của Bộ trưởng BCA</li>
+  </ul>
+</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Vị trí CAND (Điều 3 Luật CAND 2018)</div><ul class="ul">
+<li>CAND là <b>lực lượng vũ trang nhân dân làm nòng cốt</b> trong BVANCQ, BĐTTATXH, đấu tranh phòng chống TP</li>
+<li>Cùng QĐND và DQTV → 3 thứ quân LLVT của Nhà nước CHXHCNVN</li>
+<li>Là <b>nòng cốt, xung kích, công cụ sắc bén</b> của Đảng, NN, nhân dân</li>
+<li>Là <b>lực lượng chủ thể nòng cốt</b> trong quản lý NN về ANTT; cơ quan thừa hành và bảo vệ pháp luật</li>
+<li>Đại diện và bảo vệ quyền và lợi ích hợp pháp của nhân dân</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Chức năng CAND (Điều 15 Luật CAND 2018)</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">CF 1</span><span class="pill-txt"><b>Tham mưu</b> cho Đảng, NN về BVANCQ, BĐTTATXH, đấu tranh phòng chống TP và vi phạm PL</span></div>
+  <div class="pill"><span class="pill-lbl">CF 2</span><span class="pill-txt"><b>Quản lý NN</b> về BVANCQ, BĐTTATXH, đấu tranh phòng chống TP trên phạm vi cả nước</span></div>
+  <div class="pill"><span class="pill-lbl">CF 3</span><span class="pill-txt"><b>Trực tiếp đấu tranh</b> phòng chống âm mưu hoạt động của thế lực thù địch, các loại TP và vi phạm PL về ANCQ, TTATXH</span></div>
+</div></div>
+<div class="sec"><div class="stt">IV. CAND là LLVT — Biểu hiện</div><ul class="ul">
+<li><b>Tổ chức bộ máy:</b> Tinh gọn, cơ động, TT thống nhất, sức chiến đấu cao; tuyển chọn và huấn luyện theo tiêu chuẩn LLVT; kỷ luật nghiêm, điều lệnh rõ</li>
+<li><b>Hoạt động:</b> Được sử dụng biện pháp vũ trang; phối hợp hợp đồng chiến đấu cao; thường trực chiến đấu</li>
+<li><b>Trang bị:</b> Cảnh phục thống nhất, phương tiện NV, công cụ hỗ trợ, vũ khí cần thiết</li>
+<li><b>Chỉ huy:</b> Nhạy bén, tập trung thống nhất; thường trực chiến đấu cao</li>
+</ul></div>
+<div class="sec"><div class="stt">V. CAND chịu lãnh đạo của Đảng — Vì sao?</div><ul class="ul">
+<li><b>Cơ sở pháp lý:</b> Điều 4 HP 2013: Đảng = lực lượng lãnh đạo NN và XH; lấy CNML + TTHCM làm nền tảng tư tưởng</li>
+<li><b>Sự lãnh đạo của Đảng là nhân tố quyết định thắng lợi:</b> Cuộc đấu tranh BVANCQ là cuộc đấu tranh GC–DT, một mất một còn; diễn ra trên mọi lĩnh vực ĐS–XH → <em>nhất thiết phải đặt dưới lãnh đạo Đảng</em></li>
+</ul></div>
+<div class="sec"><div class="stt">VI. Nhiệm vụ và quyền hạn CAND (Điều 16 Luật CAND 2018) — 21 ý</div><ul class="ul">
+<li>Thu thập thông tin, phân tích, dự báo tình hình; đề xuất chính sách, chiến lược BVANCQ–TTATXH</li>
+<li>Chủ động phòng ngừa, phát hiện, ngăn chặn, đấu tranh âm mưu xâm phạm ANCQ; bảo vệ Đảng, NN, nhân dân, chế độ XHCN</li>
+<li>Hoạt động tình báo theo quy định PL</li>
+<li>Bảo vệ lãnh đạo cấp cao; bảo vệ sự kiện, mục tiêu quan trọng; bảo vệ cơ quan đại diện ngoại giao</li>
+<li>Quản lý BVANCQ, bảo vệ bí mật NN; quản lý xuất nhập cảnh; kiểm soát cửa khẩu</li>
+<li>Quản lý AN mạng, bảo vệ AN mạng, phòng chống TP mạng</li>
+<li>Quản lý điều tra và PCTP; chủ trì chống khủng bố, bạo loạn; phòng chống TP hình sự</li>
+<li>Quản lý thi hành án hình sự, tạm giữ–tạm giam; trại giam, trại tạm giam</li>
+<li>Quản lý xử phạt vi phạm hành chính về ANCQ–TTATXH</li>
+<li>Quản lý cư trú, dữ liệu quốc gia về dân cư, căn cước CD, con dấu, TTATGT, vũ khí–vật liệu nổ, PCCC–CNCH</li>
+<li>Tuyên truyền, giáo dục về BVANCQ–TTATXH; hướng dẫn, kiểm tra, thanh tra, giải quyết KN–TC</li>
+<li>Làm nòng cốt xây dựng nền ANND và thế trận ANND; xây dựng phong trào toàn dân BVANTQ</li>
+<li>Hướng dẫn, huấn luyện NV, bồi dưỡng PL cho tổ chức QC tham gia BVANCQ tại cơ sở</li>
+<li>Áp dụng các biện pháp VĐQC, PL, ngoại giao, kinh tế, KHKT, NV, vũ trang</li>
+<li>Sử dụng vũ khí, vật liệu nổ, công cụ hỗ trợ, vũ lực, phương tiện KTNV để tấn công–truy bắt TP</li>
+<li>Đình chỉ hoạt động cơ quan, tổ chức vi phạm ANCQ; yêu cầu cung cấp tài liệu liên quan</li>
+<li>Thực hiện BP bảo vệ ANCQ khi có chiến tranh, tình trạng khẩn cấp</li>
+<li>Quản lý, phát triển công nghiệp AN; nghiên cứu ứng dụng KHCN</li>
+<li>Xây dựng CAND cách mạng, chính quy, tinh nhuệ, từng bước hiện đại</li>
+<li>Thực hiện nghĩa vụ quốc tế; hợp tác quốc tế trong đấu tranh PCTP; tương trợ tư pháp hình sự</li>
+<li>Thực hiện nhiệm vụ, quyền hạn khác theo quy định PL</li>
+</ul></div>
+<div class="sec"><div class="stt">VII. Cơ cấu tổ chức CAND (Điều 17 Luật CAND 2018)</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">Cấp 1</span><span class="pill-txt">Bộ Công an</span></div>
+  <div class="pill"><span class="pill-lbl">Cấp 2</span><span class="pill-txt">Công an tỉnh, thành phố trực thuộc TW</span></div>
+  <div class="pill"><span class="pill-lbl">Cấp 3</span><span class="pill-txt">Công an huyện, quận, thị xã, TP thuộc tỉnh</span></div>
+  <div class="pill"><span class="pill-lbl">Cấp 4</span><span class="pill-txt">Công an xã, phường, thị trấn (xây dựng chính quy theo NĐ Chính phủ)</span></div>
+  <div class="pill"><span class="pill-lbl">Đặc biệt</span><span class="pill-txt">Đồn, trạm CA và đơn vị độc lập tại địa bàn cần thiết (Bộ trưởng BCA quyết định)</span></div>
+</div></div>
+`},
+
+/* ═══ CÂU 7 ═══ */
+{id:'c7',ac:'#f97316',ico:'🔨',bg:'6 biện pháp',
+title:'CÂU 7 — XÂY DỰNG LỰC LƯỢNG CAND — 6 BIỆN PHÁP CHIẾN LƯỢC',
+sub:'Biện pháp nào quan trọng nhất? Tại sao? Tiến hành thế nào?',
+html:`
+<div class="sec"><div class="stt">I. Quan điểm xây dựng, kiện toàn LL CAND</div><ul class="ul">
+<li>Cán bộ chiến sĩ có <b>bản lĩnh CT, trình độ tri thức toàn diện và chuyên sâu</b>; nắm vững PL, tinh thông NV; sử dụng ngoại ngữ, KHKT</li>
+<li>Lực lượng trực tiếp chiến đấu <b>trang bị hiện đại</b>; ứng dụng hiệu quả thành tựu KHCN</li>
+<li>Đội ngũ <b>nhạy bén chính trị–NV</b>, có năng lực phân tích–dự báo, chỉ huy chỉ đạo sắc sảo trong TH phức tạp; sức khỏe bền bỉ</li>
+<li>Cao tinh thần <b>cảnh giác, bí mật, mưu trí sáng tạo</b>; ý thức tổ chức kỷ luật; chấp hành 5 lời thề, 10 điều kỷ luật</li>
+</ul></div>
+<div class="sec"><div class="stt">II. 6 Biện pháp xây dựng CAND</div>
+<div class="step"><div class="snum">1</div><div class="stxt"><b>Xây dựng Đảng trong CAND thực sự trong sạch vững mạnh:</b> Quán triệt nguyên tắc Đảng lãnh đạo tuyệt đối; thực hiện "tự soi tự sửa", kiểm điểm 27 biểu hiện suy thoái (NQ TW 4 khóa XII); 17 biểu hiện suy thoái trong CAND; kiện toàn tổ chức Đảng các cấp; nâng cao năng lực lãnh đạo cấp ủy</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt"><b>Thường xuyên GD CT–TT, đạo đức, lối sống cho CBCS CAND</b> (chi tiết → xem Câu 5)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt"><b>Xây dựng, kiện toàn tổ chức CAND:</b> Nguyên tắc hệ thống, tập trung, thống nhất, chuyên sâu; kết hợp quản lý ngành với lãnh thổ; xác định rõ CN–NV–QH; phân công phân cấp; kế thừa kinh nghiệm + học tập quốc tế; có đơn vị chiến đấu mũi nhọn tinh nhuệ</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt"><b>Xây dựng đội ngũ cán bộ vững mạnh toàn diện</b> — biện pháp <u>quan trọng nhất</u> (xem mục III)</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt"><b>Xây dựng CSVC, trang thiết bị:</b> Vũ khí, công cụ hỗ trợ, thiết bị KTNV; chú trọng lực lượng trực tiếp chiến đấu và CA vùng cao, hải đảo; trang bị tàu thủy, máy bay, xe đặc chủng; nâng cấp trụ sở, doanh trại, bệnh viện</div></div>
+<div class="step"><div class="snum">6</div><div class="stxt"><b>Tăng cường phối hợp các ngành–cấp–lực lượng XH:</b> Nâng cao nhận thức vai trò BVANCQ; đấu tranh chống "phi chính trị hóa", "vô hiệu hóa" CAND; cấp ủy–chính quyền–đoàn thể tạo điều kiện CA thực hiện CN–NV</div></div>
+</div>
+<div class="sec"><div class="stt">III. Tại sao XD cán bộ là QUAN TRỌNG NHẤT?</div><ul class="ul">
+<li>Đội ngũ CBCS là người <b>trực tiếp tạo nên sức mạnh và hiệu quả</b> của LL CAND trong chiến đấu, công tác</li>
+<li>Là <b>nhân tố quyết định sức mạnh, khả năng chiến đấu</b> hoàn thành nhiệm vụ trong mọi điều kiện</li>
+<li>Mọi chủ trương, đường lối, trang thiết bị chỉ phát huy khi có <em>con người thực hiện đúng đắn</em></li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Công tác cán bộ CAND — 4 Quy chế</div>
+<div class="pills">
+  <div class="pill"><span class="pill-lbl">QC Tuyển chọn</span><span class="pill-txt">Căn cứ yêu cầu NV, chức danh tiêu chuẩn; coi trọng cả CT và NV; nâng cao chất lượng tuyển sinh; kiểm tra chặt chẽ, kiên quyết thanh loại người không đủ tiêu chuẩn</span></div>
+  <div class="pill"><span class="pill-lbl">QC Đánh giá</span><span class="pill-txt">Ban hành và thực hiện thống nhất đánh giá hàng năm; căn cứ tiêu chuẩn từng chức danh, hiệu quả công tác, sự tín nhiệm; chú ý bản lĩnh CT, đạo đức, trình độ CM, sức khỏe, tác phong</span></div>
+  <div class="pill"><span class="pill-lbl">QC Sử dụng</span><span class="pill-txt">Bố trí theo yêu cầu NV, tiêu chuẩn chức danh, khả năng sở trường, ngành nghề đào tạo; hàng quý rà soát đánh giá bố trí lại; quy hoạch → đào tạo → đề bạt bổ nhiệm</span></div>
+  <div class="pill"><span class="pill-lbl">QC Quản lý</span><span class="pill-txt">Tự rèn luyện + quản lý lẫn nhau + thanh tra kiểm tra chất lượng; quản lý cả lịch sử, tư tưởng, công tác, quan hệ gia đình–XH, tài sản cá nhân</span></div>
+</div></div>
+<div class="sec"><div class="stt">V. Đào tạo bồi dưỡng cán bộ CAND</div><ul class="ul">
+<li>Quy hoạch đào tạo gắn với quy hoạch cán bộ theo cơ cấu trình độ và tiêu chuẩn chức danh</li>
+<li>Quy chế: <b>"Đào tạo bồi dưỡng trước khi đề bạt, bổ nhiệm, luân chuyển, thăng cấp bậc hàm"</b></li>
+<li>Tuyển học sinh khá–giỏi; chính sách thu hút SV giỏi các trường ngoài ngành</li>
+<li>Đổi mới PP dạy học: chuyển trọng tâm từ người dạy → người học; giáo viên "vừa hồng vừa chuyên"</li>
+</ul></div>
+`},
+
+/* ═══ CÂU 8 ═══ */
+{id:'c8',ac:'#ec4899',ico:'⚖️',bg:'Nguyên tắc',
+title:'CÂU 8 — NGUYÊN TẮC HOẠT ĐỘNG CAND & ĐẶC ĐIỂM CHIẾN ĐẤU',
+sub:'Khoản 3 Điều 4 Luật CAND 2018',
+html:`
+<div class="sec"><div class="stt">I. Tuân thủ Hiến pháp và pháp luật</div><ul class="ul">
+<li>Nhà nước pháp quyền → mọi công dân, tổ chức đều phải tuân thủ PL → CAND không ngoại lệ</li>
+<li>Đảm bảo tính hợp hiến, hợp pháp trong mọi biện pháp bảo vệ ANTT</li>
+</ul></div>
+<div class="sec"><div class="stt">II. Cấp dưới phục tùng cấp trên</div><ul class="ul">
+<li>CAND là LLVT → đảm bảo tính chiến đấu → đòi hỏi <b>kỷ luật cao</b></li>
+<li>Thống nhất trong chỉ huy → nhanh chóng, hiệu quả khi xử lý tình huống</li>
+</ul></div>
+<div class="sec"><div class="stt">III. Dựa vào nhân dân và chịu sự giám sát của nhân dân</div><ul class="ul">
+<li>Bác Hồ: <em>"Khi nhân dân giúp đỡ ta nhiều thì thành công nhiều..."</em></li>
+<li>"Dựa vào dân" là <b>biện pháp vận động quần chúng</b> — một trong những biện pháp công tác CA</li>
+<li>CA chịu giám sát QC vì: trong CNXHCN mọi quyền lực thuộc về nhân dân; QC giám sát trực tiếp hoặc qua HĐND các cấp và QH</li>
+</ul></div>
+<div class="sec"><div class="stt">IV. Bảo vệ quyền và lợi ích hợp pháp của tổ chức, cá nhân</div><ul class="ul">
+<li>Mục đích CAND = bảo vệ ổn định TTATXH; ngăn chặn mọi hành vi bất hợp pháp xâm phạm quyền lợi</li>
+<li>Bảo vệ quyền tự do dân chủ, tính mạng, tài sản, danh dự, nhân phẩm của công dân</li>
+</ul></div>
+<div class="sec"><div class="stt">V. Nguyên tắc bí mật — Yêu cầu đặt ra</div><ul class="ul">
+<li>Bí mật là <b>nguyên tắc và yếu tố dẫn tới thành công</b> trong công tác BĐANTT</li>
+<li>Được sử dụng biện pháp NV bí mật và phương tiện NV đặc biệt được Đảng–NN cho phép</li>
+<li>Quán triệt trong mọi mặt công tác và mỗi cán bộ chiến sĩ</li>
+</ul></div>
+<div class="sec"><div class="stt">VI. Chiến đấu thường xuyên, liên tục, lâu dài, gay go quyết liệt — Yêu cầu đặt ra</div><ul class="ul">
+<li>Địch không ngừng hoạt động kể ngày đêm, chiến thời hay bình thời, ngày lễ hay ngày thường → CA phải <b>thường trực chiến đấu</b></li>
+<li>Thủ đoạn địch đa dạng, tinh vi, xảo quyệt; không có trận tuyến rõ ràng; địch luôn che giấu, ngụy trang → <b>CA phải kiên trì điều tra</b>, phân tích, đánh giá</li>
+<li>Đặc điểm này đòi hỏi:
+  <ul class="sub">
+    <li>Xây dựng CAND <b>cách mạng–chính quy–tinh nhuệ–từng bước hiện đại</b></li>
+    <li>Tuyệt đối trung thành với Tổ quốc, Đảng; gắn bó mật thiết nhân dân</li>
+    <li>Chủ động phòng ngừa, tích cực đấu tranh; không chủ quan mất cảnh giác, không ngại khó khăn</li>
+    <li>Mưu trí, sáng tạo, dũng cảm vận dụng linh hoạt biện pháp NV; nâng cao ý thức giữ bí mật</li>
+    <li>Nêu cao tinh thần phát huy sức mạnh nhân dân trong phong trào BVANTQ</li>
+  </ul>
+</li>
+</ul></div>
+`},
+
+/* ═══ CÂU 9 ═══ */
+{id:'c9',ac:'#a3e635',ico:'💡',bg:'Ý kiến bổ sung',
+title:'CÂU 9 — CÁC Ý KIẾN BỔ SUNG QUAN TRỌNG',
+sub:'CAND phục vụ nhân dân · Bản chất GC · Lenin & Bác Hồ · Đức & Tài',
+html:`
+<div class="sec"><div class="stt">9.1 CAND hết lòng phục vụ nhân dân — Bằng chứng LS</div><ul class="ul">
+<li>Phong trào CM 1930–1931: Đội Tự vệ đỏ bảo vệ QC trong Xô Viết Nghệ Tĩnh</li>
+<li>1945–1946: Bảo vệ Tổng Tuyển cử, Quốc hội khóa I; bài trừ tệ nạn, bảo vệ tài sản nhân dân</li>
+<li>Kháng chiến: "Đi dân nhớ, ở dân thương" — CAND gắn bó nhân dân giữ vùng giải phóng</li>
+<li>Ngày nay: "Vì nước quên thân, vì dân phục vụ"; "Thức cho dân ngủ ngon, gác cho dân vui chơi"</li>
+</ul></div>
+<div class="sec"><div class="stt">9.2 CA do Nhà nước sáng lập → Mang bản chất GC của NN</div><ul class="ul">
+<li>NN là bộ máy GC thống trị lập ra → mang bản chất GC</li>
+<li>CA do NN lập ra = công cụ chuyên chính, trực thuộc NN</li>
+<li>CA có NV bảo vệ lợi ích NN, lợi ích GC cầm quyền</li>
+<li>→ CA của NN nào mang bản chất GC của NN đó</li>
+<li><b>NN XHCN:</b> sự thống trị của đa số đối với thiểu số → CAND VN mang bản chất GC công nhân</li>
+</ul></div>
+<div class="sec"><div class="stt">9.3 "Không có Cảnh sát, Nhà nước không thể tồn tại" — Chứng minh</div><ul class="ul">
+<li><b>Lý luận — Lênin:</b> <em>"Bất kỳ một nhà nước nào cũng cần có cảnh sát. Không có cảnh sát, Nhà nước không tồn tại được"; "quân đội thường trực và cảnh sát là những công cụ vũ lực chủ yếu của quyền lực nhà nước"</em></li>
+<li><b>Bác Hồ:</b> <em>"Công an cách mạng là vũ khí sắc bén của chuyên chính vô sản để bảo vệ Đảng, bảo vệ chính quyền CM, bảo vệ chế độ dân chủ nhân dân"</em></li>
+<li><b>Lý luận:</b> CS là công cụ chuyên chính NN; CN cơ bản nhất = bảo vệ NN; XH luôn tồn tại 2 bộ phận muốn lật đổ NN (tàn dư chế độ cũ + mầm móng chế độ mới) → phải có CS bảo vệ</li>
+<li><b>Thực tiễn:</b> CAND VN phát hiện kịp thời, đấu tranh ngăn chặn, đập tan âm mưu chống phá → bảo vệ sự nghiệp đổi mới, cuộc sống bình yên nhân dân</li>
+</ul></div>
+<div class="sec"><div class="stt">9.4 "Người có tài mà không có đức... người có đức mà không có tài..." — Bác Hồ</div><ul class="ul">
+<li>HCM luôn coi trọng <b>tính toàn diện cả Đức và Tài</b>; phẩm chất đạo đức là <em>gốc</em>, biểu hiện bản lĩnh CT, lòng trung thành</li>
+<li><b>Đạo đức người CBCS CA theo HCM:</b> phẩm chất CT cao, bản lĩnh vững vàng; gương mẫu đạo đức CM; say mê tâm huyết; nhạy bén linh hoạt; gần gũi quần chúng</li>
+<li><b>6 điều Bác Hồ dạy CAND (11/3/1948):</b>
+  <ul class="sub">
+    <li>Đối với tự mình: <u>Cần, kiệm, liêm, chính</u></li>
+    <li>Đối với đồng sự: <u>Thân ái giúp đỡ</u></li>
+    <li>Đối với Chính phủ: <u>Tuyệt đối trung thành</u></li>
+    <li>Đối với nhân dân: <u>Kính trọng lễ phép</u></li>
+    <li>Đối với công việc: <u>Tận tụy</u></li>
+    <li>Đối với địch: <u>Cương quyết khôn khéo</u></li>
+  </ul>
+</li>
+<li><b>5 bài học rút ra:</b>
+  <ul class="sub">
+    <li>Coi trọng hàng đầu xây dựng, giữ gìn, rèn luyện đạo đức CM</li>
+    <li>Toàn tâm, toàn ý hoàn thành nhiệm vụ được giao</li>
+    <li>Nêu cao tinh thần thân ái, đoàn kết, giúp đỡ đồng chí đồng đội</li>
+    <li>Thường xuyên học tập nâng cao trình độ chuyên môn, nghiệp vụ</li>
+    <li>Không ngừng rèn luyện cả đức và tài — song hành, không tách rời</li>
+  </ul>
+</li>
+</ul></div>
+`}
+];
+
+function mk(d){
+  const el=document.createElement('div');
+  el.className='card';el.dataset.id=d.id;
+  el.style.cssText=`--ac:${d.ac}`;
+  el.innerHTML=`
+    <div class="chd">
+      <div class="cico">${d.ico}</div>
+      <div class="cmeta">
+        <div class="cttl">${d.title}</div>
+        <div class="csub">${d.sub}</div>
+      </div>
+      <div class="cright">
+        <div class="cbg">${d.bg}</div>
+        <div class="carr">▼</div>
+      </div>
+    </div>
+    <div class="cbd"><div class="cbi">${d.html}</div></div>`;
+  el.querySelector('.chd').onclick=()=>el.classList.toggle('on');
+  return el;
+}
+const grid=document.getElementById('grid');
+D.forEach(d=>grid.appendChild(mk(d)));
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=function(){
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    this.classList.add('on');
+    const f=this.dataset.f;
+    document.querySelectorAll('.card').forEach(c=>{
+      c.classList[f==='all'||c.dataset.id===f?'remove':'add']('hidden');
+    });
+  };
+});
+</script>
+</body>
+</html>
