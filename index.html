@@ -8,32 +8,59 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* Cấu hình hình nền tràn màn hình chuẩn theo file logo.jpg ở gốc */
+/* Đổi nền trang web sang màu tối sang trọng */
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('logo.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+    background: #1e293b !important; /* Nền xanh đen mờ chuyên nghiệp */
     color: #ffffff !important;
+    font-family: Arial, sans-serif;
 }
 
-/* Xóa bỏ nền xám do css/style.css tạo ra */
 .layout, main, #content {
     background: transparent !important;
 }
 
+/* Căn giữa toàn bộ nội dung chính */
+#content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 80vh !important;
+}
+
+/* Khung nội dung chính gọn gàng */
 .welcome {
-    background: rgba(0, 0, 0, 0.55) !important;
-    padding: 24px !important;
-    border-radius: 16px !important;
-    backdrop-filter: blur(6px) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 28px 20px !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(10px) !important;
     text-align: center !important;
-    margin: 20px auto !important;
-    max-width: 90% !important;
+    max-width: 320px !important;
+    width: 85% !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Kiểu dáng logo nhỏ gọn, cân đối */
+.center-logo {
+    width: 130px !important;        /* Kích thước vừa vặn cho màn hình điện thoại */
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto 16px auto !important; /* Căn giữa logo */
+    drop-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+}
+
+.welcome h1 {
+    font-size: 1.2rem !important;
+    margin-bottom: 12px !important;
+}
+
+.welcome p {
+    font-size: 0.95rem !important;
+    opacity: 0.9 !important;
+    margin: 6px 0 !important;
 }
 </style>
 </head>
@@ -89,6 +116,9 @@ body {
     <main id="content">
 
         <div class="welcome">
+
+            <!-- LOGO NHỎ GỌN NẰM CHÍNH GIỮA -->
+            <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
 
             <h1>
                 Nguyễn Hữu Khánh D5S-VB2A
