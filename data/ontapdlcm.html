@@ -186,7 +186,7 @@ transform:rotate(180deg);
 .bd{
 max-height:0;
 overflow:hidden;
-transition:max-height .4s ease;
+transition:max-height .4s ease, padding .3s ease;
 padding:0 15px;
 }
 
@@ -195,7 +195,7 @@ max-height:3000px;
 padding:15px;
 }
 
-/* CSS bổ sung hiển thị nội dung bên trong Card */
+/* Custom CSS cho nội dung bên trong card */
 .q-block{
   font-size:13px;
   color:#94a3b8;
@@ -370,8 +370,8 @@ font-size:16px;
       <button class="back-home" onclick="showHome()">← Trang chủ</button>
       
       <div class="tabs">
-        <div class="tab on" onclick="toggleAll(true)">Mở tất cả</div>
-        <div class="tab" onclick="toggleAll(false)">Đóng tất cả</div>
+        <div class="tab" id="btn-open-all" onclick="toggleAll(true)">Mở tất cả</div>
+        <div class="tab" id="btn-close-all" onclick="toggleAll(false)">Đóng tất cả</div>
       </div>
 
       <div class="grid" id="cards-container"></div>
@@ -550,7 +550,7 @@ data.forEach((item, i) => {
   }
 
   card.innerHTML = `
-    <div class="hd" onclick="this.parentElement.classList.toggle('on')">
+    <div class="hd" onclick="toggleCard(this.parentElement)">
       <div class="num">${i+1}</div>
       <div class="ttl">${item.title}</div>
       <div class="tg">${item.tag}</div>
@@ -562,6 +562,11 @@ data.forEach((item, i) => {
   `;
   container.appendChild(card);
 });
+
+// Hàm Toggle mở/đóng từng card
+function toggleCard(card) {
+  card.classList.toggle('on');
+}
 
 // Navigation Functions
 function showHome(){
@@ -595,9 +600,22 @@ function closeSidebarMobile(){
 
 function toggleAll(open){
   document.querySelectorAll('.card').forEach(card => {
-    if(open) card.classList.add('on'); 
-    else card.classList.remove('on');
+    if(open) {
+      card.classList.add('on');
+    } else {
+      card.classList.remove('on');
+    }
   });
+
+  const btnOpen = document.getElementById('btn-open-all');
+  const btnClose = document.getElementById('btn-close-all');
+  if(open){
+    btnOpen.classList.add('on');
+    btnClose.classList.remove('on');
+  } else {
+    btnClose.classList.add('on');
+    btnOpen.classList.remove('on');
+  }
 }
 </script>
 
