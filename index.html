@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="css/style.css">
+
 <style>
 /* --- CHỦ ĐỀ SÁNG / TỐI --- */
 :root {
@@ -330,12 +332,6 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
-
-.subject-content-box {
-    padding: 16px;
-    max-width: 800px;
-    margin: 0 auto;
-}
 </style>
 </head>
 <body>
@@ -369,10 +365,13 @@ body {
     </aside>
 
     <main id="content">
-        <!-- NỘI DUNG CHÍNH DÙNG FETCH NATIVE CHỐNG CACHE LỖI -->
+        <!-- NỘI DUNG CHÍNH -->
     </main>
 
 </div>
+
+<!-- GIỮ LẠI JS/APP.JS ĐỂ LOAD SCRIPT VÀ BÀI HỌC CỦA CÁC MÔN -->
+<script src="js/app.js"></script>
 
 <script>
 const SUBJECTS = [
@@ -437,60 +436,22 @@ function closeSidebar() {
     if (sidebar) sidebar.classList.remove('active');
 }
 
-/* ĐIỀU HƯỚNG BẰNG SEARCH PARAMS QUAY VỀ TRANG CHỦ HOẶC MÔN HỌC */
-function navigateTo(pageUrl) {
-    closeSidebar();
-    if (!pageUrl || pageUrl === 'home') {
-        history.pushState(null, '', window.location.pathname);
-        renderHomeView();
-    } else {
-        history.pushState(null, '', '?page=' + encodeURIComponent(pageUrl));
-        fetchAndRenderPage(pageUrl);
-    }
-}
-
+/* ĐIỀU HƯỚNG TRANG CHỦ & MÔN HỌC */
 function goHome() {
-    navigateTo('home');
-}
-
-function openSubject(name, url) {
-    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
-    navigateTo(url);
-}
-
-function renderHomeView() {
+    closeSidebar();
+    sessionStorage.setItem('current_page', 'home');
     document.getElementById('content').innerHTML = HOME_HTML;
     renderSubjects();
     renderUserBlocks();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* TẢI FILE MÔN HỌC TRỰC TIẾP KHÔNG CẦN CHỜ APP.JS */
-function fetchAndRenderPage(url) {
-    const contentBox = document.getElementById('content');
-    contentBox.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-secondary);">⏳ Đang tải nội dung...</div>';
-    
-    fetch(url)
-        .then(response => {
-            if (!response.ok) throw new Error('Không thể tải file');
-            return response.text();
-        })
-        .then(html => {
-            contentBox.innerHTML = `<div class="subject-content-box">${html}</div>`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(err => {
-            contentBox.innerHTML = `<div style="text-align:center; padding: 40px; color: #ef4444;">❌ Lỗi tải bài học. Vui lòng kiểm tra lại đường dẫn tệp.</div>`;
-        });
-}
-
-function routeFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const currentPage = params.get('page');
-    if (currentPage) {
-        fetchAndRenderPage(currentPage);
-    } else {
-        renderHomeView();
+function openSubject(name, url) {
+    closeSidebar();
+    sessionStorage.setItem('current_page', url);
+    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
+    if (typeof loadPage === 'function') {
+        loadPage(url);
     }
 }
 
@@ -607,13 +568,20 @@ function toggleSubjects() {
     }
 }
 
+/* KHỞI TẠO VÀ PHỤC HỒI TRẠNG THÁI TRANG KHI RELOAD */
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    routeFromUrl();
-});
-
-window.addEventListener('popstate', () => {
-    routeFromUrl();
+    
+    const currentPage = sessionStorage.getItem('current_page');
+    if (currentPage && currentPage !== 'home') {
+        const matched = SUBJECTS.find(s => s.url === currentPage);
+        if (matched && typeof loadPage === 'function') {
+            loadPage(matched.url);
+            return;
+        }
+    }
+    
+    goHome();
 });
 </script>
 
