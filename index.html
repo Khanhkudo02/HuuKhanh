@@ -5,53 +5,107 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho học tập cá nhân</title>
 
+<!-- Nhập Font chữ Inter hiện đại giống mẫu -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* Cấu hình màu nền tổng thể */
+/* Cấu hình giao diện Dark Mode chuẩn mẫu */
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
-    background: #0f172a !important;
-    font-family: Arial, sans-serif;
+    background: #0b0f19 !important; /* Màu nền xanh đen đậm */
+    color: #f1f5f9 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .layout {
     background: transparent !important;
 }
 
-/* Định dạng riêng cho thẻ Welcome ở trang chủ, không làm hỏng layout môn học */
+/* Khung nội dung chính với phong cách hiện đại */
 .welcome {
-    background: #ffffff !important; 
-    color: #1e293b !important;
-    padding: 28px 20px !important;
-    border-radius: 20px !important;
+    background: rgba(15, 23, 42, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 32px 24px !important;
+    border-radius: 24px !important;
+    backdrop-filter: blur(12px) !important;
     text-align: center !important;
-    max-width: 320px !important;
-    width: 85% !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
-    margin: 40px auto !important; /* Căn giữa khung trang chủ */
+    max-width: 360px !important;
+    width: 88% !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+    margin: 30px auto !important;
 }
 
+/* Thẻ tag trang trí phía trên giống mẫu */
+.badge-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+/* Logo bo góc và thêm chút phát sáng nhẹ */
 .center-logo {
-    width: 130px !important;
+    width: 120px !important;
     height: auto !important;
     display: block !important;
-    margin: 0 auto 16px auto !important;
-    border-radius: 8px;
+    margin: 0 auto 20px auto !important;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Tiêu đề phối màu gradient điểm xuyết xanh dương */
 .welcome h1 {
-    font-size: 1.25rem !important;
-    margin-bottom: 8px !important;
-    color: #0f172a !important;
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 12px !important;
+    color: #ffffff !important;
 }
 
+.welcome h1 .highlight {
+    color: #38bdf8 !important; /* Điểm xuyết màu xanh dương tươi */
+}
+
+/* Nội dung phụ màu xám nhạt */
 .welcome p {
-    font-size: 0.95rem !important;
-    color: #475569 !important;
-    margin: 6px 0 !important;
+    font-size: 0.92rem !important;
+    color: #94a3b8 !important;
+    margin: 8px 0 !important;
+    font-weight: 400 !important;
+}
+
+/* Các thẻ thông tin danh mục màu sắc phía dưới */
+.info-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pill-item {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 </style>
 </head>
@@ -108,23 +162,20 @@ body {
 
         <div class="welcome">
 
+            <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
+
             <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
 
             <h1>
-                Nguyễn Hữu Khánh D5S-VB2A
+                Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span>
             </h1>
 
-            <p>
-                Nơi lưu trữ tài liệu học tập
-            </p>
+            <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
-            <p>
-                📚 Lý thuyết các môn học
-            </p>
-
-            <p>
-                ÔN Tập
-            </p>
+            <div class="info-pills">
+                <div class="pill-item">📚 Lý thuyết các môn học</div>
+                <div class="pill-item">🎧 Audio bài giảng ôn tập</div>
+            </div>
 
         </div>
 
