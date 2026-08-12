@@ -250,7 +250,7 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
-/* --- DẠNG NÚT BẤM VÀ DANH SÁCH MÔN HỌC --- */
+/* --- CÁC NÚT BẤM VÀ MÔN HỌC --- */
 .info-pills {
     display: flex;
     flex-direction: column;
@@ -365,7 +365,7 @@ body {
     </aside>
 
     <main id="content">
-        <!-- NỘI DUNG SẼ ĐƯỢC LOAD DỰA TRÊN TRẠNG THÁI LƯU TRỮ -->
+        <!-- NỘI DUNG CHÍNH -->
     </main>
 
 </div>
@@ -435,26 +435,48 @@ function closeSidebar() {
     if (sidebar) sidebar.classList.remove('active');
 }
 
-/* QUẢN LÝ ĐIỀU HƯỚNG VÀ LƯU TRẠNG THÁI NƠI ĐANG ĐỨNG */
+/* --- ĐIỀU HƯỚNG VÀ ROUTING BẰNG URL HASH CHỐNG LỖI RELOAD --- */
+function routePage() {
+    // Đọc mã định danh sau dấu # trên thanh URL
+    const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+    
+    if (!hash || hash === 'home') {
+        renderHomeView();
+    } else {
+        const matched = SUBJECTS.find(s => s.url === hash);
+        if (matched) {
+            renderSubjectView(matched.name, matched.url);
+        } else {
+            renderHomeView();
+        }
+    }
+}
+
 function goHome() {
     closeSidebar();
-    localStorage.setItem('active_page', 'home'); // Lưu vị trí là trang chủ
+    window.location.hash = 'home'; // Đổi Hash sang #home
+}
+
+function openSubject(name, url) {
+    closeSidebar();
+    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
+    window.location.hash = url; // Đổi Hash sang #data/mônhọc.html
+}
+
+function renderHomeView() {
     document.getElementById('content').innerHTML = HOME_HTML;
     renderSubjects();
     renderUserBlocks();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function openSubject(name, url) {
-    closeSidebar();
-    // Lưu vị trí hiện tại là môn học đang mở
-    localStorage.setItem('active_page', JSON.stringify({ name, url }));
-    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
+function renderSubjectView(name, url) {
     if (typeof loadPage === 'function') {
         loadPage(url);
     }
 }
 
+/* --- THEME & BOOKMARKS --- */
 function initTheme() {
     const savedTheme = localStorage.getItem('app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -567,25 +589,14 @@ function toggleSubjects() {
     }
 }
 
-/* KHỞI CHẠY LẠI ĐÚNG TRANG BẠN ĐÃ ĐỨNG TRƯỚC KHI RELOAD */
+// LẮNG NGHE SỰ CỐ TẢI TRANG HOẶC THAY ĐỔI URL HASH
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    
-    const activePage = localStorage.getItem('active_page');
-    if (activePage && activePage !== 'home') {
-        try {
-            const pageObj = JSON.parse(activePage);
-            if (pageObj && pageObj.url) {
-                openSubject(pageObj.name, pageObj.url);
-                return;
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    }
-    
-    // Ngược lại, nếu chưa lưu hoặc lưu 'home' thì mở trang chủ
-    goHome();
+    routePage();
+});
+
+window.addEventListener('hashchange', () => {
+    routePage();
 });
 </script>
 
