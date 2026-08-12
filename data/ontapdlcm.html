@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindmap: Lịch sử ĐCSVN - An ninh chính trị</title>
+<style>
+  :root{
+    --navy-950:#050b16;
+    --navy-900:#0a1526;
+    --navy-800:#0f1e35;
+    --navy-700:#152947;
+    --navy-600:#1c3457;
+    --gold:#d4af37;
+    --gold-soft:#f0d878;
+    --red:#c0392b;
+    --red-soft:#e0574a;
+    --text:#e8edf5;
+    --text-dim:#9aabc4;
+    --line:#22334f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', 'Roboto', Arial, sans-serif;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(212,175,55,0.08), transparent 45%),
+      radial-gradient(circle at 85% 100%, rgba(192,57,43,0.10), transparent 45%),
+      var(--navy-950);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+
+  header{
+    position:relative;
+    padding:38px 20px 30px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(21,41,71,0.6), transparent);
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg, var(--gold) 0%, var(--gold) 33%, var(--red) 33%, var(--red) 66%, var(--gold) 66%);
+    opacity:0.05;
+  }
+  .eyebrow{
+    letter-spacing:4px;
+    font-size:11px;
+    color:var(--gold-soft);
+    text-transform:uppercase;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  h1{
+    margin:0;
+    font-size:clamp(22px, 4vw, 32px);
+    font-weight:800;
+    color:#fff;
+    letter-spacing:0.5px;
+  }
+  h1 span{color:var(--gold-soft);}
+  .subtitle{
+    margin-top:10px;
+    color:var(--text-dim);
+    font-size:14px;
+    max-width:640px;
+    margin-left:auto;margin-right:auto;
+  }
+
+  .controls{
+    max-width:900px;
+    margin:22px auto 0;
+    padding:0 16px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .ctrl-btn{
+    background:var(--navy-800);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:8px 16px;
+    border-radius:20px;
+    font-size:13px;
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  .ctrl-btn:hover{
+    border-color:var(--gold);
+    color:var(--gold-soft);
+  }
+
+  main{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 16px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, var(--navy-800), var(--navy-900));
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 4px 18px rgba(0,0,0,0.35);
+    transition:border-color .25s ease, transform .2s ease;
+  }
+  .card:hover{transform:translateY(-1px);}
+
+  .card-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px 18px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .tab{
+    flex-shrink:0;
+    width:6px;
+    align-self:stretch;
+    border-radius:4px;
+    min-height:30px;
+  }
+  .num{
+    flex-shrink:0;
+    width:34px;height:34px;
+    border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;
+    font-size:13px;
+    color:var(--navy-950);
+  }
+  .head-text{flex:1;}
+  .head-title{
+    font-weight:700;
+    font-size:15px;
+    line-height:1.4;
+    color:var(--text);
+  }
+  .head-tag{
+    font-size:11px;
+    color:var(--gold-soft);
+    margin-top:3px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+  }
+  .chevron{
+    flex-shrink:0;
+    width:22px;height:22px;
+    color:var(--text-dim);
+    transition:transform .3s ease;
+  }
+  .card.open .chevron{transform:rotate(180deg);}
+
+  .card-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+  .card-body-inner{
+    padding:0 18px 20px 62px;
+    border-top:1px dashed var(--line);
+    padding-top:16px;
+  }
+
+  .q-block{
+    font-size:13px;
+    color:var(--text-dim);
+    background:rgba(255,255,255,0.03);
+    border-left:3px solid var(--gold);
+    padding:10px 14px;
+    border-radius:6px;
+    margin-bottom:14px;
+    line-height:1.6;
+    font-style:italic;
+  }
+
+  .branch{
+    margin-bottom:10px;
+    padding-left:16px;
+    border-left:2px solid var(--line);
+    position:relative;
+  }
+  .branch::before{
+    content:"";
+    position:absolute;
+    left:-5px; top:8px;
+    width:8px;height:8px;
+    border-radius:50%;
+  }
+  .branch-title{
+    font-weight:700;
+    font-size:13.5px;
+    margin-bottom:4px;
+    color:var(--gold-soft);
+  }
+  .branch-text{
+    font-size:14px;
+    line-height:1.65;
+    color:var(--text);
+  }
+  .branch-text b{color:#fff;}
+
+  .stage-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .stage{
+    background:rgba(255,255,255,0.025);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 14px;
+  }
+  .stage-name{
+    font-weight:700;
+    font-size:13px;
+    color:var(--red-soft);
+    margin-bottom:3px;
+  }
+  .stage-desc{
+    font-size:13.5px;
+    color:var(--text);
+    line-height:1.55;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12px;
+    margin-top:40px;
+    letter-spacing:0.5px;
+  }
+
+  @media(max-width:480px){
+    .card-body-inner{padding-left:18px;}
+    .num{width:28px;height:28px;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Lịch sử ĐCSVN · Đường lối bảo vệ An ninh Chính trị</div>
+  <h1>MINDMAP <span>AN NINH CHÍNH TRỊ</span></h1>
+  <div class="subtitle">Hệ thống hoá 12 câu hỏi ôn tập — từ ổn định chính trị, chống "diễn biến hòa bình", đường lối qua các kỳ Đại hội, đến vai trò quần chúng nhân dân và tư tưởng Hồ Chí Minh.</div>
+</header>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="toggleAll(true)">Mở tất cả</button>
+  <button class="ctrl-btn" onclick="toggleAll(false)">Đóng tất cả</button>
+</div>
+
+<main id="cards"></main>
+
+<footer>Tài liệu ôn tập nội bộ · D5S-VB2A</footer>
+
+<script>
+const GOLD = "#d4af37", RED="#c0392b", GOLDSOFT="#f0d878";
+
+const data = [
+{
+  color: GOLD,
+  tag: "Ổn định chính trị",
+  title: "Câu 1 — Vì sao giữ vững ổn định chính trị là nhân tố hàng đầu?",
+  q: "Đảng xác định: giữ vững ổn định chính trị là nhân tố hàng đầu để đổi mới có kết quả, là nhân tố quyết định đảm bảo ổn định trước tác động phức tạp của tình hình quốc tế và trong nước.",
+  branches: [
+    {t:"Vai trò", d:"Ổn định chính trị là <b>điều kiện tiên quyết</b> để phát triển kinh tế - xã hội, mở rộng đối ngoại và giữ vững định hướng XHCN."},
+    {t:"Nguy cơ nếu mất ổn định", d:"Nếu không giữ được ổn định, sẽ tạo <b>kẽ hở</b> cho thế lực thù địch kích động chống phá, làm gián đoạn công cuộc đổi mới."},
+    {t:"Chủ trương", d:"Bảo vệ an ninh chính trị chính là <b>bảo vệ Đảng, Nhà nước, chế độ</b>, bảo vệ môi trường hòa bình để đổi mới thành công."}
+  ]
+},
+{
+  color: RED,
+  tag: "Chống phá & Diễn biến hòa bình",
+  title: "Câu 2 — Chủ trương bảo vệ an ninh chính trị trước âm mưu \"diễn biến hòa bình\"",
+  q: "Các thế lực thù địch trong và ngoài nước cấu kết khai thác khủng hoảng CNXH và sơ hở của ta, chống phá bằng thủ đoạn thâm độc, xảo quyệt, công khai lẫn ngầm; có âm mưu diễn biến hòa bình.",
+  branches: [
+    {t:"Đấu tranh trực diện", d:"Kiên quyết làm thất bại mọi âm mưu chống phá, nhất là chiến lược <b>\"diễn biến hòa bình\", bạo loạn lật đổ</b>."},
+    {t:"Giữ vững nền tảng", d:"Giữ vững ổn định chính trị, bảo vệ Đảng, Nhà nước và <b>chế độ xã hội chủ nghĩa</b>."},
+    {t:"Sức mạnh tổng hợp", d:"Phát huy sức mạnh cả hệ thống chính trị; kết hợp <b>quốc phòng với an ninh</b>, gắn phát triển KT-XH với bảo vệ an ninh."},
+    {t:"Phong trào & quản lý", d:"Phát động phong trào quần chúng bảo vệ an ninh Tổ quốc; tăng cường <b>quản lý nhà nước</b> trên lĩnh vực nhạy cảm."}
+  ]
+},
+{
+  color: GOLD,
+  tag: "Cương lĩnh 1991",
+  title: "Câu 3 — Cương lĩnh xây dựng đất nước thời kỳ quá độ lên CNXH (1991)",
+  q: "Để thực hiện mục tiêu dân giàu, nước mạnh theo con đường XHCN, quan trọng nhất là cải biến kinh tế - xã hội kém phát triển và chiến thắng lực lượng cản trở, trước hết là thế lực thù địch chống độc lập dân tộc và CNXH.",
+  branches: [
+    {t:"Hai nhiệm vụ chiến lược", d:"Xây dựng và bảo vệ Tổ quốc <b>gắn bó chặt chẽ</b>; phát triển kinh tế không tách rời bảo vệ an ninh chính trị."},
+    {t:"Liên hệ thực tiễn công tác", d:"Cán bộ, chiến sĩ phải nêu cao cảnh giác, nắm chắc tình hình, <b>bảo vệ bí mật nhà nước</b>, đấu tranh phản bác quan điểm sai trái."},
+    {t:"Không sơ hở", d:"Không để sơ hở trên các lĩnh vực <b>nội bộ, tư tưởng, dân tộc, tôn giáo, an ninh mạng và cơ sở</b>."}
+  ]
+},
+{
+  color: RED,
+  tag: "Thách thức & Chủ trương",
+  title: "Câu 4 — Thách thức an ninh chính trị & chủ trương của Đảng",
+  q: "Những thách thức về an ninh chính trị đối với nước ta? Đảng đã đề ra chủ trương bảo vệ như thế nào?",
+  branches: [
+    {t:"Thách thức bên ngoài", d:"Tác động tiêu cực của biến động quốc tế; thế lực thù địch lợi dụng <b>dân chủ, nhân quyền, dân tộc, tôn giáo</b>; âm mưu \"diễn biến hòa bình\", bạo loạn lật đổ."},
+    {t:"Thách thức nội tại", d:"Tham nhũng, quan liêu, tiêu cực, mất đoàn kết, các vấn đề xã hội phức tạp <b>dễ bị lợi dụng</b> gây mất ổn định."},
+    {t:"Chủ trương ứng phó", d:"Tăng cường lãnh đạo tuyệt đối, trực tiếp; chủ động phòng ngừa <b>\"từ sớm, từ xa\"</b>; kết hợp an ninh với quốc phòng, đối ngoại, kinh tế - xã hội."}
+  ]
+},
+{
+  color: GOLD,
+  tag: "Qua các kỳ Đại hội",
+  title: "Câu 5 — Đường lối bảo vệ an ninh chính trị qua từng kỳ Đại hội",
+  q: "Trình bày khái quát đường lối bảo vệ an ninh chính trị nước ta hiện nay theo từng kỳ Đại hội Đảng.",
+  stages: [
+    {n:"Đại hội VI", d:"Đặt nền tảng đổi mới nhận thức; đấu tranh an ninh chính trị gay gắt; coi đây là bộ phận quan trọng của chiến lược bảo vệ Tổ quốc."},
+    {n:"Đại hội VII", d:"Khẳng định ổn định chính trị là nhân tố hàng đầu của đổi mới; nhấn mạnh chống \"diễn biến hòa bình\"."},
+    {n:"Đại hội VIII", d:"Hoàn chỉnh hệ thống quan điểm, phương châm, nguyên tắc lãnh đạo; gắn thế trận an ninh nhân dân với quốc phòng toàn dân, đề cao \"dân biết, dân bàn, dân làm, dân kiểm tra\"."},
+    {n:"Đại hội IX", d:"Xác định nội hàm bảo vệ Tổ quốc: độc lập, chủ quyền, toàn vẹn lãnh thổ, an ninh quốc gia, TTATXH, văn hóa, Đảng, Nhà nước, Nhân dân, chế độ."},
+    {n:"Đại hội X", d:"Ngăn chặn, đẩy lùi âm mưu chống phá; giữ vững an ninh nội địa; xây dựng thế trận lòng dân."},
+    {n:"Đại hội XI", d:"Tiếp tục khẳng định phối hợp chặt chẽ đối ngoại với quốc phòng, an ninh."},
+    {n:"Đại hội XII", d:"Mục tiêu trọng yếu: bảo vệ vững chắc Tổ quốc, bảo vệ Đảng, Nhà nước, Nhân dân, chế độ, công cuộc đổi mới."},
+    {n:"Đại hội XIII", d:"Tư duy bảo vệ Tổ quốc \"từ sớm, từ xa, từ khi nước chưa nguy\"; xây dựng thế trận lòng dân vững chắc."}
+  ]
+},
+{
+  color: RED,
+  tag: "Sự chỉ đạo của Đảng",
+  title: "Câu 6 — Sự chỉ đạo của Đảng trên lĩnh vực an ninh chính trị",
+  branches: [
+    {t:"Lực lượng nòng cốt", d:"Toàn Đảng, toàn quân, toàn dân, lấy <b>lực lượng An ninh nhân dân</b> làm nòng cốt, phối hợp các ban, ngành, đoàn thể."},
+    {t:"Đổi mới nắm tình hình", d:"Đổi mới công tác nắm tình hình; xây dựng <b>cơ chế phối hợp</b> giữa Đảng, chính quyền, công an và lực lượng liên quan."},
+    {t:"Trọng điểm & quản lý", d:"Tập trung địa bàn trọng điểm, lĩnh vực nhạy cảm; tăng cường <b>quản lý nhà nước</b>."},
+    {t:"Kết hợp vận động & nghiệp vụ", d:"Kết hợp công tác vận động quần chúng với <b>công tác nghiệp vụ chuyên môn</b>."}
+  ]
+},
+{
+  color: GOLD,
+  tag: "Thành tựu & Kinh nghiệm",
+  title: "Câu 7 — Thành tựu và kinh nghiệm lãnh đạo của Đảng",
+  branches: [
+    {t:"Thành tựu", d:"Làm thất bại nhiều âm mưu \"diễn biến hòa bình\", bạo loạn lật đổ; giữ vững ổn định chính trị; bảo vệ an toàn các <b>kỳ Đại hội Đảng</b>; củng cố lực lượng và thế trận an ninh nhân dân."},
+    {t:"Kinh nghiệm 1", d:"Giữ vững sự lãnh đạo <b>tuyệt đối, trực tiếp về mọi mặt</b> của Đảng."},
+    {t:"Kinh nghiệm 2", d:"Phát huy sức mạnh tổng hợp của cả hệ thống chính trị và nhân dân; kết hợp chặt chẽ <b>phòng ngừa với đấu tranh</b>."},
+    {t:"Kinh nghiệm 3", d:"Gắn bảo vệ an ninh chính trị với nhiệm vụ <b>đổi mới, phát triển và hội nhập</b>."}
+  ]
+},
+{
+  color: RED,
+  tag: "An ninh — Kinh tế",
+  title: "Câu 8 — An ninh chính trị góp phần phát triển kinh tế - xã hội",
+  branches: [
+    {t:"Môi trường phát triển", d:"Bảo vệ an ninh chính trị tạo môi trường <b>hòa bình, ổn định</b> để phát triển KT-XH, công nghiệp hóa, hiện đại hóa, mở rộng đối ngoại."},
+    {t:"Vừa điều kiện, vừa mục tiêu", d:"An ninh quốc gia, TTATXH, độc lập dân tộc và hòa bình vừa là <b>điều kiện</b>, vừa là <b>nội dung của mục tiêu</b> phát triển."},
+    {t:"Hệ quả nếu mất an ninh", d:"Nếu an ninh trật tự không đảm bảo → sản xuất, đầu tư, đời sống xã hội, <b>lòng tin của nhân dân</b> đều bị ảnh hưởng."}
+  ]
+},
+{
+  color: GOLD,
+  tag: "Sức mạnh Quần chúng",
+  title: "Câu 9 — Nhiệm vụ trọng tâm phát huy sức mạnh quần chúng nhân dân",
+  branches: [
+    {t:"Tuyên truyền, giáo dục", d:"Giúp nhân dân hiểu quyền lợi, nghĩa vụ trong bảo vệ ANTT; phổ biến pháp luật, tạo <b>đồng thuận xã hội</b>."},
+    {t:"Cơ chế vận hành", d:"Quán triệt cơ chế <b>\"Đảng lãnh đạo, Nhà nước quản lý, Nhân dân làm chủ\"</b>."},
+    {t:"Phong trào toàn dân", d:"Đổi mới nội dung, phương pháp phong trào <b>Toàn dân bảo vệ an ninh Tổ quốc</b>; nhân rộng mô hình tự quản, điển hình tiên tiến."},
+    {t:"Xây dựng lực lượng CAND", d:"Xây dựng Công an nhân dân <b>trong sạch, vững mạnh</b> làm nòng cốt."},
+    {t:"Liên hệ bản thân", d:"Chấp hành nghiêm pháp luật; gần dân, trọng dân, hiểu dân; chủ động phát hiện, báo cáo dấu hiệu phức tạp; giữ gìn <b>kỷ luật, đạo đức, tác phong</b>."}
+  ]
+},
+{
+  color: RED,
+  tag: "Vận dụng của Đảng",
+  title: "Câu 10 — Sự vận dụng của Đảng & ý nghĩa với lực lượng CAND",
+  branches: [
+    {t:"Cách vận dụng", d:"Coi bảo vệ ANTT là sự nghiệp của <b>toàn dân</b>; xây dựng thế trận an ninh nhân dân gắn với thế trận quốc phòng toàn dân."},
+    {t:"Hoạt động cụ thể", d:"Phát động phong trào quần chúng bảo vệ an ninh Tổ quốc; xây dựng <b>địa bàn, cơ quan, đơn vị an toàn</b>."},
+    {t:"Ý nghĩa với CAND", d:"Công an phải làm tốt công tác dân vận, <b>dựa vào dân</b> để nắm tình hình, phòng ngừa, phát hiện, đấu tranh tội phạm."},
+    {t:"Lưu ý", d:"Không được <b>\"giao khoán\"</b> nhiệm vụ bảo vệ ANTT cho lực lượng chuyên trách tách rời nhân dân."}
+  ]
+},
+{
+  color: GOLD,
+  tag: "Tư tưởng Hồ Chí Minh",
+  title: "Câu 11 — Tư tưởng Hồ Chí Minh về vai trò quần chúng nhân dân",
+  branches: [
+    {t:"Vị trí của dân", d:"Quần chúng nhân dân là <b>nền tảng, chỗ dựa, cội nguồn sức mạnh</b>, là lực lượng quyết định thành công sự nghiệp bảo vệ ANTT."},
+    {t:"Nguyên tắc \"dựa vào dân\"", d:"\"Phải dựa vào dân\"; công an <b>không được rời xa dân</b>."},
+    {t:"Vai trò tai mắt", d:"Nhân dân đông đảo, có mặt mọi nơi, là <b>nguồn tai mắt rộng khắp</b>, giúp công an phòng gian, trừ gian, nắm tình hình."},
+    {t:"Điều kiện để được dân giúp", d:"Cán bộ công an phải <b>gần dân, thương dân, trọng dân, vì dân</b> và được lòng dân."}
+  ]
+},
+{
+  color: RED,
+  tag: "Chủ nghĩa Mác - Lênin",
+  title: "Câu 12 — Quan điểm Mác - Lênin về vai trò quần chúng nhân dân",
+  branches: [
+    {t:"Cơ sở lý luận", d:"Mác - Lênin không bàn trực tiếp về ANTT, nhưng xây dựng cơ sở lý luận về <b>vai trò quyết định</b> của quần chúng trong lịch sử, cách mạng, bảo vệ chính quyền."},
+    {t:"Quan điểm V.I. Lênin", d:"Sức mạnh chính quyền cách mạng ở chỗ <b>dựa vào quần chúng lao động</b>, phát huy quyền làm chủ, huy động hàng triệu người bảo vệ thành quả cách mạng."},
+    {t:"Kết luận", d:"Quần chúng nhân dân là <b>lực lượng nền tảng</b>; lực lượng chuyên trách giữ vai trò <b>nòng cốt, tổ chức và hướng dẫn</b>."}
+  ]
+}
+];
+
+const container = document.getElementById('cards');
+
+data.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  let bodyContent = '';
+  if(item.q){
+    bodyContent += `<div class="q-block">${item.q}</div>`;
+  }
+  if(item.branches){
+    bodyContent += item.branches.map(b => `
+      <div class="branch" style="border-left-color:${item.color}44;">
+        <div class="branch-title" style="color:${item.color === GOLD ? GOLDSOFT : '#e0574a'};">${b.t}</div>
+        <div class="branch-text">${b.d}</div>
+      </div>
+    `).join('');
+  }
+  if(item.stages){
+    bodyContent += `<div class="stage-list">` + item.stages.map(s => `
+      <div class="stage">
+        <div class="stage-name">${s.n}</div>
+        <div class="stage-desc">${s.d}</div>
+      </div>
+    `).join('') + `</div>`;
+  }
+
+  card.innerHTML = `
+    <div class="card-head" onclick="this.parentElement.classList.toggle('open'); syncHeight(this.parentElement);">
+      <div class="tab" style="background:${item.color};"></div>
+      <div class="num" style="background:${item.color};">${i+1}</div>
+      <div class="head-text">
+        <div class="head-title">${item.title}</div>
+        <div class="head-tag">${item.tag}</div>
+      </div>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-body-inner">${bodyContent}</div>
+    </div>
+  `;
+  container.appendChild(card);
+});
+
+function syncHeight(card){
+  const body = card.querySelector('.card-body');
+  if(card.classList.contains('open')){
+    body.style.maxHeight = body.scrollHeight + 'px';
+  } else {
+    body.style.maxHeight = '0px';
+  }
+}
+
+function toggleAll(open){
+  document.querySelectorAll('.card').forEach(card => {
+    if(open) card.classList.add('open'); else card.classList.remove('open');
+    syncHeight(card);
+  });
+}
+</script>
+
+</body>
+</html>
