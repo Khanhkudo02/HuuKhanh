@@ -365,7 +365,7 @@ body {
     </aside>
 
     <main id="content">
-        <!-- NỘI DUNG TRANG CHỦ SẼ ĐƯỢC CHÈN BẰNG JAVASCRIPT -->
+        <!-- NỘI DUNG SẼ ĐƯỢC LOAD DỰA TRÊN TRẠNG THÁI LƯU TRỮ -->
     </main>
 
 </div>
@@ -382,7 +382,6 @@ const SUBJECTS = [
     { name: '📋 Ôn Tập Đường Lối Cách Mạng', url: 'data/ontapdlcm.html' }
 ];
 
-// MÃ HTML GIAO DIỆN TRANG CHỦ
 const HOME_HTML = `
     <div class="welcome">
         <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
@@ -436,9 +435,10 @@ function closeSidebar() {
     if (sidebar) sidebar.classList.remove('active');
 }
 
-// XỬ LÝ QUAY VỀ TRANG CHỦ TRỰC TIẾP
+/* QUẢN LÝ ĐIỀU HƯỚNG VÀ LƯU TRẠNG THÁI NƠI ĐANG ĐỨNG */
 function goHome() {
     closeSidebar();
+    localStorage.setItem('active_page', 'home'); // Lưu vị trí là trang chủ
     document.getElementById('content').innerHTML = HOME_HTML;
     renderSubjects();
     renderUserBlocks();
@@ -447,6 +447,8 @@ function goHome() {
 
 function openSubject(name, url) {
     closeSidebar();
+    // Lưu vị trí hiện tại là môn học đang mở
+    localStorage.setItem('active_page', JSON.stringify({ name, url }));
     localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
     if (typeof loadPage === 'function') {
         loadPage(url);
@@ -565,9 +567,24 @@ function toggleSubjects() {
     }
 }
 
-// Khởi chạy giao diện ban đầu
+/* KHỞI CHẠY LẠI ĐÚNG TRANG BẠN ĐÃ ĐỨNG TRƯỚC KHI RELOAD */
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    
+    const activePage = localStorage.getItem('active_page');
+    if (activePage && activePage !== 'home') {
+        try {
+            const pageObj = JSON.parse(activePage);
+            if (pageObj && pageObj.url) {
+                openSubject(pageObj.name, pageObj.url);
+                return;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    
+    // Ngược lại, nếu chưa lưu hoặc lưu 'home' thì mở trang chủ
     goHome();
 });
 </script>
