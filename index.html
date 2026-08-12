@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho học tập cá nhân</title>
 
-<!-- Nhập Font chữ Inter hiện đại -->
+<!-- Font chữ Inter hiện đại -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,7 +84,6 @@ body {
     gap: 12px;
 }
 
-/* Kiểu dáng các nút bấm tương tác */
 .pill-btn {
     background: rgba(30, 41, 59, 0.8);
     border: 1px solid rgba(56, 189, 248, 0.2);
@@ -105,7 +104,6 @@ body {
     background: rgba(56, 189, 248, 0.15);
 }
 
-/* Danh sách môn học hiển thị khi bấm nút */
 .subject-list {
     display: none;
     flex-direction: column;
@@ -194,13 +192,11 @@ body {
             <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
             <div class="info-pills">
-                <!-- Nút bấm mở danh sách môn học -->
                 <div class="pill-btn" onclick="toggleSubjects()">
                     <span>📚 Lý thuyết các môn học</span>
                     <span id="arrow-icon">▼</span>
                 </div>
 
-                <!-- Danh sách các môn học sổ xuống -->
                 <div class="subject-list" id="subject-container">
                     <div class="subject-item" onclick="loadPage('data/psychology.html')">🧠 Tâm lý học</div>
                     <div class="subject-item" onclick="loadPage('data/english.html')">🇬🇧 Tiếng Anh</div>
@@ -209,9 +205,8 @@ body {
                     <div class="subject-item" onclick="loadPage('data/luat.html')">⚖️ Luật Hình Sự</div>
                 </div>
 
-                <!-- Nút Audio ôn tập -->
                 <div class="pill-btn" onclick="loadPage('data/ontapdlcm.html')">
-                    <span>ôn tập</span>
+                    <span>🎧 Audio ôn tập</span>
                     <span>➔</span>
                 </div>
             </div>
@@ -225,11 +220,46 @@ body {
 <script src="js/app.js"></script>
 
 <script>
-// Hàm bật/tắt danh sách môn học trực tiếp trên trang chủ
+// Định nghĩa cấu trúc giao diện trang chủ mới
+const HOME_CONTENT = `
+    <div class="welcome">
+        <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
+        <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
+        <h1>Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span></h1>
+        <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
+        <div class="info-pills">
+            <div class="pill-btn" onclick="toggleSubjects()">
+                <span>📚 Lý thuyết các môn học</span>
+                <span id="arrow-icon">▼</span>
+            </div>
+            <div class="subject-list" id="subject-container">
+                <div class="subject-item" onclick="loadPage('data/psychology.html')">🧠 Tâm lý học</div>
+                <div class="subject-item" onclick="loadPage('data/english.html')">🇬🇧 Tiếng Anh</div>
+                <div class="subject-item" onclick="loadPage('data/dlcm.html')">🇻🇳 Đường lối cách mạng</div>
+                <div class="subject-item" onclick="loadPage('data/lscand.html')">🇻🇳 Lịch Sử Công An Nhân Dân</div>
+                <div class="subject-item" onclick="loadPage('data/luat.html')">⚖️ Luật Hình Sự</div>
+            </div>
+            <div class="pill-btn" onclick="loadPage('data/ontapdlcm.html')">
+                <span>🎧 Audio ôn tập</span>
+                <span>➔</span>
+            </div>
+        </div>
+    </div>
+`;
+
+// Ghi đè hàm goHome cũ trong js/app.js để cập nhật chuẩn giao diện mới
+function goHome() {
+    document.getElementById('content').innerHTML = HOME_CONTENT;
+    var sidebar = document.getElementById('sidebar');
+    if (sidebar && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+    }
+}
+
+// Bật/tắt danh sách môn học
 function toggleSubjects() {
     var list = document.getElementById('subject-container');
     var arrow = document.getElementById('arrow-icon');
-    
     if (list.style.display === 'flex') {
         list.style.display = 'none';
         arrow.textContent = '▼';
