@@ -6,6 +6,34 @@
 <title>Kho học tập cá nhân</title>
 
 <link rel="stylesheet" href="css/style.css">
+
+<style>
+/* Cấu hình hình nền toàn màn hình */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Đổi 'images/logo.jpg' thành đường dẫn thực tế đến file ảnh của bạn */
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                url('images/logo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff; /* Đổi màu chữ sang trắng để dễ nhìn trên nền tối */
+}
+
+/* Đảm bảo khung nội dung chính nằm trên nền và có khoảng thở */
+.layout {
+    position: relative;
+    z-index: 1;
+}
+
+.welcome {
+    background: rgba(0, 0, 0, 0.4); /* Nền mờ nhẹ cho khung văn bản */
+    padding: 20px;
+    border-radius: 12px;
+    display: inline-block;
+    backdrop-filter: blur(4px); /* Hiệu ứng mờ kính hiện đại */
+}
+</style>
 </head>
 <body>
 
