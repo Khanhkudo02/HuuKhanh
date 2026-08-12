@@ -1,1948 +1,558 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
->
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho học tập cá nhân</title>
 
+<!-- FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- =====================================================
-     FONT
-===================================================== -->
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
-
-<!-- =====================================================
-     CSS CHÍNH
-===================================================== -->
-
-<link
-    rel="stylesheet"
-    href="css/style.css"
->
-
+<!-- CSS CHÍNH -->
+<link rel="stylesheet" href="css/style.css">
 
 <style>
-
-/* =====================================================
-   THEME
-===================================================== */
-
+/* THEME */
 :root {
-
     --bg-color: #0b0f19;
-
-    --card-bg:
-        rgba(15,23,42,0.85);
-
-    --text-primary:
-        #f1f5f9;
-
-    --text-secondary:
-        #94a3b8;
-
-    --accent-color:
-        #38bdf8;
-
-    --border-color:
-        rgba(255,255,255,0.08);
-
-    --pill-bg:
-        rgba(30,41,59,0.8);
-
-    --input-bg:
-        rgba(15,23,42,0.6);
-
-    --sidebar-bg:
-        #0f172a;
-
+    --card-bg: rgba(15,23,42,0.85);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --border-color: rgba(255,255,255,0.08);
+    --pill-bg: rgba(30,41,59,0.8);
+    --input-bg: rgba(15,23,42,0.6);
+    --sidebar-bg: #0f172a;
 }
-
 
 [data-theme="light"] {
-
-    --bg-color:
-        #f8fafc;
-
-    --card-bg:
-        rgba(255,255,255,0.9);
-
-    --text-primary:
-        #0f172a;
-
-    --text-secondary:
-        #64748b;
-
-    --accent-color:
-        #0284c7;
-
-    --border-color:
-        rgba(0,0,0,0.1);
-
-    --pill-bg:
-        rgba(241,245,249,0.9);
-
-    --input-bg:
-        #ffffff;
-
-    --sidebar-bg:
-        #ffffff;
-
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255,255,255,0.9);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-color: #0284c7;
+    --border-color: rgba(0,0,0,0.1);
+    --pill-bg: rgba(241,245,249,0.9);
+    --input-bg: #ffffff;
+    --sidebar-bg: #ffffff;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
-
+/* BODY */
 body {
-
     margin: 0 !important;
-
     padding: 0 !important;
-
     min-height: 100vh !important;
-
-    background:
-        var(--bg-color) !important;
-
-    color:
-        var(--text-primary) !important;
-
-    font-family:
-        'Inter',
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif !important;
-
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-
+    background: var(--bg-color) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 .layout {
-
-    background:
-        transparent !important;
-
+    background: transparent !important;
     padding-top: 10px;
-
 }
 
-
-/* =====================================================
-   NAVBAR
-===================================================== */
-
+/* NAVBAR */
 .top-navbar {
-
     display: flex;
-
     justify-content: flex-end;
-
     align-items: center;
-
     gap: 10px;
-
     padding: 12px 16px;
-
-    background:
-        var(--bg-color);
-
+    background: var(--bg-color);
     position: sticky;
-
     top: 0;
-
     z-index: 99;
-
-    border-bottom:
-        1px solid var(--border-color);
-
+    border-bottom: 1px solid var(--border-color);
 }
-
 
 .nav-btn {
-
-    background:
-        var(--pill-bg);
-
-    border:
-        1px solid var(--border-color);
-
-    color:
-        var(--text-primary);
-
-    padding:
-        8px 14px;
-
-    border-radius:
-        12px;
-
-    cursor:
-        pointer;
-
-    font-size:
-        0.88rem;
-
-    font-weight:
-        600;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-    backdrop-filter:
-        blur(8px);
-
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
 }
 
+.nav-btn:active { transform: scale(0.95); }
 
-.nav-btn:active {
-
-    transform:
-        scale(0.95);
-
-}
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
+/* SIDEBAR */
 .sidebar {
-
-    position:
-        fixed;
-
+    position: fixed;
     top: 0;
-
     right: -280px;
-
     left: auto !important;
-
     width: 260px;
-
     height: 100vh;
-
-    background:
-        var(--sidebar-bg) !important;
-
-    border-left:
-        1px solid var(--border-color);
-
-    box-shadow:
-        -10px 0 25px rgba(0,0,0,0.3);
-
-    transition:
-        right 0.3s ease-in-out;
-
+    background: var(--sidebar-bg) !important;
+    border-left: 1px solid var(--border-color);
+    box-shadow: -10px 0 25px rgba(0,0,0,0.3);
+    transition: right 0.3s ease-in-out;
     z-index: 1000;
-
     padding: 20px;
-
     box-sizing: border-box;
-
     overflow-y: auto;
-
 }
 
-
-.sidebar.active {
-
-    right: 0 !important;
-
-}
-
+.sidebar.active { right: 0 !important; }
 
 .sidebar-header {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    margin-bottom:
-        20px;
-
-    padding-bottom:
-        10px;
-
-    border-bottom:
-        1px solid var(--border-color);
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
 }
-
 
 .close-sidebar-btn {
-
-    background:
-        transparent;
-
-    border:
-        none;
-
-    color:
-        var(--text-primary);
-
-    font-size:
-        1.4rem;
-
-    cursor:
-        pointer;
-
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    cursor: pointer;
 }
 
-
-.sidebar ul {
-
-    list-style:
-        none;
-
-    padding:
-        0;
-
-    margin:
-        0;
-
-}
-
+.sidebar ul { list-style: none; padding: 0; margin: 0; }
 
 .sidebar li {
-
-    padding:
-        12px 14px;
-
-    margin-bottom:
-        8px;
-
-    border-radius:
-        12px;
-
-    background:
-        var(--pill-bg);
-
-    color:
-        var(--text-primary);
-
-    font-size:
-        0.9rem;
-
-    font-weight:
-        600;
-
-    cursor:
-        pointer;
-
-    border:
-        1px solid var(--border-color);
-
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
 }
-
 
 .sidebar li:active {
-
-    background:
-        var(--accent-color);
-
-    color:
-        #ffffff;
-
+    background: var(--accent-color);
+    color: #ffffff;
 }
-
 
 .sidebar-title {
-
-    font-size:
-        0.75rem;
-
-    font-weight:
-        700;
-
-    color:
-        var(--text-secondary);
-
-    margin:
-        16px 0 8px 4px;
-
-    text-transform:
-        uppercase;
-
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 16px 0 8px 4px;
+    text-transform: uppercase;
 }
 
-
-/* =====================================================
-   WELCOME
-===================================================== */
-
+/* WELCOME */
 .welcome {
-
-    background:
-        var(--card-bg) !important;
-
-    border:
-        1px solid var(--border-color) !important;
-
-    padding:
-        24px 20px !important;
-
-    border-radius:
-        24px !important;
-
-    backdrop-filter:
-        blur(12px) !important;
-
-    text-align:
-        center !important;
-
-    max-width:
-        360px !important;
-
-    width:
-        88% !important;
-
-    box-shadow:
-        0 20px 40px rgba(0,0,0,0.15) !important;
-
-    margin:
-        15px auto 30px auto !important;
-
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 24px 20px !important;
+    border-radius: 24px !important;
+    backdrop-filter: blur(12px) !important;
+    text-align: center !important;
+    max-width: 360px !important;
+    width: 88% !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    margin: 15px auto 30px auto !important;
 }
-
 
 .badge-tag {
-
-    display:
-        inline-block;
-
-    padding:
-        5px 12px;
-
-    font-size:
-        0.72rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        1.2px;
-
-    color:
-        var(--accent-color);
-
-    background:
-        rgba(56,189,248,0.1);
-
-    border:
-        1px solid rgba(56,189,248,0.3);
-
-    border-radius:
-        20px;
-
-    margin-bottom:
-        12px;
-
-    text-transform:
-        uppercase;
-
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--accent-color);
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
-
 
 .center-logo {
-
-    width:
-        100px !important;
-
-    height:
-        auto !important;
-
-    display:
-        block !important;
-
-    margin:
-        0 auto 12px auto !important;
-
-    border-radius:
-        12px;
-
+    width: 100px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto 12px auto !important;
+    border-radius: 12px;
 }
-
 
 .welcome h1 {
-
-    font-size:
-        1.25rem !important;
-
-    font-weight:
-        800 !important;
-
-    margin-bottom:
-        6px !important;
-
-    color:
-        var(--text-primary) !important;
-
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 6px !important;
+    color: var(--text-primary) !important;
 }
 
-
-.welcome h1 .highlight {
-
-    color:
-        var(--accent-color) !important;
-
-}
-
+.welcome h1 .highlight { color: var(--accent-color) !important; }
 
 .welcome p {
-
-    font-size:
-        0.88rem !important;
-
-    color:
-        var(--text-secondary) !important;
-
-    margin:
-        4px 0 16px 0 !important;
-
+    font-size: 0.88rem !important;
+    color: var(--text-secondary) !important;
+    margin: 4px 0 16px 0 !important;
 }
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.search-box {
-
-    position:
-        relative;
-
-    margin-bottom:
-        16px;
-
-}
-
+/* SEARCH */
+.search-box { position: relative; margin-bottom: 16px; }
 
 .search-input {
-
-    width:
-        100%;
-
-    padding:
-        10px 14px;
-
-    box-sizing:
-        border-box;
-
-    border-radius:
-        12px;
-
-    border:
-        1px solid var(--border-color);
-
-    background:
-        var(--input-bg);
-
-    color:
-        var(--text-primary);
-
-    font-size:
-        0.88rem;
-
-    outline:
-        none;
-
+    width: 100%;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    outline: none;
 }
-
 
 .search-results {
-
-    position:
-        absolute;
-
-    top:
-        100%;
-
-    left:
-        0;
-
-    right:
-        0;
-
-    background:
-        var(--card-bg);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        12px;
-
-    margin-top:
-        4px;
-
-    max-height:
-        180px;
-
-    overflow-y:
-        auto;
-
-    display:
-        none;
-
-    z-index:
-        50;
-
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-top: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    display: none;
+    z-index: 50;
 }
-
 
 .search-item {
-
-    padding:
-        10px 14px;
-
-    text-align:
-        left;
-
-    font-size:
-        0.85rem;
-
-    cursor:
-        pointer;
-
-    border-bottom:
-        1px solid var(--border-color);
-
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
 }
 
-
-/* =====================================================
-   SUBJECT
-===================================================== */
-
-.info-pills {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    gap:
-        10px;
-
-}
-
+/* SUBJECT */
+.info-pills { display: flex; flex-direction: column; gap: 10px; }
 
 .pill-btn {
-
-    background:
-        var(--pill-bg);
-
-    border:
-        1px solid var(--border-color);
-
-    padding:
-        12px 14px;
-
-    border-radius:
-        14px;
-
-    font-size:
-        0.88rem;
-
-    font-weight:
-        600;
-
-    color:
-        var(--text-primary);
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    cursor:
-        pointer;
-
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 }
-
 
 .subject-list {
-
-    display:
-        none;
-
-    flex-direction:
-        column;
-
-    gap:
-        8px;
-
-    margin-top:
-        6px;
-
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
 }
 
-
-.subject-item-wrapper {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-}
-
+.subject-item-wrapper { display: flex; align-items: center; gap: 6px; }
 
 .subject-item {
-
-    flex:
-        1;
-
-    background:
-        var(--pill-bg);
-
-    border:
-        1px solid var(--border-color);
-
-    padding:
-        10px 12px;
-
-    border-radius:
-        10px;
-
-    font-size:
-        0.85rem;
-
-    color:
-        var(--accent-color);
-
-    text-align:
-        left;
-
-    cursor:
-        pointer;
-
+    flex: 1;
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-align: left;
+    cursor: pointer;
 }
-
 
 .star-btn {
-
-    background:
-        transparent;
-
-    border:
-        none;
-
-    font-size:
-        1.1rem;
-
-    cursor:
-        pointer;
-
-    padding:
-        4px 8px;
-
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
 }
-
 
 .section-block {
-
-    text-align:
-        left;
-
-    margin-top:
-        14px;
-
-    padding-top:
-        12px;
-
-    border-top:
-        1px dashed var(--border-color);
-
+    text-align: left;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
 }
-
 
 .section-title {
-
-    font-size:
-        0.78rem;
-
-    font-weight:
-        700;
-
-    color:
-        var(--text-secondary);
-
-    margin-bottom:
-        8px;
-
-    text-transform:
-        uppercase;
-
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
 }
-
 
 .recent-chip {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-    background:
-        rgba(56,189,248,0.12);
-
-    border:
-        1px solid rgba(56,189,248,0.3);
-
-    color:
-        var(--accent-color);
-
-    padding:
-        6px 12px;
-
-    border-radius:
-        20px;
-
-    font-size:
-        0.82rem;
-
-    font-weight:
-        600;
-
-    cursor:
-        pointer;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(56,189,248,0.12);
+    border: 1px solid rgba(56,189,248,0.3);
+    color: var(--accent-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-
-/* =====================================================
-   NÚT VỀ TRANG CHỦ TRONG TRANG MÔN
-===================================================== */
 
 .back-home {
-
-    display:
-        block;
-
-    margin:
-        10px auto 15px auto;
-
-    padding:
-        10px 16px;
-
-    border-radius:
-        12px;
-
-    border:
-        1px solid var(--border-color);
-
-    background:
-        var(--pill-bg);
-
-    color:
-        var(--text-primary);
-
-    font-weight:
-        600;
-
-    cursor:
-        pointer;
-
+    display: block;
+    margin: 10px auto 15px auto;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--pill-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
 }
 
-
-.back-home:active {
-
-    transform:
-        scale(0.97);
-
-}
-
+.back-home:active { transform: scale(0.97); }
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     THANH TRÊN
-===================================================== -->
-
 <div class="top-navbar">
-
-    <button
-        class="nav-btn"
-        onclick="toggleTheme()"
-        id="theme-btn">
-
-        🌙 Tối
-
-    </button>
-
-
-    <button
-        class="nav-btn"
-        onclick="toggleSidebar()">
-
-        ☰ Menu
-
-    </button>
-
+    <button class="nav-btn" onclick="toggleTheme()" id="theme-btn">🌙 Tối</button>
+    <button class="nav-btn" onclick="toggleSidebar()">☰ Menu</button>
 </div>
-
-
-
-<!-- =====================================================
-     LAYOUT
-===================================================== -->
 
 <div class="layout">
-
-
-    <!-- =================================================
-         SIDEBAR
-    ================================================== -->
-
-    <aside
-        class="sidebar"
-        id="sidebar">
-
-
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-
-            <span style="font-weight:700;">
-                📚 Danh Mục
-            </span>
-
-
-            <button
-                class="close-sidebar-btn"
-                onclick="closeSidebar()">
-
-                ✕
-
-            </button>
-
+            <span style="font-weight:700;">📚 Danh Mục</span>
+            <button class="close-sidebar-btn" onclick="closeSidebar()">✕</button>
         </div>
-
-
         <ul>
-
-
-            <!-- TRANG CHỦ -->
-
-            <li onclick="goHome()">
-
-                🏠 Trang chủ
-
-            </li>
-
-
-            <!-- MÔN HỌC -->
-
-            <div class="sidebar-title">
-
-                🏫 Môn Học
-
-            </div>
-
-
-            <li
-                onclick="openSubject(
-                    '🧠 Tâm lý học',
-                    'data/psychology.html'
-                )">
-
-                🧠 Tâm lý học
-
-            </li>
-
-
-            <li
-                onclick="openSubject(
-                    '🇬🇧 Tiếng Anh',
-                    'data/english.html'
-                )">
-
-                🇬🇧 Tiếng Anh
-
-            </li>
-
-
-            <li
-                onclick="openSubject(
-                    '🇻🇳 Đường lối cách mạng',
-                    'data/dlcm.html'
-                )">
-
-                🇻🇳 Đường lối cách mạng
-
-            </li>
-
-
-            <li
-                onclick="openSubject(
-                    '🇻🇳 Lịch Sử Công An Nhân Dân',
-                    'data/lscand.html'
-                )">
-
-                🇻🇳 Lịch Sử CAND
-
-            </li>
-
-
-            <li
-                onclick="openSubject(
-                    '⚖️ Luật Hình Sự',
-                    'data/luat.html'
-                )">
-
-                ⚖️ Luật Hình Sự
-
-            </li>
-
-
-            <!-- ÔN TẬP -->
-
-            <div class="sidebar-title">
-
-                📖 Ôn Tập
-
-            </div>
-
-
-            <li
-                onclick="openSubject(
-                    '📋 Ôn Tập Đường Lối Cách Mạng',
-                    'data/ontapdlcm.html'
-                )">
-
-                📋 Ôn Tập Đường Lối
-
-            </li>
-
-
+            <li onclick="goHome()">🏠 Trang chủ</li>
+            <div class="sidebar-title">🏫 Môn Học</div>
+            <li onclick="openSubject('🧠 Tâm lý học', 'data/psychology.html')">🧠 Tâm lý học</li>
+            <li onclick="openSubject('🇬🇧 Tiếng Anh', 'data/english.html')">🇬🇧 Tiếng Anh</li>
+            <li onclick="openSubject('🇻🇳 Đường lối cách mạng', 'data/dlcm.html')">🇻🇳 Đường lối cách mạng</li>
+            <li onclick="openSubject('🇻🇳 Lịch Sử Công An Nhân Dân', 'data/lscand.html')">🇻🇳 Lịch Sử CAND</li>
+            <li onclick="openSubject('⚖️ Luật Hình Sự', 'data/luat.html')">⚖️ Luật Hình Sự</li>
+            <div class="sidebar-title">📖 Ôn Tập</div>
+            <li onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">📋 Ôn Tập Đường Lối</li>
         </ul>
-
     </aside>
 
-
-
-    <!-- =================================================
-         NỘI DUNG
-    ================================================== -->
-
     <main id="content"></main>
-
-
 </div>
 
-
-
-<!-- =====================================================
-     APP.JS
-     CHỈ LOAD 1 LẦN DUY NHẤT
-===================================================== -->
-
+<!-- CHỈ LOAD APP.JS -->
 <script src="js/app.js"></script>
 
-
-
 <script>
-
-/* =====================================================
-   DANH SÁCH MÔN
-===================================================== */
-
 const SUBJECTS = [
-
-    {
-        name:
-            '🧠 Tâm lý học',
-
-        url:
-            'data/psychology.html'
-    },
-
-    {
-        name:
-            '🇬🇧 Tiếng Anh',
-
-        url:
-            'data/english.html'
-    },
-
-    {
-        name:
-            '🇻🇳 Đường lối cách mạng',
-
-        url:
-            'data/dlcm.html'
-    },
-
-    {
-        name:
-            '🇻🇳 Lịch Sử Công An Nhân Dân',
-
-        url:
-            'data/lscand.html'
-    },
-
-    {
-        name:
-            '⚖️ Luật Hình Sự',
-
-        url:
-            'data/luat.html'
-    },
-
-    {
-        name:
-            '📋 Ôn Tập Đường Lối Cách Mạng',
-
-        url:
-            'data/ontapdlcm.html'
-    }
-
+    { name: '🧠 Tâm lý học', url: 'data/psychology.html' },
+    { name: '🇬🇧 Tiếng Anh', url: 'data/english.html' },
+    { name: '🇻🇳 Đường lối cách mạng', url: 'data/dlcm.html' },
+    { name: '🇻🇳 Lịch Sử Công An Nhân Dân', url: 'data/lscand.html' },
+    { name: '⚖️ Luật Hình Sự', url: 'data/luat.html' },
+    { name: '📋 Ôn Tập Đường Lối Cách Mạng', url: 'data/ontapdlcm.html' }
 ];
 
-
-/* =====================================================
-   TRANG CHỦ
-===================================================== */
-
 const HOME_HTML = `
-
 <div class="welcome">
-
-    <div class="badge-tag">
-        🎓 KHO TÀI LIỆU CÁ NHÂN
-    </div>
-
-
-    <img
-        src="logo.jpg"
-        alt="Logo Đại Học Cảnh Sát Nhân Dân"
-        class="center-logo"
-    >
-
-
-    <h1>
-
-        Nguyễn Hữu Khánh
-
-        <br>
-
-        <span class="highlight">
-            D5S-VB2A
-        </span>
-
-    </h1>
-
-
-    <p>
-        Nơi lưu trữ và tổng hợp tài liệu học tập
-    </p>
-
-
-    <!-- TÌM KIẾM -->
+    <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
+    <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
+    <h1>Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span></h1>
+    <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
     <div class="search-box">
-
-        <input
-            type="text"
-            class="search-input"
-            id="search-input"
-            placeholder="🔍 Tìm môn học nhanh..."
-            oninput="handleSearch()"
-        >
-
-
-        <div
-            class="search-results"
-            id="search-results">
-        </div>
-
+        <input type="text" class="search-input" id="search-input" placeholder="🔍 Tìm môn học nhanh..." oninput="handleSearch()">
+        <div class="search-results" id="search-results"></div>
     </div>
 
-
-    <!-- VỪA XEM -->
-
-    <div
-        id="recent-container"
-        class="section-block"
-        style="display:none;">
-
-        <div class="section-title">
-
-            ⏱️ Vừa xem gần đây
-
-        </div>
-
-
+    <div id="recent-container" class="section-block" style="display:none;">
+        <div class="section-title">⏱️ Vừa xem gần đây</div>
         <div id="recent-chip-slot"></div>
-
     </div>
 
-
-    <!-- YÊU THÍCH -->
-
-    <div
-        id="fav-container"
-        class="section-block"
-        style="display:none;">
-
-        <div class="section-title">
-
-            ⭐ Môn học yêu thích
-
-        </div>
-
-
-        <div
-            id="fav-list-slot"
-            style="
-                display:flex;
-                flex-direction:column;
-                gap:6px;
-            ">
-        </div>
-
+    <div id="fav-container" class="section-block" style="display:none;">
+        <div class="section-title">⭐ Môn học yêu thích</div>
+        <div id="fav-list-slot" style="display:flex; flex-direction:column; gap:6px;"></div>
     </div>
 
-
-    <!-- MÔN HỌC -->
-
-    <div
-        class="info-pills"
-        style="margin-top:14px;">
-
-
-        <div
-            class="pill-btn"
-            onclick="toggleSubjects()">
-
-            <span>
-                📚 Lý thuyết các môn học
-            </span>
-
-
-            <span id="arrow-icon">
-                ▼
-            </span>
-
+    <div class="info-pills" style="margin-top:14px;">
+        <div class="pill-btn" onclick="toggleSubjects()">
+            <span>📚 Lý thuyết các môn học</span>
+            <span id="arrow-icon">▼</span>
         </div>
-
-
-        <div
-            class="subject-list"
-            id="subject-container">
+        <div class="subject-list" id="subject-container"></div>
+        <div class="pill-btn" onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
+            <span>🎧 Audio ôn tập</span>
+            <span>➔</span>
         </div>
-
-
-        <div
-            class="pill-btn"
-            onclick="openSubject(
-                '📋 Ôn Tập Đường Lối Cách Mạng',
-                'data/ontapdlcm.html'
-            )">
-
-            <span>
-                🎧 Audio ôn tập
-            </span>
-
-            <span>
-                ➔
-            </span>
-
-        </div>
-
     </div>
-
 </div>
-
 `;
 
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
 function toggleSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-    if (sidebar) {
-
-        sidebar.classList.toggle(
-            "active"
-        );
-
-    }
-
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) sidebar.classList.toggle("active");
 }
-
 
 function closeSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
+    const sidebar = document.getElementById("sidebar");
     if (sidebar) {
-
-        sidebar.classList.remove(
-            "active"
-        );
-
-        sidebar.classList.remove(
-            "show"
-        );
-
+        sidebar.classList.remove("active");
+        sidebar.classList.remove("show");
     }
-
 }
-
-
-/* =====================================================
-   TRANG CHỦ
-===================================================== */
 
 function goHome() {
-
     closeSidebar();
-
-
     cleanupStyles();
-
-
-    /*
-     * QUAN TRỌNG:
-     * Ghi trạng thái HOME
-     */
-
-    sessionStorage.setItem(
-        "current_page",
-        "home"
-    );
-
-
-    content.innerHTML =
-        HOME_HTML;
-
-
+    sessionStorage.setItem("current_page", "home");
+    const content = document.getElementById("content");
+    if (content) content.innerHTML = HOME_HTML;
     renderSubjects();
-
     renderUserBlocks();
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "instant"
-    });
-
+    window.scrollTo({ top: 0, behavior: "instant" });
 }
 
-
-/* =====================================================
-   MỞ MÔN HỌC
-===================================================== */
-
-function openSubject(
-    name,
-    url
-) {
-
+function openSubject(name, url) {
     closeSidebar();
-
-
-    /*
-     * Lưu trang hiện tại
-     */
-
-    sessionStorage.setItem(
-        "current_page",
-        url
-    );
-
-
-    /*
-     * Lưu môn vừa xem
-     */
-
-    localStorage.setItem(
-        "recent_subject",
-
-        JSON.stringify({
-
-            name:
-                name,
-
-            url:
-                url
-
-        })
-
-    );
-
-
-    /*
-     * Tải môn học
-     */
-
+    sessionStorage.setItem("current_page", url);
+    localStorage.setItem("recent_subject", JSON.stringify({ name: name, url: url }));
     loadPage(url);
-
 }
-
-
-/* =====================================================
-   THEME
-===================================================== */
 
 function initTheme() {
-
-    const savedTheme =
-        localStorage.getItem(
-            "app_theme"
-        ) || "dark";
-
-
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            savedTheme
-        );
-
-
-    const themeBtn =
-        document.getElementById(
-            "theme-btn"
-        );
-
-
-    if (themeBtn) {
-
-        themeBtn.textContent =
-            savedTheme === "dark"
-                ? "🌙 Tối"
-                : "☀️ Sáng";
-
-    }
-
+    const savedTheme = localStorage.getItem("app_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    const themeBtn = document.getElementById("theme-btn");
+    if (themeBtn) themeBtn.textContent = savedTheme === "dark" ? "🌙 Tối" : "☀️ Sáng";
 }
-
 
 function toggleTheme() {
-
-    const currentTheme =
-        document.documentElement
-            .getAttribute(
-                "data-theme"
-            ) || "dark";
-
-
-    const newTheme =
-        currentTheme === "dark"
-            ? "light"
-            : "dark";
-
-
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            newTheme
-        );
-
-
-    localStorage.setItem(
-        "app_theme",
-        newTheme
-    );
-
-
-    const themeBtn =
-        document.getElementById(
-            "theme-btn"
-        );
-
-
-    if (themeBtn) {
-
-        themeBtn.textContent =
-            newTheme === "dark"
-                ? "🌙 Tối"
-                : "☀️ Sáng";
-
-    }
-
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("app_theme", newTheme);
+    const themeBtn = document.getElementById("theme-btn");
+    if (themeBtn) themeBtn.textContent = newTheme === "dark" ? "🌙 Tối" : "☀️ Sáng";
 }
-
-
-/* =====================================================
-   FAVORITE
-===================================================== */
 
 function getFavorites() {
-
-    return JSON.parse(
-        localStorage.getItem(
-            "fav_subjects"
-        ) || "[]"
-    );
-
+    return JSON.parse(localStorage.getItem("fav_subjects") || "[]");
 }
 
-
-function toggleFavorite(
-    url,
-    event
-) {
-
+function toggleFavorite(url, event) {
     event.stopPropagation();
-
-
-    let favs =
-        getFavorites();
-
-
+    let favs = getFavorites();
     if (favs.includes(url)) {
-
-        favs =
-            favs.filter(
-                item =>
-                    item !== url
-            );
-
-    }
-
-    else {
-
+        favs = favs.filter(item => item !== url);
+    } else {
         favs.push(url);
-
     }
-
-
-    localStorage.setItem(
-        "fav_subjects",
-        JSON.stringify(favs)
-    );
-
-
+    localStorage.setItem("fav_subjects", JSON.stringify(favs));
     renderSubjects();
-
     renderUserBlocks();
-
 }
-
-
-/* =====================================================
-   HIỂN THỊ DANH SÁCH MÔN
-===================================================== */
 
 function renderSubjects() {
-
-    const container =
-        document.getElementById(
-            "subject-container"
-        );
-
-
+    const container = document.getElementById("subject-container");
     if (!container) return;
-
-
-    const favs =
-        getFavorites();
-
-
-    container.innerHTML =
-        SUBJECTS.map(
-            sub => `
-
-                <div
-                    class="subject-item-wrapper">
-
-                    <div
-                        class="subject-item"
-                        onclick="openSubject(
-                            '${sub.name}',
-                            '${sub.url}'
-                        )">
-
-                        ${sub.name}
-
-                    </div>
-
-
-                    <button
-                        class="star-btn"
-                        onclick="toggleFavorite(
-                            '${sub.url}',
-                            event
-                        )">
-
-                        ${
-                            favs.includes(sub.url)
-                                ? "⭐"
-                                : "☆"
-                        }
-
-                    </button>
-
-                </div>
-
-            `
-        ).join("");
-
+    const favs = getFavorites();
+    container.innerHTML = SUBJECTS.map(sub => `
+        <div class="subject-item-wrapper">
+            <div class="subject-item" onclick="openSubject('${sub.name}', '${sub.url}')">${sub.name}</div>
+            <button class="star-btn" onclick="toggleFavorite('${sub.url}', event)">
+                ${favs.includes(sub.url) ? "⭐" : "☆"}
+            </button>
+        </div>
+    `).join("");
 }
-
-
-/* =====================================================
-   VỪA XEM + YÊU THÍCH
-===================================================== */
 
 function renderUserBlocks() {
+    const recentData = JSON.parse(localStorage.getItem("recent_subject"));
+    const recentBox = document.getElementById("recent-container");
+    const recentSlot = document.getElementById("recent-chip-slot");
 
-    const recentData =
-        JSON.parse(
-            localStorage.getItem(
-                "recent_subject"
-            )
-        );
-
-
-    const recentBox =
-        document.getElementById(
-            "recent-container"
-        );
-
-
-    const recentSlot =
-        document.getElementById(
-            "recent-chip-slot"
-        );
-
-
-    if (
-        recentData &&
-        recentBox &&
-        recentSlot
-    ) {
-
-        recentBox.style.display =
-            "block";
-
-
+    if (recentData && recentBox && recentSlot) {
+        recentBox.style.display = "block";
         recentSlot.innerHTML = `
-
-            <div
-                class="recent-chip"
-                onclick="openSubject(
-                    '${recentData.name}',
-                    '${recentData.url}'
-                )">
-
-                📖
-                ${recentData.name}
-                ➔
-
+            <div class="recent-chip" onclick="openSubject('${recentData.name}', '${recentData.url}')">
+                📖 ${recentData.name} ➔
             </div>
-
         `;
-
     }
 
+    const favs = getFavorites();
+    const favBox = document.getElementById("fav-container");
+    const favSlot = document.getElementById("fav-list-slot");
 
-    const favs =
-        getFavorites();
-
-
-    const favBox =
-        document.getElementById(
-            "fav-container"
-        );
-
-
-    const favSlot =
-        document.getElementById(
-            "fav-list-slot"
-        );
-
-
-    if (
-        favs.length > 0 &&
-        favBox &&
-        favSlot
-    ) {
-
-        favBox.style.display =
-            "block";
-
-
-        const favSubjects =
-            SUBJECTS.filter(
-                subject =>
-                    favs.includes(
-                        subject.url
-                    )
-            );
-
-
-        favSlot.innerHTML =
-            favSubjects
-                .map(
-                    sub => `
-
-                        <div
-                            class="subject-item"
-                            onclick="openSubject(
-                                '${sub.name}',
-                                '${sub.url}'
-                            )">
-
-                            ⭐
-                            ${sub.name}
-
-                        </div>
-
-                    `
-                )
-                .join("");
-
+    if (favs.length > 0 && favBox && favSlot) {
+        favBox.style.display = "block";
+        const favSubjects = SUBJECTS.filter(subject => favs.includes(subject.url));
+        favSlot.innerHTML = favSubjects.map(sub => `
+            <div class="subject-item" onclick="openSubject('${sub.name}', '${sub.url}')">
+                ⭐ ${sub.name}
+            </div>
+        `).join("");
+    } else if (favBox) {
+        favBox.style.display = "none";
     }
-
-    else if (favBox) {
-
-        favBox.style.display =
-            "none";
-
-    }
-
 }
-
-
-/* =====================================================
-   TÌM KIẾM
-===================================================== */
 
 function handleSearch() {
+    const input = document.getElementById("search-input");
+    const resultsBox = document.getElementById("search-results");
+    if (!input || !resultsBox) return;
 
-    const input =
-        document.getElementById(
-            "search-input"
-        );
-
-
-    const resultsBox =
-        document.getElementById(
-            "search-results"
-        );
-
-
-    if (
-        !input ||
-        !resultsBox
-    ) return;
-
-
-    const query =
-        input.value
-            .toLowerCase()
-            .trim();
-
-
+    const query = input.value.toLowerCase().trim();
     if (!query) {
-
-        resultsBox.style.display =
-            "none";
-
+        resultsBox.style.display = "none";
         return;
-
     }
 
-
-    const matched =
-        SUBJECTS.filter(
-            subject =>
-                subject.name
-                    .toLowerCase()
-                    .includes(query)
-        );
-
-
-    resultsBox.style.display =
-        "block";
-
+    const matched = SUBJECTS.filter(subject => subject.name.toLowerCase().includes(query));
+    resultsBox.style.display = "block";
 
     if (matched.length > 0) {
-
-        resultsBox.innerHTML =
-            matched
-                .map(
-                    sub => `
-
-                        <div
-                            class="search-item"
-                            onclick="openSubject(
-                                '${sub.name}',
-                                '${sub.url}'
-                            )">
-
-                            ${sub.name}
-
-                        </div>
-
-                    `
-                )
-                .join("");
-
+        resultsBox.innerHTML = matched.map(sub => `
+            <div class="search-item" onclick="openSubject('${sub.name}', '${sub.url}')">${sub.name}</div>
+        `).join("");
+    } else {
+        resultsBox.innerHTML = `<div class="search-item" style="color: var(--text-secondary);">Không tìm thấy môn học</div>`;
     }
-
-    else {
-
-        resultsBox.innerHTML = `
-
-            <div
-                class="search-item"
-                style="
-                    color:
-                    var(--text-secondary);
-                ">
-
-                Không tìm thấy môn học
-
-            </div>
-
-        `;
-
-    }
-
 }
-
-
-/* =====================================================
-   MỞ / ĐÓNG DANH SÁCH MÔN
-===================================================== */
 
 function toggleSubjects() {
-
-    const list =
-        document.getElementById(
-            "subject-container"
-        );
-
-
-    const arrow =
-        document.getElementById(
-            "arrow-icon"
-        );
-
-
+    const list = document.getElementById("subject-container");
+    const arrow = document.getElementById("arrow-icon");
     if (!list) return;
 
-
-    if (
-        list.style.display ===
-        "flex"
-    ) {
-
-        list.style.display =
-            "none";
-
-
-        if (arrow) {
-
-            arrow.textContent =
-                "▼";
-
-        }
-
+    if (list.style.display === "flex") {
+        list.style.display = "none";
+        if (arrow) arrow.textContent = "▼";
+    } else {
+        list.style.display = "flex";
+        if (arrow) arrow.textContent = "▲";
     }
-
-    else {
-
-        list.style.display =
-            "flex";
-
-
-        if (arrow) {
-
-            arrow.textContent =
-                "▲";
-
-        }
-
-    }
-
 }
-
-
-/* =====================================================
-   KHỞI TẠO GIAO DIỆN
-===================================================== */
-
-window.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        initTheme();
-
-    }
-);
-
 </script>
-
 </body>
-
 </html>
