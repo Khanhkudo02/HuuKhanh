@@ -53,10 +53,10 @@ body {
     padding-top: 10px;
 }
 
-/* --- HEADER CỐ ĐỊNH PHÍA TRÊN, CÁC NÚT ĐẶT BÊN PHẢI --- */
+/* --- HEADER CỐ ĐỊNH BÊN PHẢI --- */
 .top-navbar {
     display: flex;
-    justify-content: flex-end; /* Đẩy toàn bộ nút điều khiển sang BÊN PHẢI */
+    justify-content: flex-end;
     align-items: center;
     gap: 10px;
     padding: 12px 16px;
@@ -86,11 +86,11 @@ body {
     transform: scale(0.95);
 }
 
-/* --- CHỈNH SỬA SIDEBAR ĐẨY TỪ BÊN PHẢI SANG --- */
+/* --- SIDEBAR TRƯỢT TỪ BÊN PHẢI --- */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -280px; /* Ẩn sidebar ở bên phải */
+    right: -280px;
     left: auto !important;
     width: 260px;
     height: 100vh;
@@ -105,7 +105,7 @@ body {
 }
 
 .sidebar.active {
-    right: 0 !important; /* Trượt ra từ bên phải */
+    right: 0 !important;
 }
 
 .sidebar-header {
@@ -250,7 +250,7 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
-/* --- THẺ THÔNG TIN & MÔN HỌC --- */
+/* --- DẠNG NÚT BẤM VÀ DANH SÁCH MÔN HỌC --- */
 .info-pills {
     display: flex;
     flex-direction: column;
@@ -336,7 +336,6 @@ body {
 </head>
 <body>
 
-<!-- HEADER ĐẶT CÁC NÚT BẤM VỀ BÊN PHẢI MÀN HÌNH -->
 <div class="top-navbar">
     <button class="nav-btn" onclick="toggleTheme()" id="theme-btn">🌙 Tối</button>
     <button class="nav-btn" onclick="toggleSidebar()">☰ Menu</button>
@@ -344,7 +343,6 @@ body {
 
 <div class="layout">
 
-    <!-- SIDEBAR MỞ TỪ BÊN PHẢI -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <span style="font-weight: 700;">📚 Danh Mục</span>
@@ -352,7 +350,6 @@ body {
         </div>
 
         <ul>
-            <!-- NÚT TRANG CHỦ -->
             <li onclick="goHome()">🏠 Trang chủ</li>
 
             <div class="sidebar-title">🏫 Môn Học</div>
@@ -368,53 +365,7 @@ body {
     </aside>
 
     <main id="content">
-
-        <div class="welcome">
-
-            <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
-
-            <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
-
-            <h1>
-                Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span>
-            </h1>
-
-            <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
-
-            <!-- TÌM KIẾM NHANH -->
-            <div class="search-box">
-                <input type="text" class="search-input" id="search-input" placeholder="🔍 Tìm môn học nhanh..." oninput="handleSearch()">
-                <div class="search-results" id="search-results"></div>
-            </div>
-
-            <!-- VỪA XEM GẦN ĐÂY -->
-            <div id="recent-container" class="section-block" style="display: none;">
-                <div class="section-title">⏱️ Vừa xem gần đây</div>
-                <div id="recent-chip-slot"></div>
-            </div>
-
-            <!-- MÔN HỌC YÊU THÍCH -->
-            <div id="fav-container" class="section-block" style="display: none;">
-                <div class="section-title">⭐ Môn học yêu thích</div>
-                <div id="fav-list-slot" style="display: flex; flex-direction: column; gap: 6px;"></div>
-            </div>
-
-            <div class="info-pills" style="margin-top: 14px;">
-                <div class="pill-btn" onclick="toggleSubjects()">
-                    <span>📚 Lý thuyết các môn học</span>
-                    <span id="arrow-icon">▼</span>
-                </div>
-
-                <div class="subject-list" id="subject-container"></div>
-
-                <div class="pill-btn" onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
-                    <span>🎧 Audio ôn tập</span>
-                    <span>➔</span>
-                </div>
-            </div>
-
-        </div>
-
+        <!-- NỘI DUNG TRANG CHỦ SẼ ĐƯỢC CHÈN BẰNG JAVASCRIPT -->
     </main>
 
 </div>
@@ -431,10 +382,53 @@ const SUBJECTS = [
     { name: '📋 Ôn Tập Đường Lối Cách Mạng', url: 'data/ontapdlcm.html' }
 ];
 
-// --- ĐÓNG / MỞ SIDEBAR ---
+// MÃ HTML GIAO DIỆN TRANG CHỦ
+const HOME_HTML = `
+    <div class="welcome">
+        <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
+
+        <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
+
+        <h1>
+            Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span>
+        </h1>
+
+        <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="search-input" placeholder="🔍 Tìm môn học nhanh..." oninput="handleSearch()">
+            <div class="search-results" id="search-results"></div>
+        </div>
+
+        <div id="recent-container" class="section-block" style="display: none;">
+            <div class="section-title">⏱️ Vừa xem gần đây</div>
+            <div id="recent-chip-slot"></div>
+        </div>
+
+        <div id="fav-container" class="section-block" style="display: none;">
+            <div class="section-title">⭐ Môn học yêu thích</div>
+            <div id="fav-list-slot" style="display: flex; flex-direction: column; gap: 6px;"></div>
+        </div>
+
+        <div class="info-pills" style="margin-top: 14px;">
+            <div class="pill-btn" onclick="toggleSubjects()">
+                <span>📚 Lý thuyết các môn học</span>
+                <span id="arrow-icon">▼</span>
+            </div>
+
+            <div class="subject-list" id="subject-container"></div>
+
+            <div class="pill-btn" onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
+                <span>🎧 Audio ôn tập</span>
+                <span>➔</span>
+            </div>
+        </div>
+    </div>
+`;
+
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('active');
+    if (sidebar) sidebar.classList.toggle('active');
 }
 
 function closeSidebar() {
@@ -442,25 +436,28 @@ function closeSidebar() {
     if (sidebar) sidebar.classList.remove('active');
 }
 
-// --- ĐIỀU HƯỚNG VỀ TRANG CHỦ & MÔN HỌC ---
+// XỬ LÝ QUAY VỀ TRANG CHỦ TRỰC TIẾP
 function goHome() {
     closeSidebar();
-    location.reload(); // Làm mới trang để quay về giao diện trang chủ
+    document.getElementById('content').innerHTML = HOME_HTML;
+    renderSubjects();
+    renderUserBlocks();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function openSubject(name, url) {
-    closeSidebar(); // Tự động đóng sidebar khi bấm chọn
+    closeSidebar();
     localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
     if (typeof loadPage === 'function') {
         loadPage(url);
     }
 }
 
-// --- TEMA & BOOKMARKS ---
 function initTheme() {
     const savedTheme = localStorage.getItem('app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
+    const themeBtn = document.getElementById('theme-btn');
+    if (themeBtn) themeBtn.textContent = savedTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
 }
 
 function toggleTheme() {
@@ -468,7 +465,8 @@ function toggleTheme() {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('app_theme', newTheme);
-    document.getElementById('theme-btn').textContent = newTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
+    const themeBtn = document.getElementById('theme-btn');
+    if (themeBtn) themeBtn.textContent = newTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
 }
 
 function getFavorites() {
@@ -567,10 +565,10 @@ function toggleSubjects() {
     }
 }
 
+// Khởi chạy giao diện ban đầu
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    renderSubjects();
-    renderUserBlocks();
+    goHome();
 });
 </script>
 
