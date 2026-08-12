@@ -10,8 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
-
 <style>
 /* --- CHỦ ĐỀ SÁNG / TỐI --- */
 :root {
@@ -332,6 +330,12 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
+
+.subject-content-box {
+    padding: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -365,12 +369,10 @@ body {
     </aside>
 
     <main id="content">
-        <!-- NỘI DUNG CHÍNH -->
+        <!-- NỘI DUNG CHÍNH DÙNG FETCH NATIVE CHỐNG CACHE LỖI -->
     </main>
 
 </div>
-
-<script src="js/app.js"></script>
 
 <script>
 const SUBJECTS = [
@@ -435,32 +437,25 @@ function closeSidebar() {
     if (sidebar) sidebar.classList.remove('active');
 }
 
-/* --- ĐIỀU HƯỚNG VÀ ROUTING BẰNG URL HASH CHỐNG LỖI RELOAD --- */
-function routePage() {
-    // Đọc mã định danh sau dấu # trên thanh URL
-    const hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    
-    if (!hash || hash === 'home') {
+/* ĐIỀU HƯỚNG BẰNG SEARCH PARAMS QUAY VỀ TRANG CHỦ HOẶC MÔN HỌC */
+function navigateTo(pageUrl) {
+    closeSidebar();
+    if (!pageUrl || pageUrl === 'home') {
+        history.pushState(null, '', window.location.pathname);
         renderHomeView();
     } else {
-        const matched = SUBJECTS.find(s => s.url === hash);
-        if (matched) {
-            renderSubjectView(matched.name, matched.url);
-        } else {
-            renderHomeView();
-        }
+        history.pushState(null, '', '?page=' + encodeURIComponent(pageUrl));
+        fetchAndRenderPage(pageUrl);
     }
 }
 
 function goHome() {
-    closeSidebar();
-    window.location.hash = 'home'; // Đổi Hash sang #home
+    navigateTo('home');
 }
 
 function openSubject(name, url) {
-    closeSidebar();
     localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
-    window.location.hash = url; // Đổi Hash sang #data/mônhọc.html
+    navigateTo(url);
 }
 
 function renderHomeView() {
@@ -470,13 +465,36 @@ function renderHomeView() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function renderSubjectView(name, url) {
-    if (typeof loadPage === 'function') {
-        loadPage(url);
+/* TẢI FILE MÔN HỌC TRỰC TIẾP KHÔNG CẦN CHỜ APP.JS */
+function fetchAndRenderPage(url) {
+    const contentBox = document.getElementById('content');
+    contentBox.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-secondary);">⏳ Đang tải nội dung...</div>';
+    
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error('Không thể tải file');
+            return response.text();
+        })
+        .then(html => {
+            contentBox.innerHTML = `<div class="subject-content-box">${html}</div>`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        })
+        .catch(err => {
+            contentBox.innerHTML = `<div style="text-align:center; padding: 40px; color: #ef4444;">❌ Lỗi tải bài học. Vui lòng kiểm tra lại đường dẫn tệp.</div>`;
+        });
+}
+
+function routeFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const currentPage = params.get('page');
+    if (currentPage) {
+        fetchAndRenderPage(currentPage);
+    } else {
+        renderHomeView();
     }
 }
 
-/* --- THEME & BOOKMARKS --- */
+/* THEME & FAVORITES */
 function initTheme() {
     const savedTheme = localStorage.getItem('app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -589,14 +607,13 @@ function toggleSubjects() {
     }
 }
 
-// LẮNG NGHE SỰ CỐ TẢI TRANG HOẶC THAY ĐỔI URL HASH
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    routePage();
+    routeFromUrl();
 });
 
-window.addEventListener('hashchange', () => {
-    routePage();
+window.addEventListener('popstate', () => {
+    routeFromUrl();
 });
 </script>
 
