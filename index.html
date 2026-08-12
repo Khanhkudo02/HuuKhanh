@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* --- BIẾN MÀU CHẾ ĐỘ SÁNG / TỐI --- */
+/* --- CHỦ ĐỀ SÁNG / TỐI --- */
 :root {
     --bg-color: #0b0f19;
     --card-bg: rgba(15, 23, 42, 0.85);
@@ -23,6 +23,7 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --pill-bg: rgba(30, 41, 59, 0.8);
     --input-bg: rgba(15, 23, 42, 0.6);
+    --sidebar-bg: #0f172a;
 }
 
 [data-theme="light"] {
@@ -34,6 +35,7 @@
     --border-color: rgba(0, 0, 0, 0.1);
     --pill-bg: rgba(241, 245, 249, 0.9);
     --input-bg: #ffffff;
+    --sidebar-bg: #ffffff;
 }
 
 body {
@@ -48,32 +50,113 @@ body {
 
 .layout {
     background: transparent !important;
+    padding-top: 10px;
 }
 
-/* Header công cụ trên mobile (Nút Menu + Nút Chuyển Tema) */
-.top-header {
+/* --- HEADER CỐ ĐỊNH PHÍA TRÊN, CÁC NÚT ĐẶT BÊN PHẢI --- */
+.top-navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Đẩy toàn bộ nút điều khiển sang BÊN PHẢI */
     align-items: center;
+    gap: 10px;
     padding: 12px 16px;
+    background: var(--bg-color);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 99;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.theme-toggle-btn {
+.nav-btn {
     background: var(--pill-bg);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 8px 14px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     backdrop-filter: blur(8px);
 }
 
-/* Khung nội dung chính */
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- CHỈNH SỬA SIDEBAR ĐẨY TỪ BÊN PHẢI SANG --- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Ẩn sidebar ở bên phải */
+    left: auto !important;
+    width: 260px;
+    height: 100vh;
+    background: var(--sidebar-bg) !important;
+    border-left: 1px solid var(--border-color);
+    box-shadow: -10px 0 25px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    right: 0 !important; /* Trượt ra từ bên phải */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.close-sidebar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    background: var(--pill-bg);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+}
+
+.sidebar li:active {
+    background: var(--accent-color);
+    color: #ffffff;
+}
+
+.sidebar-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 16px 0 8px 4px;
+    text-transform: uppercase;
+}
+
+/* --- KHUNG NỘI DUNG TRANG CHỦ --- */
 .welcome {
     background: var(--card-bg) !important;
     border: 1px solid var(--border-color) !important;
@@ -84,7 +167,7 @@ body {
     max-width: 360px !important;
     width: 88% !important;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
-    margin: 10px auto 30px auto !important;
+    margin: 15px auto 30px auto !important;
 }
 
 .badge-tag {
@@ -157,7 +240,6 @@ body {
     overflow-y: auto;
     display: none;
     z-index: 50;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .search-item {
@@ -168,11 +250,7 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
-.search-item:last-child {
-    border-bottom: none;
-}
-
-/* --- CÁC MỤC THÔNG TIN & NÚT BẤM --- */
+/* --- THẺ THÔNG TIN & MÔN HỌC --- */
 .info-pills {
     display: flex;
     flex-direction: column;
@@ -191,11 +269,6 @@ body {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.pill-btn:active {
-    transform: scale(0.98);
 }
 
 .subject-list {
@@ -231,7 +304,6 @@ body {
     padding: 4px 8px;
 }
 
-/* --- BÀI HỌC VỪA XEM & YÊU THÍCH --- */
 .section-block {
     text-align: left;
     margin-top: 14px;
@@ -245,7 +317,6 @@ body {
     color: var(--text-secondary);
     margin-bottom: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .recent-chip {
@@ -265,54 +336,35 @@ body {
 </head>
 <body>
 
-<div class="top-header">
-    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-    <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">🌙 Tối</button>
+<!-- HEADER ĐẶT CÁC NÚT BẤM VỀ BÊN PHẢI MÀN HÌNH -->
+<div class="top-navbar">
+    <button class="nav-btn" onclick="toggleTheme()" id="theme-btn">🌙 Tối</button>
+    <button class="nav-btn" onclick="toggleSidebar()">☰ Menu</button>
 </div>
 
 <div class="layout">
 
+    <!-- SIDEBAR MỞ TỪ BÊN PHẢI -->
     <aside class="sidebar" id="sidebar">
-
-        <div class="logo">
-            📚 Kho Học Tập Cá Nhân
+        <div class="sidebar-header">
+            <span style="font-weight: 700;">📚 Danh Mục</span>
+            <button class="close-sidebar-btn" onclick="closeSidebar()">✕</button>
         </div>
 
         <ul>
+            <!-- NÚT TRANG CHỦ -->
+            <li onclick="goHome()">🏠 Trang chủ</li>
 
-            <li onclick="goHome()">
-                🏠 Trang chủ
-            </li>
-            <div class="sidebar-title">
-                🏫 Môn Học
-            </div>
+            <div class="sidebar-title">🏫 Môn Học</div>
+            <li onclick="openSubject('🧠 Tâm lý học', 'data/psychology.html')">🧠 Tâm lý học</li>
+            <li onclick="openSubject('🇬🇧 Tiếng Anh', 'data/english.html')">🇬🇧 Tiếng Anh</li>
+            <li onclick="openSubject('🇻🇳 Đường lối cách mạng', 'data/dlcm.html')">🇻🇳 Đường lối cách mạng</li>
+            <li onclick="openSubject('🇻🇳 Lịch Sử Công An Nhân Dân', 'data/lscand.html')">🇻🇳 Lịch Sử CAND</li>
+            <li onclick="openSubject('⚖️ Luật Hình Sự', 'data/luat.html')">⚖️ Luật Hình Sự</li>
 
-            <li onclick="openSubject('🧠 Tâm lý học', 'data/psychology.html')">
-                🧠 Tâm lý học
-            </li>
-
-            <li onclick="openSubject('🇬🇧 Tiếng Anh', 'data/english.html')">
-                🇬🇧 Tiếng Anh
-            </li>
-
-            <li onclick="openSubject('🇻🇳 Đường lối cách mạng', 'data/dlcm.html')">
-                🇻🇳 Đường lối cách mạng
-            </li>
-            <li onclick="openSubject('🇻🇳 Lịch Sử Công An Nhân Dân', 'data/lscand.html')">
-                🇻🇳 Lịch Sử Công An Nhân Dân
-            </li>
-            <li onclick="openSubject('⚖️ Luật Hình Sự', 'data/luat.html')">
-                ⚖️ Luật Hình Sự
-            </li>
-            <div class="sidebar-title">
-                📖 Ôn Tập
-            </div>
-            <li onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
-                📋 Ôn Tập Đường Lối Cách Mạng
-            </li>
-
+            <div class="sidebar-title">📖 Ôn Tập</div>
+            <li onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">📋 Ôn Tập Đường Lối</li>
         </ul>
-
     </aside>
 
     <main id="content">
@@ -329,19 +381,19 @@ body {
 
             <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
-            <!-- Ô TÌM KIẾM NHANH -->
+            <!-- TÌM KIẾM NHANH -->
             <div class="search-box">
                 <input type="text" class="search-input" id="search-input" placeholder="🔍 Tìm môn học nhanh..." oninput="handleSearch()">
                 <div class="search-results" id="search-results"></div>
             </div>
 
-            <!-- BÀI HỌC ĐỌC DỞ / XEM GẦN ĐÂY -->
+            <!-- VỪA XEM GẦN ĐÂY -->
             <div id="recent-container" class="section-block" style="display: none;">
                 <div class="section-title">⏱️ Vừa xem gần đây</div>
                 <div id="recent-chip-slot"></div>
             </div>
 
-            <!-- DANH SÁCH YÊU THÍCH -->
+            <!-- MÔN HỌC YÊU THÍCH -->
             <div id="fav-container" class="section-block" style="display: none;">
                 <div class="section-title">⭐ Môn học yêu thích</div>
                 <div id="fav-list-slot" style="display: flex; flex-direction: column; gap: 6px;"></div>
@@ -370,7 +422,6 @@ body {
 <script src="js/app.js"></script>
 
 <script>
-// Dữ liệu môn học
 const SUBJECTS = [
     { name: '🧠 Tâm lý học', url: 'data/psychology.html' },
     { name: '🇬🇧 Tiếng Anh', url: 'data/english.html' },
@@ -380,7 +431,32 @@ const SUBJECTS = [
     { name: '📋 Ôn Tập Đường Lối Cách Mạng', url: 'data/ontapdlcm.html' }
 ];
 
-// --- 1. QUẢN LÝ TEMA (DARK / LIGHT MODE) ---
+// --- ĐÓNG / MỞ SIDEBAR ---
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) sidebar.classList.remove('active');
+}
+
+// --- ĐIỀU HƯỚNG VỀ TRANG CHỦ & MÔN HỌC ---
+function goHome() {
+    closeSidebar();
+    location.reload(); // Làm mới trang để quay về giao diện trang chủ
+}
+
+function openSubject(name, url) {
+    closeSidebar(); // Tự động đóng sidebar khi bấm chọn
+    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
+    if (typeof loadPage === 'function') {
+        loadPage(url);
+    }
+}
+
+// --- TEMA & BOOKMARKS ---
 function initTheme() {
     const savedTheme = localStorage.getItem('app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -393,15 +469,6 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('app_theme', newTheme);
     document.getElementById('theme-btn').textContent = newTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
-}
-
-// --- 2. XỬ LÝ MÔN HỌC & BOOKMARKS / RECENT READ ---
-function openSubject(name, url) {
-    // Lưu môn học xem gần đây
-    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
-    if (typeof loadPage === 'function') {
-        loadPage(url);
-    }
 }
 
 function getFavorites() {
@@ -437,7 +504,6 @@ function renderSubjects() {
 }
 
 function renderUserBlocks() {
-    // 1. Render Recent
     const recentData = JSON.parse(localStorage.getItem('recent_subject'));
     const recentBox = document.getElementById('recent-container');
     const recentSlot = document.getElementById('recent-chip-slot');
@@ -451,7 +517,6 @@ function renderUserBlocks() {
         `;
     }
 
-    // 2. Render Favorites
     const favs = getFavorites();
     const favBox = document.getElementById('fav-container');
     const favSlot = document.getElementById('fav-list-slot');
@@ -469,7 +534,6 @@ function renderUserBlocks() {
     }
 }
 
-// --- 3. TÌM KIẾM NHANH ---
 function handleSearch() {
     const query = document.getElementById('search-input').value.toLowerCase().trim();
     const resultsBox = document.getElementById('search-results');
@@ -503,12 +567,6 @@ function toggleSubjects() {
     }
 }
 
-// Ghi đè goHome để duy trì trạng thái giao diện chuẩn
-function goHome() {
-    location.reload();
-}
-
-// Khởi tạo khi tải trang
 window.addEventListener('DOMContentLoaded', () => {
     initTheme();
     renderSubjects();
