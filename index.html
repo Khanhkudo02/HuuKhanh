@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho học tập cá nhân</title>
 
-<!-- Nhập Font chữ Inter hiện đại giống mẫu -->
+<!-- Nhập Font chữ Inter hiện đại -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,12 +13,11 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* Cấu hình giao diện Dark Mode chuẩn mẫu */
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
-    background: #0b0f19 !important; /* Màu nền xanh đen đậm */
+    background: #0b0f19 !important;
     color: #f1f5f9 !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
@@ -27,11 +26,10 @@ body {
     background: transparent !important;
 }
 
-/* Khung nội dung chính với phong cách hiện đại */
 .welcome {
     background: rgba(15, 23, 42, 0.75) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 32px 24px !important;
+    padding: 28px 20px !important;
     border-radius: 24px !important;
     backdrop-filter: blur(12px) !important;
     text-align: center !important;
@@ -41,7 +39,6 @@ body {
     margin: 30px auto !important;
 }
 
-/* Thẻ tag trang trí phía trên giống mẫu */
 .badge-tag {
     display: inline-block;
     padding: 6px 14px;
@@ -52,60 +49,84 @@ body {
     background: rgba(56, 189, 248, 0.1);
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 20px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     text-transform: uppercase;
 }
 
-/* Logo bo góc và thêm chút phát sáng nhẹ */
 .center-logo {
-    width: 120px !important;
+    width: 110px !important;
     height: auto !important;
     display: block !important;
-    margin: 0 auto 20px auto !important;
+    margin: 0 auto 16px auto !important;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Tiêu đề phối màu gradient điểm xuyết xanh dương */
 .welcome h1 {
-    font-size: 1.35rem !important;
+    font-size: 1.3rem !important;
     font-weight: 800 !important;
-    line-height: 1.4 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
     color: #ffffff !important;
 }
 
 .welcome h1 .highlight {
-    color: #38bdf8 !important; /* Điểm xuyết màu xanh dương tươi */
+    color: #38bdf8 !important;
 }
 
-/* Nội dung phụ màu xám nhạt */
 .welcome p {
-    font-size: 0.92rem !important;
+    font-size: 0.9rem !important;
     color: #94a3b8 !important;
-    margin: 8px 0 !important;
-    font-weight: 400 !important;
+    margin: 6px 0 16px 0 !important;
 }
 
-/* Các thẻ thông tin danh mục màu sắc phía dưới */
 .info-pills {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 12px;
 }
 
-.pill-item {
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 0.88rem;
+/* Kiểu dáng các nút bấm tương tác */
+.pill-btn {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: #e2e8f0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pill-btn:active {
+    transform: scale(0.97);
+    background: rgba(56, 189, 248, 0.15);
+}
+
+/* Danh sách môn học hiển thị khi bấm nút */
+.subject-list {
+    display: none;
+    flex-direction: column;
     gap: 8px;
+    margin-top: 8px;
+    padding-left: 8px;
+}
+
+.subject-item {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #38bdf8;
+    text-align: left;
+    cursor: pointer;
+}
+
+.subject-item:active {
+    background: rgba(56, 189, 248, 0.2);
 }
 </style>
 </head>
@@ -173,8 +194,26 @@ body {
             <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
             <div class="info-pills">
-                <div class="pill-item">📚 Lý thuyết các môn học</div>
-                <div class="pill-item">🎧 Audio bài giảng ôn tập</div>
+                <!-- Nút bấm mở danh sách môn học -->
+                <div class="pill-btn" onclick="toggleSubjects()">
+                    <span>📚 Lý thuyết các môn học</span>
+                    <span id="arrow-icon">▼</span>
+                </div>
+
+                <!-- Danh sách các môn học sổ xuống -->
+                <div class="subject-list" id="subject-container">
+                    <div class="subject-item" onclick="loadPage('data/psychology.html')">🧠 Tâm lý học</div>
+                    <div class="subject-item" onclick="loadPage('data/english.html')">🇬🇧 Tiếng Anh</div>
+                    <div class="subject-item" onclick="loadPage('data/dlcm.html')">🇻🇳 Đường lối cách mạng</div>
+                    <div class="subject-item" onclick="loadPage('data/lscand.html')">🇻🇳 Lịch Sử Công An Nhân Dân</div>
+                    <div class="subject-item" onclick="loadPage('data/luat.html')">⚖️ Luật Hình Sự</div>
+                </div>
+
+                <!-- Nút Audio ôn tập -->
+                <div class="pill-btn" onclick="loadPage('data/ontapdlcm.html')">
+                    <span>🎧 Audio ôn tập</span>
+                    <span>➔</span>
+                </div>
             </div>
 
         </div>
@@ -184,6 +223,22 @@ body {
 </div>
 
 <script src="js/app.js"></script>
+
+<script>
+// Hàm bật/tắt danh sách môn học trực tiếp trên trang chủ
+function toggleSubjects() {
+    var list = document.getElementById('subject-container');
+    var arrow = document.getElementById('arrow-icon');
+    
+    if (list.style.display === 'flex') {
+        list.style.display = 'none';
+        arrow.textContent = '▼';
+    } else {
+        list.style.display = 'flex';
+        arrow.textContent = '▲';
+    }
+}
+</script>
 
 </body>
 </html>
