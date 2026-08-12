@@ -8,30 +8,32 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* Cấu hình nền toàn màn hình dùng ảnh trực tiếp */
+/* Cấu hình hình nền tràn màn hình chuẩn theo file logo.jpg ở gốc */
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('https://raw.githubusercontent.com/khanhkudo02/khanhkudo02.github.io/main/images/logo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #ffffff;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('logo.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    color: #ffffff !important;
 }
 
-.layout {
-    position: relative;
-    z-index: 1;
+/* Xóa bỏ nền xám do css/style.css tạo ra */
+.layout, main, #content {
+    background: transparent !important;
 }
 
 .welcome {
-    background: rgba(0, 0, 0, 0.55);
-    padding: 24px;
-    border-radius: 16px;
-    backdrop-filter: blur(6px);
-    text-align: center;
-    margin: 20px auto;
-    max-width: 90%;
+    background: rgba(0, 0, 0, 0.55) !important;
+    padding: 24px !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(6px) !important;
+    text-align: center !important;
+    margin: 20px auto !important;
+    max-width: 90% !important;
 }
 </style>
 </head>
