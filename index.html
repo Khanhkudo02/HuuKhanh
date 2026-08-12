@@ -13,85 +13,180 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
+/* --- BIẾN MÀU CHẾ ĐỘ SÁNG / TỐI --- */
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: rgba(15, 23, 42, 0.85);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --pill-bg: rgba(30, 41, 59, 0.8);
+    --input-bg: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-color: #0284c7;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --pill-bg: rgba(241, 245, 249, 0.9);
+    --input-bg: #ffffff;
+}
+
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
-    background: #0b0f19 !important;
-    color: #f1f5f9 !important;
+    background: var(--bg-color) !important;
+    color: var(--text-primary) !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .layout {
     background: transparent !important;
 }
 
+/* Header công cụ trên mobile (Nút Menu + Nút Chuyển Tema) */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.theme-toggle-btn {
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+}
+
+/* Khung nội dung chính */
 .welcome {
-    background: rgba(15, 23, 42, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 28px 20px !important;
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 24px 20px !important;
     border-radius: 24px !important;
     backdrop-filter: blur(12px) !important;
     text-align: center !important;
     max-width: 360px !important;
     width: 88% !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-    margin: 30px auto !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    margin: 10px auto 30px auto !important;
 }
 
 .badge-tag {
     display: inline-block;
-    padding: 6px 14px;
-    font-size: 0.75rem;
+    padding: 5px 12px;
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #38bdf8;
+    letter-spacing: 1.2px;
+    color: var(--accent-color);
     background: rgba(56, 189, 248, 0.1);
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     text-transform: uppercase;
 }
 
 .center-logo {
-    width: 110px !important;
+    width: 100px !important;
     height: auto !important;
     display: block !important;
-    margin: 0 auto 16px auto !important;
+    margin: 0 auto 12px auto !important;
     border-radius: 12px;
 }
 
 .welcome h1 {
-    font-size: 1.3rem !important;
+    font-size: 1.25rem !important;
     font-weight: 800 !important;
-    margin-bottom: 8px !important;
-    color: #ffffff !important;
+    margin-bottom: 6px !important;
+    color: var(--text-primary) !important;
 }
 
 .welcome h1 .highlight {
-    color: #38bdf8 !important;
+    color: var(--accent-color) !important;
 }
 
 .welcome p {
-    font-size: 0.9rem !important;
-    color: #94a3b8 !important;
-    margin: 6px 0 16px 0 !important;
+    font-size: 0.88rem !important;
+    color: var(--text-secondary) !important;
+    margin: 4px 0 16px 0 !important;
 }
 
+/* --- TÌM KIẾM NHANH --- */
+.search-box {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-top: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    display: none;
+    z-index: 50;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.search-item {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-item:last-child {
+    border-bottom: none;
+}
+
+/* --- CÁC MỤC THÔNG TIN & NÚT BẤM --- */
 .info-pills {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .pill-btn {
-    background: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    padding: 12px 16px;
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    padding: 12px 14px;
     border-radius: 14px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -100,37 +195,80 @@ body {
 }
 
 .pill-btn:active {
-    transform: scale(0.97);
-    background: rgba(56, 189, 248, 0.15);
+    transform: scale(0.98);
 }
 
 .subject-list {
     display: none;
     flex-direction: column;
     gap: 8px;
-    margin-top: 8px;
-    padding-left: 8px;
+    margin-top: 6px;
+}
+
+.subject-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .subject-item {
-    background: rgba(15, 23, 42, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 10px 14px;
+    flex: 1;
+    background: var(--pill-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
     border-radius: 10px;
     font-size: 0.85rem;
-    color: #38bdf8;
+    color: var(--accent-color);
     text-align: left;
     cursor: pointer;
 }
 
-.subject-item:active {
-    background: rgba(56, 189, 248, 0.2);
+.star-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+/* --- BÀI HỌC VỪA XEM & YÊU THÍCH --- */
+.section-block {
+    text-align: left;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.section-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.recent-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--accent-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+<div class="top-header">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">🌙 Tối</button>
+</div>
 
 <div class="layout">
 
@@ -149,27 +287,27 @@ body {
                 🏫 Môn Học
             </div>
 
-            <li onclick="loadPage('data/psychology.html')">
+            <li onclick="openSubject('🧠 Tâm lý học', 'data/psychology.html')">
                 🧠 Tâm lý học
             </li>
 
-            <li onclick="loadPage('data/english.html')">
+            <li onclick="openSubject('🇬🇧 Tiếng Anh', 'data/english.html')">
                 🇬🇧 Tiếng Anh
             </li>
 
-            <li onclick="loadPage('data/dlcm.html')">
+            <li onclick="openSubject('🇻🇳 Đường lối cách mạng', 'data/dlcm.html')">
                 🇻🇳 Đường lối cách mạng
             </li>
-            <li onclick="loadPage('data/lscand.html')">
+            <li onclick="openSubject('🇻🇳 Lịch Sử Công An Nhân Dân', 'data/lscand.html')">
                 🇻🇳 Lịch Sử Công An Nhân Dân
             </li>
-            <li onclick="loadPage('data/luat.html')">
+            <li onclick="openSubject('⚖️ Luật Hình Sự', 'data/luat.html')">
                 ⚖️ Luật Hình Sự
             </li>
             <div class="sidebar-title">
                 📖 Ôn Tập
             </div>
-            <li onclick="loadPage('data/ontapdlcm.html')">
+            <li onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
                 📋 Ôn Tập Đường Lối Cách Mạng
             </li>
 
@@ -191,21 +329,33 @@ body {
 
             <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
 
-            <div class="info-pills">
+            <!-- Ô TÌM KIẾM NHANH -->
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" placeholder="🔍 Tìm môn học nhanh..." oninput="handleSearch()">
+                <div class="search-results" id="search-results"></div>
+            </div>
+
+            <!-- BÀI HỌC ĐỌC DỞ / XEM GẦN ĐÂY -->
+            <div id="recent-container" class="section-block" style="display: none;">
+                <div class="section-title">⏱️ Vừa xem gần đây</div>
+                <div id="recent-chip-slot"></div>
+            </div>
+
+            <!-- DANH SÁCH YÊU THÍCH -->
+            <div id="fav-container" class="section-block" style="display: none;">
+                <div class="section-title">⭐ Môn học yêu thích</div>
+                <div id="fav-list-slot" style="display: flex; flex-direction: column; gap: 6px;"></div>
+            </div>
+
+            <div class="info-pills" style="margin-top: 14px;">
                 <div class="pill-btn" onclick="toggleSubjects()">
                     <span>📚 Lý thuyết các môn học</span>
                     <span id="arrow-icon">▼</span>
                 </div>
 
-                <div class="subject-list" id="subject-container">
-                    <div class="subject-item" onclick="loadPage('data/psychology.html')">🧠 Tâm lý học</div>
-                    <div class="subject-item" onclick="loadPage('data/english.html')">🇬🇧 Tiếng Anh</div>
-                    <div class="subject-item" onclick="loadPage('data/dlcm.html')">🇻🇳 Đường lối cách mạng</div>
-                    <div class="subject-item" onclick="loadPage('data/lscand.html')">🇻🇳 Lịch Sử Công An Nhân Dân</div>
-                    <div class="subject-item" onclick="loadPage('data/luat.html')">⚖️ Luật Hình Sự</div>
-                </div>
+                <div class="subject-list" id="subject-container"></div>
 
-                <div class="pill-btn" onclick="loadPage('data/ontapdlcm.html')">
+                <div class="pill-btn" onclick="openSubject('📋 Ôn Tập Đường Lối Cách Mạng', 'data/ontapdlcm.html')">
                     <span>🎧 Audio ôn tập</span>
                     <span>➔</span>
                 </div>
@@ -220,46 +370,130 @@ body {
 <script src="js/app.js"></script>
 
 <script>
-// Định nghĩa cấu trúc giao diện trang chủ mới
-const HOME_CONTENT = `
-    <div class="welcome">
-        <div class="badge-tag">🎓 KHO TÀI LIỆU CÁ NHÂN</div>
-        <img src="logo.jpg" alt="Logo Đại Học Cảnh Sát Nhân Dân" class="center-logo">
-        <h1>Nguyễn Hữu Khánh <br><span class="highlight">D5S-VB2A</span></h1>
-        <p>Nơi lưu trữ và tổng hợp tài liệu học tập</p>
-        <div class="info-pills">
-            <div class="pill-btn" onclick="toggleSubjects()">
-                <span>📚 Lý thuyết các môn học</span>
-                <span id="arrow-icon">▼</span>
-            </div>
-            <div class="subject-list" id="subject-container">
-                <div class="subject-item" onclick="loadPage('data/psychology.html')">🧠 Tâm lý học</div>
-                <div class="subject-item" onclick="loadPage('data/english.html')">🇬🇧 Tiếng Anh</div>
-                <div class="subject-item" onclick="loadPage('data/dlcm.html')">🇻🇳 Đường lối cách mạng</div>
-                <div class="subject-item" onclick="loadPage('data/lscand.html')">🇻🇳 Lịch Sử Công An Nhân Dân</div>
-                <div class="subject-item" onclick="loadPage('data/luat.html')">⚖️ Luật Hình Sự</div>
-            </div>
-            <div class="pill-btn" onclick="loadPage('data/ontapdlcm.html')">
-                <span>🎧 Audio ôn tập</span>
-                <span>➔</span>
-            </div>
-        </div>
-    </div>
-`;
+// Dữ liệu môn học
+const SUBJECTS = [
+    { name: '🧠 Tâm lý học', url: 'data/psychology.html' },
+    { name: '🇬🇧 Tiếng Anh', url: 'data/english.html' },
+    { name: '🇻🇳 Đường lối cách mạng', url: 'data/dlcm.html' },
+    { name: '🇻🇳 Lịch Sử Công An Nhân Dân', url: 'data/lscand.html' },
+    { name: '⚖️ Luật Hình Sự', url: 'data/luat.html' },
+    { name: '📋 Ôn Tập Đường Lối Cách Mạng', url: 'data/ontapdlcm.html' }
+];
 
-// Ghi đè hàm goHome cũ trong js/app.js để cập nhật chuẩn giao diện mới
-function goHome() {
-    document.getElementById('content').innerHTML = HOME_CONTENT;
-    var sidebar = document.getElementById('sidebar');
-    if (sidebar && sidebar.classList.contains('active')) {
-        sidebar.classList.remove('active');
+// --- 1. QUẢN LÝ TEMA (DARK / LIGHT MODE) ---
+function initTheme() {
+    const savedTheme = localStorage.getItem('app_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('app_theme', newTheme);
+    document.getElementById('theme-btn').textContent = newTheme === 'dark' ? '🌙 Tối' : '☀️ Sáng';
+}
+
+// --- 2. XỬ LÝ MÔN HỌC & BOOKMARKS / RECENT READ ---
+function openSubject(name, url) {
+    // Lưu môn học xem gần đây
+    localStorage.setItem('recent_subject', JSON.stringify({ name, url }));
+    if (typeof loadPage === 'function') {
+        loadPage(url);
     }
 }
 
-// Bật/tắt danh sách môn học
+function getFavorites() {
+    return JSON.parse(localStorage.getItem('fav_subjects') || '[]');
+}
+
+function toggleFavorite(url, event) {
+    event.stopPropagation();
+    let favs = getFavorites();
+    if (favs.includes(url)) {
+        favs = favs.filter(item => item !== url);
+    } else {
+        favs.push(url);
+    }
+    localStorage.setItem('fav_subjects', JSON.stringify(favs));
+    renderSubjects();
+    renderUserBlocks();
+}
+
+function renderSubjects() {
+    const container = document.getElementById('subject-container');
+    if (!container) return;
+    const favs = getFavorites();
+    
+    container.innerHTML = SUBJECTS.map(sub => `
+        <div class="subject-item-wrapper">
+            <div class="subject-item" onclick="openSubject('${sub.name}', '${sub.url}')">${sub.name}</div>
+            <button class="star-btn" onclick="toggleFavorite('${sub.url}', event)">
+                ${favs.includes(sub.url) ? '⭐' : '☆'}
+            </button>
+        </div>
+    `).join('');
+}
+
+function renderUserBlocks() {
+    // 1. Render Recent
+    const recentData = JSON.parse(localStorage.getItem('recent_subject'));
+    const recentBox = document.getElementById('recent-container');
+    const recentSlot = document.getElementById('recent-chip-slot');
+    
+    if (recentData && recentBox && recentSlot) {
+        recentBox.style.display = 'block';
+        recentSlot.innerHTML = `
+            <div class="recent-chip" onclick="openSubject('${recentData.name}', '${recentData.url}')">
+                📖 ${recentData.name} ➔
+            </div>
+        `;
+    }
+
+    // 2. Render Favorites
+    const favs = getFavorites();
+    const favBox = document.getElementById('fav-container');
+    const favSlot = document.getElementById('fav-list-slot');
+    
+    if (favs.length > 0 && favBox && favSlot) {
+        favBox.style.display = 'block';
+        const favSubjects = SUBJECTS.filter(s => favs.includes(s.url));
+        favSlot.innerHTML = favSubjects.map(sub => `
+            <div class="subject-item" onclick="openSubject('${sub.name}', '${sub.url}')">
+                ⭐ ${sub.name}
+            </div>
+        `).join('');
+    } else if (favBox) {
+        favBox.style.display = 'none';
+    }
+}
+
+// --- 3. TÌM KIẾM NHANH ---
+function handleSearch() {
+    const query = document.getElementById('search-input').value.toLowerCase().trim();
+    const resultsBox = document.getElementById('search-results');
+    
+    if (!query) {
+        resultsBox.style.display = 'none';
+        return;
+    }
+    
+    const matched = SUBJECTS.filter(s => s.name.toLowerCase().includes(query));
+    if (matched.length > 0) {
+        resultsBox.style.display = 'block';
+        resultsBox.innerHTML = matched.map(sub => `
+            <div class="search-item" onclick="openSubject('${sub.name}', '${sub.url}')">${sub.name}</div>
+        `).join('');
+    } else {
+        resultsBox.style.display = 'block';
+        resultsBox.innerHTML = `<div class="search-item" style="color: var(--text-secondary);">Không tìm thấy môn học</div>`;
+    }
+}
+
 function toggleSubjects() {
-    var list = document.getElementById('subject-container');
-    var arrow = document.getElementById('arrow-icon');
+    const list = document.getElementById('subject-container');
+    const arrow = document.getElementById('arrow-icon');
     if (list.style.display === 'flex') {
         list.style.display = 'none';
         arrow.textContent = '▼';
@@ -268,6 +502,18 @@ function toggleSubjects() {
         arrow.textContent = '▲';
     }
 }
+
+// Ghi đè goHome để duy trì trạng thái giao diện chuẩn
+function goHome() {
+    location.reload();
+}
+
+// Khởi tạo khi tải trang
+window.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    renderSubjects();
+    renderUserBlocks();
+});
 </script>
 
 </body>
