@@ -1,9 +1,9 @@
 /* =========================================================
-   KHO HỌC TẬP CÁ NHÂN - APP.JS
+   KHO HỌC TẬP CÁ NHÂN - APP.JS (OPTIMIZED FOR RESPONSIVE)
 ========================================================= */
 
 let injectedStyles = [];
-let editingNoteIndex = null; // Biến tạm lưu trạng thái khi chỉnh sửa Note
+let editingNoteIndex = null;
 
 function cleanupStyles() {
     injectedStyles.forEach(style => {
@@ -36,8 +36,8 @@ function loadPage(page) {
 
             content.innerHTML = `
                 <div class="subject-top-bar">
-                    <button class="back-home" onclick="goHome()" style="margin: 0;">🏠 Trang chủ</button>
-                    <button class="nav-btn" onclick="toggleNoteSidebar()">📝 Note Môn Học</button>
+                    <button class="back-home" onclick="goHome()">🏠 Trang chủ</button>
+                    <button class="btn-note-toggle" onclick="toggleNoteSidebar()">📝 Note Môn Học</button>
                 </div>
                 <div id="page-container"></div>
             `;
@@ -98,7 +98,7 @@ function loadPage(page) {
 
             savePage(page);
             closeSidebar();
-            renderNotes(); // Render danh sách note riêng cho môn này
+            renderNotes();
             window.scrollTo({ top: 0, behavior: "instant" });
         })
         .catch(error => {
@@ -160,12 +160,10 @@ function saveNewNote() {
     let notes = getNotes();
 
     if (editingNoteIndex !== null) {
-        // Cập nhật note đang sửa
         notes[editingNoteIndex] = text;
         editingNoteIndex = null;
         if (saveBtn) saveBtn.textContent = "➕ Thêm Ghi Chú";
     } else {
-        // Thêm note mới
         notes.unshift(text);
     }
 
@@ -194,7 +192,6 @@ function deleteNote(index) {
     notes.splice(index, 1);
     localStorage.setItem(getNotesKey(), JSON.stringify(notes));
 
-    // Nếu đang sửa chính note bị xoá thì reset
     if (editingNoteIndex === index) {
         editingNoteIndex = null;
         const input = document.getElementById("note-input");
